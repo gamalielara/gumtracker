@@ -3,10 +3,8 @@ import { StyleSheet } from "react-native";
 import * as SplashScreen from "expo-splash-screen";
 import { useCallback } from "react";
 import GumjournalsForm from "./src/screens/GumjournalsForm";
-import {
-  MainContainerBackground,
-  SafeAreaApp,
-} from "./src/components/global/container";
+import { MainContainerBackground } from "./src/components/global/container";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -31,23 +29,10 @@ export default function App() {
     //   <StatusBar style="auto" />
     // </View>
 
-    <MainContainerBackground>
-      <SafeAreaApp>
+    <SafeAreaProvider>
+      <MainContainerBackground onLayout={onLayoutView}>
         <GumjournalsForm />
-      </SafeAreaApp>
-    </MainContainerBackground>
+      </MainContainerBackground>
+    </SafeAreaProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-
-  text: {
-    fontFamily: "Inter",
-  },
-});

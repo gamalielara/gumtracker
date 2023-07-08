@@ -34,3 +34,6 @@ export const ColorScheme = {
   [ColorModeScheme.DARK_MODE]: DarkModeColorScheme,
   [ColorModeScheme.LIGHT_MODE]: LightModeColorScheme,
 };
+
+// Change later
+export const APPCOLORSCHEME = ColorScheme[ColorModeScheme.DARK_MODE];
