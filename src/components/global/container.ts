@@ -9,8 +9,7 @@ export const MainContainerBackground = styled.View`
 
 export const SafeAreaApp = styled.SafeAreaView`
   height: auto;
-  margin-left: 10px;
-  margin-right: 10px;
+  margin: 10px;
 `;
 
 export const VisuallyInvisible = styled.View`

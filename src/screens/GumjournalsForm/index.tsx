@@ -11,9 +11,11 @@ import {
   SafeAreaApp,
   VisuallyInvisible,
 } from "../../components/global/container";
-
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { tabBarCustomOptions } from "./utils";
+import { View } from "react-native";
+import OverviewForm from "./OverviewForm";
+import { GumjournalsContextProvider } from "../../module/GumjournalsForm/context";
 
 enum GumjournalSection {
   OVERVIEW,
@@ -23,12 +25,18 @@ enum GumjournalSection {
 
 const GumjournalsForm: React.FC = () => {
   const Tab = createBottomTabNavigator();
-
   const insets = useSafeAreaInsets();
 
   return (
-    <>
-      <SafeAreaApp>
+    <GumjournalsContextProvider>
+      <SafeAreaApp
+        style={{
+          paddingTop: insets.top,
+          paddingBottom: insets.bottom,
+          paddingRight: insets.right,
+          paddingLeft: insets.left,
+        }}
+      >
         <GumjournalsContainerView>
           <Header>
             <BackButton />
@@ -43,24 +51,24 @@ const GumjournalsForm: React.FC = () => {
             >
               <Tab.Screen
                 options={{ tabBarLabelStyle: TabBarLabelStyle.tabBarLabel }}
-                component={() => <></>}
+                component={() => <OverviewForm />}
                 name="Overview"
               />
               <Tab.Screen
                 options={{ tabBarLabelStyle: TabBarLabelStyle.tabBarLabel }}
-                component={() => <></>}
+                component={() => <View />}
                 name="Wellbeing"
               />
               <Tab.Screen
                 options={{ tabBarLabelStyle: TabBarLabelStyle.tabBarLabel }}
-                component={() => <></>}
+                component={() => <View />}
                 name="Habit"
               />
             </Tab.Navigator>
           </NavigationContainer>
         </GumjournalsContainerView>
       </SafeAreaApp>
-    </>
+    </GumjournalsContextProvider>
   );
 };
 
