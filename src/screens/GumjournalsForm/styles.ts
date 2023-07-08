@@ -35,6 +35,7 @@ export const TabBarStyle = (insets: EdgeInsets) =>
     tabBar: {
       borderRadius: 15,
       backgroundColor: APPCOLORSCHEME.card,
+      padding: 10,
       paddingBottom: 10,
       height: 60,
       marginBottom: insets.bottom > 0 ? 0 : 10,
@@ -44,6 +45,6 @@ export const TabBarStyle = (insets: EdgeInsets) =>
 export const TabBarLabelStyle = StyleSheet.create({
   tabBarLabel: {
     fontFamily: "Inter",
-    fontSize: 12,
+    marginTop: 5,
   },
 });
