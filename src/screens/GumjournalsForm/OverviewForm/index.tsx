@@ -17,6 +17,7 @@ import {
 } from "../../../module/GumjournalsForm/action";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { Platform, Text } from "react-native";
+import { APPCOLORSCHEME } from "../../../utils/const";
 
 export default () => {
   const [showDatePicker, setShowDatePicker] = useState<boolean>(
@@ -55,8 +56,13 @@ export default () => {
               marginRight: "auto",
               marginLeft: "auto",
               marginTop: 10,
+              borderRadius: 10,
+              overflow: "hidden",
             }}
+            textColor={APPCOLORSCHEME.text}
             onChange={datePickerChangeHandler}
+            themeVariant="dark"
+            accentColor={APPCOLORSCHEME.primary}
           />
         )}
       </QuestionContainer>
