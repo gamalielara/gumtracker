@@ -1,4 +1,5 @@
 export interface GumjournalsForm {
+  dateFilled: number;
   mood: number;
 }
 
@@ -8,6 +9,7 @@ export interface GumjournalsAction {
 }
 
 export enum GumjournalsActionType {
+  UPDATE_DATE,
   UPDATE_MOOD,
 }
 

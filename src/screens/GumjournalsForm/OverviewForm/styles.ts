@@ -12,6 +12,27 @@ export const QuestionText = styled(BaseText)`
   font-size: 16px;
 `;
 
+export const QuestionContainer = styled.View`
+  margin: 10px 0;
+`;
+
+export const DatePickerButton = styled.TouchableOpacity`
+  height: 30px;
+  margin-top: 10px;
+  background-color: ${APPCOLORSCHEME.card};
+  width: 150px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  margin: 10px auto 0;
+`;
+
+export const DatePickerText = styled(BaseText)`
+  font-size: 14px;
+`;
+
 export const MoodsCard = styled.View`
   margin: 10px 0;
   border-radius: 10px;

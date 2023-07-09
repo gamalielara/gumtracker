@@ -7,10 +7,9 @@ export const GumjournalsContext = createContext<GumjournalsContextInterface>({
 });
 
 export const GumjournalsContextProvider = ({ children }: any) => {
-  const [value, dispatch] = useReducer(
-    GumjournasReducer,
-    {} as GumjournalsForm
-  );
+  const [value, dispatch] = useReducer(GumjournasReducer, {
+    dateFilled: new Date().getTime(),
+  } as GumjournalsForm);
 
   const contextValue = useMemo(() => ({ value, dispatch }), [value]);
 

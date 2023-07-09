@@ -11,6 +11,8 @@ export const GumjournasReducer = (
   switch (action.type) {
     case GumjournalsActionType.UPDATE_MOOD:
       return { ...state, ...action.payload };
+    case GumjournalsActionType.UPDATE_DATE:
+      return { ...state, ...action.payload };
     default:
       return { ...state };
   }
