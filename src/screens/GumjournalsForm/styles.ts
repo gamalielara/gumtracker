@@ -49,5 +49,6 @@ export const TabBarLabelStyle = StyleSheet.create({
   tabBarLabel: {
     fontFamily: "Inter",
     marginTop: 5,
+    fontSize: 14,
   },
 });

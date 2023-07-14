@@ -3,13 +3,14 @@ import { MainContainerBackground } from "../../../components/global/container";
 import { BaseText } from "../../../components/global/text";
 
 import { APPCOLORSCHEME } from "../../../utils/const";
+import { TextInput } from "react-native";
 
 export const Container = styled(MainContainerBackground)`
   padding-top: 50px;
 `;
 
 export const QuestionText = styled(BaseText)`
-  font-size: 16px;
+  font-size: 18px;
 `;
 
 export const QuestionContainer = styled.View`
@@ -58,4 +59,13 @@ export const MoodPickCard = styled.TouchableOpacity<{ isSelected: boolean }>`
 
 export const MoodValueText = styled(BaseText)`
   font-size: 16px;
+`;
+
+export const FormInput = styled.TextInput`
+  width: 100%;
+  background-color: ${APPCOLORSCHEME.card};
+  color: ${APPCOLORSCHEME.text};
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 10px;
 `;
