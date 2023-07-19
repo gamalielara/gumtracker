@@ -15,6 +15,7 @@ import { BAD_MOODS_RANGE, GOOD_MOODS_RANGE } from "./const";
 import { GumjournalsContext } from "../../../module/GumjournalsForm/context";
 import {
   updateDateFilled,
+  updateHighlightOfTheDay,
   updateMood,
 } from "../../../module/GumjournalsForm/action";
 import DateTimePicker from "@react-native-community/datetimepicker";
@@ -117,8 +118,10 @@ export default () => {
           <QuestionContainer>
             <QuestionText>Highlight of the day #1* (Required)</QuestionText>
             <FormInput
-              onChangeText={() => {}}
-              value="Hello"
+              onChangeText={(text: string) => {
+                dispatch?.(updateHighlightOfTheDay(text, 1));
+              }}
+              value={value.highlight?.[0] ?? "Highlight 1"}
               placeholder="useless placeholder"
             />
           </QuestionContainer>
@@ -126,8 +129,10 @@ export default () => {
           <QuestionContainer>
             <QuestionText>Highlight of the day #2</QuestionText>
             <FormInput
-              onChangeText={() => {}}
-              value="Hello"
+              onChangeText={(text: string) => {
+                dispatch?.(updateHighlightOfTheDay(text, 2));
+              }}
+              value={value.highlight?.[1] ?? "Highlight 1"}
               placeholder="useless placeholder"
             />
           </QuestionContainer>
