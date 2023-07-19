@@ -50,4 +50,5 @@ export const tabBarCustomOptions = (route: any, insets: any) => ({
   tabBarActiveTintColor: APPCOLORSCHEME.text,
   tabBarInactiveTintColor: APPCOLORSCHEME["text-secondary"],
   tabBarStyle: TabBarStyle(insets).tabBar,
+  tabBarHideOnKeyboard: true,
 });

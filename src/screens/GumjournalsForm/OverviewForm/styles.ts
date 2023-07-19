@@ -1,12 +1,17 @@
 import { styled } from "styled-components/native";
-import { MainContainerBackground } from "../../../components/global/container";
 import { BaseText } from "../../../components/global/text";
 
 import { APPCOLORSCHEME } from "../../../utils/const";
-import { TextInput } from "react-native";
 
-export const Container = styled(MainContainerBackground)`
-  padding-top: 50px;
+export const Container = styled.KeyboardAvoidingView`
+  background-color: ${APPCOLORSCHEME.background};
+  height: 100%;
+`;
+
+export const ScrollingBaseView = styled.ScrollView`
+  background-color: ${APPCOLORSCHEME.background};
+  margin-bottom: 90px;
+  margin-top: 20px;
 `;
 
 export const QuestionText = styled(BaseText)`
@@ -46,8 +51,11 @@ export const MoodsCard = styled.View`
   gap: 10px;
 `;
 
-export const MoodPickCard = styled.TouchableOpacity<{ isSelected: boolean }>`
-  width: 15%;
+export const MoodPickCard = styled.TouchableOpacity<{
+  isSelected: boolean;
+  width: string | null;
+}>`
+  width: ${(props) => props.width ?? "15%"};
   aspect-ratio: 1;
   background-color: ${(props) =>
     props.isSelected ? APPCOLORSCHEME["text-secondary"] : APPCOLORSCHEME.card};

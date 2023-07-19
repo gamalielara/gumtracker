@@ -13,7 +13,7 @@ import {
 } from "../../components/global/container";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { tabBarCustomOptions } from "./utils";
-import { View } from "react-native";
+import { Platform, View } from "react-native";
 import OverviewForm from "./OverviewForm";
 import { GumjournalsContextProvider } from "../../module/GumjournalsForm/context";
 

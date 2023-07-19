@@ -34,12 +34,12 @@ export const TabBarStyle = (insets: EdgeInsets) =>
   StyleSheet.create({
     tabBar: {
       borderRadius: 15,
-      backgroundColor: APPCOLORSCHEME.card,
+      backgroundColor: APPCOLORSCHEME.secondary,
       padding: 10,
       paddingBottom: 10,
       height: 60,
       marginBottom: insets.bottom > 0 ? 0 : 10,
-      borderTopColor: APPCOLORSCHEME.card,
+      borderTopColor: APPCOLORSCHEME.secondary,
       position: "absolute",
       bottom: 10,
     },
