@@ -4,6 +4,7 @@ import { GumjournalsContextInterface, GumjournalsForm } from "./interface";
 
 const INITIAL_VALUE = {
   highlight: [] as string[],
+  habits: [] as string[],
 } as GumjournalsForm;
 
 export const GumjournalsContext = createContext<GumjournalsContextInterface>({

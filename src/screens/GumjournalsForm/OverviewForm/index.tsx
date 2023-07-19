@@ -1,15 +1,10 @@
 import React, { useContext, useState } from "react";
 import {
-  Container,
   MoodPickCard,
   MoodValueText,
   MoodsCard,
-  QuestionContainer,
-  QuestionText,
   DatePickerButton,
   DatePickerText,
-  FormInput,
-  ScrollingBaseView,
 } from "./styles";
 import { BAD_MOODS_RANGE, GOOD_MOODS_RANGE } from "./const";
 import { GumjournalsContext } from "../../../module/GumjournalsForm/context";
@@ -26,6 +21,13 @@ import {
   TouchableWithoutFeedback,
 } from "react-native";
 import { APPCOLORSCHEME } from "../../../utils/const";
+import {
+  Container,
+  FormInput,
+  QuestionContainer,
+  QuestionText,
+  ScrollingBaseView,
+} from "../styles";
 
 export default () => {
   const [showDatePicker, setShowDatePicker] = useState<boolean>(
@@ -121,8 +123,9 @@ export default () => {
               onChangeText={(text: string) => {
                 dispatch?.(updateHighlightOfTheDay(text, 1));
               }}
-              value={value.highlight?.[0] ?? "Highlight 1"}
-              placeholder="useless placeholder"
+              value={value.highlight?.[0]}
+              placeholder="Highlight 1"
+              placeholderTextColor={APPCOLORSCHEME.text}
             />
           </QuestionContainer>
 
@@ -132,8 +135,9 @@ export default () => {
               onChangeText={(text: string) => {
                 dispatch?.(updateHighlightOfTheDay(text, 2));
               }}
-              value={value.highlight?.[1] ?? "Highlight 1"}
-              placeholder="useless placeholder"
+              value={value.highlight?.[1]}
+              placeholder="Highlight 2"
+              placeholderTextColor={APPCOLORSCHEME.text}
             />
           </QuestionContainer>
         </ScrollingBaseView>

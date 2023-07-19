@@ -23,6 +23,12 @@ export const GumjournasReducer = (
         ...state,
         highlight: [state.highlight[0], ...(action.payload.highlight ?? [])],
       };
+
+    case GumjournalsActionType.UPDATE_HABITS:
+      return {
+        ...state,
+        habits: [...(action.payload.habits ?? [])],
+      };
     default:
       return { ...state };
   }

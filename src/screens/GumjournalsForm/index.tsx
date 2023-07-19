@@ -16,6 +16,7 @@ import { tabBarCustomOptions } from "./utils";
 import { Platform, View } from "react-native";
 import OverviewForm from "./OverviewForm";
 import { GumjournalsContextProvider } from "../../module/GumjournalsForm/context";
+import HabitsForm from "./HabitsForm";
 
 enum GumjournalSection {
   OVERVIEW,
@@ -51,17 +52,17 @@ const GumjournalsForm: React.FC = () => {
             >
               <Tab.Screen
                 options={{ tabBarLabelStyle: TabBarLabelStyle.tabBarLabel }}
-                component={() => <OverviewForm />}
+                component={OverviewForm}
                 name="Overview"
               />
               <Tab.Screen
                 options={{ tabBarLabelStyle: TabBarLabelStyle.tabBarLabel }}
-                component={() => <View />}
+                component={OverviewForm}
                 name="Wellbeing"
               />
               <Tab.Screen
                 options={{ tabBarLabelStyle: TabBarLabelStyle.tabBarLabel }}
-                component={() => <View />}
+                component={HabitsForm}
                 name="Habit"
               />
             </Tab.Navigator>

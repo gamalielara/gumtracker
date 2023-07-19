@@ -3,26 +3,6 @@ import { BaseText } from "../../../components/global/text";
 
 import { APPCOLORSCHEME } from "../../../utils/const";
 
-export const Container = styled.KeyboardAvoidingView`
-  background-color: ${APPCOLORSCHEME.background};
-  height: 100%;
-  padding: 0 3%;
-`;
-
-export const ScrollingBaseView = styled.ScrollView`
-  background-color: ${APPCOLORSCHEME.background};
-  margin-bottom: 90px;
-  margin-top: 50px;
-`;
-
-export const QuestionText = styled(BaseText)`
-  font-size: 18px;
-`;
-
-export const QuestionContainer = styled.View`
-  margin: 20px 0;
-`;
-
 export const DatePickerButton = styled.TouchableOpacity`
   height: 30px;
   margin-top: 10px;
@@ -68,13 +48,4 @@ export const MoodPickCard = styled.TouchableOpacity<{
 
 export const MoodValueText = styled(BaseText)`
   font-size: 16px;
-`;
-
-export const FormInput = styled.TextInput`
-  width: 100%;
-  background-color: ${APPCOLORSCHEME.card};
-  color: ${APPCOLORSCHEME.text};
-  padding: 10px;
-  margin-top: 10px;
-  border-radius: 10px;
 `;

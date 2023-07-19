@@ -13,12 +13,15 @@ export const updateDateFilled = (timestamp: number) => ({
 export const updateHighlightOfTheDay = (
   highlight: string,
   highlightType: number
-) => {
-  return {
-    payload: { highlight: [highlight] },
-    type:
-      highlightType === 1
-        ? GumjournalsActionType.UPDATE_HIGHLIGHT_ONE
-        : GumjournalsActionType.UPDATE_HIGHLIGHT_TWO,
-  };
-};
+) => ({
+  payload: { highlight: [highlight] },
+  type:
+    highlightType === 1
+      ? GumjournalsActionType.UPDATE_HIGHLIGHT_ONE
+      : GumjournalsActionType.UPDATE_HIGHLIGHT_TWO,
+});
+
+export const updateHabits = (habits: string[]) => ({
+  payload: { habits },
+  type: GumjournalsActionType.UPDATE_HABITS,
+});
