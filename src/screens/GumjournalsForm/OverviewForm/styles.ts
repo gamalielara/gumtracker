@@ -6,12 +6,13 @@ import { APPCOLORSCHEME } from "../../../utils/const";
 export const Container = styled.KeyboardAvoidingView`
   background-color: ${APPCOLORSCHEME.background};
   height: 100%;
+  padding: 0 3%;
 `;
 
 export const ScrollingBaseView = styled.ScrollView`
   background-color: ${APPCOLORSCHEME.background};
   margin-bottom: 90px;
-  margin-top: 20px;
+  margin-top: 50px;
 `;
 
 export const QuestionText = styled(BaseText)`
@@ -19,7 +20,7 @@ export const QuestionText = styled(BaseText)`
 `;
 
 export const QuestionContainer = styled.View`
-  margin: 10px 0;
+  margin: 20px 0;
 `;
 
 export const DatePickerButton = styled.TouchableOpacity`

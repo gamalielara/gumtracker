@@ -115,7 +115,7 @@ export default () => {
           </QuestionContainer>
 
           <QuestionContainer>
-            <QuestionText>Highlight of the day #1 (Required)</QuestionText>
+            <QuestionText>Highlight of the day #1* (Required)</QuestionText>
             <FormInput
               onChangeText={() => {}}
               value="Hello"
@@ -125,51 +125,6 @@ export default () => {
 
           <QuestionContainer>
             <QuestionText>Highlight of the day #2</QuestionText>
-            <FormInput
-              onChangeText={() => {}}
-              value="Hello"
-              placeholder="useless placeholder"
-            />
-          </QuestionContainer>
-
-          <QuestionContainer>
-            <QuestionText>Highlight of the day #3</QuestionText>
-            <FormInput
-              onChangeText={() => {}}
-              value="Hello"
-              placeholder="useless placeholder"
-            />
-          </QuestionContainer>
-
-          <QuestionContainer>
-            <QuestionText>Highlight of the day #3</QuestionText>
-            <FormInput
-              onChangeText={() => {}}
-              value="Hello"
-              placeholder="useless placeholder"
-            />
-          </QuestionContainer>
-
-          <QuestionContainer>
-            <QuestionText>Highlight of the day #3</QuestionText>
-            <FormInput
-              onChangeText={() => {}}
-              value="Hello"
-              placeholder="useless placeholder"
-            />
-          </QuestionContainer>
-
-          <QuestionContainer>
-            <QuestionText>Highlight of the day #3</QuestionText>
-            <FormInput
-              onChangeText={() => {}}
-              value="Hello"
-              placeholder="useless placeholder"
-            />
-          </QuestionContainer>
-
-          <QuestionContainer>
-            <QuestionText>Highlight of the day #3</QuestionText>
             <FormInput
               onChangeText={() => {}}
               value="Hello"
