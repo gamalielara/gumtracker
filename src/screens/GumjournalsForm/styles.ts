@@ -83,10 +83,10 @@ export const FormInput = styled.TextInput`
   border-radius: 10px;
 `;
 
-export const CheckboxViewContainer = styled.View`
+export const CheckboxViewContainer = styled.TouchableOpacity`
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: 10px;
-  margin: 5px 0;
+  margin: 10px 0;
 `;

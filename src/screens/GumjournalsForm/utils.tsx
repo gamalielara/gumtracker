@@ -80,19 +80,27 @@ export const FormItem: React.FC<IFormItemProps> = (props) => {
         return (
           <>
             {(formConfig.options as string[]).map((option) => {
+              const isSelected = (value as Function)?.(option);
+
               return (
-                <CheckboxViewContainer key={option}>
-                  <>
-                    <Checkbox
-                      color={APPCOLORSCHEME.card}
-                      //@ts-ignore
-                      value={value(option)}
-                      onValueChange={(e) => {
-                        callbackFunc?.({ isSelected: e, habit: option });
-                      }}
-                    />
-                    <BaseText>{option}</BaseText>
-                  </>
+                <CheckboxViewContainer
+                  key={option}
+                  onPress={() =>
+                    callbackFunc?.({
+                      isChangedSelected: !isSelected,
+                      habit: option,
+                    })
+                  }
+                >
+                  <Checkbox
+                    color={APPCOLORSCHEME.card}
+                    //@ts-ignore
+                    value={isSelected}
+                    onValueChange={(e) => {
+                      callbackFunc?.({ isChangedSelected: e, habit: option });
+                    }}
+                  />
+                  <BaseText>{option}</BaseText>
                 </CheckboxViewContainer>
               );
             })}

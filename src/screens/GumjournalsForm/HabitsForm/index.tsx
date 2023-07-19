@@ -14,16 +14,17 @@ import { updateHabits } from "../../../module/GumjournalsForm/action";
 export default () => {
   const { value, dispatch } = useContext(GumjournalsContext);
 
-  const onHabitCheckboxChanged = ({
-    isSelected,
+  const onHabitsCheckboxChanged = ({
+    isChangedSelected,
     habit,
   }: {
-    isSelected: boolean;
+    isChangedSelected: boolean;
     habit: string;
   }) => {
     let newHabit: string[];
 
-    if (isSelected) {
+    // The user select the checkbox
+    if (isChangedSelected) {
       newHabit = [...value.habits, habit];
     } else {
       newHabit = value.habits.filter(
@@ -45,7 +46,7 @@ export default () => {
         <ScrollingBaseView>
           <FormItem
             form={FORMS.habitsTracker[0]}
-            callbackFunc={onHabitCheckboxChanged}
+            callbackFunc={onHabitsCheckboxChanged}
             value={setCheckboxSelected}
           />
         </ScrollingBaseView>
