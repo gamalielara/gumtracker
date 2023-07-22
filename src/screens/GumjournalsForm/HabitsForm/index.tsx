@@ -7,7 +7,8 @@ import {
   updateHabits,
   updateHabitsGami,
 } from "../../../module/GumjournalsForm/action";
-import { FormItem } from "../utils/formItem";
+import { RadioGridForm, SelectForm } from "../utils/formItem";
+import { APPCOLORSCHEME } from "../../../utils/const";
 
 export default () => {
   const { value, dispatch } = useContext(GumjournalsContext);
@@ -51,26 +52,27 @@ export default () => {
 
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-      <Container
-        enabled
-        behavior={Platform.OS === "ios" ? "padding" : "height"}
-      >
-        <ScrollingBaseView>
-          <FormItem
+      <ScrollingBaseView>
+        <Container
+          enabled
+          behavior={Platform.OS === "ios" ? "padding" : "height"}
+        >
+          <SelectForm
             questionTitle="Habits I do today"
-            form={FORMS.habitsTracker["Habits I do today"]}
+            options={FORMS.habitsTracker["Habits I do today"].options}
             callbackFunc={onHabitsCheckboxChanged}
             value={setCheckboxSelected}
           />
 
-          <FormItem
+          <RadioGridForm
             questionTitle="Habits I do today"
-            form={FORMS.habitsTracker["Habits Gamification"]}
+            scale={FORMS.habitsTracker["Habits Gamification"].scale}
+            columns={FORMS.habitsTracker["Habits Gamification"].columns}
             value={setHabitScore}
             callbackFunc={onHabitScoreChanged}
           />
-        </ScrollingBaseView>
-      </Container>
+        </Container>
+      </ScrollingBaseView>
     </TouchableWithoutFeedback>
   );
 };

@@ -45,5 +45,7 @@ export const FORMS = {
   },
 };
 
+export type TGumjournalsForm = typeof FORMS;
+
 export type THabits = typeof HABITS_CONFIG;
 export type THabitsGami = typeof HABITS_GAMI_CONFIG;

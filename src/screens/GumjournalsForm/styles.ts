@@ -56,7 +56,6 @@ export const TabBarLabelStyle = StyleSheet.create({
 // Common form styles
 export const Container = styled.KeyboardAvoidingView`
   background-color: ${APPCOLORSCHEME.background};
-  height: 100%;
   padding: 0 3%;
 `;
 
@@ -91,6 +90,14 @@ export const CheckboxViewContainer = styled.TouchableOpacity`
   margin: 10px 0;
 `;
 
-export const MultiselectGridQuestion = styled(BaseText)`
+export const MultiRadioGridQuestion = styled(BaseText)`
   margin: 10px 0;
+`;
+
+export const MultiRadioGridContainer = styled.View`
+  width: 100%;
+`;
+
+export const ScrollableHorizontalView = styled.ScrollView`
+  width: 100%;
 `;

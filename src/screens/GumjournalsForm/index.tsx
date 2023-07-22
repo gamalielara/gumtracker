@@ -16,6 +16,7 @@ import { tabBarCustomOptions } from "./utils/tabBarCustomOptions";
 import OverviewForm from "./OverviewForm";
 import { GumjournalsContextProvider } from "../../module/GumjournalsForm/context";
 import HabitsForm from "./HabitsForm";
+import { APPCOLORSCHEME } from "../../utils/const";
 
 enum GumjournalSection {
   OVERVIEW,
@@ -46,8 +47,11 @@ const GumjournalsForm: React.FC = () => {
 
           <NavigationContainer>
             <Tab.Navigator
-              initialRouteName="Hello"
+              initialRouteName="Overview"
               screenOptions={({ route }) => tabBarCustomOptions(route, insets)}
+              sceneContainerStyle={{
+                backgroundColor: APPCOLORSCHEME.background,
+              }}
             >
               <Tab.Screen
                 options={{ tabBarLabelStyle: TabBarLabelStyle.tabBarLabel }}

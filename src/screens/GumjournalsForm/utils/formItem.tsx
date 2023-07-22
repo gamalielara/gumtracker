@@ -2,21 +2,20 @@ import Checkbox from "expo-checkbox";
 import { FORMS, FormType, THabits, THabitsGami } from "../../../utils/forms";
 import {
   CheckboxViewContainer,
-  MultiselectGridQuestion,
+  MultiRadioGridContainer,
+  MultiRadioGridQuestion,
   QuestionContainer,
   QuestionText,
+  ScrollableHorizontalView,
 } from "../styles";
 import { APPCOLORSCHEME } from "../../../utils/const";
 import { BaseText } from "../../../components/global/text";
-import { ScrollView, Text, View } from "react-native";
-import { useCallback, useMemo } from "react";
+import { Dimensions, FlatList, ScrollView, View } from "react-native";
+import React, { useMemo } from "react";
 import RadioButtonsGroup from "react-native-radio-buttons-group";
-
-type KForms = keyof (typeof FORMS)[keyof typeof FORMS];
 
 interface IFormItemProps {
   questionTitle: string;
-  form: (typeof FORMS.habitsTracker)[KForms];
   value?:
     | string
     | boolean
@@ -25,110 +24,123 @@ interface IFormItemProps {
   callbackFunc?: (...args: any) => void;
 }
 
-export const FormItem: React.FC<IFormItemProps> = (props) => {
-  const { questionTitle, form: formConfig, value, callbackFunc } = props;
+type TSelectForm = Omit<THabits, "type"> & IFormItemProps;
+type TRadioGridForm = Omit<THabitsGami, "type"> & IFormItemProps;
 
-  const FormBody = useCallback(() => {
-    switch (formConfig.type) {
-      case FormType.MULTISELECT:
-        return (
-          <>
-            {((formConfig as THabits).options as string[]).map((option) => {
-              const isSelected = (value as Function)?.(option);
+export const SelectForm: React.FC<TSelectForm> = React.memo(
+  (props) => {
+    const { questionTitle, options, callbackFunc, value } = props;
 
-              return (
-                <CheckboxViewContainer
-                  key={option}
-                  onPress={() =>
-                    callbackFunc?.({
-                      isChangedSelected: !isSelected,
-                      habit: option,
-                    })
-                  }
-                >
-                  <Checkbox
-                    color={APPCOLORSCHEME.card}
-                    //@ts-ignore
-                    value={isSelected}
-                    onValueChange={(e) => {
-                      callbackFunc?.({ isChangedSelected: e, habit: option });
-                    }}
-                  />
-                  <BaseText>{option}</BaseText>
-                </CheckboxViewContainer>
-              );
-            })}
-          </>
-        );
+    const renderCheckbox = ({ item }: { item: string }) => {
+      const isSelected = (value as Function)?.(item);
 
-      case FormType.GRIDSELECT:
-        const [scaleFrom, scaleTo] = (formConfig as THabitsGami).scale;
+      return (
+        <CheckboxViewContainer
+          onPress={() =>
+            callbackFunc?.({
+              isChangedSelected: !isSelected,
+              habit: item,
+            })
+          }
+        >
+          <Checkbox
+            color={APPCOLORSCHEME.card}
+            //@ts-ignore
+            value={isSelected}
+            onValueChange={(e) => {
+              callbackFunc?.({ isChangedSelected: e, habit: item });
+            }}
+          />
+          <BaseText>{item}</BaseText>
+        </CheckboxViewContainer>
+      );
+    };
 
-        const scaleMap = Array.from(
-          { length: scaleTo - scaleFrom + 1 },
-          (v, i) => scaleFrom + i
-        );
+    return (
+      <QuestionContainer>
+        <QuestionText>{questionTitle}</QuestionText>
 
-        const radioButtons = useMemo(
-          () =>
-            scaleMap.map((_, i) => ({
-              id: String(Math.random()),
-              label: String(i),
-              value: String(i),
-              borderColor: APPCOLORSCHEME.card,
-              color: APPCOLORSCHEME.text,
-              labelStyle: {
-                color: APPCOLORSCHEME.text,
-              },
-            })),
-          []
-        );
+        <FlatList
+          data={options}
+          keyExtractor={() => String(Math.random())}
+          renderItem={renderCheckbox}
+        />
+      </QuestionContainer>
+    );
+  },
+  (prev, next) => prev.value === next.value
+);
 
-        const constRadioSelected = (name: string, id: string) => {
-          const selectedHabitScore = radioButtons.filter(
-            (radio) => radio.id === id
-          )[0].label;
+export const RadioGridForm: React.FC<TRadioGridForm> = React.memo(
+  (props) => {
+    const { questionTitle, scale, value, columns, callbackFunc } = props;
 
-          callbackFunc?.({ habit: name, score: selectedHabitScore });
-        };
+    const [scaleFrom, scaleTo] = scale;
 
-        return (
-          <>
-            {(formConfig as THabitsGami).columns.map((habitName: string) => {
-              const thisHabitValue = String(
-                (value as Function)(habitName) as number
-              );
+    const radioButtons = useMemo(() => {
+      const scaleMap = Array.from(
+        { length: scaleTo - scaleFrom + 1 },
+        (_, i) => scaleFrom + i
+      );
 
-              const selectedId = radioButtons.filter(
-                (radio) => radio.value === thisHabitValue
-              )[0].id;
+      return scaleMap.map((_, i) => ({
+        id: String(Math.random()),
+        label: String(i),
+        value: String(i),
+        borderColor: APPCOLORSCHEME.card,
+        color: APPCOLORSCHEME.text,
+        labelStyle: {
+          color: APPCOLORSCHEME.text,
+        },
+      }));
+    }, []);
 
-              return (
-                <View>
-                  <MultiselectGridQuestion>{habitName}</MultiselectGridQuestion>
-                  <ScrollView horizontal>
-                    <RadioButtonsGroup
-                      radioButtons={radioButtons}
-                      onPress={(id) => constRadioSelected(habitName, id)}
-                      selectedId={selectedId}
-                      layout="row"
-                    />
-                  </ScrollView>
-                </View>
-              );
-            })}
-          </>
-        );
+    const constRadioSelected = (name: string, id: string) => {
+      const selectedHabitScore = radioButtons.filter(
+        (radio) => radio.id === id
+      )[0].label;
 
-      default:
-        return <></>;
-    }
-  }, [value]);
+      callbackFunc?.({ habit: name, score: selectedHabitScore });
+    };
 
-  return (
-    <QuestionContainer>
-      <QuestionText>{questionTitle}</QuestionText>
-      <FormBody />
-    </QuestionContainer>
-  );
-};
+    const renderRadioButton = ({ item }: { item: string }) => {
+      const thisHabitValue = String((value as Function)(item) as number);
+
+      const selectedId = radioButtons.filter(
+        (radio) => radio.value === thisHabitValue
+      )[0].id;
+
+      return (
+        <MultiRadioGridContainer>
+          <MultiRadioGridQuestion>{item}</MultiRadioGridQuestion>
+          <ScrollableHorizontalView horizontal>
+            <RadioButtonsGroup
+              radioButtons={radioButtons}
+              onPress={(id) => constRadioSelected(item, id)}
+              selectedId={selectedId}
+              layout="row"
+              containerStyle={{
+                width: Dimensions.get("window").width,
+                justifyContent: "space-around",
+                gap: 20,
+                height: 50,
+              }}
+            />
+          </ScrollableHorizontalView>
+        </MultiRadioGridContainer>
+      );
+    };
+
+    return (
+      <QuestionContainer>
+        <QuestionText>{questionTitle}</QuestionText>
+        <FlatList
+          data={columns}
+          renderItem={renderRadioButton}
+          keyExtractor={() => String(Math.random())}
+        />
+      </QuestionContainer>
+    );
+  },
+  (prev, next) => prev.value === next.value
+);
