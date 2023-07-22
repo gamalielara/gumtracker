@@ -40,12 +40,16 @@ export default () => {
       >
         <ScrollingBaseView>
           <FormItem
-            form={FORMS.habitsTracker[0]}
+            questionTitle="Habits I do today"
+            form={FORMS.habitsTracker["Habits I do today"]}
             callbackFunc={onHabitsCheckboxChanged}
             value={setCheckboxSelected}
           />
 
-          <FormItem form={FORMS.habitsTracker[1]} />
+          <FormItem
+            questionTitle="Habits I do today"
+            form={FORMS.habitsTracker["Habits Gamification"]}
+          />
         </ScrollingBaseView>
       </Container>
     </TouchableWithoutFeedback>

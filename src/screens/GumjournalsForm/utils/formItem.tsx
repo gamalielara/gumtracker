@@ -1,5 +1,5 @@
 import Checkbox from "expo-checkbox";
-import { FORMS, FormType } from "../../../utils/forms";
+import { FORMS, FormType, THabits, THabitsGami } from "../../../utils/forms";
 import {
   CheckboxViewContainer,
   MultiselectGridQuestion,
@@ -12,24 +12,24 @@ import { ScrollView, Text, View } from "react-native";
 import { useCallback, useMemo } from "react";
 import RadioButtonsGroup from "react-native-radio-buttons-group";
 
-type k = keyof typeof FORMS;
+type KForms = keyof (typeof FORMS)[keyof typeof FORMS];
 
 interface IFormItemProps {
-  form: (typeof FORMS)[k][0];
+  questionTitle: string;
+  form: (typeof FORMS.habitsTracker)[KForms];
   value?: string | boolean | ((...args: any) => boolean);
   callbackFunc?: (...args: any) => void;
 }
 
 export const FormItem: React.FC<IFormItemProps> = (props) => {
-  const { form, value, callbackFunc } = props;
-  const [formQuestionName, formConfig] = Object.entries(form)[0];
+  const { questionTitle, form: formConfig, value, callbackFunc } = props;
 
   const FormBody = useCallback(() => {
-    switch ((formConfig as any).type) {
+    switch (formConfig.type) {
       case FormType.MULTISELECT:
         return (
           <>
-            {(formConfig.options as string[]).map((option) => {
+            {((formConfig as THabits).options as string[]).map((option) => {
               const isSelected = (value as Function)?.(option);
 
               return (
@@ -58,7 +58,7 @@ export const FormItem: React.FC<IFormItemProps> = (props) => {
         );
 
       case FormType.GRIDSELECT:
-        const [scaleFrom, scaleTo] = formConfig.scale;
+        const [scaleFrom, scaleTo] = (formConfig as THabitsGami).scale;
 
         const scaleMap = Array.from(
           { length: scaleTo - scaleFrom + 1 },
@@ -79,19 +79,23 @@ export const FormItem: React.FC<IFormItemProps> = (props) => {
           []
         );
 
-        return formConfig.columns.map((column: string) => (
-          <View>
-            <MultiselectGridQuestion>{column}</MultiselectGridQuestion>
-            <ScrollView horizontal>
-              <RadioButtonsGroup
-                radioButtons={radioButtons}
-                onPress={callbackFunc}
-                selectedId={value as string}
-                layout="row"
-              />
-            </ScrollView>
-          </View>
-        ));
+        return (
+          <>
+            {(formConfig as THabitsGami).columns.map((column: string) => (
+              <View>
+                <MultiselectGridQuestion>{column}</MultiselectGridQuestion>
+                <ScrollView horizontal>
+                  <RadioButtonsGroup
+                    radioButtons={radioButtons}
+                    onPress={callbackFunc}
+                    selectedId={value as string}
+                    layout="row"
+                  />
+                </ScrollView>
+              </View>
+            ))}
+          </>
+        );
 
       default:
         return <></>;
@@ -100,7 +104,7 @@ export const FormItem: React.FC<IFormItemProps> = (props) => {
 
   return (
     <QuestionContainer>
-      <QuestionText>{formQuestionName}</QuestionText>
+      <QuestionText>{questionTitle}</QuestionText>
       <FormBody />
     </QuestionContainer>
   );

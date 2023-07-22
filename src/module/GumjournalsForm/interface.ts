@@ -1,8 +1,16 @@
+import { THabitsGami } from "../../utils/forms";
+
+type THabitsGamiCountRecord<T extends THabitsGami["columns"]> = Record<
+  T[number],
+  number
+>;
+
 export interface GumjournalsForm {
   dateFilled: number;
   mood: number;
   highlight: string[];
   habits: string[];
+  habitsGamification: THabitsGamiCountRecord<THabitsGami["columns"]>;
 }
 
 export interface GumjournalsAction {
