@@ -12,8 +12,7 @@ import {
   VisuallyInvisible,
 } from "../../components/global/container";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { tabBarCustomOptions } from "./utils";
-import { Platform, View } from "react-native";
+import { tabBarCustomOptions } from "./utils/tabBarCustomOptions";
 import OverviewForm from "./OverviewForm";
 import { GumjournalsContextProvider } from "../../module/GumjournalsForm/context";
 import HabitsForm from "./HabitsForm";

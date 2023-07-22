@@ -1,22 +1,10 @@
 import { useContext } from "react";
 import { GumjournalsContext } from "../../../module/GumjournalsForm/context";
-import {
-  Button,
-  Keyboard,
-  Platform,
-  Text,
-  TouchableWithoutFeedback,
-} from "react-native";
-import {
-  Container,
-  QuestionContainer,
-  QuestionText,
-  ScrollingBaseView,
-} from "../styles";
-import { FormItem } from "../utils";
+import { Keyboard, Platform, TouchableWithoutFeedback } from "react-native";
+import { Container, ScrollingBaseView } from "../styles";
 import { FORMS } from "../../../utils/forms";
 import { updateHabits } from "../../../module/GumjournalsForm/action";
-import * as Notifications from "expo-notifications";
+import { FormItem } from "../utils/formItem";
 
 export default () => {
   const { value, dispatch } = useContext(GumjournalsContext);
@@ -56,6 +44,8 @@ export default () => {
             callbackFunc={onHabitsCheckboxChanged}
             value={setCheckboxSelected}
           />
+
+          <FormItem form={FORMS.habitsTracker[1]} />
         </ScrollingBaseView>
       </Container>
     </TouchableWithoutFeedback>

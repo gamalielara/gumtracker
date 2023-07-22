@@ -90,3 +90,7 @@ export const CheckboxViewContainer = styled.TouchableOpacity`
   gap: 10px;
   margin: 10px 0;
 `;
+
+export const MultiselectGridQuestion = styled(BaseText)`
+  margin: 10px 0;
+`;
