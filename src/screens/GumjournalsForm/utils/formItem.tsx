@@ -17,7 +17,11 @@ type KForms = keyof (typeof FORMS)[keyof typeof FORMS];
 interface IFormItemProps {
   questionTitle: string;
   form: (typeof FORMS.habitsTracker)[KForms];
-  value?: string | boolean | ((...args: any) => boolean);
+  value?:
+    | string
+    | boolean
+    | number
+    | ((...args: any) => boolean | number | string);
   callbackFunc?: (...args: any) => void;
 }
 
@@ -72,6 +76,7 @@ export const FormItem: React.FC<IFormItemProps> = (props) => {
               label: String(i),
               value: String(i),
               borderColor: APPCOLORSCHEME.card,
+              color: APPCOLORSCHEME.text,
               labelStyle: {
                 color: APPCOLORSCHEME.text,
               },
@@ -79,21 +84,39 @@ export const FormItem: React.FC<IFormItemProps> = (props) => {
           []
         );
 
+        const constRadioSelected = (name: string, id: string) => {
+          const selectedHabitScore = radioButtons.filter(
+            (radio) => radio.id === id
+          )[0].label;
+
+          callbackFunc?.({ habit: name, score: selectedHabitScore });
+        };
+
         return (
           <>
-            {(formConfig as THabitsGami).columns.map((column: string) => (
-              <View>
-                <MultiselectGridQuestion>{column}</MultiselectGridQuestion>
-                <ScrollView horizontal>
-                  <RadioButtonsGroup
-                    radioButtons={radioButtons}
-                    onPress={callbackFunc}
-                    selectedId={value as string}
-                    layout="row"
-                  />
-                </ScrollView>
-              </View>
-            ))}
+            {(formConfig as THabitsGami).columns.map((habitName: string) => {
+              const thisHabitValue = String(
+                (value as Function)(habitName) as number
+              );
+
+              const selectedId = radioButtons.filter(
+                (radio) => radio.value === thisHabitValue
+              )[0].id;
+
+              return (
+                <View>
+                  <MultiselectGridQuestion>{habitName}</MultiselectGridQuestion>
+                  <ScrollView horizontal>
+                    <RadioButtonsGroup
+                      radioButtons={radioButtons}
+                      onPress={(id) => constRadioSelected(habitName, id)}
+                      selectedId={selectedId}
+                      layout="row"
+                    />
+                  </ScrollView>
+                </View>
+              );
+            })}
           </>
         );
 

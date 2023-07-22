@@ -24,6 +24,7 @@ export enum GumjournalsActionType {
   UPDATE_HIGHLIGHT_ONE,
   UPDATE_HIGHLIGHT_TWO,
   UPDATE_HABITS,
+  UPDATE_HABITS_GAMI,
 }
 
 export interface GumjournalsContextInterface {

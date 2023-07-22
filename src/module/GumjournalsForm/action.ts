@@ -25,3 +25,10 @@ export const updateHabits = (habits: string[]) => ({
   payload: { habits },
   type: GumjournalsActionType.UPDATE_HABITS,
 });
+
+export const updateHabitsGami = (
+  habitsGamification: Record<string, number>
+) => ({
+  payload: { habitsGamification },
+  type: GumjournalsActionType.UPDATE_HABITS_GAMI,
+});

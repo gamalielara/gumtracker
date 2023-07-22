@@ -29,6 +29,11 @@ export const GumjournasReducer = (
         ...state,
         habits: [...(action.payload.habits ?? [])],
       };
+    case GumjournalsActionType.UPDATE_HABITS_GAMI:
+      return {
+        ...state,
+        habitsGamification: { ...action.payload.habitsGamification },
+      };
     default:
       return { ...state };
   }
