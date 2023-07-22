@@ -41,7 +41,7 @@ export const TabBarStyle = (insets: EdgeInsets) =>
       marginBottom: insets.bottom > 0 ? 0 : 10,
       borderTopColor: APPCOLORSCHEME.secondary,
       position: "absolute",
-      bottom: 10,
+      bottom: 0,
     },
   });
 

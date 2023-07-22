@@ -1,7 +1,7 @@
 import { styled } from "styled-components/native";
 import { ColorModeScheme, ColorScheme } from "../../utils/const";
 
-export const MainContainerBackground = styled.View`
+export const MainContainerBackground = styled.KeyboardAvoidingView`
   width: 100%;
   height: 100%;
   background-color: ${ColorScheme[ColorModeScheme.DARK_MODE].background};

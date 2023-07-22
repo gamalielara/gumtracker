@@ -17,6 +17,7 @@ import OverviewForm from "./OverviewForm";
 import { GumjournalsContextProvider } from "../../module/GumjournalsForm/context";
 import HabitsForm from "./HabitsForm";
 import { APPCOLORSCHEME } from "../../utils/const";
+import { Platform } from "react-native";
 
 enum GumjournalSection {
   OVERVIEW,
@@ -38,7 +39,10 @@ const GumjournalsForm: React.FC = () => {
           paddingLeft: insets.left,
         }}
       >
-        <GumjournalsContainerView>
+        <GumjournalsContainerView
+          enabled
+          behavior={Platform.OS === "ios" ? "padding" : "height"}
+        >
           <Header>
             <BackButton />
             <GumjournalsTitleText>gumjournals form</GumjournalsTitleText>
