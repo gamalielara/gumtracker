@@ -1,6 +1,12 @@
 import { useContext } from "react";
 import { GumjournalsContext } from "../../../module/GumjournalsForm/context";
-import { Keyboard, Platform, TouchableWithoutFeedback } from "react-native";
+import {
+  Button,
+  Keyboard,
+  Platform,
+  Text,
+  TouchableWithoutFeedback,
+} from "react-native";
 import {
   Container,
   QuestionContainer,
@@ -10,6 +16,7 @@ import {
 import { FormItem } from "../utils";
 import { FORMS } from "../../../utils/forms";
 import { updateHabits } from "../../../module/GumjournalsForm/action";
+import * as Notifications from "expo-notifications";
 
 export default () => {
   const { value, dispatch } = useContext(GumjournalsContext);
