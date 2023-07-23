@@ -7,10 +7,10 @@ export const getAppNotiPermission = async () => {
   if (notiPermissionStatus !== "granted") {
     const { status } = await Notifications.requestPermissionsAsync();
 
-    console.log("NOTI PERMISSION: ", status);
-
     if (status !== "granted") {
-      alert("Failed to get noti permission.");
+      alert("Warning: failed to get noti permission.");
+    } else {
+      console.info("NOTI PERMISSION: ", status);
     }
   }
   Notifications.setNotificationHandler({

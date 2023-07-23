@@ -57,14 +57,14 @@ export default () => {
           questionTitle="Habits I do today"
           options={FORMS.habitsTracker["Habits I do today"].options}
           callbackFunc={onHabitsCheckboxChanged}
-          value={setCheckboxSelected}
+          value={value.habits}
         />
 
         <RadioGridForm
           questionTitle="Habits I do today"
           scale={FORMS.habitsTracker["Habits Gamification"].scale}
           columns={FORMS.habitsTracker["Habits Gamification"].columns}
-          value={setHabitScore}
+          value={value.habitsGamification}
           callbackFunc={onHabitScoreChanged}
         />
       </ScrollingBaseView>
