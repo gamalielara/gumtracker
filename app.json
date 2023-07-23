@@ -13,18 +13,23 @@
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.gamalielboanerges.gumtracker"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff",
-        "useNextNotificationsApi": true,
-        "permissions": ["RECEIVE_BOOT_COMPLETED"]
-      }
+        "backgroundColor": "#ffffff"
+      },
+      "package": "com.gamalielboanerges.gumtracker"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "60a7a02d-31d6-4a91-8a1d-ba92a38437ab"
+      }
     }
   }
 }
