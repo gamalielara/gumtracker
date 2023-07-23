@@ -10,29 +10,43 @@ import {
 } from "../styles";
 import { APPCOLORSCHEME } from "../../../utils/const";
 import { BaseText } from "../../../components/global/text";
-import { Dimensions, FlatList, ScrollView, View } from "react-native";
+import { Dimensions, FlatList } from "react-native";
 import React, { useMemo } from "react";
 import RadioButtonsGroup from "react-native-radio-buttons-group";
 
+type TForm = {
+  select: string[];
+  grid_radio: Record<string, number>;
+};
+
 interface IFormItemProps {
   questionTitle: string;
-  value?:
-    | string
-    | boolean
-    | number
-    | ((...args: any) => boolean | number | string);
   callbackFunc?: (...args: any) => void;
 }
 
-type TSelectForm = Omit<THabits, "type"> & IFormItemProps;
-type TRadioGridForm = Omit<THabitsGami, "type"> & IFormItemProps;
+type IFormItemOpt<T extends keyof TForm> = IFormItemProps & {
+  value: TForm[T];
+};
 
+type TSelectForm = Omit<THabits, "type"> & IFormItemOpt<"select">;
+type TRadioGridForm = Omit<THabitsGami, "type"> & IFormItemOpt<"grid_radio">;
+
+interface IRadioButton {
+  item: string;
+  value: Record<string, number>;
+  scaleFrom: number;
+  scaleTo: number;
+  callbackFunc?: (...args: any) => void;
+}
+
+// React memo is used to enhance performance. We don't want to rerender forms that was not previously changed
+// If we change a form there's a chance for other form to rerender as well
 export const SelectForm: React.FC<TSelectForm> = React.memo(
   (props) => {
     const { questionTitle, options, callbackFunc, value } = props;
 
     const renderCheckbox = ({ item }: { item: string }) => {
-      const isSelected = (value as Function)?.(item);
+      const isSelected = value.includes(item);
 
       return (
         <CheckboxViewContainer
@@ -68,15 +82,11 @@ export const SelectForm: React.FC<TSelectForm> = React.memo(
       </QuestionContainer>
     );
   },
-  (prev, next) => prev.value === next.value
+  (prev, next) => JSON.stringify(prev.value) === JSON.stringify(next.value)
 );
 
-export const RadioGridForm: React.FC<TRadioGridForm> = React.memo(
-  (props) => {
-    const { questionTitle, scale, value, columns, callbackFunc } = props;
-
-    const [scaleFrom, scaleTo] = scale;
-
+const RadioBtn = React.memo(
+  ({ item, value, scaleFrom, scaleTo, callbackFunc }: IRadioButton) => {
     const radioButtons = useMemo(() => {
       const scaleMap = Array.from(
         { length: scaleTo - scaleFrom + 1 },
@@ -95,7 +105,7 @@ export const RadioGridForm: React.FC<TRadioGridForm> = React.memo(
       }));
     }, []);
 
-    const constRadioSelected = (name: string, id: string) => {
+    const onRadioSelected = (name: string, id: string) => {
       const selectedHabitScore = radioButtons.filter(
         (radio) => radio.id === id
       )[0].label;
@@ -103,44 +113,62 @@ export const RadioGridForm: React.FC<TRadioGridForm> = React.memo(
       callbackFunc?.({ habit: name, score: selectedHabitScore });
     };
 
-    const renderRadioButton = ({ item }: { item: string }) => {
-      const thisHabitValue = String((value as Function)(item) as number);
+    const thisHabitValue = value[item];
 
-      const selectedId = radioButtons.filter(
-        (radio) => radio.value === thisHabitValue
-      )[0].id;
+    const selectedId = useMemo(
+      () =>
+        radioButtons.filter(
+          (radio) => radio.value === String(thisHabitValue)
+        )[0]?.id,
+      [thisHabitValue]
+    );
 
-      return (
-        <MultiRadioGridContainer>
-          <MultiRadioGridQuestion>{item}</MultiRadioGridQuestion>
-          <ScrollableHorizontalView horizontal>
-            <RadioButtonsGroup
-              radioButtons={radioButtons}
-              onPress={(id) => constRadioSelected(item, id)}
-              selectedId={selectedId}
-              layout="row"
-              containerStyle={{
-                width: Dimensions.get("window").width,
-                justifyContent: "space-around",
-                gap: 20,
-                height: 50,
-              }}
-            />
-          </ScrollableHorizontalView>
-        </MultiRadioGridContainer>
-      );
-    };
+    return (
+      <MultiRadioGridContainer>
+        <MultiRadioGridQuestion>{item}</MultiRadioGridQuestion>
+        <ScrollableHorizontalView horizontal>
+          <RadioButtonsGroup
+            radioButtons={radioButtons}
+            onPress={(id) => onRadioSelected(item, id)}
+            selectedId={selectedId}
+            layout="row"
+            containerStyle={{
+              width: Dimensions.get("window").width,
+              justifyContent: "space-around",
+              gap: 20,
+              height: 50,
+            }}
+          />
+        </ScrollableHorizontalView>
+      </MultiRadioGridContainer>
+    );
+  }
+);
+
+export const RadioGridForm: React.FC<TRadioGridForm> = React.memo(
+  (props) => {
+    const { questionTitle, scale, value, columns, callbackFunc } = props;
+
+    const [scaleFrom, scaleTo] = scale;
 
     return (
       <QuestionContainer>
         <QuestionText>{questionTitle}</QuestionText>
         <FlatList
           data={columns}
-          renderItem={renderRadioButton}
-          keyExtractor={() => String(Math.random())}
+          renderItem={({ item }) => (
+            <RadioBtn
+              scaleFrom={scaleFrom}
+              scaleTo={scaleTo}
+              value={value}
+              item={item}
+              callbackFunc={callbackFunc}
+            />
+          )}
+          keyExtractor={(item) => item}
         />
       </QuestionContainer>
     );
   },
-  (prev, next) => prev.value === next.value
+  (prev, next) => JSON.stringify(prev.value) === JSON.stringify(next.value)
 );
