@@ -75,6 +75,8 @@ const GumjournalsForm: React.FC = () => {
                 options={{ tabBarLabelStyle: TabBarLabelStyle.tabBarLabel }}
                 component={FitnessForm}
                 name={GumjournalsFormName.FITNESS}
+                // TODO: show toast when clicked on other than monday
+                // listeners={{tabPress: showToast}}
               />
               <Tab.Screen
                 options={{ tabBarLabelStyle: TabBarLabelStyle.tabBarLabel }}
