@@ -7,13 +7,13 @@ import {
   DatePickerText,
 } from "./styles";
 import { BAD_MOODS_RANGE, GOOD_MOODS_RANGE } from "./const";
-import { GumjournalsContext } from "../../../module/GumjournalsForm/context";
+import { GumjournalsContext } from "../../../module/gumjournalsForm/context";
 import {
   updateDateFilled,
   updateGratitude,
   updateHighlightOfTheDay,
   updateMood,
-} from "../../../module/GumjournalsForm/action";
+} from "../../../module/gumjournalsForm/action";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import {
   Dimensions,

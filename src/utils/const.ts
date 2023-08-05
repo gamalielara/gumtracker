@@ -44,3 +44,9 @@ export enum GumjournalsFormName {
   FITNESS = "Fitness",
   HABIT = "Habit",
 }
+
+export enum ToastType {
+  INFO = "info",
+  SUCCESS = "success",
+  FAILED = "failed",
+}

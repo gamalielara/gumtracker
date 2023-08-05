@@ -1,9 +1,9 @@
 import { useContext } from "react";
-import { GumjournalsContext } from "../../../module/GumjournalsForm/context";
+import { GumjournalsContext } from "../../../module/gumjournalsForm/context";
 import { Keyboard, Platform, TouchableWithoutFeedback } from "react-native";
 import { Container, ScrollingBaseView } from "../styles";
 import { FORMS } from "../../../utils/forms";
-import { updateHabitsGami } from "../../../module/GumjournalsForm/action";
+import { updateHabitsGami } from "../../../module/gumjournalsForm/action";
 import { RadioGridForm, SelectForm } from "../utils/formItem";
 import { APPCOLORSCHEME } from "../../../utils/const";
 

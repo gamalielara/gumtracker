@@ -14,13 +14,18 @@ import {
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { tabBarCustomOptions } from "./utils/tabBarCustomOptions";
 import OverviewForm from "./OverviewForm";
-import { GumjournalsContextProvider } from "../../module/GumjournalsForm/context";
+import { GumjournalsContextProvider } from "../../module/gumjournalsForm/context";
 import HabitsForm from "./HabitsForm";
-import { APPCOLORSCHEME, GumjournalsFormName } from "../../utils/const";
+import {
+  APPCOLORSCHEME,
+  GumjournalsFormName,
+  ToastType,
+} from "../../utils/const";
 import { Platform } from "react-native";
 import WellbeingForm from "./WellbeingForm";
-import { useRef } from "react";
+import { useContext, useRef } from "react";
 import FitnessForm from "./FitnessForm";
+import CommonContext from "../../module/common";
 
 enum GumjournalSection {
   OVERVIEW,
@@ -76,7 +81,15 @@ const GumjournalsForm: React.FC = () => {
                 component={FitnessForm}
                 name={GumjournalsFormName.FITNESS}
                 // TODO: show toast when clicked on other than monday
-                // listeners={{tabPress: showToast}}
+                listeners={{
+                  tabPress: () => {
+                    if (new Date().getDay() !== 1) {
+                      globalThis.showInfoToast(
+                        "Fitness tracker only available on Monday"
+                      );
+                    }
+                  },
+                }}
               />
               <Tab.Screen
                 options={{ tabBarLabelStyle: TabBarLabelStyle.tabBarLabel }}
