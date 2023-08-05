@@ -23,16 +23,20 @@ export const GumjournasReducer = (
         ...state,
         highlight: [state.highlight[0], ...(action.payload.highlight ?? [])],
       };
-
-    case GumjournalsActionType.UPDATE_HABITS:
-      return {
-        ...state,
-        habits: [...(action.payload.habits ?? [])],
-      };
     case GumjournalsActionType.UPDATE_HABITS_GAMI:
       return {
         ...state,
         habitsGamification: { ...action.payload.habitsGamification },
+      };
+    case GumjournalsActionType.UPDATE_GRATITUDE_ONE:
+      return {
+        ...state,
+        gratitude: [...(action.payload.gratitude ?? []), state.gratitude[1]],
+      };
+    case GumjournalsActionType.UPDATE_GRATITUDE_TWO:
+      return {
+        ...state,
+        gratitude: [state.gratitude[0], ...(action.payload.gratitude ?? [])],
       };
     default:
       return { ...state };

@@ -11,6 +11,7 @@ export interface GumjournalsForm {
   highlight: string[];
   habits: string[];
   habitsGamification: THabitsGamiCountRecord<THabitsGami["columns"]>;
+  gratitude: string[];
 }
 
 export interface GumjournalsAction {
@@ -25,6 +26,8 @@ export enum GumjournalsActionType {
   UPDATE_HIGHLIGHT_TWO,
   UPDATE_HABITS,
   UPDATE_HABITS_GAMI,
+  UPDATE_GRATITUDE_ONE,
+  UPDATE_GRATITUDE_TWO,
 }
 
 export interface GumjournalsContextInterface {

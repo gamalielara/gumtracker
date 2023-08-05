@@ -61,7 +61,6 @@ export const Container = styled.KeyboardAvoidingView`
 
 export const ScrollingBaseView = styled.ScrollView`
   background-color: ${APPCOLORSCHEME.background};
-  margin-bottom: 90px;
   margin-top: 50px;
 `;
 
@@ -77,7 +76,7 @@ export const FormInput = styled.TextInput`
   width: 100%;
   background-color: ${APPCOLORSCHEME.card};
   color: ${APPCOLORSCHEME.text};
-  padding: 10px;
+  padding: 15px;
   margin-top: 10px;
   border-radius: 10px;
 `;
