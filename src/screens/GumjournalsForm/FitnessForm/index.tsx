@@ -6,11 +6,14 @@ import {
   QuestionText,
   ScrollingBaseView,
 } from "../styles";
-import { useRef } from "react";
+import { useMemo, useRef } from "react";
 
 export default () => {
   // Fitness form can only be filled on Mondays
-  const isMondayRef = useRef(new Date().getDay() === 1);
+  const isMondayRef = useMemo(
+    () => new Date().getDay() === 1,
+    [new Date().getDay()]
+  );
 
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
@@ -18,22 +21,22 @@ export default () => {
         <QuestionContainer>
           <QuestionText>Body Weight (kg)</QuestionText>
           <FormInput
-            isDisabled={!isMondayRef.current}
+            isDisabled={!isMondayRef}
             placeholder="Weight in kg"
             placeholderTextColor={APPCOLORSCHEME.text}
             inputMode="decimal"
-            editable={isMondayRef.current}
+            editable={isMondayRef}
           />
         </QuestionContainer>
 
         <QuestionContainer>
           <QuestionText>Belly circumference (cm)</QuestionText>
           <FormInput
-            isDisabled={!isMondayRef.current}
+            isDisabled={!isMondayRef}
             placeholder="Belly circumference in cm"
             placeholderTextColor={APPCOLORSCHEME.text}
             inputMode="decimal"
-            editable={isMondayRef.current}
+            editable={isMondayRef}
           />
         </QuestionContainer>
       </ScrollingBaseView>
