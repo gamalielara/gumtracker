@@ -37,3 +37,16 @@ export const ColorScheme = {
 
 // Change later
 export const APPCOLORSCHEME = ColorScheme[ColorModeScheme.DARK_MODE];
+
+export enum GumjournalsFormName {
+  OVERVIEW = "Overview",
+  WELLBEING = "Wellbeing",
+  FITNESS = "Fitness",
+  HABIT = "Habit",
+}
+
+export enum ToastType {
+  INFO = "info",
+  SUCCESS = "success",
+  FAILED = "failed",
+}

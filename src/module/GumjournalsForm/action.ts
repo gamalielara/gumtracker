@@ -21,14 +21,17 @@ export const updateHighlightOfTheDay = (
       : GumjournalsActionType.UPDATE_HIGHLIGHT_TWO,
 });
 
-export const updateHabits = (habits: string[]) => ({
-  payload: { habits },
-  type: GumjournalsActionType.UPDATE_HABITS,
-});
-
 export const updateHabitsGami = (
   habitsGamification: Record<string, number>
 ) => ({
   payload: { habitsGamification },
   type: GumjournalsActionType.UPDATE_HABITS_GAMI,
+});
+
+export const updateGratitude = (gratitude: string, gratitudeNum: number) => ({
+  payload: { gratitude: [gratitude] },
+  type:
+    gratitudeNum === 1
+      ? GumjournalsActionType.UPDATE_GRATITUDE_ONE
+      : GumjournalsActionType.UPDATE_GRATITUDE_TWO,
 });

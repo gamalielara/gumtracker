@@ -1,5 +1,5 @@
 import Checkbox from "expo-checkbox";
-import { FORMS, FormType, THabits, THabitsGami } from "../../../utils/forms";
+import { FORMS, FormType, THabitsGami } from "../../../utils/forms";
 import {
   CheckboxViewContainer,
   MultiRadioGridContainer,
@@ -28,7 +28,6 @@ type IFormItemOpt<T extends keyof TForm> = IFormItemProps & {
   value: TForm[T];
 };
 
-type TSelectForm = Omit<THabits, "type"> & IFormItemOpt<"select">;
 type TRadioGridForm = Omit<THabitsGami, "type"> & IFormItemOpt<"grid_radio">;
 
 interface IRadioButton {
@@ -41,7 +40,7 @@ interface IRadioButton {
 
 // React memo is used to enhance performance. We don't want to rerender forms that was not previously changed
 // If we change a form there's a chance for other form to rerender as well
-export const SelectForm: React.FC<TSelectForm> = React.memo(
+export const SelectForm: React.FC<any> = React.memo(
   (props) => {
     const { questionTitle, options, callbackFunc, value } = props;
 

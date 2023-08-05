@@ -14,10 +14,18 @@ import {
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { tabBarCustomOptions } from "./utils/tabBarCustomOptions";
 import OverviewForm from "./OverviewForm";
-import { GumjournalsContextProvider } from "../../module/GumjournalsForm/context";
+import { GumjournalsContextProvider } from "../../module/gumjournalsForm/context";
 import HabitsForm from "./HabitsForm";
-import { APPCOLORSCHEME } from "../../utils/const";
+import {
+  APPCOLORSCHEME,
+  GumjournalsFormName,
+  ToastType,
+} from "../../utils/const";
 import { Platform } from "react-native";
+import WellbeingForm from "./WellbeingForm";
+import { useContext, useRef } from "react";
+import FitnessForm from "./FitnessForm";
+import CommonContext from "../../module/common";
 
 enum GumjournalSection {
   OVERVIEW,
@@ -55,22 +63,38 @@ const GumjournalsForm: React.FC = () => {
               screenOptions={({ route }) => tabBarCustomOptions(route, insets)}
               sceneContainerStyle={{
                 backgroundColor: APPCOLORSCHEME.background,
+                marginBottom: 65,
               }}
             >
               <Tab.Screen
                 options={{ tabBarLabelStyle: TabBarLabelStyle.tabBarLabel }}
                 component={OverviewForm}
-                name="Overview"
+                name={GumjournalsFormName.OVERVIEW}
               />
               <Tab.Screen
                 options={{ tabBarLabelStyle: TabBarLabelStyle.tabBarLabel }}
-                component={OverviewForm}
-                name="Wellbeing"
+                component={WellbeingForm}
+                name={GumjournalsFormName.WELLBEING}
+              />
+              <Tab.Screen
+                options={{ tabBarLabelStyle: TabBarLabelStyle.tabBarLabel }}
+                component={FitnessForm}
+                name={GumjournalsFormName.FITNESS}
+                // TODO: show toast when clicked on other than monday
+                listeners={{
+                  tabPress: () => {
+                    if (new Date().getDay() !== 1) {
+                      globalThis.showInfoToast(
+                        "Fitness tracker only available on Monday"
+                      );
+                    }
+                  },
+                }}
               />
               <Tab.Screen
                 options={{ tabBarLabelStyle: TabBarLabelStyle.tabBarLabel }}
                 component={HabitsForm}
-                name="Habit"
+                name={GumjournalsFormName.HABIT}
               />
             </Tab.Navigator>
           </NavigationContainer>

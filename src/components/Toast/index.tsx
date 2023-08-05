@@ -1,0 +1,82 @@
+import React, { useEffect, useRef, useState } from "react";
+import { Overlay, ToastBox, ToastText } from "./style";
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import {
+  faCircleCheck,
+  faCircleInfo,
+  faCircleXmark,
+  faFontAwesome,
+} from "@fortawesome/free-solid-svg-icons";
+import { APPCOLORSCHEME, ToastType } from "../../utils/const";
+import { Animated } from "react-native";
+
+export default () => {
+  const [toast, setToast] = useState<ToastType | null>(null);
+  const [toastText, setToastText] = useState<string | null>(null);
+
+  const fadingAnim = useRef(new Animated.Value(0)).current;
+
+  let toastIcon;
+  switch (toast) {
+    case ToastType.INFO:
+      toastIcon = faCircleInfo;
+    case ToastType.SUCCESS:
+      toastIcon = faCircleCheck;
+    case ToastType.FAILED:
+      toastIcon = faCircleXmark;
+    case ToastType.INFO:
+    default:
+      toastIcon = faCircleInfo;
+  }
+
+  useEffect(() => {
+    if (toast) {
+      Animated.timing(fadingAnim, {
+        toValue: 0.5,
+        duration: 200,
+        useNativeDriver: true,
+      }).start();
+
+      setTimeout(() => {
+        Animated.timing(fadingAnim, {
+          toValue: 0,
+          duration: 200,
+          useNativeDriver: true,
+        }).start();
+      }, 1000);
+
+      setTimeout(() => {
+        setToast(null);
+      }, 1200);
+    }
+  }, [toast]);
+
+  useEffect(() => {
+    const registerToastEvent = () =>
+      (globalThis.showInfoToast = (text: string) => {
+        setToast(ToastType.INFO);
+        setToastText(text);
+      });
+
+    registerToastEvent();
+  }, []);
+
+  return (
+    toast && (
+      <Overlay
+        style={{
+          opacity: fadingAnim,
+        }}
+      >
+        <ToastBox>
+          <FontAwesomeIcon
+            icon={toastIcon}
+            color={APPCOLORSCHEME.text}
+            size={30}
+          />
+          <ToastText>{toastText}</ToastText>
+        </ToastBox>
+      </Overlay>
+    )
+  );
+};

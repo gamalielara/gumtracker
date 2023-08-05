@@ -61,7 +61,6 @@ export const Container = styled.KeyboardAvoidingView`
 
 export const ScrollingBaseView = styled.ScrollView`
   background-color: ${APPCOLORSCHEME.background};
-  margin-bottom: 90px;
   margin-top: 50px;
 `;
 
@@ -73,11 +72,13 @@ export const QuestionContainer = styled.View`
   margin: 20px 0;
 `;
 
-export const FormInput = styled.TextInput`
+export const FormInput = styled.TextInput<{ isDisabled?: boolean }>`
   width: 100%;
-  background-color: ${APPCOLORSCHEME.card};
+  background-color: ${(props) =>
+    props.isDisabled ? APPCOLORSCHEME["text-secondary"] : APPCOLORSCHEME.card};
+  opacity: ${(props) => (props.isDisabled ? 0.5 : 1)};
   color: ${APPCOLORSCHEME.text};
-  padding: 10px;
+  padding: 15px;
   margin-top: 10px;
   border-radius: 10px;
 `;

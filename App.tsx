@@ -1,13 +1,25 @@
 import { useFonts } from "expo-font";
-import { useCallback } from "react";
+import {
+  createContext,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import GumjournalsForm from "./src/screens/GumjournalsForm";
 import { MainContainerBackground } from "./src/components/global/container";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { getAppNotiPermission } from "./src/utils/getAppPermission";
 import * as SplashScreen from "expo-splash-screen";
+import CommonContext from "./src/module/common";
+import { APPCOLORSCHEME } from "./src/utils/const";
+import Toast from "./src/components/Toast";
 
 export default function App() {
   getAppNotiPermission().then(() => console.info("Noti permission is created"));
+
+  const colorScheme = APPCOLORSCHEME;
 
   const [fontsLoaded] = useFonts({
     Inter: require("./src/assets/fonts/Inter-Regular.ttf"),
@@ -24,10 +36,13 @@ export default function App() {
   if (!fontsLoaded) return;
 
   return (
-    <SafeAreaProvider>
-      <MainContainerBackground onLayout={onLayoutView}>
-        <GumjournalsForm />
-      </MainContainerBackground>
-    </SafeAreaProvider>
+    <CommonContext.Provider value={{ colorScheme }}>
+      <SafeAreaProvider>
+        <MainContainerBackground onLayout={onLayoutView}>
+          <GumjournalsForm />
+        </MainContainerBackground>
+      </SafeAreaProvider>
+      <Toast />
+    </CommonContext.Provider>
   );
 }
