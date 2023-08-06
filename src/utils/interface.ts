@@ -14,3 +14,7 @@ export interface TransformedSheetData {
     Mood: string[];
   };
 }
+
+export type Props<T extends Record<string, unknown> = Record<never, never>> = {
+  children: React.ReactNode;
+} & T;

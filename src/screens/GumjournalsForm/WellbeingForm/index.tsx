@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import React, { useContext, useState } from "react";
 import {
   MoodPickCard,
@@ -14,7 +15,9 @@ import {
   updateHighlightOfTheDay,
   updateMood,
 } from "../../../module/gumjournalsForm/action";
-import DateTimePicker from "@react-native-community/datetimepicker";
+import DateTimePicker, {
+  DateTimePickerEvent,
+} from "@react-native-community/datetimepicker";
 import {
   Dimensions,
   Keyboard,
@@ -28,7 +31,6 @@ import {
   QuestionText,
   ScrollingBaseView,
 } from "../styles";
-import * as Notifications from "expo-notifications";
 
 export default () => {
   const [showDatePicker, setShowDatePicker] = useState<boolean>(
@@ -41,8 +43,11 @@ export default () => {
     dispatch?.(updateMood({ mood }));
   };
 
-  const datePickerChangeHandler = (event: any, selectedDate: any) => {
-    const tmp = new Date(selectedDate).getTime();
+  const datePickerChangeHandler = (
+    event: DateTimePickerEvent,
+    selectedDate?: Date
+  ) => {
+    const tmp = new Date(selectedDate ?? "").getTime();
     dispatch?.(updateDateFilled(tmp));
     setShowDatePicker(Platform.OS === "ios");
   };

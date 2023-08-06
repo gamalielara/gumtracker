@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Keyboard, TouchableWithoutFeedback } from "react-native";
 import { APPCOLORSCHEME } from "../../../utils/const";
 import { ScrollingBaseView } from "../styles";
@@ -22,7 +22,7 @@ async function fetchSpreadsheetData() {
 }
 
 export default () => {
-  const [data, setData] = useState<any>();
+  const [data, setData] = useState<Record<string, unknown>>();
 
   useEffect(() => {
     const fetchSmth = async () => {
@@ -54,7 +54,10 @@ export default () => {
             arrowColor: APPCOLORSCHEME.card,
           }}
           markedDates={Object.fromEntries(
-            data.Timestamp.map((time: string) => [time, { selected: true }])
+            (data.Timestamp as string[]).map((time: string) => [
+              time,
+              { selected: true },
+            ])
           )}
         />
       </ScrollingBaseView>
