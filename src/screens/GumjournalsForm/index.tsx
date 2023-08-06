@@ -16,22 +16,10 @@ import { tabBarCustomOptions } from "./utils/tabBarCustomOptions";
 import OverviewForm from "./OverviewForm";
 import { GumjournalsContextProvider } from "../../module/gumjournalsForm/context";
 import HabitsForm from "./HabitsForm";
-import {
-  APPCOLORSCHEME,
-  GumjournalsFormName,
-  ToastType,
-} from "../../utils/const";
+import { APPCOLORSCHEME, GumjournalsFormName } from "../../utils/const";
 import { Platform } from "react-native";
 import WellbeingForm from "./WellbeingForm";
-import { useContext, useRef } from "react";
 import FitnessForm from "./FitnessForm";
-import CommonContext from "../../module/common";
-
-enum GumjournalSection {
-  OVERVIEW,
-  WELLBEING,
-  HABIT,
-}
 
 const GumjournalsForm: React.FC = () => {
   const Tab = createBottomTabNavigator();
@@ -80,7 +68,6 @@ const GumjournalsForm: React.FC = () => {
                 options={{ tabBarLabelStyle: TabBarLabelStyle.tabBarLabel }}
                 component={FitnessForm}
                 name={GumjournalsFormName.FITNESS}
-                // TODO: show toast when clicked on other than monday
                 listeners={{
                   tabPress: () => {
                     if (new Date().getDay() !== 1) {

@@ -3,14 +3,20 @@ import { APPCOLORSCHEME } from "../../utils/const";
 import { BaseText } from "../global/text";
 import { Animated } from "react-native";
 
-export const Overlay = styled(Animated.View)`
-  background-color: black;
+export const ToastContainer = styled.View`
   position: absolute;
   width: 100%;
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
+`;
+
+export const Overlay = styled(Animated.View)`
+  background-color: black;
+  position: absolute;
+  width: 100%;
+  height: 100%;
 `;
 
 export const ToastBox = styled.View`
@@ -22,6 +28,7 @@ export const ToastBox = styled.View`
   align-items: center;
   justify-content: center;
   gap: 10px;
+  z-index: 999;
 `;
 
 export const ToastText = styled(BaseText)`

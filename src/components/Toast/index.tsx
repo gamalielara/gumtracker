@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Overlay, ToastBox, ToastText } from "./style";
+import { Overlay, ToastBox, ToastContainer, ToastText } from "./style";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import {
   faCircleCheck,
@@ -9,6 +9,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { APPCOLORSCHEME, ToastType } from "../../utils/const";
 import { Animated } from "react-native";
+import { Container } from "../../screens/GumjournalsForm/styles";
 
 export default () => {
   const [toast, setToast] = useState<ToastType | null>(null);
@@ -63,11 +64,7 @@ export default () => {
 
   return (
     toast && (
-      <Overlay
-        style={{
-          opacity: fadingAnim,
-        }}
-      >
+      <ToastContainer>
         <ToastBox>
           <FontAwesomeIcon
             icon={toastIcon}
@@ -76,7 +73,12 @@ export default () => {
           />
           <ToastText>{toastText}</ToastText>
         </ToastBox>
-      </Overlay>
+        <Overlay
+          style={{
+            opacity: fadingAnim,
+          }}
+        ></Overlay>
+      </ToastContainer>
     )
   );
 };
