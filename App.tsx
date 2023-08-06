@@ -1,12 +1,5 @@
 import { useFonts } from "expo-font";
-import {
-  createContext,
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
+import { useCallback } from "react";
 import GumjournalsForm from "./src/screens/GumjournalsForm";
 import { MainContainerBackground } from "./src/components/global/container";
 import { SafeAreaProvider } from "react-native-safe-area-context";
@@ -15,9 +8,12 @@ import * as SplashScreen from "expo-splash-screen";
 import CommonContext from "./src/module/common";
 import { APPCOLORSCHEME } from "./src/utils/const";
 import Toast from "./src/components/Toast";
+import { API_KEY } from "@env";
 
 export default function App() {
   getAppNotiPermission().then(() => console.info("Noti permission is created"));
+
+  console.log("HELLO ", API_KEY);
 
   const colorScheme = APPCOLORSCHEME;
 

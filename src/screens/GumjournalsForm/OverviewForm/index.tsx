@@ -32,31 +32,31 @@ import {
   ScrollingBaseView,
 } from "../styles";
 import * as Notifications from "expo-notifications";
-import { BaseText } from "../../../components/global/text";
+import { BaseText, BoldText } from "../../../components/global/text";
+import { Calendar } from "react-native-calendars";
 
 export default () => {
-  const [showDatePicker, setShowDatePicker] = useState<boolean>(
-    Platform.OS === "ios"
-  );
-
-  const { value, dispatch } = useContext(GumjournalsContext);
-
-  const pickMoodHandle = (mood: number) => {
-    dispatch?.(updateMood({ mood }));
-  };
-
-  const datePickerChangeHandler = (event: any, selectedDate: any) => {
-    const tmp = new Date(selectedDate).getTime();
-    dispatch?.(updateDateFilled(tmp));
-    setShowDatePicker(Platform.OS === "ios");
-  };
-
-  const { width: appWidth } = Dimensions.get("window");
-
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <ScrollingBaseView>
-        <BaseText>Overview form</BaseText>
+        <BoldText style={{ marginBottom: 10, fontSize: 18 }}>
+          Journals Filled
+        </BoldText>
+        <Calendar
+          firstDay={1}
+          theme={{
+            calendarBackground: undefined,
+            selectedDayTextColor: APPCOLORSCHEME.text,
+            selectedDayBackgroundColor: APPCOLORSCHEME["text-secondary"],
+            dayTextColor: APPCOLORSCHEME["text-secondary"],
+            todayTextColor: APPCOLORSCHEME.text,
+            monthTextColor: APPCOLORSCHEME.text,
+            arrowColor: APPCOLORSCHEME.card,
+          }}
+          markedDates={{
+            "2023-08-08": { selected: true },
+          }}
+        />
       </ScrollingBaseView>
     </TouchableWithoutFeedback>
   );
