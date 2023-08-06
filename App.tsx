@@ -8,12 +8,9 @@ import * as SplashScreen from "expo-splash-screen";
 import CommonContext from "./src/module/common";
 import { APPCOLORSCHEME } from "./src/utils/const";
 import Toast from "./src/components/Toast";
-import { API_KEY } from "@env";
 
 export default function App() {
   getAppNotiPermission().then(() => console.info("Noti permission is created"));
-
-  console.log("HELLO ", API_KEY);
 
   const colorScheme = APPCOLORSCHEME;
 

@@ -2,6 +2,7 @@ import { createContext, useMemo, useReducer } from "react";
 import { GumjournasReducer } from "./reducer";
 import { GumjournalsContextInterface, GumjournalsForm } from "./interface";
 import { HABITS_GAMI_CONFIG } from "../../utils/forms";
+import { Props } from "../../utils/interface";
 
 const INITIAL_HABITS_GAMI = HABITS_GAMI_CONFIG.columns.map((e) => [e, 0]);
 
@@ -13,13 +14,13 @@ const INITIAL_VALUE = {
     string,
     number
   >,
-} as GumjournalsForm;
+} as unknown as GumjournalsForm;
 
 export const GumjournalsContext = createContext<GumjournalsContextInterface>({
   value: INITIAL_VALUE,
 });
 
-export const GumjournalsContextProvider = ({ children }: any) => {
+export const GumjournalsContextProvider = ({ children }: Props) => {
   const [value, dispatch] = useReducer(GumjournasReducer, {
     ...INITIAL_VALUE,
     dateFilled: new Date().getTime(),
