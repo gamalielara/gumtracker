@@ -1,41 +1,41 @@
-import React, { useContext, useState } from "react";
-import {
-  MoodPickCard,
-  MoodValueText,
-  MoodsCard,
-  DatePickerButton,
-  DatePickerText,
-} from "./styles";
-import { BAD_MOODS_RANGE, GOOD_MOODS_RANGE } from "./const";
-import { GumjournalsContext } from "../../../module/gumjournalsForm/context";
-import {
-  updateDateFilled,
-  updateHighlightOfTheDay,
-  updateMood,
-} from "../../../module/gumjournalsForm/action";
-import DateTimePicker from "@react-native-community/datetimepicker";
-import {
-  Dimensions,
-  Keyboard,
-  Platform,
-  Pressable,
-  Text,
-  TouchableHighlight,
-  TouchableWithoutFeedback,
-} from "react-native";
+import React, { useEffect, useState } from "react";
+import { Keyboard, TouchableWithoutFeedback } from "react-native";
 import { APPCOLORSCHEME } from "../../../utils/const";
-import {
-  Container,
-  FormInput,
-  QuestionContainer,
-  QuestionText,
-  ScrollingBaseView,
-} from "../styles";
-import * as Notifications from "expo-notifications";
+import { ScrollingBaseView } from "../styles";
 import { BaseText, BoldText } from "../../../components/global/text";
 import { Calendar } from "react-native-calendars";
+import { SPREADSHEET_ID, SPREADSHEET_NAME, API_KEY } from "@env";
+import transformSheetData from "../../../utils/sheetDataTransformer";
+
+// TODO: Create ApiService
+// TODO: Create a function to call this
+async function fetchSpreadsheetData() {
+  const res = await fetch(
+    `https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/${SPREADSHEET_NAME}?valueRenderOption=FORMATTED_VALUE&key=${API_KEY}`
+  );
+
+  const data = await res.json();
+
+  const transformedData = transformSheetData(data);
+
+  return transformedData;
+}
 
 export default () => {
+  const [data, setData] = useState<any>();
+
+  useEffect(() => {
+    const fetchSmth = async () => {
+      const res = await fetchSpreadsheetData();
+      setData(res);
+    };
+
+    fetchSmth();
+  }, []);
+
+  // TODO: Loading overlay
+  if (!data?.Timestamp) return <BaseText>Loading...</BaseText>;
+
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <ScrollingBaseView>
@@ -53,9 +53,9 @@ export default () => {
             monthTextColor: APPCOLORSCHEME.text,
             arrowColor: APPCOLORSCHEME.card,
           }}
-          markedDates={{
-            "2023-08-08": { selected: true },
-          }}
+          markedDates={Object.fromEntries(
+            data.Timestamp.map((time: string) => [time, { selected: true }])
+          )}
         />
       </ScrollingBaseView>
     </TouchableWithoutFeedback>
