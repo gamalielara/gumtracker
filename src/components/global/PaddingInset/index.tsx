@@ -9,7 +9,7 @@ export default () => {
         paddingRight: right,
         paddingTop: top,
         paddingLeft: left,
-        paddingBottom: bottom,
+        paddingBottom: bottom || 65,
       }}
     />
   );

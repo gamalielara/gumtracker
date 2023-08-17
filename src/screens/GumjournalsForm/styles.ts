@@ -19,11 +19,12 @@ export const GumjournalsContainerView = styled(MainContainer)<{
 export const TabBarStyle = (insets: EdgeInsets) =>
   StyleSheet.create({
     tabBar: {
-      borderRadius: 15,
+      borderTopLeftRadius: 15,
+      borderTopRightRadius: 15,
       backgroundColor: APPCOLORSCHEME.secondary,
       paddingTop: 20,
       paddingBottom: 20, // Need extra padding bottom
-      height: insets.bottom + 60,
+      height: (insets.bottom || 20) + 60,
       borderTopColor: APPCOLORSCHEME.secondary,
       position: "absolute",
       bottom: 0,
