@@ -1,24 +1,41 @@
-import { parseDate } from "./date";
-import { SheetData } from "./interface";
+export function transformSheetDataToMapObj(rawValues: string[][]) {
+  const [standAloneKeys, detailKeys, ...values] = rawValues;
 
-export default function transformSheetData(rawData: SheetData) {
-  const transformedData: Record<string, string[]> = {};
+  const result: Record<string, unknown> = {};
 
-  const [keys, ...values] = rawData.values;
+  const maxKeysLength = Math.max(standAloneKeys.length, detailKeys.length);
 
-  for (let i = 0; i < keys.length; i++) {
-    const key = keys[i];
+  let tmpKey: string = "";
 
-    if (!transformedData[key]) transformedData[key] = [];
+  function getValues(index: number) {
+    const result = [];
 
-    for (let j = 0; j < values.length; j++) {
-      if (i === 0) {
-        transformedData[key].push(parseDate(values[j][i] ?? ""));
-      } else {
-        transformedData[key].push(values[j][i] ?? "");
+    for (let i = 0; i < values.length; i++) {
+      for (let j = 0; j < values[i].length; j++) {
+        if (j === index) {
+          result.push(values[i][j]);
+        }
       }
     }
+
+    return result;
   }
 
-  return transformedData;
+  for (let i = 0; i < maxKeysLength; i++) {
+    if (standAloneKeys[i]) {
+      tmpKey = standAloneKeys[i];
+    } else {
+      if (!tmpKey) tmpKey = detailKeys[i];
+    }
+
+    if (detailKeys[i]) {
+      result[tmpKey] = {
+        ...(result[tmpKey] ?? {}),
+        [detailKeys[i]]: getValues(i),
+      };
+    } else {
+      result[tmpKey] = getValues(i);
+    }
+  }
+  return result;
 }
