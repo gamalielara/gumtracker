@@ -12,9 +12,9 @@ const Button = styled.TouchableOpacity`
   justify-content: center;
 `;
 
-export default () => {
+export default ({ goBackCallbackFunc }: { goBackCallbackFunc: () => void }) => {
   return (
-    <Button>
+    <Button onPress={goBackCallbackFunc}>
       <FontAwesomeIcon
         icon={faChevronLeft}
         color={ColorScheme[ColorModeScheme.DARK_MODE].text}

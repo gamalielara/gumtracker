@@ -1,13 +1,13 @@
 import {useEffect, useState} from "react";
 import {Keyboard, TouchableWithoutFeedback} from "react-native";
 import {APPCOLORSCHEME, ScreenNames} from "../../utils/const";
-import {ScrollingBaseView} from "../GumjournalsForm/styles";
 import {BaseText, BoldText} from "../../components/global/text";
 import {Calendar} from "react-native-calendars";
 import {API_KEY, SPREADSHEET_ID, SPREADSHEET_NAME} from "@env";
 import transformSheetData from "../../utils/sheetDataTransformer";
-import {MainContainer} from "./styles";
+import {Container, FillFormButton, FillFormText, ScrollingBaseView, Wrapper,} from "./styles";
 import HeaderBar from "../../components/global/HeaderBar";
+import {NavigationScreenProps} from "../../utils/interface";
 
 // TODO: Create ApiService
 // TODO: Create a function to call this
@@ -23,9 +23,10 @@ async function fetchSpreadsheetData() {
   return transformedData;
 }
 
-export default () => {
+export default ({ navigation }: NavigationScreenProps) => {
   const [data, setData] = useState<Record<string, unknown>>();
 
+  // TODO move to APIService
   useEffect(() => {
     const fetchSmth = async () => {
       const res = await fetchSpreadsheetData();
@@ -39,9 +40,9 @@ export default () => {
   if (!data?.Timestamp) return <BaseText>Loading...</BaseText>;
 
   return (
-    <MainContainer>
+    <Container>
       <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-        <>
+        <Wrapper>
           <HeaderBar title={ScreenNames.GUMJOURNALS_OVERVIEW} />
           <ScrollingBaseView>
             <BoldText style={{ marginBottom: 10, fontSize: 18 }}>
@@ -65,9 +66,20 @@ export default () => {
                 ]),
               )}
             />
+
+            <FillFormButton
+              bgColor={APPCOLORSCHEME.card}
+              onPress={() =>
+                navigation.navigate(ScreenNames.GUMJOURNALS_FORM as never)
+              }
+            >
+              <FillFormText textColor={APPCOLORSCHEME.text}>
+                Fill Gumjournals for Today
+              </FillFormText>
+            </FillFormButton>
           </ScrollingBaseView>
-        </>
+        </Wrapper>
       </TouchableWithoutFeedback>
-    </MainContainer>
+    </Container>
   );
 };
