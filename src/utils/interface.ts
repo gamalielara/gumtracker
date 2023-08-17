@@ -2,20 +2,49 @@ import { ScreenNames } from "./const";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 type HeadRow = string[];
+type HeadSubRow = string[];
 type ValueRow = string[];
-type SheetDimension = "DIMENSIOn";
+type SheetDimension = "ROWS" | "COLUMNS";
 
-export interface SheetData {
+export interface RawSheetData {
   range: string;
   majorDimension: SheetDimension;
-  values: [HeadRow, ...Array<ValueRow>]; // The first index is always the row key header
+  values: [HeadRow, HeadSubRow, ...Array<ValueRow>]; // The first index is always the row key header
 }
 
 export interface TransformedSheetData {
-  data: {
-    DateFilled: string[];
-    Mood: string[];
-  };
+  dateFilled: string[];
+  fitness: Fitness;
+  habitsGamification: HabitsGamification;
+  timestamp: string[];
+  wellbeing: Wellbeing;
+}
+
+export interface Fitness {
+  bellyCircumference: string[];
+  bodyWeight: string[];
+}
+
+export interface HabitsGamification {
+  drawing: string[];
+  journaling: string[];
+  language: string[];
+  meditate: string[];
+  mobdev: string[];
+  reading: string[];
+  watchingMovies: string[];
+  webdev: string[];
+  writingBlog: string[];
+}
+
+export interface Wellbeing {
+  gratitude1: string[];
+  gratitude2: string[];
+  gratitude3: string[];
+  highlightOfTheDay1: string[];
+  highlightOfTheDay2: string[];
+  highlightOfTheDay3: string[];
+  mood: string[];
 }
 
 export type ComponentBasePropsWithChildren<
