@@ -1,4 +1,4 @@
-import { Alert, Keyboard, TouchableWithoutFeedback } from "react-native";
+import {  Keyboard, TouchableWithoutFeedback } from "react-native";
 import { APPCOLORSCHEME } from "../../../utils/const";
 import {
   FormInput,
@@ -6,7 +6,7 @@ import {
   QuestionText,
   ScrollingBaseView,
 } from "../styles";
-import { useMemo, useRef } from "react";
+import { useMemo, } from "react";
 
 export default () => {
   // Fitness form can only be filled on Mondays
