@@ -1,33 +1,19 @@
 import { styled } from "styled-components/native";
-import { MainContainerBackground } from "../../components/global/container";
-import { BaseText, BoldText } from "../../components/global/text";
+import { BaseText } from "../../components/global/text";
 import { StyleSheet } from "react-native";
 import { APPCOLORSCHEME } from "../../utils/const";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import MainContainer from "../../components/global/MainContainer";
+import { MainGlobalContainer } from "../../components/global/container";
 
 type EdgeInsets = ReturnType<typeof useSafeAreaInsets>;
 
-export const GumjournalsContainerView = styled(MainContainerBackground)`
-  width: auto;
-  padding-top: 10px;
-  box-sizing: content-box;
-`;
-
-export const Header = styled.View`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  gap: 16px;
-`;
-
-export const GumjournalsTitleText = styled(BoldText)`
-  font-size: 24px;
-  text-align: center;
-`;
-
-export const TabIcon = styled.View`
-  width: 20px;
-  aspect-ratio: 1;
+export const GumjournalsContainerView = styled(MainContainer)<{
+  height: number;
+}>`
+  ${MainGlobalContainer} {
+    height: ${(props) => props.height}px;
+  }
 `;
 
 export const TabBarStyle = (insets: EdgeInsets) =>
@@ -35,20 +21,21 @@ export const TabBarStyle = (insets: EdgeInsets) =>
     tabBar: {
       borderRadius: 15,
       backgroundColor: APPCOLORSCHEME.secondary,
-      padding: 10,
-      paddingBottom: 10,
-      height: 60,
-      marginBottom: insets.bottom > 0 ? 0 : 10,
+      paddingTop: 20,
+      paddingBottom: 20, // Need extra padding bottom
+      height: insets.bottom + 60,
       borderTopColor: APPCOLORSCHEME.secondary,
       position: "absolute",
       bottom: 0,
+      left: 0,
+      right: 0,
+      width: "100%",
     },
   });
 
 export const TabBarLabelStyle = StyleSheet.create({
   tabBarLabel: {
     fontFamily: "Inter",
-    marginTop: 5,
     fontSize: 14,
   },
 });
@@ -61,7 +48,7 @@ export const Container = styled.KeyboardAvoidingView`
 
 export const ScrollingBaseView = styled.ScrollView`
   background-color: ${APPCOLORSCHEME.background};
-  margin-top: 50px;
+  margin-top: 10px;
 `;
 
 export const QuestionText = styled(BaseText)`

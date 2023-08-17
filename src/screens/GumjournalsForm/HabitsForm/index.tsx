@@ -1,11 +1,11 @@
 import { useContext } from "react";
 import { GumjournalsContext } from "../../../module/gumjournalsForm/context";
-import { Keyboard, Platform, TouchableWithoutFeedback } from "react-native";
-import { Container, ScrollingBaseView } from "../styles";
+import { Keyboard, TouchableWithoutFeedback } from "react-native";
+import { ScrollingBaseView } from "../styles";
 import { FORMS } from "../../../utils/forms";
 import { updateHabitsGami } from "../../../module/gumjournalsForm/action";
-import { RadioGridForm, SelectForm } from "../utils/formItem";
-import { APPCOLORSCHEME } from "../../../utils/const";
+import { RadioGridForm } from "../utils/formItem";
+import PaddingInset from "../../../components/global/PaddingInset";
 
 export default () => {
   const { value, dispatch } = useContext(GumjournalsContext);
@@ -31,6 +31,7 @@ export default () => {
           value={value.habitsGamification}
           callbackFunc={onHabitScoreChanged}
         />
+        <PaddingInset />
       </ScrollingBaseView>
     </TouchableWithoutFeedback>
   );

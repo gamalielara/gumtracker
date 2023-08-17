@@ -6,20 +6,8 @@ import { TabBarStyle } from "../styles";
 import React from "react";
 
 export const tabBarCustomOptions = (route: any, insets: any) => ({
-  tabBarIcon: ({ focused, color, size }: any) => {
+  tabBarIcon: ({ focused, size }: any) => {
     switch (route.name) {
-      case GumjournalsFormName.OVERVIEW:
-        return (
-          <FontAwesomeIcon
-            size={size}
-            icon={
-              (focused ? SolidFontAwesome : RegularFontAwesome).faNoteSticky
-            }
-            color={
-              focused ? APPCOLORSCHEME.text : APPCOLORSCHEME["text-secondary"]
-            }
-          />
-        );
       case GumjournalsFormName.WELLBEING:
         return (
           <FontAwesomeIcon
