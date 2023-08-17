@@ -1,40 +1,23 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import React, { useContext, useState } from "react";
-import {
-  MoodPickCard,
-  MoodValueText,
-  MoodsCard,
-  DatePickerButton,
-  DatePickerText,
-} from "./styles";
-import { BAD_MOODS_RANGE, GOOD_MOODS_RANGE } from "./const";
-import { GumjournalsContext } from "../../../module/gumjournalsForm/context";
+import React, {useContext, useState} from "react";
+import {DatePickerButton, DatePickerText, MoodPickCard, MoodsCard, MoodValueText,} from "./styles";
+import {BAD_MOODS_RANGE, GOOD_MOODS_RANGE} from "./const";
+import {GumjournalsContext} from "../../../module/gumjournalsForm/context";
 import {
   updateDateFilled,
   updateGratitude,
   updateHighlightOfTheDay,
   updateMood,
 } from "../../../module/gumjournalsForm/action";
-import DateTimePicker, {
-  DateTimePickerEvent,
-} from "@react-native-community/datetimepicker";
-import {
-  Dimensions,
-  Keyboard,
-  Platform,
-  TouchableWithoutFeedback,
-} from "react-native";
-import { APPCOLORSCHEME } from "../../../utils/const";
-import {
-  FormInput,
-  QuestionContainer,
-  QuestionText,
-  ScrollingBaseView,
-} from "../styles";
+import DateTimePicker, {DateTimePickerEvent,} from "@react-native-community/datetimepicker";
+import {Dimensions, Keyboard, Platform, TouchableWithoutFeedback,} from "react-native";
+import {APPCOLORSCHEME} from "../../../utils/const";
+import {FormInput, QuestionContainer, QuestionText, ScrollingBaseView,} from "../styles";
+import PaddingInset from "../../../components/global/PaddingInset";
 
 export default () => {
   const [showDatePicker, setShowDatePicker] = useState<boolean>(
-    Platform.OS === "ios"
+    Platform.OS === "ios",
   );
 
   const { value, dispatch } = useContext(GumjournalsContext);
@@ -45,7 +28,7 @@ export default () => {
 
   const datePickerChangeHandler = (
     event: DateTimePickerEvent,
-    selectedDate?: Date
+    selectedDate?: Date,
   ) => {
     const tmp = new Date(selectedDate ?? "").getTime();
     dispatch?.(updateDateFilled(tmp));
@@ -63,7 +46,7 @@ export default () => {
           {Platform.OS === "android" && (
             <DatePickerButton onPress={() => setShowDatePicker(true)}>
               <DatePickerText>{`${new Date(
-                value.dateFilled
+                value.dateFilled,
               ).toDateString()}`}</DatePickerText>
             </DatePickerButton>
           )}
@@ -160,6 +143,8 @@ export default () => {
             placeholderTextColor={APPCOLORSCHEME.text}
           />
         </QuestionContainer>
+
+        <PaddingInset />
       </ScrollingBaseView>
     </TouchableWithoutFeedback>
   );

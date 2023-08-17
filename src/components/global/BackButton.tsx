@@ -1,11 +1,11 @@
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { ColorModeScheme, ColorScheme } from "../../utils/const";
 import { styled } from "styled-components/native";
-import { faCircleChevronLeft } from "@fortawesome/free-solid-svg-icons/faCircleChevronLeft";
+import { faChevronLeft } from "@fortawesome/free-solid-svg-icons/faChevronLeft";
 
 const Button = styled.TouchableOpacity`
-  width: 32;
-  height: 32;
+  width: 24;
+  height: 24;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -16,9 +16,9 @@ export default () => {
   return (
     <Button>
       <FontAwesomeIcon
-        icon={faCircleChevronLeft}
+        icon={faChevronLeft}
         color={ColorScheme[ColorModeScheme.DARK_MODE].text}
-        size={32}
+        size={24}
       />
     </Button>
   );

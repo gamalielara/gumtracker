@@ -1,5 +1,5 @@
 import Checkbox from "expo-checkbox";
-import { FORMS, FormType, THabitsGami } from "../../../utils/forms";
+import { THabitsGami } from "../../../utils/forms";
 import {
   CheckboxViewContainer,
   MultiRadioGridContainer,
