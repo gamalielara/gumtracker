@@ -1,14 +1,15 @@
-import { useFonts } from "expo-font";
-import { useCallback } from "react";
-import { getAppNotiPermission } from "./src/utils/getAppPermission";
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+import {useFonts} from "expo-font";
+import {useCallback} from "react";
+import {getAppNotiPermission} from "./src/utils/getAppPermission";
 import * as SplashScreen from "expo-splash-screen";
 import CommonContext from "./src/module/common";
-import { APPCOLORSCHEME, ScreenNames } from "./src/utils/const";
+import {APPCOLORSCHEME, ScreenNames} from "./src/utils/const";
 import GumjournalsOverview from "./src/screens/GumjournalsOverview";
 import GumjournalsForm from "./src/screens/GumjournalsForm";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { SafeAreaProvider } from "react-native-safe-area-context";
-import { NavigationContainer } from "@react-navigation/native";
+import {createNativeStackNavigator} from "@react-navigation/native-stack";
+import {SafeAreaProvider} from "react-native-safe-area-context";
+import {NavigationContainer} from "@react-navigation/native";
 import Toast from "./src/components/Toast";
 
 export default function App() {
@@ -35,17 +36,19 @@ export default function App() {
   return (
     <NavigationContainer>
       <CommonContext.Provider value={{ colorScheme }}>
-        <SafeAreaProvider>
+        <SafeAreaProvider onLayout={onLayoutView}>
           <Stack.Navigator
             initialRouteName={ScreenNames.GUMJOURNALS_OVERVIEW}
             screenOptions={{ headerShown: false }}
           >
             <Stack.Screen
               name={ScreenNames.GUMJOURNALS_OVERVIEW}
+              //@ts-ignore
               component={GumjournalsOverview}
             />
             <Stack.Screen
               name={ScreenNames.GUMJOURNALS_FORM}
+              //@ts-ignore
               component={GumjournalsForm}
             />
           </Stack.Navigator>

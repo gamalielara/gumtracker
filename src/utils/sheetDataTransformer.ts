@@ -1,3 +1,7 @@
+import { parseDate } from "./date";
+
+const TIMESTAMP_COLUMN_NUM = 0;
+
 export function transformSheetDataToMapObj(rawValues: string[][]) {
   const [standAloneKeys, detailKeys, ...values] = rawValues;
 
@@ -8,12 +12,16 @@ export function transformSheetDataToMapObj(rawValues: string[][]) {
   let tmpKey: string = "";
 
   function getValues(index: number) {
+    const isTimestampColumn = index === TIMESTAMP_COLUMN_NUM;
     const result = [];
 
     for (let i = 0; i < values.length; i++) {
       for (let j = 0; j < values[i].length; j++) {
         if (j === index) {
-          result.push(values[i][j]);
+          const valueToPush = isTimestampColumn
+            ? parseDate(values[i][j])
+            : values[i][j];
+          result.push(valueToPush);
         }
       }
     }
