@@ -34,4 +34,4 @@ export type TNavigation = NativeStackNavigationProp<
 
 export type NavigationScreenProps<
   T extends Partial<Record<string, unknown>> = Record<never, never>,
-> = TNavigation & ComponentBasePropsWithChildren<T>;
+> = { navigation: TNavigation } & ComponentBasePropsWithChildren<T>;
