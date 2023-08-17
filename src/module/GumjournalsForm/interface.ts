@@ -5,7 +5,7 @@ type THabitsGamiCountRecord<T extends THabitsGami["columns"]> = Record<
   number
 >;
 
-export interface GumjournalsForm {
+export interface IGumjournalsFormState {
   dateFilled: number;
   mood: number;
   highlight: string[];
@@ -13,8 +13,8 @@ export interface GumjournalsForm {
   gratitude: string[];
 }
 
-export interface GumjournalsAction {
-  payload: Partial<GumjournalsForm>;
+export interface IGumjournalsAction {
+  payload: Partial<IGumjournalsFormState>;
   type: GumjournalsActionType;
 }
 
@@ -29,6 +29,6 @@ export enum GumjournalsActionType {
 }
 
 export interface GumjournalsContextInterface {
-  value: GumjournalsForm;
-  dispatch?: React.Dispatch<GumjournalsAction>;
+  value: IGumjournalsFormState;
+  dispatch?: React.Dispatch<IGumjournalsAction>;
 }

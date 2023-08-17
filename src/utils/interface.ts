@@ -1,3 +1,6 @@
+import { ScreenNames } from "./const";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+
 type HeadRow = string[];
 type ValueRow = string[];
 type SheetDimension = "DIMENSIOn";
@@ -15,6 +18,20 @@ export interface TransformedSheetData {
   };
 }
 
-export type Props<T extends Record<string, unknown> = Record<never, never>> = {
+export type ComponentBasePropsWithChildren<
+  T extends Record<string, unknown> = Record<never, never>,
+> = {
   children: React.ReactNode;
 } & T;
+
+type RootStackParamsList = Record<ScreenNames, Record<string, unknown>>;
+
+export type TNavigation = NativeStackNavigationProp<
+  RootStackParamsList,
+  ScreenNames,
+  undefined
+>;
+
+export type NavigationScreenProps<
+  T extends Partial<Record<string, unknown>> = Record<never, never>,
+> = TNavigation & ComponentBasePropsWithChildren<T>;

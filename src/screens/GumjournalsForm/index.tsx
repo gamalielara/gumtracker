@@ -14,18 +14,32 @@ import WellbeingForm from "./WellbeingForm";
 import FitnessForm from "./FitnessForm";
 import HeaderBar from "../../components/global/HeaderBar";
 import { Dimensions } from "react-native";
+import { IGumjournalsFormState } from "../../module/gumjournalsForm/interface";
+import { NavigationScreenProps } from "../../utils/interface";
 
-const GumjournalsForm: React.FC = () => {
+interface GumjournalsFormProps {
+  valuesToShow: IGumjournalsFormState;
+}
+
+type Props = NavigationScreenProps<Partial<GumjournalsFormProps>>;
+
+const GumjournalsForm: React.FC<Props> = ({
+  valuesToShow,
+  navigation,
+}: Props) => {
   const Tab = createBottomTabNavigator();
   const insets = useSafeAreaInsets();
 
   const screenHeight = Dimensions.get("window").height - insets.bottom;
 
   return (
-    <GumjournalsContextProvider>
+    <GumjournalsContextProvider valuesToShow={valuesToShow}>
       <GumjournalsContainerView height={screenHeight}>
-        <HeaderBar title={ScreenNames.GUMJOURNALS_FORM} />
-        <NavigationContainer>
+        <HeaderBar
+          title={ScreenNames.GUMJOURNALS_FORM}
+          navigation={navigation}
+        />
+        <NavigationContainer independent={true}>
           <Tab.Navigator
             initialRouteName={GumjournalsFormName.WELLBEING}
             screenOptions={({ route }) => tabBarCustomOptions(route, insets)}

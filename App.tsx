@@ -1,13 +1,15 @@
 import { useFonts } from "expo-font";
 import { useCallback } from "react";
-import { SafeAreaProvider } from "react-native-safe-area-context";
 import { getAppNotiPermission } from "./src/utils/getAppPermission";
 import * as SplashScreen from "expo-splash-screen";
 import CommonContext from "./src/module/common";
-import { APPCOLORSCHEME } from "./src/utils/const";
-import Toast from "./src/components/Toast";
+import { APPCOLORSCHEME, ScreenNames } from "./src/utils/const";
+import GumjournalsOverview from "./src/screens/GumjournalsOverview";
 import GumjournalsForm from "./src/screens/GumjournalsForm";
-import { View } from "react-native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { SafeAreaProvider } from "react-native-safe-area-context";
+import { NavigationContainer } from "@react-navigation/native";
+import Toast from "./src/components/Toast";
 
 export default function App() {
   getAppNotiPermission().then(() => console.info("Noti permission is created"));
@@ -28,15 +30,28 @@ export default function App() {
 
   if (!fontsLoaded) return;
 
+  const Stack = createNativeStackNavigator();
+
   return (
-    <CommonContext.Provider value={{ colorScheme }}>
-      <SafeAreaProvider>
-        <View onLayout={onLayoutView}>
-          <GumjournalsForm />
-          {/*<GumjournalsOverview />*/}
-        </View>
-      </SafeAreaProvider>
-      <Toast />
-    </CommonContext.Provider>
+    <NavigationContainer>
+      <CommonContext.Provider value={{ colorScheme }}>
+        <SafeAreaProvider>
+          <Stack.Navigator
+            initialRouteName={ScreenNames.GUMJOURNALS_OVERVIEW}
+            screenOptions={{ headerShown: false }}
+          >
+            <Stack.Screen
+              name={ScreenNames.GUMJOURNALS_OVERVIEW}
+              component={GumjournalsOverview}
+            />
+            <Stack.Screen
+              name={ScreenNames.GUMJOURNALS_FORM}
+              component={GumjournalsForm}
+            />
+          </Stack.Navigator>
+          <Toast />
+        </SafeAreaProvider>
+      </CommonContext.Provider>
+    </NavigationContainer>
   );
 }
