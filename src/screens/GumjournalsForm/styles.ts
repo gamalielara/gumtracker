@@ -37,6 +37,7 @@ export const TabBarStyle = (insets: EdgeInsets) =>
 export const TabBarLabelStyle = StyleSheet.create({
   tabBarLabel: {
     fontFamily: "Inter",
+    marginTop: 10,
     fontSize: 14,
   },
 });

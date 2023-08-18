@@ -11,6 +11,7 @@ import {createNativeStackNavigator} from "@react-navigation/native-stack";
 import {SafeAreaProvider} from "react-native-safe-area-context";
 import {NavigationContainer} from "@react-navigation/native";
 import Toast from "./src/components/Toast";
+import {CardStyleInterpolators} from "@react-navigation/stack";
 
 export default function App() {
   getAppNotiPermission().then(() => console.info("Noti permission is created"));
@@ -33,13 +34,29 @@ export default function App() {
 
   const Stack = createNativeStackNavigator();
 
+  const transitionCustomOptions = {
+    animation: "timing",
+    config: {
+      duration: 500,
+    },
+  };
+
   return (
     <NavigationContainer>
       <CommonContext.Provider value={{ colorScheme }}>
         <SafeAreaProvider onLayout={onLayoutView}>
           <Stack.Navigator
             initialRouteName={ScreenNames.GUMJOURNALS_OVERVIEW}
-            screenOptions={{ headerShown: false }}
+            screenOptions={{
+              gestureEnabled: true,
+              gestureDirection: "horizontal",
+              headerShown: false,
+              cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+              transitionSpec: {
+                open: transitionCustomOptions,
+                close: transitionCustomOptions,
+              },
+            }}
           >
             <Stack.Screen
               name={ScreenNames.GUMJOURNALS_OVERVIEW}
