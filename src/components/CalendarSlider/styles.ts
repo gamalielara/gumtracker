@@ -19,8 +19,9 @@ export const MonthText = styled(BoldText)`
   font-size: 18px;
 `;
 
-export const DateCard = styled.View`
-  padding: 10px 20px;
+export const DateCard = styled.TouchableOpacity`
+  width: 50px;
+  padding: 10px;
   background-color: ${(props) => props.theme.card};
   margin: 10px;
   border-radius: 10px;
