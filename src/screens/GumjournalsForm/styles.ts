@@ -1,5 +1,5 @@
 import { styled } from "styled-components/native";
-import { BaseText } from "../../components/global/text";
+import { BaseText, BaseTextInput } from "../../components/global/text";
 import { StyleSheet } from "react-native";
 import { APPCOLORSCHEME } from "../../utils/const";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -37,6 +37,7 @@ export const TabBarStyle = (insets: EdgeInsets) =>
 export const TabBarLabelStyle = StyleSheet.create({
   tabBarLabel: {
     fontFamily: "Inter",
+    marginTop: 10,
     fontSize: 14,
   },
 });
@@ -60,7 +61,7 @@ export const QuestionContainer = styled.View`
   margin: 20px 0;
 `;
 
-export const FormInput = styled.TextInput<{ isDisabled?: boolean }>`
+export const FormInput = styled(BaseTextInput)<{ isDisabled?: boolean }>`
   width: 100%;
   background-color: ${(props) =>
     props.isDisabled ? APPCOLORSCHEME["text-secondary"] : APPCOLORSCHEME.card};

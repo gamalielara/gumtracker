@@ -52,5 +52,9 @@ export enum ToastType {
 
 export enum ScreenNames {
   GUMJOURNALS_FORM = "Gumjournals Form",
-  GUMJOURNALS_OVERVIEW = "Gumjournals Overview"
+  GUMJOURNALS_OVERVIEW = "Gumjournals Overview",
+}
+
+export enum AsyncStorageKeys {
+  NOTI_STATUS = "noti_permission_status",
 }

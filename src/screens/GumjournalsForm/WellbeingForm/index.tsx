@@ -55,7 +55,7 @@ export default () => {
             <DateTimePicker
               value={new Date(value.dateFilled)}
               mode="date"
-              display={Platform.OS === "ios" ? "default" : "calendar"}
+              display={"default"}
               style={{
                 marginRight: "auto",
                 marginLeft: "auto",

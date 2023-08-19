@@ -9,3 +9,7 @@ export const BaseText = styled.Text`
 export const BoldText = styled(BaseText)`
   font-family: "Inter-Bold";
 `;
+
+export const BaseTextInput = styled.TextInput`
+  font-family: Inter;
+`;
