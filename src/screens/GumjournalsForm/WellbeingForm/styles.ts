@@ -1,12 +1,9 @@
 import { styled } from "styled-components/native";
 import { BaseText } from "../../../components/global/text";
 
-import { APPCOLORSCHEME } from "../../../utils/const";
-
 export const DatePickerButton = styled.TouchableOpacity`
   height: 30px;
-  margin-top: 10px;
-  background-color: ${APPCOLORSCHEME.card};
+  background-color: ${(props) => props.theme.card};
   width: 150px;
   display: flex;
   flex-direction: row;
@@ -39,7 +36,7 @@ export const MoodPickCard = styled.TouchableOpacity<{
   width: ${(props) => props.width ?? "15%"};
   aspect-ratio: 1;
   background-color: ${(props) =>
-    props.isSelected ? APPCOLORSCHEME["text-secondary"] : APPCOLORSCHEME.card};
+    props.isSelected ? props.theme["text-secondary"] : props.theme.card};
   border-radius: 5px;
   display: flex;
   align-items: center;
@@ -47,5 +44,6 @@ export const MoodPickCard = styled.TouchableOpacity<{
 `;
 
 export const MoodValueText = styled(BaseText)`
+  color: ${(props) => props.theme.text};
   font-size: 16px;
 `;

@@ -1,21 +1,22 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { Overlay, ToastBox, ToastContainer, ToastText } from "./style";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import {
   faCircleCheck,
   faCircleInfo,
   faCircleXmark,
-  faFontAwesome,
 } from "@fortawesome/free-solid-svg-icons";
-import { APPCOLORSCHEME, ToastType } from "../../utils/const";
+import { ToastType } from "../../utils/const";
 import { Animated } from "react-native";
-import { Container } from "../../screens/GumjournalsForm/styles";
+import CommonContext from "../../module/common";
 
 export default () => {
   const [toast, setToast] = useState<ToastType | null>(null);
   const [toastText, setToastText] = useState<string | null>(null);
 
   const fadingAnim = useRef(new Animated.Value(0)).current;
+
+  const { colorScheme } = useContext(CommonContext);
 
   let toastIcon;
   switch (toast) {
@@ -68,7 +69,7 @@ export default () => {
         <ToastBox>
           <FontAwesomeIcon
             icon={toastIcon}
-            color={APPCOLORSCHEME.text}
+            color={colorScheme.text}
             size={30}
           />
           <ToastText>{toastText}</ToastText>

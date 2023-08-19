@@ -1,11 +1,12 @@
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { ColorModeScheme, ColorScheme } from "../../utils/const";
 import { styled } from "styled-components/native";
 import { faChevronLeft } from "@fortawesome/free-solid-svg-icons/faChevronLeft";
+import { useContext } from "react";
+import CommonContext from "../../module/common";
 
 const Button = styled.TouchableOpacity`
-  width: 24;
-  height: 24;
+  width: 24px;
+  height: 24px;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -13,11 +14,12 @@ const Button = styled.TouchableOpacity`
 `;
 
 export default ({ goBackCallbackFunc }: { goBackCallbackFunc: () => void }) => {
+  const { colorScheme } = useContext(CommonContext);
   return (
     <Button onPress={goBackCallbackFunc}>
       <FontAwesomeIcon
         icon={faChevronLeft}
-        color={ColorScheme[ColorModeScheme.DARK_MODE].text}
+        color={colorScheme.text}
         size={24}
       />
     </Button>

@@ -14,7 +14,7 @@ export enum ColorModeScheme {
 
 export const DarkModeColorScheme: IColorScheme = {
   primary: "#404258",
-  secondary: "#474E68",
+  secondary: "#3c435d",
   card: "#50577A",
   background: "#404258", // primary color
   text: "#F4F4F2",
@@ -22,21 +22,18 @@ export const DarkModeColorScheme: IColorScheme = {
 };
 
 export const LightModeColorScheme: IColorScheme = {
-  primary: "#F4F4F2",
-  secondary: "#BBBFCA",
-  card: "#E8E8E8",
-  background: "#F4F4F2", // primary color
-  text: "#BBBFCA",
-  "text-secondary": "#E8E8E8", // darker
+  primary: "#96B6C5",
+  secondary: "#698998",
+  card: "#ADC4CE",
+  background: "#96B6C5", // primary color
+  text: "#F1F0E8",
+  "text-secondary": "#557381", // darker
 };
 
 export const ColorScheme = {
   [ColorModeScheme.DARK_MODE]: DarkModeColorScheme,
   [ColorModeScheme.LIGHT_MODE]: LightModeColorScheme,
 };
-
-// Change later
-export const APPCOLORSCHEME = ColorScheme[ColorModeScheme.DARK_MODE];
 
 export enum GumjournalsFormName {
   WELLBEING = "Wellbeing",
@@ -57,4 +54,5 @@ export enum ScreenNames {
 
 export enum AsyncStorageKeys {
   NOTI_STATUS = "noti_permission_status",
+  COLOR_SCHEME = "color-scheme",
 }

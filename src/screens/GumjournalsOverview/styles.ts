@@ -1,7 +1,6 @@
 import { styled } from "styled-components/native";
 import MainContainer from "../../components/global/MainContainer";
 import { BoldText } from "../../components/global/text";
-import { APPCOLORSCHEME } from "../../utils/const";
 
 export const Container = styled(MainContainer)``;
 
@@ -23,6 +22,6 @@ export const FillFormText = styled(BoldText)<{ textColor: string }>`
 `;
 
 export const ScrollingBaseView = styled.ScrollView`
-  background-color: ${APPCOLORSCHEME.background};
+  background-color: ${(props) => props.theme.background};
   margin-top: 30px;
 `;

@@ -1,18 +1,19 @@
-import {  Keyboard, TouchableWithoutFeedback } from "react-native";
-import { APPCOLORSCHEME } from "../../../utils/const";
+import { Keyboard, TouchableWithoutFeedback } from "react-native";
 import {
   FormInput,
   QuestionContainer,
   QuestionText,
   ScrollingBaseView,
 } from "../styles";
-import { useMemo, } from "react";
+import { useContext, useMemo } from "react";
+import CommonContext from "../../../module/common";
 
 export default () => {
+  const { colorScheme } = useContext(CommonContext);
   // Fitness form can only be filled on Mondays
   const isMondayRef = useMemo(
     () => new Date().getDay() === 1,
-    [new Date().getDay()]
+    [new Date().getDay()],
   );
 
   return (
@@ -23,7 +24,7 @@ export default () => {
           <FormInput
             isDisabled={!isMondayRef}
             placeholder="Weight in kg"
-            placeholderTextColor={APPCOLORSCHEME.text}
+            placeholderTextColor={colorScheme.text}
             inputMode="decimal"
             editable={isMondayRef}
           />
@@ -34,7 +35,7 @@ export default () => {
           <FormInput
             isDisabled={!isMondayRef}
             placeholder="Belly circumference in cm"
-            placeholderTextColor={APPCOLORSCHEME.text}
+            placeholderTextColor={colorScheme.text}
             inputMode="decimal"
             editable={isMondayRef}
           />

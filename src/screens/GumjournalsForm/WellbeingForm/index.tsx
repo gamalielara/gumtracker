@@ -11,9 +11,10 @@ import {
 } from "../../../module/gumjournalsForm/action";
 import DateTimePicker, {DateTimePickerEvent,} from "@react-native-community/datetimepicker";
 import {Dimensions, Keyboard, Platform, TouchableWithoutFeedback,} from "react-native";
-import {APPCOLORSCHEME} from "../../../utils/const";
+
 import {FormInput, QuestionContainer, QuestionText, ScrollingBaseView,} from "../styles";
 import PaddingInset from "../../../components/global/PaddingInset";
+import commonContext from "../../../module/common";
 
 export default () => {
   const [showDatePicker, setShowDatePicker] = useState<boolean>(
@@ -21,6 +22,8 @@ export default () => {
   );
 
   const { value, dispatch } = useContext(GumjournalsContext);
+
+  const { colorScheme } = useContext(commonContext);
 
   const pickMoodHandle = (mood: number) => {
     dispatch?.(updateMood({ mood }));
@@ -64,10 +67,10 @@ export default () => {
                 overflow: "hidden",
               }}
               //@ts-ignore
-              textColor={APPCOLORSCHEME["text-secondary"]}
+              textColor={colorScheme["text-secondary"]}
               onChange={datePickerChangeHandler}
               themeVariant="dark"
-              accentColor={APPCOLORSCHEME.text}
+              accentColor={colorScheme.text}
             />
           )}
         </QuestionContainer>
@@ -110,7 +113,7 @@ export default () => {
             }}
             value={value.highlight?.[0]}
             placeholder="Highlight 1"
-            placeholderTextColor={APPCOLORSCHEME.text}
+            placeholderTextColor={colorScheme.text}
           />
           <FormInput
             onChangeText={(text: string) => {
@@ -118,7 +121,7 @@ export default () => {
             }}
             value={value.highlight?.[1]}
             placeholder="Highlight 2"
-            placeholderTextColor={APPCOLORSCHEME.text}
+            placeholderTextColor={colorScheme.text}
           />
         </QuestionContainer>
 
@@ -132,7 +135,7 @@ export default () => {
             }}
             value={value.gratitude?.[0]}
             placeholder="Gratitude 1"
-            placeholderTextColor={APPCOLORSCHEME.text}
+            placeholderTextColor={colorScheme.text}
           />
           <FormInput
             onChangeText={(text: string) => {
@@ -140,7 +143,7 @@ export default () => {
             }}
             value={value.gratitude?.[1]}
             placeholder="Gratitude 2"
-            placeholderTextColor={APPCOLORSCHEME.text}
+            placeholderTextColor={colorScheme.text}
           />
         </QuestionContainer>
 

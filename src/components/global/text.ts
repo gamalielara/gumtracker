@@ -1,9 +1,8 @@
 import { styled } from "styled-components/native";
-import { ColorModeScheme, ColorScheme } from "../../utils/const";
 
 export const BaseText = styled.Text`
   font-family: "Inter";
-  color: ${ColorScheme[ColorModeScheme.DARK_MODE].text};
+  color: ${(props) => props.theme.text};
 `;
 
 export const BoldText = styled(BaseText)`
