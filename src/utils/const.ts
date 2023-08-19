@@ -14,7 +14,7 @@ export enum ColorModeScheme {
 
 export const DarkModeColorScheme: IColorScheme = {
   primary: "#404258",
-  secondary: "#474E68",
+  secondary: "#3c435d",
   card: "#50577A",
   background: "#404258", // primary color
   text: "#F4F4F2",
@@ -23,7 +23,7 @@ export const DarkModeColorScheme: IColorScheme = {
 
 export const LightModeColorScheme: IColorScheme = {
   primary: "#96B6C5",
-  secondary: "#BBBFCA",
+  secondary: "#698998",
   card: "#ADC4CE",
   background: "#96B6C5", // primary color
   text: "#F1F0E8",

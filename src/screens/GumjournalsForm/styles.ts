@@ -28,7 +28,7 @@ export const TabBarStyle = (insets: EdgeInsets) => {
     tabBar: {
       borderTopLeftRadius: 15,
       borderTopRightRadius: 15,
-      backgroundColor: ColorScheme[colorScheme].background,
+      backgroundColor: ColorScheme[colorScheme].secondary,
       paddingTop: 20,
       paddingBottom: 20, // Need extra padding bottom
       height: (insets.bottom || 20) + 60,
