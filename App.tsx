@@ -7,11 +7,10 @@ import CommonContext from "./src/module/common";
 import {APPCOLORSCHEME, ScreenNames} from "./src/utils/const";
 import GumjournalsOverview from "./src/screens/GumjournalsOverview";
 import GumjournalsForm from "./src/screens/GumjournalsForm";
-import {createNativeStackNavigator} from "@react-navigation/native-stack";
 import {SafeAreaProvider} from "react-native-safe-area-context";
 import {NavigationContainer} from "@react-navigation/native";
 import Toast from "./src/components/Toast";
-import {CardStyleInterpolators} from "@react-navigation/stack";
+import {CardStyleInterpolators, createStackNavigator,} from "@react-navigation/stack";
 
 export default function App() {
   getAppNotiPermission().then(() => console.info("Noti permission is created"));
@@ -32,14 +31,7 @@ export default function App() {
 
   if (!fontsLoaded) return;
 
-  const Stack = createNativeStackNavigator();
-
-  const transitionCustomOptions = {
-    animation: "timing",
-    config: {
-      duration: 500,
-    },
-  };
+  const Stack = createStackNavigator();
 
   return (
     <NavigationContainer>
@@ -49,12 +41,21 @@ export default function App() {
             initialRouteName={ScreenNames.GUMJOURNALS_OVERVIEW}
             screenOptions={{
               gestureEnabled: true,
-              gestureDirection: "horizontal",
               headerShown: false,
               cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
               transitionSpec: {
-                open: transitionCustomOptions,
-                close: transitionCustomOptions,
+                open: {
+                  animation: "timing",
+                  config: {
+                    duration: 450,
+                  },
+                },
+                close: {
+                  animation: "timing",
+                  config: {
+                    duration: 450,
+                  },
+                },
               },
             }}
           >
