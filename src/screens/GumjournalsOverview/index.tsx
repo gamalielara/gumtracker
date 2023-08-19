@@ -63,7 +63,9 @@ export default ({ navigation }: NavigationScreenProps) => {
             <FillFormButton
               bgColor={APPCOLORSCHEME.card}
               onPress={() =>
-                navigation.navigate(ScreenNames.GUMJOURNALS_FORM as never)
+                navigation.navigate(ScreenNames.GUMJOURNALS_FORM, {
+                  hei: "hei",
+                })
               }
             >
               <FillFormText textColor={APPCOLORSCHEME.text}>

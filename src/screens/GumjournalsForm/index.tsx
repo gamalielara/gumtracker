@@ -26,9 +26,12 @@ type Props = NavigationScreenProps<Partial<GumjournalsFormProps>>;
 const GumjournalsForm: React.FC<Props> = ({
   valuesToShow,
   navigation,
+  route,
 }: Props) => {
   const Tab = createBottomTabNavigator();
   const insets = useSafeAreaInsets();
+
+  console.log(route.params);
 
   const screenHeight = Dimensions.get("window").height - insets.bottom;
 

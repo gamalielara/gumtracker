@@ -1,4 +1,6 @@
 import * as Notifications from "expo-notifications";
+import { AsyncStorageKeys } from "./const";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export const getAppNotiPermission = async () => {
   const { status: notiPermissionStatus } =
@@ -7,12 +9,17 @@ export const getAppNotiPermission = async () => {
   if (notiPermissionStatus !== "granted") {
     const { status } = await Notifications.requestPermissionsAsync();
 
-    if (status !== "granted") {
-      alert("Warning: failed to get noti permission.");
+    if (status === "granted") {
+      try {
+        await AsyncStorage.setItem(AsyncStorageKeys.NOTI_STATUS, "true");
+      } catch (err) {
+        console.error(err);
+      }
     } else {
-      console.info("NOTI PERMISSION: ", status);
+      alert(`Warning: failed to get noti permission. Noti Status: ${status}`);
     }
   }
+
   Notifications.setNotificationHandler({
     handleNotification: async () => ({
       shouldShowAlert: true,

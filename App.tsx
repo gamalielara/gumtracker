@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import {useFonts} from "expo-font";
 import {useCallback} from "react";
-import {getAppNotiPermission} from "./src/utils/getAppPermission";
 import * as SplashScreen from "expo-splash-screen";
 import CommonContext from "./src/module/common";
 import {APPCOLORSCHEME, ScreenNames} from "./src/utils/const";
@@ -10,10 +9,11 @@ import GumjournalsForm from "./src/screens/GumjournalsForm";
 import {SafeAreaProvider} from "react-native-safe-area-context";
 import {NavigationContainer} from "@react-navigation/native";
 import Toast from "./src/components/Toast";
+import useAppPermision from "./src/utils/hook/useAppPermision";
 import {CardStyleInterpolators, createStackNavigator,} from "@react-navigation/stack";
 
 export default function App() {
-  getAppNotiPermission().then(() => console.info("Noti permission is created"));
+  useAppPermision();
 
   const colorScheme = APPCOLORSCHEME;
 
