@@ -14,6 +14,7 @@ import {CardStyleInterpolators, createStackNavigator,} from "@react-navigation/s
 import useSetColorScheme from "./src/utils/hook/useSetColorScheme";
 import {ThemeProvider} from "styled-components";
 import {StatusBar} from "react-native";
+import TrackerForms from "./src/screens/TrackerForms";
 
 export default function App() {
   useAppPermision();
@@ -43,7 +44,7 @@ export default function App() {
           <SafeAreaProvider onLayout={onLayoutView}>
             <StatusBar backgroundColor={ColorScheme[themeColor].background} />
             <Stack.Navigator
-              initialRouteName={ScreenNames.GUMJOURNALS_OVERVIEW}
+              initialRouteName={ScreenNames.TRACKER_FORMS}
               screenOptions={{
                 gestureEnabled: true,
                 headerShown: false,
@@ -73,6 +74,11 @@ export default function App() {
                 name={ScreenNames.GUMJOURNALS_FORM}
                 //@ts-ignore
                 component={GumjournalsForm}
+              />
+              <Stack.Screen
+                name={ScreenNames.TRACKER_FORMS}
+                //@ts-ignore
+                component={TrackerForms}
               />
             </Stack.Navigator>
             <Toast />
