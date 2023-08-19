@@ -5,17 +5,15 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { tabBarCustomOptions } from "./utils/tabBarCustomOptions";
 import { GumjournalsContextProvider } from "../../module/gumjournalsForm/context";
 import HabitsForm from "./HabitsForm";
-import {
-  APPCOLORSCHEME,
-  GumjournalsFormName,
-  ScreenNames,
-} from "../../utils/const";
+import { GumjournalsFormName, ScreenNames } from "../../utils/const";
 import WellbeingForm from "./WellbeingForm";
 import FitnessForm from "./FitnessForm";
 import HeaderBar from "../../components/global/HeaderBar";
 import { Dimensions } from "react-native";
 import { IGumjournalsFormState } from "../../module/gumjournalsForm/interface";
 import { NavigationScreenProps } from "../../utils/interface";
+import { useContext } from "react";
+import CommonContext from "../../module/common";
 
 interface GumjournalsFormProps {
   valuesToShow: IGumjournalsFormState;
@@ -31,7 +29,7 @@ const GumjournalsForm: React.FC<Props> = ({
   const Tab = createBottomTabNavigator();
   const insets = useSafeAreaInsets();
 
-  console.log(route.params);
+  const { colorScheme } = useContext(CommonContext);
 
   const screenHeight = Dimensions.get("window").height - insets.bottom;
 
@@ -47,7 +45,7 @@ const GumjournalsForm: React.FC<Props> = ({
             initialRouteName={GumjournalsFormName.WELLBEING}
             screenOptions={({ route }) => tabBarCustomOptions(route, insets)}
             sceneContainerStyle={{
-              backgroundColor: APPCOLORSCHEME.background,
+              backgroundColor: colorScheme.background,
               paddingLeft: insets.left + 10,
               paddingRight: insets.right + 10,
               paddingBottom: 10,

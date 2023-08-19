@@ -1,9 +1,8 @@
 import { createContext } from "react";
-import { APPCOLORSCHEME } from "../../utils/const";
+import { DarkModeColorScheme, LightModeColorScheme } from "../../utils/const";
 
 interface CommonContext {
-  colorScheme: typeof APPCOLORSCHEME;
+  colorScheme: typeof DarkModeColorScheme | typeof LightModeColorScheme;
 }
 
-//@ts-ignore
-export default createContext<CommonContext>(null);
+export default createContext<CommonContext>({} as CommonContext);

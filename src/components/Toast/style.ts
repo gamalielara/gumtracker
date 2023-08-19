@@ -1,5 +1,4 @@
 import { styled } from "styled-components/native";
-import { APPCOLORSCHEME } from "../../utils/const";
 import { BaseText } from "../global/text";
 import { Animated } from "react-native";
 
@@ -22,7 +21,7 @@ export const Overlay = styled(Animated.View)`
 export const ToastBox = styled.View`
   width: 50%;
   padding: 20px;
-  background-color: ${APPCOLORSCHEME.card};
+  background-color: ${(props) => props.theme.card};
   border-radius: 10px;
   display: flex;
   align-items: center;
@@ -31,6 +30,4 @@ export const ToastBox = styled.View`
   z-index: 999;
 `;
 
-export const ToastText = styled(BaseText)`
-  font-weight: bold;
-`;
+export const ToastText = styled(BaseText)``;

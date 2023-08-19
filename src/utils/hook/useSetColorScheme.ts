@@ -11,7 +11,14 @@ export default () => {
         AsyncStorageKeys.COLOR_SCHEME,
       )) as ColorModeScheme | null;
 
-      setColorScheme(scheme || ColorModeScheme.LIGHT_MODE);
+      if (!scheme) {
+        await AsyncStorage.setItem(
+          AsyncStorageKeys.COLOR_SCHEME,
+          ColorModeScheme.LIGHT_MODE,
+        );
+      }
+
+      setColorScheme(scheme ?? ColorModeScheme.LIGHT_MODE);
     })();
   }, []);
 

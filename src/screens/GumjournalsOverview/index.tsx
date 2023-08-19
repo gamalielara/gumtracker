@@ -1,18 +1,21 @@
-import {useEffect, useMemo, useState} from "react";
+import {useContext, useEffect, useMemo, useState} from "react";
 import {Keyboard, TouchableWithoutFeedback} from "react-native";
-import {APPCOLORSCHEME, ScreenNames} from "../../utils/const";
+import {ScreenNames} from "../../utils/const";
 import {BaseText, BoldText} from "../../components/global/text";
 import {Calendar} from "react-native-calendars";
 import {Container, FillFormButton, FillFormText, ScrollingBaseView, Wrapper,} from "./styles";
 import HeaderBar from "../../components/global/HeaderBar";
 import {NavigationScreenProps, TransformedSheetData,} from "../../utils/interface";
-import ApiService from "../../utils/apiService"; // TODO: Create ApiService
+import ApiService from "../../utils/apiService";
+import CommonContext from "../../module/common";
 
 // TODO: Create ApiService
 // TODO: Create a function to call this
 
 export default ({ navigation }: NavigationScreenProps) => {
   const [data, setData] = useState<TransformedSheetData>();
+
+  const { colorScheme } = useContext(CommonContext);
 
   // TODO move to APIService
   useEffect(() => {
@@ -51,24 +54,24 @@ export default ({ navigation }: NavigationScreenProps) => {
               markedDates={markedDates}
               theme={{
                 calendarBackground: undefined,
-                selectedDayTextColor: APPCOLORSCHEME.text,
-                selectedDayBackgroundColor: APPCOLORSCHEME["text-secondary"],
-                dayTextColor: APPCOLORSCHEME["text-secondary"],
-                todayTextColor: APPCOLORSCHEME.text,
-                monthTextColor: APPCOLORSCHEME.text,
-                arrowColor: APPCOLORSCHEME.card,
+                selectedDayTextColor: colorScheme.text,
+                selectedDayBackgroundColor: colorScheme.card,
+                dayTextColor: colorScheme["text-secondary"],
+                todayTextColor: colorScheme.text,
+                monthTextColor: colorScheme.text,
+                arrowColor: colorScheme.card,
               }}
             />
 
             <FillFormButton
-              bgColor={APPCOLORSCHEME.card}
+              bgColor={colorScheme.card}
               onPress={() =>
                 navigation.navigate(ScreenNames.GUMJOURNALS_FORM, {
                   hei: "hei",
                 })
               }
             >
-              <FillFormText textColor={APPCOLORSCHEME.text}>
+              <FillFormText textColor={colorScheme.text}>
                 Fill Gumjournals for Today
               </FillFormText>
             </FillFormButton>

@@ -1,10 +1,9 @@
 import { styled } from "styled-components/native";
-import { ColorModeScheme, ColorScheme } from "../../utils/const";
 
 export const MainGlobalContainer = styled.KeyboardAvoidingView`
   width: 100%;
   height: 100%;
-  background-color: ${ColorScheme[ColorModeScheme.DARK_MODE].background};
+  background-color: ${(props) => props.theme.background};
 `;
 
 export const SafeAreaApp = styled.SafeAreaView`

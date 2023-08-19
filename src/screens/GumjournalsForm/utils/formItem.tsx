@@ -8,11 +8,11 @@ import {
   QuestionText,
   ScrollableHorizontalView,
 } from "../styles";
-import { APPCOLORSCHEME } from "../../../utils/const";
 import { BaseText } from "../../../components/global/text";
 import { Dimensions, FlatList } from "react-native";
-import React, { useMemo } from "react";
+import React, { useContext, useMemo } from "react";
 import RadioButtonsGroup from "react-native-radio-buttons-group";
+import CommonContext from "../../../module/common";
 
 type TForm = {
   select: string[];
@@ -42,6 +42,8 @@ interface IRadioButton {
 // If we change a form there's a chance for other form to rerender as well
 export const SelectForm: React.FC<any> = React.memo(
   (props) => {
+    const { colorScheme } = useContext(CommonContext);
+
     const { questionTitle, options, callbackFunc, value } = props;
 
     const renderCheckbox = ({ item }: { item: string }) => {
@@ -57,8 +59,7 @@ export const SelectForm: React.FC<any> = React.memo(
           }
         >
           <Checkbox
-            color={APPCOLORSCHEME.card}
-            //@ts-ignore
+            color={colorScheme.card}
             value={isSelected}
             onValueChange={(e) => {
               callbackFunc?.({ isChangedSelected: e, habit: item });
@@ -81,32 +82,34 @@ export const SelectForm: React.FC<any> = React.memo(
       </QuestionContainer>
     );
   },
-  (prev, next) => JSON.stringify(prev.value) === JSON.stringify(next.value)
+  (prev, next) => JSON.stringify(prev.value) === JSON.stringify(next.value),
 );
 
 const RadioBtn = React.memo(
   ({ item, value, scaleFrom, scaleTo, callbackFunc }: IRadioButton) => {
+    const { colorScheme } = useContext(CommonContext);
+
     const radioButtons = useMemo(() => {
       const scaleMap = Array.from(
         { length: scaleTo - scaleFrom + 1 },
-        (_, i) => scaleFrom + i
+        (_, i) => scaleFrom + i,
       );
 
       return scaleMap.map((_, i) => ({
         id: String(Math.random()),
         label: String(i),
         value: String(i),
-        borderColor: APPCOLORSCHEME.card,
-        color: APPCOLORSCHEME.text,
+        borderColor: colorScheme.card,
+        color: colorScheme.text,
         labelStyle: {
-          color: APPCOLORSCHEME.text,
+          color: colorScheme.text,
         },
       }));
     }, []);
 
     const onRadioSelected = (name: string, id: string) => {
       const selectedHabitScore = radioButtons.filter(
-        (radio) => radio.id === id
+        (radio) => radio.id === id,
       )[0].label;
 
       callbackFunc?.({ habit: name, score: selectedHabitScore });
@@ -117,9 +120,9 @@ const RadioBtn = React.memo(
     const selectedId = useMemo(
       () =>
         radioButtons.filter(
-          (radio) => radio.value === String(thisHabitValue)
+          (radio) => radio.value === String(thisHabitValue),
         )[0]?.id,
-      [thisHabitValue]
+      [thisHabitValue],
     );
 
     return (
@@ -141,7 +144,7 @@ const RadioBtn = React.memo(
         </ScrollableHorizontalView>
       </MultiRadioGridContainer>
     );
-  }
+  },
 );
 
 export const RadioGridForm: React.FC<TRadioGridForm> = React.memo(
@@ -169,5 +172,5 @@ export const RadioGridForm: React.FC<TRadioGridForm> = React.memo(
       </QuestionContainer>
     );
   },
-  (prev, next) => JSON.stringify(prev.value) === JSON.stringify(next.value)
+  (prev, next) => JSON.stringify(prev.value) === JSON.stringify(next.value),
 );

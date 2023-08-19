@@ -1,9 +1,19 @@
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import * as SolidFontAwesome from "@fortawesome/free-solid-svg-icons/";
 import * as RegularFontAwesome from "@fortawesome/free-regular-svg-icons";
-import { APPCOLORSCHEME, GumjournalsFormName } from "../../../utils/const";
+import {
+  ColorModeScheme,
+  ColorScheme,
+  GumjournalsFormName,
+} from "../../../utils/const";
 import { TabBarStyle } from "../styles";
 import React from "react";
+import { getAppColorScheme } from "../../../utils/getAppColorScheme";
+
+let colorScheme = ColorModeScheme.LIGHT_MODE;
+getAppColorScheme().then((color) => {
+  if (color) colorScheme = color;
+});
 
 export const tabBarCustomOptions = (route: any, insets: any) => ({
   tabBarIcon: ({ focused, size }: any) => {
@@ -16,7 +26,9 @@ export const tabBarCustomOptions = (route: any, insets: any) => ({
               (focused ? SolidFontAwesome : RegularFontAwesome).faFaceLaughWink
             }
             color={
-              focused ? APPCOLORSCHEME.text : APPCOLORSCHEME["text-secondary"]
+              focused
+                ? ColorScheme[colorScheme].text
+                : ColorScheme[colorScheme]["text-secondary"]
             }
           />
         );
@@ -27,7 +39,9 @@ export const tabBarCustomOptions = (route: any, insets: any) => ({
             size={size}
             icon={(focused ? SolidFontAwesome : RegularFontAwesome).faHeart}
             color={
-              focused ? APPCOLORSCHEME.text : APPCOLORSCHEME["text-secondary"]
+              focused
+                ? ColorScheme[colorScheme].text
+                : ColorScheme[colorScheme]["text-secondary"]
             }
           />
         );
@@ -38,7 +52,9 @@ export const tabBarCustomOptions = (route: any, insets: any) => ({
             size={size}
             icon={SolidFontAwesome.faTableTennisPaddleBall}
             color={
-              focused ? APPCOLORSCHEME.text : APPCOLORSCHEME["text-secondary"]
+              focused
+                ? ColorScheme[colorScheme].text
+                : ColorScheme[colorScheme]["text-secondary"]
             }
           />
         );
@@ -47,8 +63,8 @@ export const tabBarCustomOptions = (route: any, insets: any) => ({
     }
   },
   headerShown: false,
-  tabBarActiveTintColor: APPCOLORSCHEME.text,
-  tabBarInactiveTintColor: APPCOLORSCHEME["text-secondary"],
+  tabBarActiveTintColor: ColorScheme[colorScheme].text,
+  tabBarInactiveTintColor: ColorScheme[colorScheme]["text-secondary"],
   tabBarStyle: TabBarStyle(insets).tabBar,
   tabBarHideOnKeyboard: true,
 });
