@@ -12,17 +12,28 @@ import { faCheck, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { useContext, useRef, useState } from "react";
 import CommonContext from "../../module/common";
 import SelectBox from "./SelectBox";
-import { IFormCardMethodhandle } from "./SelectBox/types";
-import { IFormCard } from "../../utils/interface";
+import {
+  FormCardType,
+  IFormCard,
+  IFormCardMethodhandle,
+} from "../../utils/interface";
+import TextInputBox from "./TextInputBox";
 
 const FormCard: React.FC<IFormCard> = (props) => {
-  const { title, SVGImage, subtitle, illustrationPosition, type, options } =
-    props;
+  const {
+    title,
+    SVGImage,
+    subtitle,
+    illustrationPosition,
+    type,
+    options,
+    additionIllustrationStyle,
+  } = props;
   const { colorScheme } = useContext(CommonContext);
 
   const [isCTAButtonClicked, setIsCTAButtonClicked] = useState(false);
 
-  const selectBoxRef = useRef<IFormCardMethodhandle>();
+  const selectBoxRef = useRef<IFormCardMethodhandle>(null);
 
   const onCTAButtonClick = () => {
     setIsCTAButtonClicked((state) => !state);
@@ -34,13 +45,27 @@ const FormCard: React.FC<IFormCard> = (props) => {
     }
   };
 
+  let BottomCard;
+  switch (type) {
+    case FormCardType.SELECT:
+      BottomCard = <SelectBox options={options} ref={selectBoxRef} />;
+      break;
+    default:
+    case FormCardType.INPUT_TEXT:
+      BottomCard = <TextInputBox ref={selectBoxRef} />;
+      break;
+  }
+
   return (
     <>
       <Card position={illustrationPosition}>
-        <IllustrationImage position={illustrationPosition}>
+        <IllustrationImage
+          position={illustrationPosition}
+          {...additionIllustrationStyle}
+        >
           <SVGImage />
         </IllustrationImage>
-        <CardSide>
+        <CardSide layoutPosition={illustrationPosition}>
           <CardInfo>
             <CardTitle>{title}</CardTitle>
             {subtitle && <CardSubtitle>{subtitle}</CardSubtitle>}
@@ -53,7 +78,7 @@ const FormCard: React.FC<IFormCard> = (props) => {
           </AddButton>
         </CardSide>
       </Card>
-      <SelectBox options={options} ref={selectBoxRef} />
+      {BottomCard}
     </>
   );
 };

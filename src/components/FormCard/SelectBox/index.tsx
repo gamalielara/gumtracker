@@ -1,45 +1,30 @@
 import React, { useImperativeHandle, useRef } from "react";
 import { Container, Option } from "./styles";
 import { Animated } from "react-native";
-import { IFormCardMethodhandle } from "./types";
+import { IFormCardMethodhandle } from "../../../utils/interface";
 
 interface IProps {
-  options: React.FC[];
+  options?: React.FC[];
 }
 
 const SelectBox = React.forwardRef<IFormCardMethodhandle, IProps>(
   ({ options }, ref) => {
-    const boxWidthAnimRef = useRef(new Animated.Value(0));
-    const boxHeightAnimRef = useRef(new Animated.Value(0));
+    const boxAnim = useRef(new Animated.Value(0));
     const AnimatedOption = Animated.createAnimatedComponent(Option);
 
     const expandBox = () => {
-      Animated.sequence([
-        Animated.timing(boxHeightAnimRef.current, {
-          toValue: 100,
-          duration: 500,
-          useNativeDriver: false,
-        }),
-        Animated.spring(boxWidthAnimRef.current, {
-          toValue: 100,
-          useNativeDriver: false,
-        }),
-      ]).start();
+      Animated.spring(boxAnim.current, {
+        toValue: 100,
+        useNativeDriver: false,
+      }).start();
     };
 
     const hideBox = () => {
-      Animated.sequence([
-        Animated.timing(boxWidthAnimRef.current, {
-          toValue: 0,
-          duration: 500,
-          useNativeDriver: false,
-        }),
-        Animated.timing(boxHeightAnimRef.current, {
-          toValue: 0,
-          duration: 500,
-          useNativeDriver: false,
-        }),
-      ]).start();
+      Animated.timing(boxAnim.current, {
+        toValue: 0,
+        duration: 500,
+        useNativeDriver: false,
+      }).start();
     };
 
     useImperativeHandle(ref, () => ({
@@ -54,24 +39,27 @@ const SelectBox = React.forwardRef<IFormCardMethodhandle, IProps>(
     return (
       <Animated.View
         style={{
-          width: boxWidthAnimRef.current.interpolate({
+          width: boxAnim.current.interpolate({
             inputRange: [0, 100],
             outputRange: ["0%", "100%"],
           }),
-          height: boxHeightAnimRef.current,
+          height: boxAnim.current.interpolate({
+            inputRange: [0, 100],
+            outputRange: [0, 75],
+          }),
           overflow: "hidden",
         }}
       >
         <Container>
-          {options.map((Option) => (
+          {options?.map((Option) => (
             <AnimatedOption
               key={Math.random()}
               style={{
-                flexBasis: boxWidthAnimRef.current.interpolate({
+                flexBasis: boxAnim.current.interpolate({
                   inputRange: [0, 100],
                   outputRange: ["0%", "10%"],
                 }),
-                opacity: boxWidthAnimRef.current.interpolate({
+                opacity: boxAnim.current.interpolate({
                   inputRange: [0, 90, 100],
                   outputRange: [0, 0.1, 1],
                 }),

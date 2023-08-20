@@ -14,6 +14,7 @@ export const Card = styled.View<IllustrationPosition>`
   position: relative;
   overflow: hidden;
   padding: 10px;
+  margin-top: 10px;
   ${(props) =>
     props.position === "right" &&
     css`
@@ -27,22 +28,23 @@ export const IllustrationImage = styled.View<IllustrationPosition>`
   ${(props) =>
     props.position === "right"
       ? css`
-          left: -15%;
+          left: -20%;
         `
       : css`
           right: -15%;
         `};
   width: 65%;
   aspect-ratio: 1;
-  transform: rotate(-10deg);
 `;
 
-export const CardSide = styled.View`
-  flex-direction: row;
-  margin: auto 10px;
+export const CardSide = styled.View<{ layoutPosition: "left" | "right" }>`
+  flex-direction: ${(props) =>
+    props.layoutPosition === "right" ? "row" : "row-reverse"};
+  margin: auto 0;
   gap: 15px;
   align-items: center;
-  justify-content: center;
+  justify-content: ${(props) =>
+    props.layoutPosition === "right" ? "flex-start" : "flex-end"};
 `;
 
 export const CardInfo = styled.View`
@@ -51,14 +53,14 @@ export const CardInfo = styled.View`
 `;
 
 export const CardTitle = styled(BoldText)<IllustrationPosition>`
-  font-size: 20px;
+  font-size: 18px;
   margin: auto 0;
   color: ${(props) => props.theme["text-secondary"]};
   text-align: center;
 `;
 
 export const CardSubtitle = styled(BaseText)<IllustrationPosition>`
-  font-size: 14px;
+  font-size: 12px;
   color: ${(props) => props.theme["text-secondary"]};
   text-align: center;
 `;

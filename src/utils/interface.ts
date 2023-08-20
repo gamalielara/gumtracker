@@ -74,6 +74,11 @@ export enum FormCardType {
   INPUT_NUMBER,
 }
 
+export interface IFormCardMethodhandle {
+  showSelectBox: () => void;
+  hideSelectBox: () => void;
+}
+
 export interface IFormCard {
   title: string;
   subtitle?: string;
@@ -81,4 +86,5 @@ export interface IFormCard {
   illustrationPosition: "left" | "right";
   type: FormCardType;
   options?: React.FC[];
+  additionIllustrationStyle?: Record<string, unknown>;
 }
