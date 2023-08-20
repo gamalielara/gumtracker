@@ -1,19 +1,16 @@
 import { Container, FormsContainer } from "./styles";
 import CalendarSlider from "../../components/CalendarSlider";
 import FormCard from "../../components/FormCard";
-import MoodCardImage from "../../assets/svg/mood-card-illustration.svg";
+import { FORMS_DETAIL } from "../../utils/formsConstant";
 
 const TrackerForms = () => {
   return (
     <Container>
       <CalendarSlider />
       <FormsContainer>
-        <FormCard
-          title="Add Mood"
-          subtitle="How are you feeling today?"
-          SVGImage={MoodCardImage}
-          illustrationPosition={"right"}
-        />
+        {FORMS_DETAIL.map((formDetail) => (
+          <FormCard {...formDetail} key={formDetail.title} />
+        ))}
       </FormsContainer>
     </Container>
   );

@@ -1,3 +1,7 @@
+/**
+ * This is old form constant. Should be deleted later.
+ */
+
 export enum FormType {
   TEXT,
   MULTILINE_TEXT,

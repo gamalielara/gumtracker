@@ -67,3 +67,18 @@ export type NavigationScreenProps<
   navigation: TNavigation;
   route?: Record<string, unknown>;
 } & ComponentBasePropsWithChildren<T>;
+
+export enum FormCardType {
+  SELECT,
+  INPUT_TEXT,
+  INPUT_NUMBER,
+}
+
+export interface IFormCard {
+  title: string;
+  subtitle?: string;
+  SVGImage: any;
+  illustrationPosition: "left" | "right";
+  type: FormCardType;
+  options?: React.FC[];
+}

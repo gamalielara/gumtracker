@@ -71,10 +71,3 @@ export const AddButton = styled.TouchableOpacity`
   align-items: center;
   border-radius: 13px;
 `;
-
-export const Plus = styled(BaseText)`
-  color: ${(props) => props.theme["text-secondary"]};
-  margin: 0;
-  font-size: 20px;
-  line-height: 20px;
-`;
