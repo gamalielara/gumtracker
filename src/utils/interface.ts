@@ -12,17 +12,32 @@ export interface RawSheetData {
   values: [HeadRow, HeadSubRow, ...Array<ValueRow>]; // The first index is always the row key header
 }
 
-export interface TransformedSheetData {
-  dateFilled: string[];
+export type TransformedSheetData = Record<string, TransformedSheetDataFields>;
+
+export type TransformedSheetDataFields = {
   fitness: Fitness;
-  habitsGamification: HabitsGamification;
-  timestamp: string[];
-  wellbeing: Wellbeing;
-}
+  habits: NewHabitsGamification;
+  timestamp: string | number;
+  mood: number;
+  gratitudeStatements: string[];
+  highlightsOfTheDay: string[];
+};
 
 export interface Fitness {
   bellyCircumference: string[];
   bodyWeight: string[];
+}
+
+export interface NewHabitsGamification {
+  drawing: number;
+  journaling: number;
+  language: number;
+  meditate: number;
+  mobdev: number;
+  reading: number;
+  watchingMovies: number;
+  webdev: number;
+  writingBlog: number;
 }
 
 export interface HabitsGamification {

@@ -13,6 +13,9 @@ import useSetColorScheme from "./src/utils/hook/useSetColorScheme";
 import {ThemeProvider} from "styled-components";
 import {StatusBar} from "react-native";
 import TrackerForms from "./src/screens/TrackerForms";
+import {Provider} from "react-redux";
+import {store} from "./src/module/store";
+import DataPreloader from "./src/components/DataPreloader";
 
 export default function App() {
   useAppPermision();
@@ -36,43 +39,52 @@ export default function App() {
   const Stack = createStackNavigator();
 
   return (
-    <NavigationContainer>
-      <CommonContext.Provider value={{ colorScheme: ColorScheme[themeColor] }}>
-        <ThemeProvider theme={ColorScheme[themeColor]}>
-          <SafeAreaProvider onLayout={onLayoutView}>
-            <StatusBar backgroundColor={ColorScheme[themeColor].background} />
-            <Stack.Navigator
-              initialRouteName={ScreenNames.TRACKER_FORMS}
-              screenOptions={{
-                gestureEnabled: true,
-                headerShown: false,
-                cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
-                transitionSpec: {
-                  open: {
-                    animation: "timing",
-                    config: {
-                      duration: 450,
+    <Provider store={store}>
+      <NavigationContainer>
+        <CommonContext.Provider
+          value={{ colorScheme: ColorScheme[themeColor] }}
+        >
+          <ThemeProvider theme={ColorScheme[themeColor]}>
+            <DataPreloader>
+              <SafeAreaProvider onLayout={onLayoutView}>
+                <StatusBar
+                  backgroundColor={ColorScheme[themeColor].background}
+                />
+                <Stack.Navigator
+                  initialRouteName={ScreenNames.TRACKER_FORMS}
+                  screenOptions={{
+                    gestureEnabled: true,
+                    headerShown: false,
+                    cardStyleInterpolator:
+                      CardStyleInterpolators.forHorizontalIOS,
+                    transitionSpec: {
+                      open: {
+                        animation: "timing",
+                        config: {
+                          duration: 450,
+                        },
+                      },
+                      close: {
+                        animation: "timing",
+                        config: {
+                          duration: 450,
+                        },
+                      },
                     },
-                  },
-                  close: {
-                    animation: "timing",
-                    config: {
-                      duration: 450,
-                    },
-                  },
-                },
-              }}
-            >
-              <Stack.Screen
-                name={ScreenNames.TRACKER_FORMS}
-                //@ts-ignore
-                component={TrackerForms}
-              />
-            </Stack.Navigator>
-            <Toast />
-          </SafeAreaProvider>
-        </ThemeProvider>
-      </CommonContext.Provider>
-    </NavigationContainer>
+                  }}
+                >
+                  <Stack.Screen
+                    name={ScreenNames.TRACKER_FORMS}
+                    //@ts-ignore
+                    component={TrackerForms}
+                  />
+                </Stack.Navigator>
+                <Toast />
+              </SafeAreaProvider>
+            </DataPreloader>
+          </ThemeProvider>
+        </CommonContext.Provider>
+      </NavigationContainer>
+    </Provider>
   );
 }
