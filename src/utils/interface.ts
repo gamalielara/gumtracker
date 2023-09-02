@@ -87,4 +87,5 @@ export interface IFormCard {
   type: FormCardType;
   options?: React.FC[];
   additionIllustrationStyle?: Record<string, unknown>;
+  textInputPlaceHolder?: string;
 }

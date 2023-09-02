@@ -6,6 +6,7 @@ export const Container = styled.View`
   padding: 10px;
   background-color: ${(props) => props.theme.primary};
   border-radius: 15px;
+  margin-top: 10px;
 `;
 
 export const Option = styled.Pressable`

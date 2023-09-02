@@ -28,6 +28,7 @@ const FormCard: React.FC<IFormCard> = (props) => {
     type,
     options,
     additionIllustrationStyle,
+    textInputPlaceHolder,
   } = props;
   const { colorScheme } = useContext(CommonContext);
 
@@ -52,7 +53,12 @@ const FormCard: React.FC<IFormCard> = (props) => {
       break;
     default:
     case FormCardType.INPUT_TEXT:
-      BottomCard = <TextInputBox ref={selectBoxRef} />;
+      BottomCard = (
+        <TextInputBox
+          ref={selectBoxRef}
+          textInputPlaceHolder={textInputPlaceHolder}
+        />
+      );
       break;
   }
 

@@ -1,6 +1,6 @@
 import React, { useImperativeHandle, useRef } from "react";
 import { Container, Option } from "./styles";
-import { Animated } from "react-native";
+import { Animated, FlatList } from "react-native";
 import { IFormCardMethodhandle } from "../../../utils/interface";
 
 interface IProps {
@@ -9,22 +9,37 @@ interface IProps {
 
 const SelectBox = React.forwardRef<IFormCardMethodhandle, IProps>(
   ({ options }, ref) => {
-    const boxAnim = useRef(new Animated.Value(0));
     const AnimatedOption = Animated.createAnimatedComponent(Option);
 
+    const boxWidthAnim = useRef(new Animated.Value(0));
+    const boxHeightAnim = useRef(new Animated.Value(0));
+
     const expandBox = () => {
-      Animated.spring(boxAnim.current, {
-        toValue: 100,
-        useNativeDriver: false,
-      }).start();
+      Animated.parallel([
+        Animated.timing(boxHeightAnim.current, {
+          toValue: 100,
+          useNativeDriver: false,
+        }),
+
+        Animated.spring(boxWidthAnim.current, {
+          toValue: 100,
+          useNativeDriver: false,
+        }),
+      ]).start();
     };
 
     const hideBox = () => {
-      Animated.timing(boxAnim.current, {
-        toValue: 0,
-        duration: 500,
-        useNativeDriver: false,
-      }).start();
+      Animated.parallel([
+        Animated.timing(boxWidthAnim.current, {
+          toValue: 0,
+          useNativeDriver: false,
+        }),
+
+        Animated.timing(boxHeightAnim.current, {
+          toValue: 0,
+          useNativeDriver: false,
+        }),
+      ]).start();
     };
 
     useImperativeHandle(ref, () => ({
@@ -39,11 +54,11 @@ const SelectBox = React.forwardRef<IFormCardMethodhandle, IProps>(
     return (
       <Animated.View
         style={{
-          width: boxAnim.current.interpolate({
+          width: boxWidthAnim.current.interpolate({
             inputRange: [0, 100],
             outputRange: ["0%", "100%"],
           }),
-          height: boxAnim.current.interpolate({
+          height: boxHeightAnim.current.interpolate({
             inputRange: [0, 100],
             outputRange: [0, 75],
           }),
@@ -51,23 +66,48 @@ const SelectBox = React.forwardRef<IFormCardMethodhandle, IProps>(
         }}
       >
         <Container>
-          {options?.map((Option) => (
-            <AnimatedOption
-              key={Math.random()}
-              style={{
-                flexBasis: boxAnim.current.interpolate({
-                  inputRange: [0, 100],
-                  outputRange: ["0%", "10%"],
-                }),
-                opacity: boxAnim.current.interpolate({
-                  inputRange: [0, 90, 100],
-                  outputRange: [0, 0.1, 1],
-                }),
-              }}
-            >
-              <Option />
-            </AnimatedOption>
-          ))}
+          <FlatList
+            horizontal
+            data={options}
+            keyExtractor={() => Math.random().toString()}
+            renderItem={({ item: Option }) => (
+              <AnimatedOption
+                style={{
+                  flexBasis: boxWidthAnim.current.interpolate({
+                    inputRange: [0, 100],
+                    outputRange: ["0%", "10%"],
+                  }),
+                  opacity: boxWidthAnim.current.interpolate({
+                    inputRange: [0, 90, 100],
+                    outputRange: [0, 0.1, 1],
+                  }),
+                }}
+              >
+                <Option />
+              </AnimatedOption>
+            )}
+            contentContainerStyle={{
+              justifyContent: "space-between",
+              width: "100%",
+            }}
+          />
+          {/*{options?.map((Option) => (*/}
+          {/*  <AnimatedOption*/}
+          {/*    key={Math.random()}*/}
+          {/*    style={{*/}
+          {/*      flexBasis: boxWidthAnim.current.interpolate({*/}
+          {/*        inputRange: [0, 100],*/}
+          {/*        outputRange: ["0%", "10%"],*/}
+          {/*      }),*/}
+          {/*      opacity: boxWidthAnim.current.interpolate({*/}
+          {/*        inputRange: [0, 90, 100],*/}
+          {/*        outputRange: [0, 0.1, 1],*/}
+          {/*      }),*/}
+          {/*    }}*/}
+          {/*  >*/}
+          {/*    <Option />*/}
+          {/*  </AnimatedOption>*/}
+          {/*))}*/}
         </Container>
       </Animated.View>
     );

@@ -13,6 +13,7 @@ export const SubmitTextInputContainer = styled.View`
   width: 100%;
   flex-direction: row;
   gap: 10px;
+  margin-top: 10px;
 `;
 
 export const TextInput = styled.TextInput`

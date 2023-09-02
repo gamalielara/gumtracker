@@ -31,6 +31,7 @@ export const FORMS_DETAIL: IFormCard[] = [
     SVGImage: HighlightOfTheDayImage,
     illustrationPosition: "left",
     type: FormCardType.INPUT_TEXT,
+    textInputPlaceHolder: "Enter the most memorable thing here",
   },
   {
     title: "Gratitude Statements",
@@ -42,5 +43,6 @@ export const FORMS_DETAIL: IFormCard[] = [
       top: "-40%",
       right: "-20%",
     },
+    textInputPlaceHolder: "Enter thing you are grateful for here",
   },
 ];
