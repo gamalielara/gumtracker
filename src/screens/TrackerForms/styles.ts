@@ -11,5 +11,5 @@ export const FormsContainer = styled.KeyboardAvoidingView`
 `;
 
 export const ScrollingFormBody = styled.ScrollView`
-  min-height: 100%;
+  padding-bottom: 20px;
 `;

@@ -91,23 +91,6 @@ const SelectBox = React.forwardRef<IFormCardMethodhandle, IProps>(
               width: "100%",
             }}
           />
-          {/*{options?.map((Option) => (*/}
-          {/*  <AnimatedOption*/}
-          {/*    key={Math.random()}*/}
-          {/*    style={{*/}
-          {/*      flexBasis: boxWidthAnim.current.interpolate({*/}
-          {/*        inputRange: [0, 100],*/}
-          {/*        outputRange: ["0%", "10%"],*/}
-          {/*      }),*/}
-          {/*      opacity: boxWidthAnim.current.interpolate({*/}
-          {/*        inputRange: [0, 90, 100],*/}
-          {/*        outputRange: [0, 0.1, 1],*/}
-          {/*      }),*/}
-          {/*    }}*/}
-          {/*  >*/}
-          {/*    <Option />*/}
-          {/*  </AnimatedOption>*/}
-          {/*))}*/}
         </Container>
       </Animated.View>
     );
