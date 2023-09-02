@@ -4,8 +4,6 @@ import {useCallback} from "react";
 import * as SplashScreen from "expo-splash-screen";
 import CommonContext from "./src/module/common";
 import {ColorScheme, ScreenNames} from "./src/utils/const";
-import GumjournalsOverview from "./src/screens/GumjournalsOverview";
-import GumjournalsForm from "./src/screens/GumjournalsForm";
 import {SafeAreaProvider} from "react-native-safe-area-context";
 import {NavigationContainer} from "@react-navigation/native";
 import Toast from "./src/components/Toast";
@@ -65,16 +63,6 @@ export default function App() {
                 },
               }}
             >
-              <Stack.Screen
-                name={ScreenNames.GUMJOURNALS_OVERVIEW}
-                //@ts-ignore
-                component={GumjournalsOverview}
-              />
-              <Stack.Screen
-                name={ScreenNames.GUMJOURNALS_FORM}
-                //@ts-ignore
-                component={GumjournalsForm}
-              />
               <Stack.Screen
                 name={ScreenNames.TRACKER_FORMS}
                 //@ts-ignore
