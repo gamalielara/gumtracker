@@ -9,8 +9,13 @@ import CommonContext from "../../module/common";
 import { TouchableOpacity } from "react-native";
 import { addDays, format, lastDayOfMonth } from "date-fns";
 import DateCards from "./DateCards";
+import { useSelector } from "react-redux";
+import { getGumjournalsDateList } from "../../module/gumjournals/selectors";
+import { CalendarDateInfo } from "./interface";
 
 const CalendarSlider = () => {
+  const filledDateList = useSelector(getGumjournalsDateList);
+
   const [month, setMonth] = useState<string>();
 
   const now = useRef<Date>(new Date());
@@ -45,12 +50,21 @@ const CalendarSlider = () => {
     const firstDateOfMonth = new Date(format(now.current, "yyyy-MM-01"));
     const lastDayOfThisMonth = addDays(lastDayOfMonth(now.current), 1);
 
-    const dateArrs: Date[] = [];
+    const dateArrs: CalendarDateInfo[] = [];
 
     let current = firstDateOfMonth;
 
     do {
-      dateArrs.push(new Date(current));
+      const date = {
+        date: new Date(current),
+        hasBeenFilled: false,
+      };
+      const currentDateFormatted = format(current, "yyyy-MM-dd");
+
+      if (filledDateList.includes(currentDateFormatted))
+        date.hasBeenFilled = true;
+
+      dateArrs.push(date);
 
       current = addDays(new Date(current), 1);
     } while (current < lastDayOfThisMonth);
@@ -77,7 +91,7 @@ const CalendarSlider = () => {
           />
         </TouchableOpacity>
       </MonthContainer>
-      <DateCards dates={thisMonthDatesArr} />
+      <DateCards datesInfo={thisMonthDatesArr} />
     </Container>
   );
 };

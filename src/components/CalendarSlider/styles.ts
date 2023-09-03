@@ -19,10 +19,11 @@ export const MonthText = styled(BoldText)`
   font-size: 18px;
 `;
 
-export const DateCard = styled.TouchableOpacity`
+export const DateCard = styled.TouchableOpacity<{ hasBeenFilled: boolean }>`
   width: 50px;
   padding: 10px;
-  background-color: ${(props) => props.theme.card};
+  background-color: ${(props) =>
+    props.hasBeenFilled ? props.theme.secondary : props.theme.card};
   margin: 10px;
   border-radius: 10px;
   align-items: center;
@@ -30,6 +31,7 @@ export const DateCard = styled.TouchableOpacity`
 `;
 
 export const DateDayText = styled(BoldText)`
+  font-size: 12px;
   color: ${(props) => props.theme["text-secondary"]};
 `;
 
