@@ -65,15 +65,6 @@ const TextInputBox = React.forwardRef<IFormCardMethodhandle, IProps>(
       },
     }));
 
-    useImperativeHandle(ref, () => ({
-      showSelectBox: () => {
-        expandBox();
-      },
-      hideSelectBox: () => {
-        hideBox();
-      },
-    }));
-
     return (
       <Animated.View
         style={{
