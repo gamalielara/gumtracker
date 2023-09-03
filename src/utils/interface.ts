@@ -15,12 +15,12 @@ export interface RawSheetData {
 export type TransformedSheetData = Record<string, TransformedSheetDataFields>;
 
 export type TransformedSheetDataFields = {
+  dateFilled: string;
   fitness: Fitness;
-  habits: NewHabitsGamification;
+  habits: HabitsGamification;
   timestamp: string | number;
   mood: number;
-  gratitudeStatements: string[];
-  highlightsOfTheDay: string[];
+  wellbeing: Wellbeing;
 };
 
 export interface Fitness {
@@ -28,7 +28,7 @@ export interface Fitness {
   bodyWeight: string[];
 }
 
-export interface NewHabitsGamification {
+export interface HabitsGamification {
   drawing: number;
   journaling: number;
   language: number;
@@ -40,26 +40,10 @@ export interface NewHabitsGamification {
   writingBlog: number;
 }
 
-export interface HabitsGamification {
-  drawing: string[];
-  journaling: string[];
-  language: string[];
-  meditate: string[];
-  mobdev: string[];
-  reading: string[];
-  watchingMovies: string[];
-  webdev: string[];
-  writingBlog: string[];
-}
-
 export interface Wellbeing {
-  gratitude1: string[];
-  gratitude2: string[];
-  gratitude3: string[];
-  highlightOfTheDay1: string[];
-  highlightOfTheDay2: string[];
-  highlightOfTheDay3: string[];
-  mood: string[];
+  gratitudeStatements: string[];
+  highlightsOfTheDay: string[];
+  mood: string;
 }
 
 export type ComponentBasePropsWithChildren<

@@ -7,3 +7,8 @@ export const getGumjournalsDateList = (state: BaseState) => {
   const gumjournalsData = state.gumjournals.value;
   return Object.keys(gumjournalsData);
 };
+
+export const getGumjournalsDataByDate =
+  (date: string) => (state: BaseState) => {
+    return state.gumjournals.value[date] ?? {};
+  };

@@ -12,8 +12,15 @@ import DateCards from "./DateCards";
 import { useSelector } from "react-redux";
 import { getGumjournalsDateList } from "../../module/gumjournals/selectors";
 import { CalendarDateInfo } from "./interface";
+import { TrackerContext } from "../../screens/TrackerForms/context";
 
 const CalendarSlider = () => {
+  const gumjournalsContext = useContext(TrackerContext);
+
+  if (!gumjournalsContext) return <>Loading...</>;
+
+  const { selectedDate } = gumjournalsContext;
+
   const filledDateList = useSelector(getGumjournalsDateList);
 
   const [month, setMonth] = useState<string>();
@@ -91,7 +98,7 @@ const CalendarSlider = () => {
           />
         </TouchableOpacity>
       </MonthContainer>
-      <DateCards datesInfo={thisMonthDatesArr} />
+      <DateCards datesInfo={thisMonthDatesArr} selectedDate={selectedDate} />
     </Container>
   );
 };

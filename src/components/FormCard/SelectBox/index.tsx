@@ -1,7 +1,13 @@
-import React, { useImperativeHandle, useRef } from "react";
+import React, {
+  useContext,
+  useEffect,
+  useImperativeHandle,
+  useRef,
+} from "react";
 import { Container, Option } from "./styles";
 import { Animated, FlatList } from "react-native";
 import { IFormCardMethodhandle } from "../../../utils/interface";
+import { TrackerContext } from "../../../screens/TrackerForms/context";
 
 interface IProps {
   options?: React.FC[];
@@ -9,6 +15,12 @@ interface IProps {
 
 const SelectBox = React.forwardRef<IFormCardMethodhandle, IProps>(
   ({ options }, ref) => {
+    const gumjournalsContext = useContext(TrackerContext);
+
+    useEffect(() => {
+      hideBox();
+    }, [gumjournalsContext?.selectedDate]);
+
     const AnimatedOption = Animated.createAnimatedComponent(Option);
 
     const boxWidthAnim = useRef(new Animated.Value(0));

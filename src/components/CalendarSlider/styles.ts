@@ -1,5 +1,6 @@
 import { styled } from "styled-components/native";
 import { BaseText, BoldText } from "../global/text";
+import { DateVariant } from "./interface";
 
 export const Container = styled.View`
   width: 100%;
@@ -19,11 +20,19 @@ export const MonthText = styled(BoldText)`
   font-size: 18px;
 `;
 
-export const DateCard = styled.TouchableOpacity<{ hasBeenFilled: boolean }>`
+export const DateCard = styled.TouchableOpacity<{ variant: DateVariant }>`
   width: 50px;
   padding: 10px;
-  background-color: ${(props) =>
-    props.hasBeenFilled ? props.theme.secondary : props.theme.card};
+  background-color: ${(props) => {
+    switch (props.variant) {
+      case DateVariant.SELECTED:
+        return props.theme.secondary;
+      case DateVariant.HAS_BEEN_FILLED:
+        return props.theme.primary;
+      default:
+        return props.theme.card;
+    }
+  }};
   margin: 10px;
   border-radius: 10px;
   align-items: center;

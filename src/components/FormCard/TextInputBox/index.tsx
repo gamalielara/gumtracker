@@ -1,10 +1,16 @@
-import React, { useContext, useImperativeHandle, useRef } from "react";
+import React, {
+  useContext,
+  useEffect,
+  useImperativeHandle,
+  useRef,
+} from "react";
 import { SubmitButton, SubmitTextInputContainer, TextInput } from "./styles";
 import { Animated } from "react-native";
 import { IFormCardMethodhandle } from "../../../utils/interface";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import CommonContext from "../../../module/common";
+import { TrackerContext } from "../../../screens/TrackerForms/context";
 
 interface IProps {
   textInputPlaceHolder?: string;
@@ -12,6 +18,12 @@ interface IProps {
 
 const TextInputBox = React.forwardRef<IFormCardMethodhandle, IProps>(
   ({ textInputPlaceHolder }, ref) => {
+    const gumjournalsContext = useContext(TrackerContext);
+
+    useEffect(() => {
+      hideBox();
+    }, [gumjournalsContext?.selectedDate]);
+
     const { colorScheme } = useContext(CommonContext);
     const boxWidthAnim = useRef(new Animated.Value(0));
     const boxHeightAnim = useRef(new Animated.Value(0));

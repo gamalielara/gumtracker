@@ -8,8 +8,12 @@ import {
   IllustrationImage,
 } from "./style";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { faCheck, faPlus } from "@fortawesome/free-solid-svg-icons";
-import { useContext, useRef, useState } from "react";
+import {
+  faCheck,
+  faChevronDown,
+  faPlus,
+} from "@fortawesome/free-solid-svg-icons";
+import { useContext, useEffect, useRef, useState } from "react";
 import CommonContext from "../../module/common";
 import SelectBox from "./SelectBox";
 import {
@@ -18,8 +22,18 @@ import {
   IFormCardMethodhandle,
 } from "../../utils/interface";
 import TextInputBox from "./TextInputBox";
+import { TrackerContext } from "../../screens/TrackerForms/context";
 
 const FormCard: React.FC<IFormCard> = (props) => {
+  const gumjournalsContext = useContext(TrackerContext);
+
+  if (!gumjournalsContext) return <></>;
+
+  const { selectedGumjournalsData, selectedDate } = gumjournalsContext;
+
+  // empty object if data has not been filled
+  const isDataHasBeenFilled = Object.keys(selectedGumjournalsData).length > 0;
+
   const {
     title,
     SVGImage,
@@ -35,6 +49,10 @@ const FormCard: React.FC<IFormCard> = (props) => {
   const [isCTAButtonClicked, setIsCTAButtonClicked] = useState(false);
 
   const selectBoxRef = useRef<IFormCardMethodhandle>(null);
+
+  useEffect(() => {
+    setIsCTAButtonClicked(false);
+  }, [selectedDate]);
 
   const onCTAButtonClick = () => {
     setIsCTAButtonClicked((state) => !state);
@@ -62,6 +80,8 @@ const FormCard: React.FC<IFormCard> = (props) => {
       break;
   }
 
+  const CTAButtonIcon = isDataHasBeenFilled ? faChevronDown : faPlus;
+
   return (
     <>
       <Card position={illustrationPosition}>
@@ -78,7 +98,7 @@ const FormCard: React.FC<IFormCard> = (props) => {
           </CardInfo>
           <AddButton onPress={onCTAButtonClick}>
             <FontAwesomeIcon
-              icon={isCTAButtonClicked ? faCheck : faPlus}
+              icon={isCTAButtonClicked ? faCheck : CTAButtonIcon}
               color={colorScheme["text-secondary"]}
             />
           </AddButton>
