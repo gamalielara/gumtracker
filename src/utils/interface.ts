@@ -74,11 +74,12 @@ export enum FormCardType {
 }
 
 export interface IFormCardMethodhandle {
-  showSelectBox: () => void;
-  hideSelectBox: () => void;
+  show: () => void;
+  hide: () => void;
 }
 
 export interface IFormCard {
+  formKey: number;
   title: string;
   subtitle?: string;
   SVGImage: any;

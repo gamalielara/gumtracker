@@ -1,5 +1,5 @@
 import {
-  AddButton,
+  ActionButton,
   Card,
   CardInfo,
   CardSide,
@@ -23,18 +23,11 @@ import {
 } from "../../utils/interface";
 import TextInputBox from "./TextInputBox";
 import { TrackerContext } from "../../screens/TrackerForms/context";
+import usePickFormValue from "../../utils/hook/usePickFormValue";
 
 const FormCard: React.FC<IFormCard> = (props) => {
-  const gumjournalsContext = useContext(TrackerContext);
-
-  if (!gumjournalsContext) return <></>;
-
-  const { selectedGumjournalsData, selectedDate } = gumjournalsContext;
-
-  // empty object if data has not been filled
-  const isDataHasBeenFilled = Object.keys(selectedGumjournalsData).length > 0;
-
   const {
+    formKey,
     title,
     SVGImage,
     subtitle,
@@ -44,11 +37,23 @@ const FormCard: React.FC<IFormCard> = (props) => {
     additionIllustrationStyle,
     textInputPlaceHolder,
   } = props;
+
+  const gumjournalsContext = useContext(TrackerContext);
+
+  const filledData = usePickFormValue(formKey);
+
+  if (!gumjournalsContext) return <></>;
+
+  const { selectedGumjournalsData, selectedDate } = gumjournalsContext;
+
+  // empty object if data has not been filled
+  const isDataHasBeenFilled = Object.keys(selectedGumjournalsData).length > 0;
+
   const { colorScheme } = useContext(CommonContext);
 
   const [isCTAButtonClicked, setIsCTAButtonClicked] = useState(false);
 
-  const selectBoxRef = useRef<IFormCardMethodhandle>(null);
+  const bottomBoxRef = useRef<IFormCardMethodhandle>(null);
 
   useEffect(() => {
     setIsCTAButtonClicked(false);
@@ -58,23 +63,30 @@ const FormCard: React.FC<IFormCard> = (props) => {
     setIsCTAButtonClicked((state) => !state);
 
     if (isCTAButtonClicked) {
-      selectBoxRef.current?.hideSelectBox();
+      bottomBoxRef.current?.hide();
     } else {
-      selectBoxRef.current?.showSelectBox();
+      bottomBoxRef.current?.show();
     }
   };
 
   let BottomCard;
   switch (type) {
     case FormCardType.SELECT:
-      BottomCard = <SelectBox options={options} ref={selectBoxRef} />;
+      BottomCard = (
+        <SelectBox
+          options={options}
+          ref={bottomBoxRef}
+          filledData={filledData as number}
+        />
+      );
       break;
     default:
     case FormCardType.INPUT_TEXT:
       BottomCard = (
         <TextInputBox
-          ref={selectBoxRef}
+          ref={bottomBoxRef}
           textInputPlaceHolder={textInputPlaceHolder}
+          filledData={filledData as string[]}
         />
       );
       break;
@@ -96,12 +108,12 @@ const FormCard: React.FC<IFormCard> = (props) => {
             <CardTitle>{title}</CardTitle>
             {subtitle && <CardSubtitle>{subtitle}</CardSubtitle>}
           </CardInfo>
-          <AddButton onPress={onCTAButtonClick}>
+          <ActionButton onPress={onCTAButtonClick}>
             <FontAwesomeIcon
               icon={isCTAButtonClicked ? faCheck : CTAButtonIcon}
               color={colorScheme["text-secondary"]}
             />
-          </AddButton>
+          </ActionButton>
         </CardSide>
       </Card>
       {BottomCard}

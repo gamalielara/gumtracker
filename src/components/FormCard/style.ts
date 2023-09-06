@@ -65,7 +65,7 @@ export const CardSubtitle = styled(BaseText)<IllustrationPosition>`
   text-align: center;
 `;
 
-export const AddButton = styled.TouchableOpacity`
+export const ActionButton = styled.TouchableOpacity`
   background-color: ${(props) => props.theme.text};
   width: 50px;
   aspect-ratio: 1;

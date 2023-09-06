@@ -8,8 +8,9 @@ export const FormsContainer = styled.KeyboardAvoidingView`
   padding: 0 10px;
   margin-top: 50px;
   gap: 10px;
+  flex: 1;
 `;
 
 export const ScrollingFormBody = styled.ScrollView`
-  padding-bottom: 10px;
+  padding-bottom: 0px;
 `;

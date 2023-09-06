@@ -9,8 +9,15 @@ import SlightlySmile from "../assets/emoji/Slightly Smiling Face.svg";
 import CalmFace from "../assets/emoji/Relieved Face.svg";
 import PartyFace from "../assets/emoji/Partying Face.svg";
 
+export enum FormKey {
+  MOOD,
+  HIGHLIGHTS_OF_THE_DAY,
+  GRATITUDE_STATEMENTS,
+}
+
 export const FORMS_DETAIL: IFormCard[] = [
   {
+    formKey: FormKey.MOOD,
     title: "Add Mood",
     subtitle: "How are you feeling today?",
     SVGImage: MoodCardImage,
@@ -26,6 +33,7 @@ export const FORMS_DETAIL: IFormCard[] = [
     ],
   },
   {
+    formKey: FormKey.HIGHLIGHTS_OF_THE_DAY,
     title: "Highlights of the Day",
     subtitle: "What are the most memorable things\nthat happened today?",
     SVGImage: HighlightOfTheDayImage,
@@ -34,6 +42,7 @@ export const FORMS_DETAIL: IFormCard[] = [
     textInputPlaceHolder: "Enter the most memorable thing here",
   },
   {
+    formKey: FormKey.GRATITUDE_STATEMENTS,
     title: "Gratitude Statements",
     subtitle: "What are things you are grateful for today?",
     SVGImage: GratitudeImage,

@@ -33,6 +33,9 @@ const TrackerForms = () => {
               renderItem={({ item: formDetail }) => (
                 <FormCard {...formDetail} />
               )}
+              contentContainerStyle={{
+                marginBottom: 50,
+              }}
             />
           </ScrollingFormBody>
         </FormsContainer>

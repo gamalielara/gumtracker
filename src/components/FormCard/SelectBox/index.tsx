@@ -11,6 +11,7 @@ import { TrackerContext } from "../../../screens/TrackerForms/context";
 
 interface IProps {
   options?: React.FC[];
+  filledData: number;
 }
 
 const SelectBox = React.forwardRef<IFormCardMethodhandle, IProps>(
@@ -23,42 +24,27 @@ const SelectBox = React.forwardRef<IFormCardMethodhandle, IProps>(
 
     const AnimatedOption = Animated.createAnimatedComponent(Option);
 
-    const boxWidthAnim = useRef(new Animated.Value(0));
     const boxHeightAnim = useRef(new Animated.Value(0));
 
     const expandBox = () => {
-      Animated.parallel([
-        Animated.timing(boxHeightAnim.current, {
-          toValue: 100,
-          useNativeDriver: false,
-        }),
-
-        Animated.spring(boxWidthAnim.current, {
-          toValue: 100,
-          useNativeDriver: false,
-        }),
-      ]).start();
+      Animated.timing(boxHeightAnim.current, {
+        toValue: 100,
+        useNativeDriver: false,
+      }).start();
     };
 
     const hideBox = () => {
-      Animated.parallel([
-        Animated.timing(boxWidthAnim.current, {
-          toValue: 0,
-          useNativeDriver: false,
-        }),
-
-        Animated.timing(boxHeightAnim.current, {
-          toValue: 0,
-          useNativeDriver: false,
-        }),
-      ]).start();
+      Animated.timing(boxHeightAnim.current, {
+        toValue: 0,
+        useNativeDriver: false,
+      }).start();
     };
 
     useImperativeHandle(ref, () => ({
-      showSelectBox: () => {
+      show: () => {
         expandBox();
       },
-      hideSelectBox: () => {
+      hide: () => {
         hideBox();
       },
     }));
@@ -66,10 +52,6 @@ const SelectBox = React.forwardRef<IFormCardMethodhandle, IProps>(
     return (
       <Animated.View
         style={{
-          width: boxWidthAnim.current.interpolate({
-            inputRange: [0, 100],
-            outputRange: ["0%", "100%"],
-          }),
           height: boxHeightAnim.current.interpolate({
             inputRange: [0, 100],
             outputRange: [0, 75],
@@ -85,14 +67,7 @@ const SelectBox = React.forwardRef<IFormCardMethodhandle, IProps>(
             renderItem={({ item: Option }) => (
               <AnimatedOption
                 style={{
-                  flexBasis: boxWidthAnim.current.interpolate({
-                    inputRange: [0, 100],
-                    outputRange: ["0%", "10%"],
-                  }),
-                  opacity: boxWidthAnim.current.interpolate({
-                    inputRange: [0, 90, 100],
-                    outputRange: [0, 0.1, 1],
-                  }),
+                  flexBasis: "10%",
                 }}
               >
                 <Option />
