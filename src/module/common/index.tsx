@@ -5,4 +5,6 @@ interface CommonContext {
   colorScheme: typeof DarkModeColorScheme | typeof LightModeColorScheme;
 }
 
-export default createContext<CommonContext>({} as CommonContext);
+const CommonContext = createContext<CommonContext>({} as CommonContext);
+
+export default CommonContext;

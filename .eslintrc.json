@@ -13,15 +13,27 @@
     "ecmaVersion": "latest",
     "sourceType": "module"
   },
-  "plugins": ["@typescript-eslint", "react", "unused-imports"],
+  "plugins": [
+    "@typescript-eslint",
+    "react",
+    "unused-imports"
+  ],
   "rules": {
     "react/display-name": "off",
     "react/react-in-jsx-scope": "off",
     "react/jsx-filename-extension": [
       1,
-      { "extensions": [".js", ".jsx", ".ts", ".tsx"] }
+      {
+        "extensions": [
+          ".js",
+          ".jsx",
+          ".ts",
+          ".tsx"
+        ]
+      }
     ],
-    "no-unused-vars": "off",
+    "react/prop-types": "off",
+    "no-unused-vars": "error",
     "unused-imports/no-unused-imports": "error",
     "unused-imports/no-unused-vars": [
       "warn",
