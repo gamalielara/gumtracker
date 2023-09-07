@@ -25,9 +25,9 @@ export const LightModeColorScheme: IColorScheme = {
   primary: "#96B6C5",
   secondary: "#698998",
   card: "#ADC4CE",
-  background: "#96B6C5", // primary color
-  text: "#F1F0E8",
-  "text-secondary": "#557381", // darker
+  background: "#F1F0E8", // primary color
+  text: "#96B6C5",
+  "text-secondary": "#445c67", // darker
 };
 
 export const ColorScheme = {
@@ -50,9 +50,11 @@ export enum ToastType {
 export enum ScreenNames {
   GUMJOURNALS_FORM = "Gumjournals Form",
   GUMJOURNALS_OVERVIEW = "Gumjournals Overview",
+  TRACKER_FORMS = "Tracker Forms",
 }
 
 export enum AsyncStorageKeys {
   NOTI_STATUS = "noti_permission_status",
-  COLOR_SCHEME = "color-scheme",
+  COLOR_SCHEME = "color_scheme",
+  GUMJOURNALS_LOCAL_STORAGE = "gumjournals_local_storage",
 }

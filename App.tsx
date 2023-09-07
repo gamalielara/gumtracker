@@ -4,8 +4,6 @@ import {useCallback} from "react";
 import * as SplashScreen from "expo-splash-screen";
 import CommonContext from "./src/module/common";
 import {ColorScheme, ScreenNames} from "./src/utils/const";
-import GumjournalsOverview from "./src/screens/GumjournalsOverview";
-import GumjournalsForm from "./src/screens/GumjournalsForm";
 import {SafeAreaProvider} from "react-native-safe-area-context";
 import {NavigationContainer} from "@react-navigation/native";
 import Toast from "./src/components/Toast";
@@ -14,6 +12,10 @@ import {CardStyleInterpolators, createStackNavigator,} from "@react-navigation/s
 import useSetColorScheme from "./src/utils/hook/useSetColorScheme";
 import {ThemeProvider} from "styled-components";
 import {StatusBar} from "react-native";
+import TrackerForms from "./src/screens/TrackerForms";
+import {Provider} from "react-redux";
+import {store} from "./src/module/store";
+import DataPreloader from "./src/components/DataPreloader";
 
 export default function App() {
   useAppPermision();
@@ -37,48 +39,52 @@ export default function App() {
   const Stack = createStackNavigator();
 
   return (
-    <NavigationContainer>
-      <CommonContext.Provider value={{ colorScheme: ColorScheme[themeColor] }}>
-        <ThemeProvider theme={ColorScheme[themeColor]}>
-          <SafeAreaProvider onLayout={onLayoutView}>
-            <StatusBar backgroundColor={ColorScheme[themeColor].background} />
-            <Stack.Navigator
-              initialRouteName={ScreenNames.GUMJOURNALS_OVERVIEW}
-              screenOptions={{
-                gestureEnabled: true,
-                headerShown: false,
-                cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
-                transitionSpec: {
-                  open: {
-                    animation: "timing",
-                    config: {
-                      duration: 450,
+    <Provider store={store}>
+      <NavigationContainer>
+        <CommonContext.Provider
+          value={{ colorScheme: ColorScheme[themeColor] }}
+        >
+          <ThemeProvider theme={ColorScheme[themeColor]}>
+            <DataPreloader>
+              <SafeAreaProvider onLayout={onLayoutView}>
+                <StatusBar
+                  backgroundColor={ColorScheme[themeColor].background}
+                />
+                <Stack.Navigator
+                  initialRouteName={ScreenNames.TRACKER_FORMS}
+                  screenOptions={{
+                    gestureEnabled: true,
+                    headerShown: false,
+                    cardStyleInterpolator:
+                      CardStyleInterpolators.forHorizontalIOS,
+                    transitionSpec: {
+                      open: {
+                        animation: "timing",
+                        config: {
+                          duration: 450,
+                        },
+                      },
+                      close: {
+                        animation: "timing",
+                        config: {
+                          duration: 450,
+                        },
+                      },
                     },
-                  },
-                  close: {
-                    animation: "timing",
-                    config: {
-                      duration: 450,
-                    },
-                  },
-                },
-              }}
-            >
-              <Stack.Screen
-                name={ScreenNames.GUMJOURNALS_OVERVIEW}
-                //@ts-ignore
-                component={GumjournalsOverview}
-              />
-              <Stack.Screen
-                name={ScreenNames.GUMJOURNALS_FORM}
-                //@ts-ignore
-                component={GumjournalsForm}
-              />
-            </Stack.Navigator>
-            <Toast />
-          </SafeAreaProvider>
-        </ThemeProvider>
-      </CommonContext.Provider>
-    </NavigationContainer>
+                  }}
+                >
+                  <Stack.Screen
+                    name={ScreenNames.TRACKER_FORMS}
+                    //@ts-ignore
+                    component={TrackerForms}
+                  />
+                </Stack.Navigator>
+                <Toast />
+              </SafeAreaProvider>
+            </DataPreloader>
+          </ThemeProvider>
+        </CommonContext.Provider>
+      </NavigationContainer>
+    </Provider>
   );
 }

@@ -1,49 +1,42 @@
 import { parseDate } from "./date";
 
-const TIMESTAMP_COLUMN_NUM = 0;
+export function transformSheetDataToMapObj(
+  rawValues: [string[], string[], ...Array<string[]>],
+) {
+  const [topHeader, header, ...values] = rawValues;
 
-export function transformSheetDataToMapObj(rawValues: string[][]) {
-  const [standAloneKeys, detailKeys, ...values] = rawValues;
+  const result: Record<string, any> = {};
 
-  const result: Record<string, unknown> = {};
+  const splittedValuesKeys = ["Gratitude Statements", "Highlight of The Day"];
 
-  const maxKeysLength = Math.max(standAloneKeys.length, detailKeys.length);
+  for (let i = 0; i < values.length; i++) {
+    const date = parseDate(values[i][0]);
+    result[date] = {};
 
-  let tmpKey: string = "";
+    let topHeaderKey;
 
-  function getValues(index: number) {
-    const isTimestampColumn = index === TIMESTAMP_COLUMN_NUM;
-    const result = [];
+    for (let j = 0; j < values[i].length; j++) {
+      if (topHeader[j]) topHeaderKey = topHeader[j];
 
-    for (let i = 0; i < values.length; i++) {
-      for (let j = 0; j < values[i].length; j++) {
-        if (j === index) {
-          const valueToPush = isTimestampColumn
-            ? parseDate(values[i][j])
-            : values[i][j];
-          result.push(valueToPush);
-        }
+      if (!topHeaderKey) {
+        result[date][header[j]] = values[i][j];
+        continue;
+      }
+
+      result[date][topHeaderKey] = { ...(result[date][topHeaderKey] ?? {}) };
+
+      if (header[j]) {
+        let transformedValues: string | string[] = values[i][j];
+
+        if (splittedValuesKeys.includes(header[j]))
+          transformedValues = transformedValues.split("; ");
+
+        result[date][topHeaderKey][header[j]] = transformedValues;
+      } else {
+        result[date][topHeaderKey] = values[i][j];
       }
     }
-
-    return result;
   }
 
-  for (let i = 0; i < maxKeysLength; i++) {
-    if (standAloneKeys[i]) {
-      tmpKey = standAloneKeys[i];
-    } else {
-      if (!tmpKey) tmpKey = detailKeys[i];
-    }
-
-    if (detailKeys[i]) {
-      result[tmpKey] = {
-        ...(result[tmpKey] ?? {}),
-        [detailKeys[i]]: getValues(i),
-      };
-    } else {
-      result[tmpKey] = getValues(i);
-    }
-  }
   return result;
 }

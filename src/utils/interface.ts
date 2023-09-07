@@ -12,13 +12,16 @@ export interface RawSheetData {
   values: [HeadRow, HeadSubRow, ...Array<ValueRow>]; // The first index is always the row key header
 }
 
-export interface TransformedSheetData {
-  dateFilled: string[];
+export type TransformedSheetData = Record<string, TransformedSheetDataFields>;
+
+export type TransformedSheetDataFields = {
+  dateFilled: string;
   fitness: Fitness;
-  habitsGamification: HabitsGamification;
-  timestamp: string[];
+  habits: HabitsGamification;
+  timestamp: string | number;
+  mood: number;
   wellbeing: Wellbeing;
-}
+};
 
 export interface Fitness {
   bellyCircumference: string[];
@@ -26,25 +29,21 @@ export interface Fitness {
 }
 
 export interface HabitsGamification {
-  drawing: string[];
-  journaling: string[];
-  language: string[];
-  meditate: string[];
-  mobdev: string[];
-  reading: string[];
-  watchingMovies: string[];
-  webdev: string[];
-  writingBlog: string[];
+  drawing: number;
+  journaling: number;
+  language: number;
+  meditate: number;
+  mobdev: number;
+  reading: number;
+  watchingMovies: number;
+  webdev: number;
+  writingBlog: number;
 }
 
 export interface Wellbeing {
-  gratitude1: string[];
-  gratitude2: string[];
-  gratitude3: string[];
-  highlightOfTheDay1: string[];
-  highlightOfTheDay2: string[];
-  highlightOfTheDay3: string[];
-  mood: string[];
+  gratitudeStatements: string[];
+  highlightsOfTheDay: string[];
+  mood: string;
 }
 
 export type ComponentBasePropsWithChildren<
@@ -67,3 +66,26 @@ export type NavigationScreenProps<
   navigation: TNavigation;
   route?: Record<string, unknown>;
 } & ComponentBasePropsWithChildren<T>;
+
+export enum FormCardType {
+  SELECT,
+  INPUT_TEXT,
+  INPUT_NUMBER,
+}
+
+export interface IFormCardMethodhandle {
+  show: () => void;
+  hide: () => void;
+}
+
+export interface IFormCard {
+  formKey: number;
+  title: string;
+  subtitle?: string;
+  SVGImage: any;
+  illustrationPosition: "left" | "right";
+  type: FormCardType;
+  options?: React.FC[];
+  additionIllustrationStyle?: Record<string, unknown>;
+  textInputPlaceHolder?: string;
+}
