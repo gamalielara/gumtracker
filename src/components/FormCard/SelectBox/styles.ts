@@ -9,10 +9,13 @@ export const Container = styled.View`
   margin-top: 10px;
 `;
 
-export const Option = styled.Pressable`
+export const Option = styled.Pressable<{ isHighlighted: boolean }>`
   aspect-ratio: 1;
   padding: 5px;
-  background-color: ${(props) => props.theme.secondary};
+  background-color: ${(props) =>
+    props.isHighlighted
+      ? props.theme["text-secondary"]
+      : props.theme.secondary};
   border-radius: 10px;
   justify-content: center;
   align-items: center;

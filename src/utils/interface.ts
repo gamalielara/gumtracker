@@ -19,7 +19,6 @@ export type TransformedSheetDataFields = {
   fitness: Fitness;
   habits: HabitsGamification;
   timestamp: string | number;
-  mood: number;
   wellbeing: Wellbeing;
 };
 
@@ -78,6 +77,11 @@ export interface IFormCardMethodhandle {
   hide: () => void;
 }
 
+export interface FormOptions {
+  detail: React.FC;
+  value: string | number;
+}
+
 export interface IFormCard {
   formKey: number;
   title: string;
@@ -85,7 +89,7 @@ export interface IFormCard {
   SVGImage: any;
   illustrationPosition: "left" | "right";
   type: FormCardType;
-  options?: React.FC[];
+  options?: FormOptions[];
   additionIllustrationStyle?: Record<string, unknown>;
   textInputPlaceHolder?: string;
 }

@@ -6,16 +6,16 @@ import React, {
 } from "react";
 import { Container, Option } from "./styles";
 import { Animated, FlatList } from "react-native";
-import { IFormCardMethodhandle } from "../../../utils/interface";
+import { FormOptions, IFormCardMethodhandle } from "../../../utils/interface";
 import { TrackerContext } from "../../../screens/TrackerForms/context";
 
 interface IProps {
-  options?: React.FC[];
-  filledData: number;
+  options?: FormOptions[];
+  filledData: string;
 }
 
 const SelectBox = React.forwardRef<IFormCardMethodhandle, IProps>(
-  ({ options }, ref) => {
+  ({ options, filledData }, ref) => {
     const gumjournalsContext = useContext(TrackerContext);
 
     useEffect(() => {
@@ -64,11 +64,12 @@ const SelectBox = React.forwardRef<IFormCardMethodhandle, IProps>(
             horizontal
             data={options}
             keyExtractor={() => Math.random().toString()}
-            renderItem={({ item: Option }) => (
+            renderItem={({ item: { detail: Option, value } }) => (
               <AnimatedOption
                 style={{
                   flexBasis: "10%",
                 }}
+                isHighlighted={value === filledData}
               >
                 <Option />
               </AnimatedOption>

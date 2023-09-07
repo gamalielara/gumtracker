@@ -6,11 +6,11 @@ export const Container = styled(MainContainer)``;
 export const FormsContainer = styled.KeyboardAvoidingView`
   width: 100%;
   padding: 0 10px;
-  margin-top: 50px;
+  margin-top: 5px;
   gap: 10px;
   flex: 1;
 `;
 
 export const ScrollingFormBody = styled.ScrollView`
-  padding-bottom: 0px;
+  flex-grow: 1;
 `;

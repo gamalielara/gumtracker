@@ -16,3 +16,7 @@ export const VisuallyInvisible = styled.View`
   heihgt: 0;
   visibility: hidden;
 `;
+
+export const VisuallyInvisibleWithHeight = styled(VisuallyInvisible)`
+  height: 50px;
+`;

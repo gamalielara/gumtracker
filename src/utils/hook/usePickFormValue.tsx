@@ -7,7 +7,7 @@ export default (fieldName: FormKey) => {
 
   switch (fieldName) {
     case FormKey.MOOD:
-      return gumjournalsContext?.selectedGumjournalsData.mood;
+      return gumjournalsContext?.selectedGumjournalsData.wellbeing?.mood;
     case FormKey.GRATITUDE_STATEMENTS:
       return gumjournalsContext?.selectedGumjournalsData.wellbeing
         ?.highlightsOfTheDay;
