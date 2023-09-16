@@ -2,7 +2,7 @@ import { Container, FormsContainer, ScrollingFormBody } from "./styles";
 import CalendarSlider from "../../components/CalendarSlider";
 import FormCard from "../../components/FormCard";
 import { FORMS_DETAIL } from "../../utils/formsConstant";
-import { FlatList } from "react-native";
+import { FlatList, Platform } from "react-native";
 import { useState } from "react";
 import { parseDate } from "../../utils/date";
 import { useSelector } from "react-redux";
@@ -21,12 +21,11 @@ const TrackerForms = () => {
       value={{ selectedGumjournalsData, selectedDate, setSelectedDate }}
     >
       <Container>
-        <CalendarSlider />
         <FormsContainer
           enabled
-          behavior="padding"
-          keyboardVerticalOffset={-200}
+          behavior={Platform.OS === "ios" ? "padding" : "height"}
         >
+          <CalendarSlider />
           <ScrollingFormBody>
             <FlatList
               data={FORMS_DETAIL}
@@ -35,7 +34,6 @@ const TrackerForms = () => {
                 <FormCard {...formDetail} />
               )}
             />
-            {/*<VisuallyInvisibleWithHeight />*/}
           </ScrollingFormBody>
         </FormsContainer>
       </Container>

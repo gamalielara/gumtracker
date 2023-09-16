@@ -19,27 +19,36 @@ export const SubmitTextInputContainer = styled.View`
 
 export const TextInput = styled.TextInput`
   flex: 10;
-  padding: 5px 10px;
+  padding: 10px 20px;
   background-color: ${(props) => props.theme.primary};
-  border-radius: 10px;
+  border-radius: 15px;
   font-family: "Inter";
   color: ${(props) => props.theme["text-secondary"]};
+  font-size: 14px;
+  overflow: hidden;
+  height: 50px;
 `;
 
 export const SubmitButton = styled.TouchableOpacity`
   flex: 1;
-  padding: 10px;
+  padding: 10px 20px;
   background-color: ${(props) => props.theme.primary};
-  border-radius: 10px;
+  border-radius: 15px;
   justify-content: center;
   align-items: center;
 `;
 
-export const FilledDataBox = styled(BaseText)`
+export const FilledDataBox = styled.View`
   flex: 10;
   padding: 5px 10px;
   background-color: ${(props) => props.theme.primary};
-  border-radius: 10px;
-  color: ${(props) => props.theme["text-secondary"]};
+  border-radius: 15px;
   margin: 5px 0;
+  height: 50px;
+  justify-content: center;
+`;
+
+export const FilledDataText = styled(BaseText)`
+  color: ${(props) => props.theme["text-secondary"]};
+  font-size: 14px;
 `;

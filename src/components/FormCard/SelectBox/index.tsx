@@ -5,7 +5,7 @@ import React, {
   useRef,
 } from "react";
 import { Container, Option } from "./styles";
-import { Animated, FlatList } from "react-native";
+import { Animated, FlatList, View } from "react-native";
 import { FormOptions, IFormCardMethodhandle } from "../../../utils/interface";
 import { TrackerContext } from "../../../screens/TrackerForms/context";
 
@@ -52,10 +52,7 @@ const SelectBox = React.forwardRef<IFormCardMethodhandle, IProps>(
     return (
       <Animated.View
         style={{
-          height: boxHeightAnim.current.interpolate({
-            inputRange: [0, 100],
-            outputRange: [0, 75],
-          }),
+          height: boxHeightAnim.current,
           overflow: "hidden",
         }}
       >
@@ -71,7 +68,9 @@ const SelectBox = React.forwardRef<IFormCardMethodhandle, IProps>(
                 }}
                 isHighlighted={value === filledData}
               >
-                <Option />
+                <View style={{ width: "100%", height: "100%" }}>
+                  <Option />
+                </View>
               </AnimatedOption>
             )}
             contentContainerStyle={{

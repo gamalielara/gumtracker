@@ -1,6 +1,6 @@
 import { styled } from "styled-components/native";
 
-export const MainGlobalContainer = styled.KeyboardAvoidingView`
+export const MainGlobalContainer = styled.View`
   width: 100%;
   height: 100%;
   background-color: ${(props) => props.theme.background};
@@ -18,5 +18,5 @@ export const VisuallyInvisible = styled.View`
 `;
 
 export const VisuallyInvisibleWithHeight = styled(VisuallyInvisible)`
-  height: 50px;
+  height: 100px;
 `;
