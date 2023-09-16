@@ -76,7 +76,7 @@ const FormCard: React.FC<IFormCard> = (props) => {
         <SelectBox
           options={options}
           ref={bottomBoxRef}
-          filledData={filledData as number}
+          filledData={filledData as string}
         />
       );
       break;

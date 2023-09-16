@@ -58,6 +58,8 @@ target 'gumtracker' do
     :flipper_configuration => flipper_config
   )
 
+  use_flipper!({'Flipper' => '0.219.0'})
+
   post_install do |installer|
     react_native_post_install(
       installer,
@@ -87,4 +89,5 @@ target 'gumtracker' do
       Pod::UI.warn e
     end
   end
+
 end

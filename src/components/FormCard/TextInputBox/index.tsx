@@ -6,6 +6,7 @@ import React, {
 } from "react";
 import {
   FilledDataBox,
+  FilledDataText,
   SubmitButton,
   SubmitTextInputContainer,
   TextInput,
@@ -57,8 +58,8 @@ const TextInputBox = React.forwardRef<IFormCardMethodhandle, IProps>(
     }));
 
     // Manually calculate the box height based on the presence of filled data
-    // One box is hardcoded to have height 50
-    const defaultBoxHeight = (filledData?.length ?? 1) * 50;
+    // One box is hardcoded to have height 75
+    const defaultBoxHeight = (filledData?.length ?? 1) * 75;
 
     return (
       <Animated.View
@@ -84,7 +85,9 @@ const TextInputBox = React.forwardRef<IFormCardMethodhandle, IProps>(
             <FlatList
               data={filledData}
               renderItem={({ item: filledDataText }) => (
-                <FilledDataBox>{filledDataText}</FilledDataBox>
+                <FilledDataBox>
+                  <FilledDataText>{filledDataText}</FilledDataText>
+                </FilledDataBox>
               )}
             />
           </ScrollView>

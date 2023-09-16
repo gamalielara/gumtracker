@@ -24,12 +24,21 @@ export const FORMS_DETAIL: IFormCard[] = [
     illustrationPosition: "right",
     type: FormCardType.SELECT,
     options: [
-      LoudlyCrying,
-      PerseveringFace,
-      SlightlyFrowning,
-      SlightlySmile,
-      CalmFace,
-      PartyFace,
+      {
+        detail: LoudlyCrying,
+        value: "1",
+      },
+      {
+        detail: PerseveringFace,
+        value: "2",
+      },
+      {
+        detail: SlightlyFrowning,
+        value: "2.5",
+      },
+      { detail: SlightlySmile, value: "3.5" },
+      { detail: CalmFace, value: "4" },
+      { detail: PartyFace, value: "5" },
     ],
   },
   {

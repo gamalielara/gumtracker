@@ -22,9 +22,9 @@ export const DarkModeColorScheme: IColorScheme = {
 };
 
 export const LightModeColorScheme: IColorScheme = {
-  primary: "#96B6C5",
+  primary: "#76a2b7",
   secondary: "#698998",
-  card: "#ADC4CE",
+  card: "#b1c3cb",
   background: "#F1F0E8", // primary color
   text: "#96B6C5",
   "text-secondary": "#445c67", // darker
@@ -57,4 +57,12 @@ export enum AsyncStorageKeys {
   NOTI_STATUS = "noti_permission_status",
   COLOR_SCHEME = "color_scheme",
   GUMJOURNALS_LOCAL_STORAGE = "gumjournals_local_storage",
+}
+
+export const ANDROID_KEYBOARD_OFFSET = -200;
+
+export enum DeviceWidthType {
+  NARROW,
+  PHONE,
+  TABLET,
 }

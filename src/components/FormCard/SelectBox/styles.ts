@@ -7,12 +7,18 @@ export const Container = styled.View`
   background-color: ${(props) => props.theme.primary};
   border-radius: 15px;
   margin-top: 10px;
+  height: 80px;
+  align-items: center;
 `;
 
-export const Option = styled.Pressable`
+export const Option = styled.Pressable<{ isHighlighted: boolean }>`
+  height: 100%;
   aspect-ratio: 1;
   padding: 5px;
-  background-color: ${(props) => props.theme.secondary};
+  background-color: ${(props) =>
+    props.isHighlighted
+      ? props.theme["text-secondary"]
+      : props.theme.secondary};
   border-radius: 10px;
   justify-content: center;
   align-items: center;
