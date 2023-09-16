@@ -3,7 +3,7 @@ import CalendarSlider from "../../components/CalendarSlider";
 import FormCard from "../../components/FormCard";
 import { FORMS_DETAIL } from "../../utils/formsConstant";
 import { FlatList, Platform } from "react-native";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { parseDate } from "../../utils/date";
 import { useSelector } from "react-redux";
 import { getGumjournalsDataByDate } from "../../module/gumjournals/selectors";
@@ -16,10 +16,16 @@ const TrackerForms = () => {
     getGumjournalsDataByDate(selectedDate),
   );
 
+  const trackerProviderValue = useMemo(() => {
+    return {
+      selectedGumjournalsData,
+      selectedDate,
+      setSelectedDate,
+    };
+  }, [selectedDate]);
+
   return (
-    <TrackerContext.Provider
-      value={{ selectedGumjournalsData, selectedDate, setSelectedDate }}
-    >
+    <TrackerContext.Provider value={trackerProviderValue}>
       <Container>
         <FormsContainer
           enabled

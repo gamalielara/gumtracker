@@ -19,7 +19,7 @@ export const SubmitTextInputContainer = styled.View`
 
 export const TextInput = styled.TextInput`
   flex: 10;
-  padding: 10px 20px;
+  padding: 10px 15px;
   background-color: ${(props) => props.theme.primary};
   border-radius: 15px;
   font-family: "Inter";
@@ -31,7 +31,7 @@ export const TextInput = styled.TextInput`
 
 export const SubmitButton = styled.TouchableOpacity`
   flex: 1;
-  padding: 10px 20px;
+  padding: 10px 15px;
   background-color: ${(props) => props.theme.primary};
   border-radius: 15px;
   justify-content: center;
@@ -40,7 +40,7 @@ export const SubmitButton = styled.TouchableOpacity`
 
 export const FilledDataBox = styled.View`
   flex: 10;
-  padding: 5px 10px;
+  padding: 10px 15px;
   background-color: ${(props) => props.theme.primary};
   border-radius: 15px;
   margin: 5px 0;

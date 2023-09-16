@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef } from "react";
+import React, { useCallback, useContext, useEffect, useRef } from "react";
 import { FlatList, ScrollView } from "react-native";
 import { DateCard, DateDayText, DateText } from "./styles";
 import { format } from "date-fns";
@@ -17,6 +17,8 @@ const DateCards: React.FC<IProps> = ({ datesInfo, selectedDate }) => {
   if (!trackerContext) return <>Loading...</>;
 
   const { setSelectedDate } = trackerContext;
+
+  const selectedDateCallback = useCallback(setSelectedDate, []);
 
   const dateCardsFlatListRef = useRef<ScrollView>(null);
 
@@ -40,7 +42,7 @@ const DateCards: React.FC<IProps> = ({ datesInfo, selectedDate }) => {
   const onDateSelected = (selectedDateInfo: Date) => () => {
     const dateInfoEpoch = new Date(selectedDateInfo).getTime();
 
-    setSelectedDate(parseDate(dateInfoEpoch));
+    selectedDateCallback(parseDate(dateInfoEpoch));
   };
 
   return (
@@ -66,4 +68,4 @@ const DateCards: React.FC<IProps> = ({ datesInfo, selectedDate }) => {
   );
 };
 
-export default React.memo(DateCards);
+export default DateCards;
