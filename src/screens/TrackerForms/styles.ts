@@ -2,19 +2,7 @@ import { styled } from "styled-components/native";
 import MainContainer from "../../components/global/MainContainer";
 import { getDeviceType } from "../../utils/getDeviceType";
 import { DeviceWidthType } from "../../utils/const";
-
-const decideContainerPadding = () => {
-  const deviceType = getDeviceType();
-
-  switch (deviceType) {
-    case DeviceWidthType.PHONE:
-      return "10px";
-    case DeviceWidthType.TABLET:
-      return "50px";
-    default:
-      return "5px";
-  }
-};
+import { BoldText } from "../../components/global/text";
 
 const decideWidth = () => {
   const deviceType = getDeviceType();
@@ -41,4 +29,18 @@ export const FormsContainer = styled.KeyboardAvoidingView`
 
 export const ScrollingFormBody = styled.ScrollView`
   flex: 1;
+`;
+
+export const SubmitButton = styled.TouchableOpacity`
+  width: 100%;
+  padding: 10px 20px;
+  background-color: ${(props) => props.theme.secondary};
+  border-radius: 20px;
+  margin: 10px 0 35px;
+`;
+
+export const SubmitText = styled(BoldText)`
+  font-size: 20px;
+  text-align: center;
+  color: white;
 `;

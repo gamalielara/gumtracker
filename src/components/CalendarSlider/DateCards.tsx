@@ -1,7 +1,7 @@
 import React, { useCallback, useContext, useEffect, useRef } from "react";
-import { FlatList, ScrollView } from "react-native";
+import { FlatList } from "react-native";
 import { DateCard, DateDayText, DateText } from "./styles";
-import { format } from "date-fns";
+import { format, getDate } from "date-fns";
 import { CalendarDateInfo, DateVariant } from "./interface";
 import { TrackerContext } from "../../screens/TrackerForms/context";
 import { parseDate } from "../../utils/date";
@@ -20,15 +20,19 @@ const DateCards: React.FC<IProps> = ({ datesInfo, selectedDate }) => {
 
   const selectedDateCallback = useCallback(setSelectedDate, []);
 
-  const dateCardsFlatListRef = useRef<ScrollView>(null);
+  const dateCardsFlatListRef = useRef<FlatList>(null);
 
   useEffect(() => {
-    dateCardsFlatListRef.current?.scrollTo({
-      x: 0,
-      y: 0,
+    const indexToScroll = datesInfo.indexOf(
+      datesInfo.filter(
+        (date) => getDate(date.date) === getDate(new Date(selectedDate)),
+      )[0],
+    );
+    dateCardsFlatListRef.current?.scrollToIndex({
+      index: indexToScroll,
       animated: true,
     });
-  }, [datesInfo[0].date]);
+  }, [selectedDate]);
 
   const decideDateCardVariant = (dateInfo: CalendarDateInfo) => {
     const dateInfoEpoch = new Date(dateInfo.date).getTime();
@@ -46,25 +50,26 @@ const DateCards: React.FC<IProps> = ({ datesInfo, selectedDate }) => {
   };
 
   return (
-    <ScrollView
+    <FlatList
       ref={dateCardsFlatListRef}
       horizontal={true}
+      data={datesInfo}
+      getItemLayout={(data, index) => ({
+        length: 30,
+        offset: 59 * index,
+        index,
+      })}
       showsHorizontalScrollIndicator={false}
-    >
-      <FlatList
-        horizontal={true}
-        data={datesInfo}
-        renderItem={({ item: dateInfo }) => (
-          <DateCard
-            variant={decideDateCardVariant(dateInfo)}
-            onPress={onDateSelected(dateInfo.date)}
-          >
-            <DateDayText>{format(dateInfo.date, "EEE")}</DateDayText>
-            <DateText>{format(dateInfo.date, "d")}</DateText>
-          </DateCard>
-        )}
-      />
-    </ScrollView>
+      renderItem={({ item: dateInfo }) => (
+        <DateCard
+          variant={decideDateCardVariant(dateInfo)}
+          onPress={onDateSelected(dateInfo.date)}
+        >
+          <DateDayText>{format(dateInfo.date, "EEE")}</DateDayText>
+          <DateText>{format(dateInfo.date, "d")}</DateText>
+        </DateCard>
+      )}
+    />
   );
 };
 
