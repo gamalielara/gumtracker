@@ -1,4 +1,10 @@
-import { Container, FormsContainer, ScrollingFormBody } from "./styles";
+import {
+  Container,
+  FormsContainer,
+  ScrollingFormBody,
+  SubmitButton,
+  SubmitText,
+} from "./styles";
 import CalendarSlider from "../../components/CalendarSlider";
 import FormCard from "../../components/FormCard";
 import { FORMS_DETAIL } from "../../utils/formsConstant";
@@ -27,11 +33,11 @@ const TrackerForms = () => {
   return (
     <TrackerContext.Provider value={trackerProviderValue}>
       <Container>
+        <CalendarSlider />
         <FormsContainer
           enabled
           behavior={Platform.OS === "ios" ? "padding" : "height"}
         >
-          <CalendarSlider />
           <ScrollingFormBody>
             <FlatList
               data={FORMS_DETAIL}
@@ -40,6 +46,9 @@ const TrackerForms = () => {
                 <FormCard {...formDetail} />
               )}
             />
+            <SubmitButton>
+              <SubmitText>Submit</SubmitText>
+            </SubmitButton>
           </ScrollingFormBody>
         </FormsContainer>
       </Container>
