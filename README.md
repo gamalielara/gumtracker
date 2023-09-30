@@ -1,7 +1,6 @@
 # gumtracker
 
-<img src="./captures/ss-1.png" width="200px"/>
-<img src="./captures/ss-2.png" width="200px"/>
+<img src="./captures/ss-1.png" width="200px"/>  <img src="./captures/ss-2.png" width="200px"/>
 
 A personal tracker app created using React Native. Written using TypeScript.
 
