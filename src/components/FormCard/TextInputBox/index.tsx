@@ -17,6 +17,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import CommonContext from "../../../module/common";
 import { SelectedTrackerData } from "../../../screens/TrackerForms/context";
+import { useSelector } from "react-redux";
+import { getBaseGumjournalsData } from "../../../module/gumjournals/selectors";
 
 interface IProps {
   textInputPlaceHolder?: string;
@@ -26,6 +28,7 @@ interface IProps {
 const TextInputBox = React.forwardRef<IFormCardMethodhandle, IProps>(
   ({ textInputPlaceHolder, filledData }, ref) => {
     const gumjournalsContext = useContext(SelectedTrackerData);
+    const gumjournalsBaseData = useSelector(getBaseGumjournalsData);
 
     const textToInput = useRef<string>();
 
