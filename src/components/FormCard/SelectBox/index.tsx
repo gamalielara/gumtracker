@@ -7,7 +7,7 @@ import React, {
 import { Container, Option } from "./styles";
 import { Animated, FlatList, View } from "react-native";
 import { FormOptions, IFormCardMethodhandle } from "../../../utils/interface";
-import { TrackerContext } from "../../../screens/TrackerForms/context";
+import { SelectedTrackerData } from "../../../screens/TrackerForms/context";
 
 interface IProps {
   options?: FormOptions[];
@@ -16,7 +16,7 @@ interface IProps {
 
 const SelectBox = React.forwardRef<IFormCardMethodhandle, IProps>(
   ({ options, filledData }, ref) => {
-    const gumjournalsContext = useContext(TrackerContext);
+    const gumjournalsContext = useContext(SelectedTrackerData);
 
     useEffect(() => {
       hideBox();

@@ -13,7 +13,7 @@ import { useMemo, useState } from "react";
 import { parseDate } from "../../utils/date";
 import { useSelector } from "react-redux";
 import { getGumjournalsDataByDate} from "../../module/gumjournals/selectors";
-import { TrackerContext } from "./context";
+import { SelectedTrackerData } from "./context";
 
 const TrackerForms = () => {
   const [selectedDate, setSelectedDate] = useState(parseDate(Date.now()));
@@ -31,7 +31,7 @@ const TrackerForms = () => {
   }, [selectedDate]);
 
   return (
-    <TrackerContext.Provider value={trackerProviderValue}>
+    <SelectedTrackerData.Provider value={trackerProviderValue}>
       <Container>
         <CalendarSlider />
         <FormsContainer
@@ -52,7 +52,7 @@ const TrackerForms = () => {
           </ScrollingFormBody>
         </FormsContainer>
       </Container>
-    </TrackerContext.Provider>
+    </SelectedTrackerData.Provider>
   );
 };
 

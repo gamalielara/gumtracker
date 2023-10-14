@@ -16,7 +16,7 @@ import { IFormCardMethodhandle } from "../../../utils/interface";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import CommonContext from "../../../module/common";
-import { TrackerContext } from "../../../screens/TrackerForms/context";
+import { SelectedTrackerData } from "../../../screens/TrackerForms/context";
 
 interface IProps {
   textInputPlaceHolder?: string;
@@ -25,7 +25,9 @@ interface IProps {
 
 const TextInputBox = React.forwardRef<IFormCardMethodhandle, IProps>(
   ({ textInputPlaceHolder, filledData }, ref) => {
-    const gumjournalsContext = useContext(TrackerContext);
+    const gumjournalsContext = useContext(SelectedTrackerData);
+
+    const textToInput = useRef<string>();
 
     useEffect(() => {
       hideBox();
@@ -72,8 +74,8 @@ const TextInputBox = React.forwardRef<IFormCardMethodhandle, IProps>(
         }}
       >
         <SubmitTextInputContainer>
-          <TextInput placeholder={textInputPlaceHolder} />
-          <SubmitButton>
+          <TextInput placeholder={textInputPlaceHolder} onChangeText={(text) => {textToInput.current = text}}/>
+          <SubmitButton onPress={() => console.log(textToInput.current)}>
             <FontAwesomeIcon
               icon={faPlus}
               color={colorScheme["text-secondary"]}

@@ -1,9 +1,9 @@
 import { FormKey } from "../formsConstant";
 import { useContext } from "react";
-import { TrackerContext } from "../../screens/TrackerForms/context";
+import { SelectedTrackerData } from "../../screens/TrackerForms/context";
 
 export default (fieldName: FormKey) => {
-  const gumjournalsContext = useContext(TrackerContext);
+  const gumjournalsContext = useContext(SelectedTrackerData);
 
   switch (fieldName) {
     case FormKey.MOOD:

@@ -1,10 +1,12 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+//@ts-nocheck
 import React, { useCallback, useContext, useEffect, useRef } from "react";
 import { FlatList } from "react-native";
 import { DateCard, DateDayText, DateText } from "./styles";
 import { format, getDate } from "date-fns";
 import { CalendarDateInfo, DateVariant } from "./interface";
-import { TrackerContext } from "../../screens/TrackerForms/context";
 import { parseDate } from "../../utils/date";
+import {SelectedTrackerData} from "../../screens/TrackerForms/context";
 
 interface IProps {
   datesInfo: CalendarDateInfo[];
@@ -12,11 +14,11 @@ interface IProps {
 }
 
 const DateCards: React.FC<IProps> = ({ datesInfo, selectedDate }) => {
-  const trackerContext = useContext(TrackerContext);
+  const selectedGumjournalsData = useContext(SelectedTrackerData);
 
-  if (!trackerContext) return <>Loading...</>;
+  if (!selectedGumjournalsData) return <>Loading...</>;
 
-  const { setSelectedDate } = trackerContext;
+  const { setSelectedDate } = selectedGumjournalsData;
 
   const selectedDateCallback = useCallback(setSelectedDate, []);
 
@@ -32,7 +34,7 @@ const DateCards: React.FC<IProps> = ({ datesInfo, selectedDate }) => {
       index: indexToScroll,
       animated: true,
     });
-  }, [selectedDate]);
+  }, []);
 
   const decideDateCardVariant = (dateInfo: CalendarDateInfo) => {
     const dateInfoEpoch = new Date(dateInfo.date).getTime();
@@ -48,6 +50,7 @@ const DateCards: React.FC<IProps> = ({ datesInfo, selectedDate }) => {
 
     selectedDateCallback(parseDate(dateInfoEpoch));
   };
+
 
   return (
     <FlatList
