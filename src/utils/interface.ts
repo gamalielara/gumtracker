@@ -1,5 +1,6 @@
 import { ScreenNames } from "./const";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { FormKey } from "./formsConstant";
 
 type HeadRow = string[];
 type HeadSubRow = string[];
@@ -83,7 +84,7 @@ export interface FormOptions {
 }
 
 export interface IFormCard {
-  formKey: number;
+  formKey: FormKey;
   title: string;
   subtitle?: string;
   SVGImage: any;

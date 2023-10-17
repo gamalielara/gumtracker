@@ -1,60 +1,40 @@
-import React, {
-  useContext,
-  useEffect,
-  useImperativeHandle,
-  useRef,
-} from "react";
+import React, { ForwardedRef, useContext, useEffect, } from "react";
 import { Container, Option } from "./styles";
-import { Animated, FlatList, View } from "react-native";
+import { FlatList, View } from "react-native";
 import { FormOptions, IFormCardMethodhandle } from "../../../utils/interface";
-import { TrackerContext } from "../../../screens/TrackerForms/context";
+import { SelectedTrackerData } from "../../../screens/TrackerForms/context";
+import Animated from "react-native-reanimated";
+import useExpandAndHideBox from "../../../utils/hook/useExpandAndHideBox";
 
 interface IProps {
   options?: FormOptions[];
   filledData: string;
 }
 
+const SELECT_BOX_DEFAULT_HEIGHT = 100
+
 const SelectBox = React.forwardRef<IFormCardMethodhandle, IProps>(
   ({ options, filledData }, ref) => {
-    const gumjournalsContext = useContext(TrackerContext);
+    const gumjournalsContext = useContext(SelectedTrackerData);
 
     useEffect(() => {
       hideBox();
     }, [gumjournalsContext?.selectedDate]);
 
+    //@ts-ignore
     const AnimatedOption = Animated.createAnimatedComponent(Option);
 
-    const boxHeightAnim = useRef(new Animated.Value(0));
-
-    const expandBox = () => {
-      Animated.timing(boxHeightAnim.current, {
-        toValue: 100,
-        useNativeDriver: false,
-      }).start();
-    };
-
-    const hideBox = () => {
-      Animated.timing(boxHeightAnim.current, {
-        toValue: 0,
-        useNativeDriver: false,
-      }).start();
-    };
-
-    useImperativeHandle(ref, () => ({
-      show: () => {
-        expandBox();
-      },
-      hide: () => {
-        hideBox();
-      },
-    }));
+    const { animatedTextInputContainerStyle, hideBox } = useExpandAndHideBox({
+      ref,
+      filledData: filledData?.length ?? 1,
+      height: SELECT_BOX_DEFAULT_HEIGHT
+    });
 
     return (
       <Animated.View
-        style={{
-          height: boxHeightAnim.current,
+        style={ [{
           overflow: "hidden",
-        }}
+        }, animatedTextInputContainerStyle] }
       >
         <Container>
           <FlatList

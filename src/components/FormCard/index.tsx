@@ -22,7 +22,7 @@ import {
   IFormCardMethodhandle,
 } from "../../utils/interface";
 import TextInputBox from "./TextInputBox";
-import { TrackerContext } from "../../screens/TrackerForms/context";
+import { SelectedTrackerData } from "../../screens/TrackerForms/context";
 import usePickFormValue from "../../utils/hook/usePickFormValue";
 
 const FormCard: React.FC<IFormCard> = (props) => {
@@ -38,13 +38,13 @@ const FormCard: React.FC<IFormCard> = (props) => {
     textInputPlaceHolder,
   } = props;
 
-  const gumjournalsContext = useContext(TrackerContext);
+  const selectedGumjournalsDataContext = useContext(SelectedTrackerData);
 
   const filledData = usePickFormValue(formKey);
 
-  if (!gumjournalsContext) return <></>;
+  if (!selectedGumjournalsDataContext) return <></>;
 
-  const { selectedGumjournalsData, selectedDate } = gumjournalsContext;
+  const { selectedGumjournalsData, selectedDate } = selectedGumjournalsDataContext;
 
   // empty object if data has not been filled
   const isDataHasBeenFilled = Object.keys(selectedGumjournalsData).length > 0;

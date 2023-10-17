@@ -12,10 +12,10 @@ import DateCards from "./DateCards";
 import { useSelector } from "react-redux";
 import { getGumjournalsDateList } from "../../module/gumjournals/selectors";
 import { CalendarDateInfo } from "./interface";
-import { TrackerContext } from "../../screens/TrackerForms/context";
+import { SelectedTrackerData } from "../../screens/TrackerForms/context";
 
 const CalendarSlider = () => {
-  const gumjournalsContext = useContext(TrackerContext);
+  const gumjournalsContext = useContext(SelectedTrackerData);
 
   if (!gumjournalsContext) return <>Loading...</>;
 
