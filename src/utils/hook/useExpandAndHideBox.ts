@@ -3,22 +3,17 @@ import { useAnimatedStyle, useSharedValue, withSpring, withTiming } from "react-
 
 interface IParams<T> {
   ref: ForwardedRef<T>,
-  filledData: number;
-  height?: number
+  height: number
 }
 
-const BOX_HEIGHT = 75;
-
 export default <T extends any>(params: IParams<T>) => {
-  const { ref, filledData, height } = params;
+  const { ref, height } = params;
 
   const boxHeightAnim = useSharedValue(0);
 
-  const defaultBoxHeight = filledData * (height ?? BOX_HEIGHT);
-
   const expandBox = useCallback(() => {
-    boxHeightAnim.value = withSpring(defaultBoxHeight);
-  }, []);
+    boxHeightAnim.value = withSpring(height);
+  }, [height]);
 
   const hideBox = useCallback(() => {
     boxHeightAnim.value = withTiming(0);

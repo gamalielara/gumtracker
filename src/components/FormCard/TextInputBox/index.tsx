@@ -16,6 +16,8 @@ interface IProps {
   filledData: string[];
 }
 
+export const DEFAULT_BOX_HEIGHT = 75;
+
 const TextInputBox = React.forwardRef<IFormCardMethodhandle, IProps>(
   ({ textInputPlaceHolder, filledData }, ref) => {
     const gumjournalsContext = useContext(SelectedTrackerData);
@@ -25,7 +27,7 @@ const TextInputBox = React.forwardRef<IFormCardMethodhandle, IProps>(
 
     const { colorScheme } = useContext(CommonContext);
 
-    const {animatedTextInputContainerStyle, hideBox} = useExpandAndHideBox({ ref, filledData: filledData?.length ?? 1 });
+    const {animatedTextInputContainerStyle, hideBox} = useExpandAndHideBox({ ref, height: DEFAULT_BOX_HEIGHT * (filledData?.length + 1 || 1) });
 
     useEffect(() => {
       hideBox();

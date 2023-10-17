@@ -10,10 +10,10 @@ export default (fieldName: FormKey) => {
       return gumjournalsContext?.selectedGumjournalsData.wellbeing?.mood;
     case FormKey.GRATITUDE_STATEMENTS:
       return gumjournalsContext?.selectedGumjournalsData.wellbeing
-        ?.highlightsOfTheDay;
+        ?.gratitudeStatements;
     case FormKey.HIGHLIGHTS_OF_THE_DAY:
       return gumjournalsContext?.selectedGumjournalsData.wellbeing
-        ?.gratitudeStatements;
+        ?.highlightsOfTheDay;
     default:
       return;
   }

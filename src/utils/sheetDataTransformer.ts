@@ -7,7 +7,7 @@ export function transformSheetDataToMapObj(
 
   const result: Record<string, any> = {};
 
-  const splittedValuesKeys = ["Gratitude Statements", "Highlight of The Day"];
+  const splittedValuesKeys = ["Gratitude Statements", "Highlights of The Day"];
 
   for (let i = 0; i < values.length; i++) {
     const date = parseDate(values[i][0]);

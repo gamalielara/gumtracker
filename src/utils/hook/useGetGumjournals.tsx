@@ -16,8 +16,10 @@ export default () => {
       );
 
       if (!localGumjournalsData) {
+        console.info("Local gumjournals data is not detected. Fetching the new one...");
         dispatch(fetchGumjournalsSpreadsheetData());
       } else {
+        console.info("Local gumjournals data is detected. Using the cached data...");
         const parsedLocalGumjournalsData = JSON.parse(
           localGumjournalsData,
         ) as TransformedSheetData;
