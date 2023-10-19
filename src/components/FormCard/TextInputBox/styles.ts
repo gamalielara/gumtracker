@@ -29,7 +29,7 @@ export const TextInput = styled.TextInput`
   height: 50px;
 `;
 
-export const SubmitButton = styled.TouchableOpacity`
+export const AddButton = styled.TouchableOpacity`
   flex: 1;
   padding: 10px 15px;
   background-color: ${(props) => props.theme.primary};

@@ -1,14 +1,16 @@
-import React, { ForwardedRef, useContext, useEffect, } from "react";
+import React, { useContext, useEffect, } from "react";
 import { Container, Option } from "./styles";
 import { FlatList, View } from "react-native";
 import { FormOptions, IFormCardMethodhandle } from "../../../utils/interface";
 import { SelectedTrackerData } from "../../../screens/TrackerForms/context";
 import Animated from "react-native-reanimated";
 import useExpandAndHideBox from "../../../utils/hook/useExpandAndHideBox";
+import { FormKey } from "../../../utils/formsConstant";
 
 interface IProps {
   options?: FormOptions[];
   filledData: string;
+  fieldKey: FormKey
 }
 
 const SELECT_BOX_DEFAULT_HEIGHT = 100

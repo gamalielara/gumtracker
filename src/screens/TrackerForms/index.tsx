@@ -12,7 +12,7 @@ import { FlatList, Platform } from "react-native";
 import { useMemo, useState } from "react";
 import { parseDate } from "../../utils/date";
 import { useSelector } from "react-redux";
-import { getGumjournalsDataByDate} from "../../module/gumjournals/selectors";
+import { getGumjournalsDataByDate } from "../../module/gumjournals/selectors";
 import { SelectedTrackerData } from "./context";
 
 const TrackerForms = () => {
@@ -22,13 +22,11 @@ const TrackerForms = () => {
     getGumjournalsDataByDate(selectedDate),
   );
   
-  const trackerProviderValue = useMemo(() => {
-    return {
-      selectedGumjournalsData,
-      selectedDate,
-      setSelectedDate,
-    };
-  }, [selectedDate]);
+  const trackerProviderValue =  useMemo(() => ({
+    selectedGumjournalsData,
+    selectedDate,
+    setSelectedDate,
+  }), [selectedGumjournalsData]);
 
   return (
     <SelectedTrackerData.Provider value={trackerProviderValue}>

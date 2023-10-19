@@ -55,6 +55,9 @@ const FormCard: React.FC<IFormCard> = (props) => {
 
   const bottomBoxRef = useRef<IFormCardMethodhandle>(null);
 
+  console.log(selectedGumjournalsData);
+
+
   useEffect(() => {
     setIsCTAButtonClicked(false);
   }, [selectedDate]);
@@ -69,6 +72,7 @@ const FormCard: React.FC<IFormCard> = (props) => {
     }
   };
 
+
   let BottomCard;
   switch (type) {
     case FormCardType.SELECT:
@@ -77,6 +81,7 @@ const FormCard: React.FC<IFormCard> = (props) => {
           options={options}
           ref={bottomBoxRef}
           filledData={filledData as string}
+          fieldKey={formKey}
         />
       );
       break;
@@ -87,6 +92,7 @@ const FormCard: React.FC<IFormCard> = (props) => {
           ref={bottomBoxRef}
           textInputPlaceHolder={textInputPlaceHolder}
           filledData={filledData as string[]}
+          fieldKey={formKey}
         />
       );
       break;
