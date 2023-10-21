@@ -23,7 +23,6 @@ const DateCards: React.FC<IProps> = ({ datesInfo}) => {
   const dateCardsFlatListRef = useRef<FlatList>(null);
 
   useEffect(() => {
-    console.log({selectedDate});
     const indexToScroll = datesInfo.indexOf(
       datesInfo.filter(
         (date) => getDate(date.date) === getDate(new Date(selectedDate)),
@@ -46,7 +45,6 @@ const DateCards: React.FC<IProps> = ({ datesInfo}) => {
 
   const onDateSelected = (selectedDateInfo: Date) => () => {
     const dateInfoEpoch = new Date(selectedDateInfo).getTime();
-    console.log("ON DATE SELECTED ");
     dispatch(setSelectedDate(parseDate(dateInfoEpoch)))
   };
 

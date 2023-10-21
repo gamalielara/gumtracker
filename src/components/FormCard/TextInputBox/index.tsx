@@ -56,7 +56,6 @@ const TextInputBox = React.forwardRef<IFormCardMethodhandle, IProps>(
 
 
     const onAddTextHandler = () => {
-      console.log(selectedGumJournalsData);
       const payload = { date: selectedDate, text: textToInput.current! }
       switch (fieldKey) {
         case FormKey.HIGHLIGHTS_OF_THE_DAY:
@@ -67,8 +66,6 @@ const TextInputBox = React.forwardRef<IFormCardMethodhandle, IProps>(
           break;
       }
     };
-
-    console.log("FILED DATA ", filledData?.length);
 
     return (
       <Animated.View style={ [ { overflow: "hidden" }, animatedTextInputContainerStyle ] }>
