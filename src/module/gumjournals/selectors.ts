@@ -14,3 +14,5 @@ export const getGumjournalsDateList = createSelector(
 export const getGumjournalsDataByDate = (date: string) => {
   return createSelector([getBaseGumjournalsData], (state) => state[date] ?? {});
 };
+
+export const getGumjournalsSelectedDate = (state: BaseState) => state.gumjournals.selectedDate;

@@ -66,3 +66,20 @@ export enum DeviceWidthType {
   PHONE,
   TABLET,
 }
+
+export const HABITS_GAMIFICATION_TO_TRACK = [
+  "drawing",
+  "journaling",
+  "language",
+  "meditate",
+  "mobdev",
+  "reading",
+  "watchingMovies",
+  "webdev",
+  "writingBlog"
+] as const;
+
+export const FITNESS_TO_TRACK = [
+  "bellyCircumferece",
+  "bodyWeight",
+] as const;

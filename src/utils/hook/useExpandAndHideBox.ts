@@ -6,7 +6,7 @@ interface IParams<T> {
   height: number
 }
 
-export default <T extends any>(params: IParams<T>) => {
+export default <T>(params: IParams<T>) => {
   const { ref, height } = params;
 
   const boxHeightAnim = useSharedValue(0);

@@ -6,5 +6,11 @@ export interface BaseState {
 
 export interface IGumjournalsState {
   isLoading: boolean;
+  selectedDate: string;
   value: TransformedSheetData;
+}
+
+export interface GumjournalsAddNewText {
+  date : string;
+  text: string;
 }

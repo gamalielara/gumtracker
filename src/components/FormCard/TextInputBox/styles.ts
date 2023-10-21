@@ -29,7 +29,7 @@ export const TextInput = styled.TextInput`
   height: 50px;
 `;
 
-export const SubmitButton = styled.TouchableOpacity`
+export const AddButton = styled.TouchableOpacity`
   flex: 1;
   padding: 10px 15px;
   background-color: ${(props) => props.theme.primary};
@@ -44,8 +44,8 @@ export const FilledDataBox = styled.View`
   background-color: ${(props) => props.theme.primary};
   border-radius: 15px;
   margin: 5px 0;
-  height: 50px;
   justify-content: center;
+  min-height: 50px;
 `;
 
 export const FilledDataText = styled(BaseText)`
