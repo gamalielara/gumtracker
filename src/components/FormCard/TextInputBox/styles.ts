@@ -44,8 +44,8 @@ export const FilledDataBox = styled.View`
   background-color: ${(props) => props.theme.primary};
   border-radius: 15px;
   margin: 5px 0;
-  height: 50px;
   justify-content: center;
+  min-height: 50px;
 `;
 
 export const FilledDataText = styled(BaseText)`

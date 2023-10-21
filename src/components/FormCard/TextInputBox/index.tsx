@@ -68,7 +68,7 @@ const TextInputBox = React.forwardRef<IFormCardMethodhandle, IProps>(
       }
     };
 
-    console.log(filledData?.length);
+    console.log("FILED DATA ", filledData?.length);
 
     return (
       <Animated.View style={ [ { overflow: "hidden" }, animatedTextInputContainerStyle ] }>
@@ -85,11 +85,14 @@ const TextInputBox = React.forwardRef<IFormCardMethodhandle, IProps>(
           <ScrollView>
             <FlatList
               data={filledData}
-              renderItem={({ item: filledDataText }) => (
-                <FilledDataBox>
-                  <FilledDataText>{filledDataText}</FilledDataText>
-                </FilledDataBox>
-              )}
+              keyExtractor={() => crypto.randomUUID()}
+              renderItem={({ item: filledDataText }) => {
+                return (
+                  <FilledDataBox>
+                    <FilledDataText>{filledDataText}</FilledDataText>
+                  </FilledDataBox>
+                )
+              }}
             />
           </ScrollView>
         )}
