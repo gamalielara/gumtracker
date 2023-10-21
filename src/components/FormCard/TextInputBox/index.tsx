@@ -2,18 +2,20 @@ import React, { useContext, useEffect, useMemo, useRef, } from "react";
 import { AddButton, FilledDataBox, FilledDataText, SubmitTextInputContainer, TextInput, } from "./styles";
 import Animated from "react-native-reanimated";
 import { FlatList, ScrollView } from "react-native";
-import { IFormCardMethodhandle, TransformedSheetData } from "../../../utils/interface";
+import { IFormCardMethodhandle } from "../../../utils/interface";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import CommonContext from "../../../module/common";
-import { SelectedTrackerData } from "../../../screens/TrackerForms/context";
 import { useDispatch, useSelector } from "react-redux";
-import { getBaseGumjournalsData } from "../../../module/gumjournals/selectors";
+import {
+  getBaseGumjournalsData,
+  getGumjournalsDataByDate,
+  getGumjournalsSelectedDate
+} from "../../../module/gumjournals/selectors";
 import useExpandAndHideBox from "../../../utils/hook/useExpandAndHideBox";
-import useDetermineGumjournalsContextKeys from "../../../utils/hook/useDetermineGumjournalsContextKeys";
 import { FormKey } from "../../../utils/formsConstant";
-import { setGumjournals } from "../../../module/gumjournals/slice";
 import { AppDispatch } from "../../../module/store";
+import { setHighlightOfTheDay } from "../../../module/gumjournals/slice";
 
 interface IProps {
   fieldKey: FormKey;
@@ -25,8 +27,10 @@ export const DEFAULT_BOX_HEIGHT = 75;
 
 const TextInputBox = React.forwardRef<IFormCardMethodhandle, IProps>(
   ({ textInputPlaceHolder, filledData, fieldKey }, ref) => {
-    const gumjournalsContext = useContext(SelectedTrackerData);
     const gumjournalsBaseData = useSelector(getBaseGumjournalsData);
+
+    const selectedDate = useSelector(getGumjournalsSelectedDate);
+    const selectedGumJournalsData = useSelector(getGumjournalsDataByDate(selectedDate));
 
     const textToInput = useRef<string>();
 
@@ -36,11 +40,11 @@ const TextInputBox = React.forwardRef<IFormCardMethodhandle, IProps>(
 
     const boxHeight = useMemo(() => DEFAULT_BOX_HEIGHT * (filledData?.length + 1 || 1), [filledData?.length])
 
-    const {animatedTextInputContainerStyle, hideBox, expandBox} = useExpandAndHideBox({ ref, height: boxHeight })
+    const { animatedTextInputContainerStyle, hideBox, expandBox } = useExpandAndHideBox({ ref, height: boxHeight });
 
     useEffect(() => {
       hideBox();
-    }, [gumjournalsContext?.selectedDate]);
+    }, [ selectedDate ]);
 
     // Update text box's height if add new data
     useEffect(() => {
@@ -50,36 +54,20 @@ const TextInputBox = React.forwardRef<IFormCardMethodhandle, IProps>(
     }, [filledData?.length]);
 
 
-    const rawKeys = useDetermineGumjournalsContextKeys(fieldKey);
-
-    const keysArr = useMemo(() => rawKeys.split(/\??\./), []);
 
     const onAddTextHandler = () => {
-      // TransformedSheetDataFields
-      const fields = gumjournalsContext?.selectedGumjournalsData ?? {} as Record<string, unknown>;
-
-
-      let tmp = fields;
-
-      keysArr.forEach((key, i) => {
-        if ( i < keysArr.length - 1) {
-          tmp[key] = tmp[key] ?? {};
-
-        } else {
-          tmp[key] =  tmp[key] ?? [];
-          tmp[key] = [...tmp[key], textToInput.current!]
-        }
-
-        tmp = tmp[key] as Record<string, unknown>;
-      });
-
-      const dataToPush = {[gumjournalsContext!.selectedDate]: fields} as TransformedSheetData;
-
-      const newGumjournalsData = {...gumjournalsBaseData, ...dataToPush};
-
-      dispatch(setGumjournals(newGumjournalsData));
+      console.log(selectedGumJournalsData);
+      switch (fieldKey) {
+        case FormKey.HIGHLIGHTS_OF_THE_DAY:
+          dispatch(setHighlightOfTheDay({ date: selectedDate, text: textToInput.current! }));
+        case FormKey.GRATITUDE_STATEMENTS:
+          dispatch()
+        default:
+          break;
+      }
     };
 
+    console.log(filledData?.length);
 
     return (
       <Animated.View style={ [ { overflow: "hidden" }, animatedTextInputContainerStyle ] }>
@@ -92,7 +80,7 @@ const TextInputBox = React.forwardRef<IFormCardMethodhandle, IProps>(
             />
           </AddButton>
         </SubmitTextInputContainer>
-        {filledData?.length && (
+        { Boolean(filledData?.length) && (
           <ScrollView>
             <FlatList
               data={filledData}

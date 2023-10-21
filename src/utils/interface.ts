@@ -1,4 +1,4 @@
-import { ScreenNames } from "./const";
+import { FITNESS_TO_TRACK, HABITS_GAMIFICATION_TO_TRACK, ScreenNames } from "./const";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { FormKey } from "./formsConstant";
 
@@ -23,21 +23,12 @@ export type TransformedSheetDataFields = {
   wellbeing: Wellbeing;
 };
 
-export interface Fitness {
-  bellyCircumference: string[];
-  bodyWeight: string[];
+export type Fitness =  {
+  [K in typeof FITNESS_TO_TRACK[number]] : string;
 }
 
-export interface HabitsGamification {
-  drawing: number;
-  journaling: number;
-  language: number;
-  meditate: number;
-  mobdev: number;
-  reading: number;
-  watchingMovies: number;
-  webdev: number;
-  writingBlog: number;
+export type HabitsGamification = {
+  [K in typeof HABITS_GAMIFICATION_TO_TRACK[number]] : string;
 }
 
 export interface Wellbeing {

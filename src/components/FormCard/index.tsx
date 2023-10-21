@@ -24,6 +24,8 @@ import {
 import TextInputBox from "./TextInputBox";
 import { SelectedTrackerData } from "../../screens/TrackerForms/context";
 import usePickFormValue from "../../utils/hook/usePickFormValue";
+import { useSelector } from "react-redux";
+import { getGumjournalsDataByDate, getGumjournalsSelectedDate } from "../../module/gumjournals/selectors";
 
 const FormCard: React.FC<IFormCard> = (props) => {
   const {
@@ -38,13 +40,11 @@ const FormCard: React.FC<IFormCard> = (props) => {
     textInputPlaceHolder,
   } = props;
 
-  const selectedGumjournalsDataContext = useContext(SelectedTrackerData);
-
   const filledData = usePickFormValue(formKey);
 
-  if (!selectedGumjournalsDataContext) return <></>;
+  const selectedDate = useSelector(getGumjournalsSelectedDate);
 
-  const { selectedGumjournalsData, selectedDate } = selectedGumjournalsDataContext;
+  const selectedGumjournalsData = useSelector(getGumjournalsDataByDate(selectedDate))
 
   // empty object if data has not been filled
   const isDataHasBeenFilled = Object.keys(selectedGumjournalsData).length > 0;
@@ -55,12 +55,9 @@ const FormCard: React.FC<IFormCard> = (props) => {
 
   const bottomBoxRef = useRef<IFormCardMethodhandle>(null);
 
-  console.log(selectedGumjournalsData);
-
-
   useEffect(() => {
     setIsCTAButtonClicked(false);
-  }, [selectedDate]);
+  }, []);
 
   const onCTAButtonClick = () => {
     setIsCTAButtonClicked((state) => !state);

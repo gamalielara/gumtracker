@@ -10,16 +10,12 @@ import { TouchableOpacity } from "react-native";
 import { addDays, format, lastDayOfMonth } from "date-fns";
 import DateCards from "./DateCards";
 import { useSelector } from "react-redux";
-import { getGumjournalsDateList } from "../../module/gumjournals/selectors";
+import { getGumjournalsDateList, getGumjournalsSelectedDate } from "../../module/gumjournals/selectors";
 import { CalendarDateInfo } from "./interface";
 import { SelectedTrackerData } from "../../screens/TrackerForms/context";
 
 const CalendarSlider = () => {
-  const gumjournalsContext = useContext(SelectedTrackerData);
-
-  if (!gumjournalsContext) return <>Loading...</>;
-
-  const { selectedDate } = gumjournalsContext;
+  const selectedDate = useSelector(getGumjournalsSelectedDate);
 
   const filledDateList = useSelector(getGumjournalsDateList);
 
@@ -98,7 +94,7 @@ const CalendarSlider = () => {
           />
         </TouchableOpacity>
       </MonthContainer>
-      <DateCards datesInfo={thisMonthDatesArr} selectedDate={selectedDate} />
+      <DateCards datesInfo={thisMonthDatesArr} />
     </Container>
   );
 };

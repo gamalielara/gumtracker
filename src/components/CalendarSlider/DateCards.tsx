@@ -7,24 +7,23 @@ import { format, getDate } from "date-fns";
 import { CalendarDateInfo, DateVariant } from "./interface";
 import { parseDate } from "../../utils/date";
 import {SelectedTrackerData} from "../../screens/TrackerForms/context";
+import { useDispatch, useSelector } from "react-redux";
+import { getGumjournalsSelectedDate } from "../../module/gumjournals/selectors";
+import { AppDispatch } from "../../module/store";
+import { setSelectedDate } from "../../module/gumjournals/slice";
 
 interface IProps {
   datesInfo: CalendarDateInfo[];
-  selectedDate: string;
 }
 
-const DateCards: React.FC<IProps> = ({ datesInfo, selectedDate }) => {
-  const selectedGumjournalsData = useContext(SelectedTrackerData);
-
-  if (!selectedGumjournalsData) return <>Loading...</>;
-
-  const { setSelectedDate } = selectedGumjournalsData;
-
-  const selectedDateCallback = useCallback(setSelectedDate, []);
+const DateCards: React.FC<IProps> = ({ datesInfo}) => {
+  const selectedDate = useSelector(getGumjournalsSelectedDate);
+  const dispatch = useDispatch<AppDispatch>();
 
   const dateCardsFlatListRef = useRef<FlatList>(null);
 
   useEffect(() => {
+    console.log({selectedDate});
     const indexToScroll = datesInfo.indexOf(
       datesInfo.filter(
         (date) => getDate(date.date) === getDate(new Date(selectedDate)),
@@ -47,10 +46,9 @@ const DateCards: React.FC<IProps> = ({ datesInfo, selectedDate }) => {
 
   const onDateSelected = (selectedDateInfo: Date) => () => {
     const dateInfoEpoch = new Date(selectedDateInfo).getTime();
-
-    selectedDateCallback(parseDate(dateInfoEpoch));
+    console.log("ON DATE SELECTED ");
+    dispatch(setSelectedDate(parseDate(dateInfoEpoch)))
   };
-
 
   return (
     <FlatList
