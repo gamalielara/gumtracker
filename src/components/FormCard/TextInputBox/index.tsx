@@ -8,14 +8,14 @@ import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import CommonContext from "../../../module/common";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  getBaseGumjournalsData,
-  getGumjournalsDataByDate,
   getGumjournalsSelectedDate
 } from "../../../module/gumjournals/selectors";
 import useExpandAndHideBox from "../../../utils/hook/useExpandAndHideBox";
 import { FormKey } from "../../../utils/formsConstant";
 import { AppDispatch } from "../../../module/store";
 import { setGratitudeStatement, setHighlightOfTheDay } from "../../../module/gumjournals/slice";
+import { faker } from '@faker-js/faker';
+
 
 interface IProps {
   fieldKey: FormKey;
@@ -25,12 +25,8 @@ interface IProps {
 
 export const DEFAULT_BOX_HEIGHT = 75;
 
-const TextInputBox = React.forwardRef<IFormCardMethodhandle, IProps>(
-  ({ textInputPlaceHolder, filledData, fieldKey }, ref) => {
-    const gumjournalsBaseData = useSelector(getBaseGumjournalsData);
-
+const TextInputBox = React.forwardRef<IFormCardMethodhandle, IProps>(({ textInputPlaceHolder, filledData, fieldKey }, ref) => {
     const selectedDate = useSelector(getGumjournalsSelectedDate);
-    const selectedGumJournalsData = useSelector(getGumjournalsDataByDate(selectedDate));
 
     const textToInput = useRef<string>();
 
@@ -60,8 +56,10 @@ const TextInputBox = React.forwardRef<IFormCardMethodhandle, IProps>(
       switch (fieldKey) {
         case FormKey.HIGHLIGHTS_OF_THE_DAY:
           dispatch(setHighlightOfTheDay(payload));
+          break;
         case FormKey.GRATITUDE_STATEMENTS:
-          dispatch(setGratitudeStatement(payload))
+          dispatch(setGratitudeStatement(payload));
+          break;
         default:
           break;
       }
@@ -82,7 +80,7 @@ const TextInputBox = React.forwardRef<IFormCardMethodhandle, IProps>(
           <ScrollView>
             <FlatList
               data={filledData}
-              keyExtractor={() => crypto.randomUUID()}
+              keyExtractor={() => faker.string.uuid()}
               renderItem={({ item: filledDataText }) => {
                 return (
                   <FilledDataBox>

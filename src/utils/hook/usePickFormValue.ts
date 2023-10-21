@@ -8,7 +8,6 @@ export default (fieldName: FormKey) => {
   const keys = useDetermineGumjournalsContextKeys(fieldName);
   const selectedGumjournalsData = useSelector(getGumjournalsDataByDate(selectedDate));
 
-  console.log("selectedGumjournalsData ", selectedGumjournalsData);
 
   const keysArr = keys.split(/\??\./);
 
