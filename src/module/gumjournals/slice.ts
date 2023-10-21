@@ -34,7 +34,7 @@ export const gumjournalsSlice = createSlice({
       const { date, text } = action.payload;
 
       state.value[date] ??= generateNewGumjournalsData() as TransformedSheetDataFields;
-      state.value[date].wellbeing.gratitudeStatements = [ ...state.value[date].wellbeing.highlightsOfTheDay, text ];
+      state.value[date].wellbeing.gratitudeStatements = [ ...state.value[date].wellbeing.gratitudeStatements, text ];
     }
 
   },

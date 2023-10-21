@@ -15,7 +15,7 @@ import {
 import useExpandAndHideBox from "../../../utils/hook/useExpandAndHideBox";
 import { FormKey } from "../../../utils/formsConstant";
 import { AppDispatch } from "../../../module/store";
-import { setHighlightOfTheDay } from "../../../module/gumjournals/slice";
+import { setGratitudeStatement, setHighlightOfTheDay } from "../../../module/gumjournals/slice";
 
 interface IProps {
   fieldKey: FormKey;
@@ -57,11 +57,12 @@ const TextInputBox = React.forwardRef<IFormCardMethodhandle, IProps>(
 
     const onAddTextHandler = () => {
       console.log(selectedGumJournalsData);
+      const payload = { date: selectedDate, text: textToInput.current! }
       switch (fieldKey) {
         case FormKey.HIGHLIGHTS_OF_THE_DAY:
-          dispatch(setHighlightOfTheDay({ date: selectedDate, text: textToInput.current! }));
+          dispatch(setHighlightOfTheDay(payload));
         case FormKey.GRATITUDE_STATEMENTS:
-          dispatch()
+          dispatch(setGratitudeStatement(payload))
         default:
           break;
       }
