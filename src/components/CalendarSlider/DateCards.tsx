@@ -6,7 +6,6 @@ import { DateCard, DateDayText, DateText } from "./styles";
 import { format, getDate } from "date-fns";
 import { CalendarDateInfo, DateVariant } from "./interface";
 import { parseDate } from "../../utils/date";
-import {SelectedTrackerData} from "../../screens/TrackerForms/context";
 import { useDispatch, useSelector } from "react-redux";
 import { getGumjournalsSelectedDate } from "../../module/gumjournals/selectors";
 import { AppDispatch } from "../../module/store";

@@ -23,12 +23,11 @@ const SelectBox = React.forwardRef<IFormCardMethodhandle, IProps>(
       hideBox();
     }, [gumjournalsContext?.selectedDate]);
 
-    //@ts-ignore
+
     const AnimatedOption = Animated.createAnimatedComponent(Option);
 
     const { animatedTextInputContainerStyle, hideBox } = useExpandAndHideBox({
       ref,
-      filledData: filledData?.length ?? 1,
       height: SELECT_BOX_DEFAULT_HEIGHT
     });
 

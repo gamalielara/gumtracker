@@ -11,7 +11,9 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.gamalielboanerges.gumtracker"
@@ -36,6 +38,9 @@
       "translucent": false,
       "hidden": false,
       "barStyle": "dark-content"
-    }
+    },
+    "plugins": [
+      "react-native-flipper-performance-plugin"
+    ]
   }
 }
