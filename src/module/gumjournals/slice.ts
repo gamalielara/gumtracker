@@ -7,6 +7,7 @@ import { generateNewGumjournalsData } from "../../utils/generateNewGumjournalsDa
 const initialState: IGumjournalsState = {
   isLoading: true,
   selectedDate: "",
+  selectedGumjournals: {} as TransformedSheetDataFields,
   value: {},
 };
 
@@ -35,8 +36,11 @@ export const gumjournalsSlice = createSlice({
 
       state.value[date] ??= generateNewGumjournalsData() as TransformedSheetDataFields;
       state.value[date].wellbeing.gratitudeStatements = [ ...state.value[date].wellbeing.gratitudeStatements, text ];
-    }
+    },
 
+    setSelectedGumjournals: (state: IGumjournalsState, action: PayloadAction<TransformedSheetDataFields>) => {
+      state.selectedGumjournals = action.payload
+    }
   },
   extraReducers: (builder) => {
     builder

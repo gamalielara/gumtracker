@@ -7,6 +7,7 @@ export interface BaseState {
 export interface IGumjournalsState {
   isLoading: boolean;
   selectedDate: string;
+  selectedGumjournals: TransformedSheetData[string];
   value: TransformedSheetData;
 }
 

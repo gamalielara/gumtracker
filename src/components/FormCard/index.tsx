@@ -22,7 +22,6 @@ import {
   IFormCardMethodhandle,
 } from "../../utils/interface";
 import TextInputBox from "./TextInputBox";
-import { SelectedTrackerData } from "../../screens/TrackerForms/context";
 import usePickFormValue from "../../utils/hook/usePickFormValue";
 import { useSelector } from "react-redux";
 import { getGumjournalsDataByDate, getGumjournalsSelectedDate } from "../../module/gumjournals/selectors";

@@ -17,12 +17,10 @@ const SELECT_BOX_DEFAULT_HEIGHT = 100
 
 const SelectBox = React.forwardRef<IFormCardMethodhandle, IProps>(
   ({ options, filledData }, ref) => {
-    const gumjournalsContext = useContext(SelectedTrackerData);
 
     useEffect(() => {
       hideBox();
-    }, [gumjournalsContext?.selectedDate]);
-
+    }, []);
 
     const AnimatedOption = Animated.createAnimatedComponent(Option);
 
@@ -33,9 +31,9 @@ const SelectBox = React.forwardRef<IFormCardMethodhandle, IProps>(
 
     return (
       <Animated.View
-        style={ [{
+        style={[{
           overflow: "hidden",
-        }, animatedTextInputContainerStyle] }
+        }, animatedTextInputContainerStyle]}
       >
         <Container>
           <FlatList
