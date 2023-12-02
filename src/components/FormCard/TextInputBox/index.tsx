@@ -23,77 +23,77 @@ interface IProps {
   filledData: string[];
 }
 
-export const DEFAULT_BOX_HEIGHT = 75;
+const DEFAULT_BOX_HEIGHT = 75;
 
 const TextInputBox = React.forwardRef<IFormCardMethodhandle, IProps>(({ textInputPlaceHolder, filledData, fieldKey }, ref) => {
-    const selectedDate = useSelector(getGumjournalsSelectedDate);
+  const selectedDate = useSelector(getGumjournalsSelectedDate);
 
-    const textToInput = useRef<string>();
+  const textToInput = useRef<string>();
 
-    const { colorScheme } = useContext(CommonContext);
+  const { colorScheme } = useContext(CommonContext);
 
-    const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useDispatch<AppDispatch>();
 
-    const boxHeight = useMemo(() => DEFAULT_BOX_HEIGHT * (filledData?.length + 1 || 1), [filledData?.length])
+  const boxHeight = useMemo(() => DEFAULT_BOX_HEIGHT * (filledData?.length + 1 || 1), [filledData?.length])
 
-    const { animatedTextInputContainerStyle, hideBox, expandBox } = useExpandAndHideBox({ ref, height: boxHeight });
+  const { animatedTextInputContainerStyle, hideBox, expandBox } = useExpandAndHideBox({ ref, height: boxHeight });
 
-    useEffect(() => {
-      hideBox();
-    }, [ selectedDate ]);
+  useEffect(() => {
+    hideBox();
+  }, [selectedDate]);
 
-    // Update text box's height if add new data
-    useEffect(() => {
-      if(boxHeight > DEFAULT_BOX_HEIGHT){
-        expandBox();
-      }
-    }, [filledData?.length]);
+  // Update text box's height if add new data
+  useEffect(() => {
+    if (boxHeight > DEFAULT_BOX_HEIGHT) {
+      expandBox();
+    }
+  }, [filledData?.length]);
 
 
 
-    const onAddTextHandler = () => {
-      const payload = { date: selectedDate, text: textToInput.current! }
-      switch (fieldKey) {
-        case FormKey.HIGHLIGHTS_OF_THE_DAY:
-          dispatch(setHighlightOfTheDay(payload));
-          break;
-        case FormKey.GRATITUDE_STATEMENTS:
-          dispatch(setGratitudeStatement(payload));
-          break;
-        default:
-          break;
-      }
-    };
+  const onAddTextHandler = () => {
+    const payload = { date: selectedDate, text: textToInput.current! }
+    switch (fieldKey) {
+      case FormKey.HIGHLIGHTS_OF_THE_DAY:
+        dispatch(setHighlightOfTheDay(payload));
+        break;
+      case FormKey.GRATITUDE_STATEMENTS:
+        dispatch(setGratitudeStatement(payload));
+        break;
+      default:
+        break;
+    }
+  };
 
-    return (
-      <Animated.View style={ [ { overflow: "hidden" }, animatedTextInputContainerStyle ] }>
-        <SubmitTextInputContainer>
-          <TextInput placeholder={textInputPlaceHolder} onChangeText={(text) => {textToInput.current = text}}/>
-          <AddButton onPress={ onAddTextHandler }>
-            <FontAwesomeIcon
-              icon={faPlus}
-              color={colorScheme["text-secondary"]}
-            />
-          </AddButton>
-        </SubmitTextInputContainer>
-        { Boolean(filledData?.length) && (
-          <ScrollView>
-            <FlatList
-              data={filledData}
-              keyExtractor={() => faker.string.uuid()}
-              renderItem={({ item: filledDataText }) => {
-                return (
-                  <FilledDataBox>
-                    <FilledDataText>{filledDataText}</FilledDataText>
-                  </FilledDataBox>
-                )
-              }}
-            />
-          </ScrollView>
-        )}
-      </Animated.View>
-    );
-  },
+  return (
+    <Animated.View style={[{ overflow: "hidden" }, animatedTextInputContainerStyle]}>
+      <SubmitTextInputContainer>
+        <TextInput placeholder={textInputPlaceHolder} onChangeText={(text) => { textToInput.current = text }} />
+        <AddButton onPress={onAddTextHandler}>
+          <FontAwesomeIcon
+            icon={faPlus}
+            color={colorScheme["text-secondary"]}
+          />
+        </AddButton>
+      </SubmitTextInputContainer>
+      {Boolean(filledData?.length) && (
+        <ScrollView>
+          <FlatList
+            data={filledData}
+            keyExtractor={() => faker.string.uuid()}
+            renderItem={({ item: filledDataText }) => {
+              return (
+                <FilledDataBox>
+                  <FilledDataText>{filledDataText}</FilledDataText>
+                </FilledDataBox>
+              )
+            }}
+          />
+        </ScrollView>
+      )}
+    </Animated.View>
+  );
+},
 );
 
 export default TextInputBox;

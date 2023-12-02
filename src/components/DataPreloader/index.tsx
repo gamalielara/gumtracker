@@ -14,8 +14,6 @@ export default ({ children }: ComponentBasePropsWithChildren) => {
   useEffect(() => {
     const today = parseDate(Date.now())
     dispatch(setSelectedDate(today))
-
-    console.log("TRACKER FORMS CALLED ", today);
   }, []);
 
   return <>{children}</>;

@@ -12,7 +12,6 @@ import DateCards from "./DateCards";
 import { useSelector } from "react-redux";
 import { getGumjournalsDateList, getGumjournalsSelectedDate } from "../../module/gumjournals/selectors";
 import { CalendarDateInfo } from "./interface";
-import { SelectedTrackerData } from "../../screens/TrackerForms/context";
 
 const CalendarSlider = () => {
   const selectedDate = useSelector(getGumjournalsSelectedDate);

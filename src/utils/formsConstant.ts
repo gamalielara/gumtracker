@@ -1,7 +1,14 @@
+import { FormCardType, IFormCard } from "./interface";
+
 import MoodCardImage from "../assets/svg/mood-card-illustration.svg";
 import HighlightOfTheDayImage from "../assets/svg/highlight-card-illustration.svg";
 import GratitudeImage from "../assets/svg/gratitude-card-illustration.svg";
-import { FormCardType, IFormCard } from "./interface";
+import BodyWeightImage from "../assets/svg/body-weight-illustration.svg";
+import BellyCircumference from "../assets/svg/belly-illustration.svg";
+import HabitsIllustration from "../assets/svg/habit-illustration.svg"
+
+
+
 import LoudlyCrying from "../assets/emoji/Loudly Crying Face.svg";
 import PerseveringFace from "../assets/emoji/Persevering Face.svg";
 import SlightlyFrowning from "../assets/emoji/Slightly Frowning Face.svg";
@@ -13,6 +20,9 @@ export enum FormKey {
   MOOD,
   HIGHLIGHTS_OF_THE_DAY,
   GRATITUDE_STATEMENTS,
+  HABITS_MULTI_SELECT,
+  BODY_WEIGHT,
+  BELLY_CIRCUMFERENCE,
 }
 
 export const FORMS_DETAIL: IFormCard[] = [
@@ -57,6 +67,44 @@ export const FORMS_DETAIL: IFormCard[] = [
     SVGImage: GratitudeImage,
     illustrationPosition: "left",
     type: FormCardType.INPUT_TEXT,
+    additionIllustrationStyle: {
+      top: "-40%",
+      right: "-20%",
+    },
+    textInputPlaceHolder: "Enter thing you are grateful for here",
+  },
+  {
+    formKey: FormKey.HABITS_MULTI_SELECT,
+    title: "Habits Tracker",
+    subtitle: "What are things you are grateful for today?",
+    SVGImage: HabitsIllustration,
+    illustrationPosition: "right",
+    type: FormCardType.SELECT,
+    textInputPlaceHolder: "Enter thing you are grateful for here",
+    additionIllustrationStyle: {
+      top: "-60%"
+    }
+  },
+  {
+    formKey: FormKey.BODY_WEIGHT,
+    title: "Body Weight",
+    subtitle: "Body measurement",
+    SVGImage: BodyWeightImage,
+    illustrationPosition: "left",
+    type: FormCardType.INPUT_NUMBER,
+    additionIllustrationStyle: {
+      top: "-50%",
+      right: "-20%",
+    },
+    textInputPlaceHolder: "Enter thing you are grateful for here",
+  },
+  {
+    formKey: FormKey.BELLY_CIRCUMFERENCE,
+    title: "Belly Circumference",
+    subtitle: "Body measurement",
+    SVGImage: BellyCircumference,
+    illustrationPosition: "left",
+    type: FormCardType.INPUT_NUMBER,
     additionIllustrationStyle: {
       top: "-40%",
       right: "-20%",

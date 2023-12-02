@@ -10,10 +10,9 @@ export default (fieldName: FormKey) => {
 
 
   const keysArr = keys.split(/\??\./);
-
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-  const selectedData: string[] = keysArr.reduce((acc, key) => acc[key] ?? {}, selectedGumjournalsData);
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  //@ts-ignore
+  const selectedData = keysArr.reduce((acc, key) => acc[key] ?? [], selectedGumjournalsData) as unknown as string[] | string;
 
   return selectedData;
 };

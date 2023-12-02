@@ -1,4 +1,6 @@
 import { styled } from "styled-components/native";
+import Animated from "react-native-reanimated";
+
 
 export const Container = styled.View`
   flex-direction: row;
@@ -11,7 +13,7 @@ export const Container = styled.View`
   align-items: center;
 `;
 
-export const Option = styled.Pressable<{ isHighlighted: boolean }>`
+const Option = styled.Pressable<{ isHighlighted: boolean }>`
   height: 100%;
   aspect-ratio: 1;
   padding: 5px;
@@ -23,3 +25,5 @@ export const Option = styled.Pressable<{ isHighlighted: boolean }>`
   justify-content: center;
   align-items: center;
 `;
+
+export const AnimatedOption = Animated.createAnimatedComponent(Option);
