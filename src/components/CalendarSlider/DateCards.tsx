@@ -1,6 +1,5 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-//@ts-nocheck
-import React, { useCallback, useContext, useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { FlatList } from "react-native";
 import { DateCard, DateDayText, DateText } from "./styles";
 import { format, getDate } from "date-fns";
@@ -15,7 +14,7 @@ interface IProps {
   datesInfo: CalendarDateInfo[];
 }
 
-const DateCards: React.FC<IProps> = ({ datesInfo}) => {
+const DateCards: React.FC<IProps> = ({ datesInfo }) => {
   const selectedDate = useSelector(getGumjournalsSelectedDate);
   const dispatch = useDispatch<AppDispatch>();
 

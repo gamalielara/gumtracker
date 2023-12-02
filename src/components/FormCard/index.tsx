@@ -13,7 +13,7 @@ import {
   faChevronDown,
   faPlus,
 } from "@fortawesome/free-solid-svg-icons";
-import { useContext, useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useMemo, useRef, useState } from "react";
 import CommonContext from "../../module/common";
 import SelectBox from "./SelectBox";
 import {
@@ -68,31 +68,31 @@ const FormCard: React.FC<IFormCard> = (props) => {
     }
   };
 
+  const BottomCard = useMemo(() => {
+    switch (type) {
+      case FormCardType.SELECT:
+        return (
+          <SelectBox
+            options={options}
+            ref={bottomBoxRef}
+            filledData={filledData as string[]}
+            fieldKey={formKey}
+          />
+        );
 
-  let BottomCard;
-  switch (type) {
-    case FormCardType.SELECT:
-      BottomCard = (
-        <SelectBox
-          options={options}
-          ref={bottomBoxRef}
-          filledData={filledData as string}
-          fieldKey={formKey}
-        />
-      );
-      break;
-    default:
-    case FormCardType.INPUT_TEXT:
-      BottomCard = (
-        <TextInputBox
-          ref={bottomBoxRef}
-          textInputPlaceHolder={textInputPlaceHolder}
-          filledData={filledData as string[]}
-          fieldKey={formKey}
-        />
-      );
-      break;
-  }
+      default:
+      case FormCardType.INPUT_TEXT:
+        return (
+          <TextInputBox
+            ref={bottomBoxRef}
+            textInputPlaceHolder={textInputPlaceHolder}
+            filledData={filledData as string[]}
+            fieldKey={formKey}
+          />
+        );
+
+    }
+  }, [])
 
   const CTAButtonIcon = isDataHasBeenFilled ? faChevronDown : faPlus;
 

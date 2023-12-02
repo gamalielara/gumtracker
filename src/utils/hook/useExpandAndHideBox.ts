@@ -19,14 +19,15 @@ export default <T>(params: IParams<T>) => {
     boxHeightAnim.value = withTiming(0);
   }, []);
 
-  useImperativeHandle(ref, () => ( {
+  useImperativeHandle(ref, () => ({
     show: expandBox,
     hide: hideBox,
-  } ));
+  }));
 
-  const animatedTextInputContainerStyle = useAnimatedStyle(() => ( {
+  const animatedTextInputContainerStyle = useAnimatedStyle(() => ({
     height: boxHeightAnim.value
-  } ));
+  }));
+
 
   return { expandBox, hideBox, animatedTextInputContainerStyle };
 }

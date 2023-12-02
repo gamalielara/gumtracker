@@ -1,8 +1,7 @@
 import React, { useContext, useEffect, } from "react";
-import { Container, Option } from "./styles";
+import { Container, AnimatedOption } from "./styles";
 import { FlatList, View } from "react-native";
 import { FormOptions, IFormCardMethodhandle } from "../../../utils/interface";
-import { SelectedTrackerData } from "../../../screens/TrackerForms/context";
 import Animated from "react-native-reanimated";
 import useExpandAndHideBox from "../../../utils/hook/useExpandAndHideBox";
 import { FormKey } from "../../../utils/formsConstant";
@@ -22,7 +21,6 @@ const SelectBox = React.forwardRef<IFormCardMethodhandle, IProps>(
       hideBox();
     }, []);
 
-    const AnimatedOption = Animated.createAnimatedComponent(Option);
 
     const { animatedTextInputContainerStyle, hideBox } = useExpandAndHideBox({
       ref,
@@ -47,7 +45,7 @@ const SelectBox = React.forwardRef<IFormCardMethodhandle, IProps>(
                 }}
                 isHighlighted={value === filledData}
               >
-                <View style={{ width: "100%", height: "100%" }}>
+                <View style={{ width: "100%", height: "100%", padding: 5 }}>
                   <Option />
                 </View>
               </AnimatedOption>
