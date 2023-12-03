@@ -59,8 +59,6 @@ export enum AsyncStorageKeys {
   GUMJOURNALS_LOCAL_STORAGE = "gumjournals_local_storage",
 }
 
-export const ANDROID_KEYBOARD_OFFSET = -200;
-
 export enum DeviceWidthType {
   NARROW,
   PHONE,

@@ -1,10 +1,12 @@
-import React, { useContext, useEffect, } from "react";
+import React, { useEffect, } from "react";
 import { Container, AnimatedOption } from "./styles";
 import { FlatList, View } from "react-native";
 import { FormOptions, IFormCardMethodhandle } from "../../../utils/interface";
 import Animated from "react-native-reanimated";
 import useExpandAndHideBox from "../../../utils/hook/useExpandAndHideBox";
 import { FormKey } from "../../../utils/formsConstant";
+import { useSelector } from "react-redux";
+import { getGumjournalsSelectedDate } from "../../../module/gumjournals/selectors";
 
 interface IProps {
   options?: FormOptions[];
@@ -17,15 +19,19 @@ const SELECT_BOX_DEFAULT_HEIGHT = 100
 const SelectBox = React.forwardRef<IFormCardMethodhandle, IProps>(
   ({ options, filledData }, ref) => {
 
+    const selectedDate = useSelector(getGumjournalsSelectedDate);
+
     useEffect(() => {
       hideBox();
-    }, []);
+    }, [selectedDate]);
 
 
     const { animatedTextInputContainerStyle, hideBox } = useExpandAndHideBox({
       ref,
       height: SELECT_BOX_DEFAULT_HEIGHT
     });
+
+    const onSelectOption = () => { }
 
     return (
       <Animated.View
@@ -38,18 +44,21 @@ const SelectBox = React.forwardRef<IFormCardMethodhandle, IProps>(
             horizontal
             data={options}
             keyExtractor={() => Math.random().toString()}
-            renderItem={({ item: { detail: Option, value } }) => (
-              <AnimatedOption
-                style={{
-                  flexBasis: "10%",
-                }}
-                isHighlighted={value === filledData}
-              >
-                <View style={{ width: "100%", height: "100%", padding: 5 }}>
-                  <Option />
-                </View>
-              </AnimatedOption>
-            )}
+            renderItem={({ item: { detail: Option, value } }) => {
+              return (
+                <AnimatedOption
+                  style={{
+                    flexBasis: "10%",
+                  }}
+                  isHighlighted={value === filledData}
+                  onClick={onSelectOption}
+                >
+                  <View style={{ width: "100%", height: "100%", padding: 5 }}>
+                    <Option />
+                  </View>
+                </AnimatedOption>
+              )
+            }}
             contentContainerStyle={{
               justifyContent: "space-between",
               width: "100%",
