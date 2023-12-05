@@ -1,14 +1,32 @@
-import { Container, FormsContainer, ScrollingFormBody, SubmitButton, SubmitText, } from "./styles";
+import {
+  Container,
+  FormsContainer,
+  ScrollingFormBody,
+  SubmitButton,
+  SubmitText,
+} from "./styles";
 import CalendarSlider from "../../components/CalendarSlider";
-import FormCard from "../../components/FormCard";
-import { FORMS_DETAIL } from "../../utils/formsConstant";
-import { FlatList, Platform } from "react-native";
-import { FormCardType } from "../../utils/interface";
+import { MOOD_OPTIONS } from "../../utils/formsConstant";
+import { Platform } from "react-native";
+import { useSelector } from "react-redux";
+import {
+  getGumjournalsDataByDate,
+  getGumjournalsSelectedDate,
+} from "../../module/gumjournals/selectors";
+import SelectFormCard from "../../components/FormCards/SelectFormCard";
+
+import MoodCardImage from "../../assets/svg/mood-card-illustration.svg";
+import HighlightOfTheDayImage from "../../assets/svg/highlight-card-illustration.svg";
+import GratitudeImage from "../../assets/svg/gratitude-card-illustration.svg";
+import BodyWeightImage from "../../assets/svg/body-weight-illustration.svg";
+import BellyCircumference from "../../assets/svg/belly-illustration.svg";
+import HabitsIllustration from "../../assets/svg/habit-illustration.svg";
 
 const TrackerForms = () => {
-  const selectForms = FORMS_DETAIL.filter(form => form.type === FormCardType.SELECT && Boolean(form.options));
-
-  const inputBasedForms = FORMS_DETAIL.filter(form => [FormCardType.INPUT_TEXT, FormCardType.INPUT_NUMBER].includes(form.type));
+  const selectedDate = useSelector(getGumjournalsSelectedDate);
+  const selectedGumjournalsData = useSelector(
+    getGumjournalsDataByDate(selectedDate)
+  );
 
   return (
     <Container>
@@ -18,12 +36,13 @@ const TrackerForms = () => {
         behavior={Platform.OS === "ios" ? "padding" : "height"}
       >
         <ScrollingFormBody>
-          <FlatList
-            data={FORMS_DETAIL}
-            keyExtractor={(formDetail) => formDetail.title}
-            renderItem={({ item: formDetail }) => (
-              <FormCard {...formDetail} />
-            )}
+          <SelectFormCard
+            filledData={selectedGumjournalsData.wellbeing?.mood ?? ""}
+            title="Mood Tracker"
+            subtitle="How are you feeling today?"
+            SVGImage={MoodCardImage}
+            illustrationPosition={"left"}
+            options={MOOD_OPTIONS}
           />
           <SubmitButton>
             <SubmitText>Submit</SubmitText>

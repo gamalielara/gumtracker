@@ -1,8 +1,9 @@
 import { styled } from "styled-components/native";
 import Animated from "react-native-reanimated";
+import commonStyles from "../commonStyles";
 
 
-export const Container = styled.View`
+const Container = styled.View`
   flex-direction: row;
   justify-content: space-between;
   padding: 10px;
@@ -18,12 +19,18 @@ const Option = styled.Pressable<{ isHighlighted: boolean }>`
   aspect-ratio: 1;
   padding: 5px;
   background-color: ${(props) =>
-    props.isHighlighted
-      ? props.theme["text-secondary"]
-      : props.theme.secondary};
+        props.isHighlighted
+            ? props.theme["text-secondary"]
+            : props.theme.secondary};
   border-radius: 10px;
   justify-content: center;
   align-items: center;
 `;
 
-export const AnimatedOption = Animated.createAnimatedComponent(Option);
+const AnimatedOption = Animated.createAnimatedComponent(Option);
+
+export default {
+    Container,
+    AnimatedOption,
+    ...commonStyles
+}

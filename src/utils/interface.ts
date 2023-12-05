@@ -23,12 +23,12 @@ export type TransformedSheetDataFields = {
   wellbeing: Wellbeing;
 };
 
-export type Fitness =  {
-  [K in typeof FITNESS_TO_TRACK[number]] : string;
+export type Fitness = {
+  [K in typeof FITNESS_TO_TRACK[number]]: string;
 }
 
 export type HabitsGamification = {
-  [K in typeof HABITS_GAMIFICATION_TO_TRACK[number]] : string;
+  [K in typeof HABITS_GAMIFICATION_TO_TRACK[number]]: string;
 }
 
 export interface Wellbeing {
@@ -75,12 +75,10 @@ export interface FormOptions {
 }
 
 export interface IFormCard {
-  formKey: FormKey;
   title: string;
   subtitle?: string;
   SVGImage: any;
   illustrationPosition: "left" | "right";
-  type: FormCardType;
   options?: FormOptions[];
   additionIllustrationStyle?: Record<string, unknown>;
   textInputPlaceHolder?: string;
