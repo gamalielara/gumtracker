@@ -59,7 +59,9 @@ const InputFormCard: React.FC<IProps> = (props) => {
   useEffect(() => {
     if (isCTAButtonClicked) {
       boxHeightAnim.value = withSpring(
-        SELECT_BOX_DEFAULT_HEIGHT * (filledData.length + 1)
+        filledData.length > 1
+          ? SELECT_BOX_DEFAULT_HEIGHT * 3
+          : SELECT_BOX_DEFAULT_HEIGHT
       );
     } else {
       boxHeightAnim.value = withTiming(0);
