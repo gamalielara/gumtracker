@@ -1,7 +1,7 @@
 import { parseDate } from "./date";
 
 export function transformSheetDataToMapObj(
-  rawValues: [string[], string[], ...Array<string[]>],
+  rawValues: [string[], string[], ...Array<string[]>]
 ) {
   const [topHeader, header, ...values] = rawValues;
 

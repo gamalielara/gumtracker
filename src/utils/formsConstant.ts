@@ -26,7 +26,7 @@ export enum FormKey {
 }
 
 // TODO: DELETE LATER
-export const FORMS_DETAIL: IFormCard[] = [
+const FORMS_DETAIL: IFormCard[] = [
   {
     formKey: FormKey.MOOD,
     title: "Add Mood",
