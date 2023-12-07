@@ -70,6 +70,37 @@ const TrackerForms = () => {
             inputType="text"
             textInputPlaceHolder="Enter thing you are grateful for here"
             subtitle="What are things you are grateful for today?"
+            additionIllustrationStyle={{
+              top: "-50%",
+            }}
+          />
+
+          <InputFormCard
+            inputType="number"
+            textInputPlaceHolder="Insert your body weight here"
+            filledData={selectedGumjournalsData.fitness?.bodyWeight ?? ""}
+            title={"Body Weight\nMeasurement (in cm)"}
+            subtitle="Only fill this on Monday"
+            SVGImage={BodyWeightImage}
+            illustrationPosition="left"
+            additionIllustrationStyle={{
+              top: "-50%",
+            }}
+          />
+
+          <InputFormCard
+            inputType="number"
+            textInputPlaceHolder="Insert your belly circumference here"
+            filledData={
+              selectedGumjournalsData.fitness?.bellyCircumferece ?? ""
+            }
+            title={"Belly Circumference\nMeasurement (in cm)"}
+            subtitle="Only fill this on Monday"
+            SVGImage={BellyCircumference}
+            illustrationPosition="left"
+            additionIllustrationStyle={{
+              top: "-50%",
+            }}
           />
 
           <SubmitButton>

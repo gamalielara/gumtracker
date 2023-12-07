@@ -16,6 +16,8 @@ import {
   faChevronDown,
   faPlus,
 } from "@fortawesome/free-solid-svg-icons";
+import { useSelector } from "react-redux";
+import { getGumjournalsSelectedDate } from "../../../module/gumjournals/selectors";
 
 interface IProps extends IFormCard {
   options: FormOptions[];
@@ -25,6 +27,8 @@ interface IProps extends IFormCard {
 const SELECT_BOX_DEFAULT_HEIGHT = 100;
 
 const SelectFormCard: React.FC<IProps> = (props) => {
+  const selectedGumjournalsData = useSelector(getGumjournalsSelectedDate);
+
   const [isCTAButtonClicked, setIsCTAButtonClicked] = useState(false);
 
   const {
@@ -46,6 +50,10 @@ const SelectFormCard: React.FC<IProps> = (props) => {
   const onCTAButtonClick = () => {
     setIsCTAButtonClicked((state) => !state);
   };
+
+  useEffect(() => {
+    setIsCTAButtonClicked(Boolean(filledData));
+  }, [selectedGumjournalsData]);
 
   useEffect(() => {
     if (isCTAButtonClicked) {

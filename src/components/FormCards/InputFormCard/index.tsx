@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { IFormCard } from "../../../utils/interface";
 import Component from "./styles";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
@@ -17,16 +17,19 @@ import Animated, {
 import { ScrollView } from "react-native-gesture-handler";
 import { FlatList, TextInput } from "react-native";
 import { faker } from "@faker-js/faker";
+import { useSelector } from "react-redux";
+import { getGumjournalsSelectedDate } from "../../../module/gumjournals/selectors";
 
 interface IProps extends IFormCard {
   inputType: "number" | "text";
   textInputPlaceHolder: string;
-  filledData: string[];
+  filledData: string[] | string;
 }
 
 const SELECT_BOX_DEFAULT_HEIGHT = 75;
 
 const InputFormCard: React.FC<IProps> = (props) => {
+  const selectedGumjournalsData = useSelector(getGumjournalsSelectedDate);
   const [isCTAButtonClicked, setIsCTAButtonClicked] = useState(false);
 
   const textToInput = useRef<string>();
@@ -42,7 +45,13 @@ const InputFormCard: React.FC<IProps> = (props) => {
     textInputPlaceHolder,
   } = props;
 
-  const CTAButtonIcon = Boolean(filledData.length) ? faChevronDown : faPlus;
+  const shouldHasMultipleData = Array.isArray(filledData);
+
+  const isFilled = shouldHasMultipleData
+    ? filledData.length > 0
+    : Boolean(filledData);
+
+  const CTAButtonIcon = isFilled ? faChevronDown : faPlus;
 
   const boxHeightAnim = useSharedValue(0);
 
@@ -58,22 +67,54 @@ const InputFormCard: React.FC<IProps> = (props) => {
 
   useEffect(() => {
     if (isCTAButtonClicked) {
+      console.log("LENGTH ", filledData.length);
+
       boxHeightAnim.value = withSpring(
-        filledData.length > 1
-          ? SELECT_BOX_DEFAULT_HEIGHT * 3
-          : SELECT_BOX_DEFAULT_HEIGHT
+        SELECT_BOX_DEFAULT_HEIGHT * Math.max(Math.min(filledData.length, 3), 2)
       );
     } else {
       boxHeightAnim.value = withTiming(0);
     }
   }, [isCTAButtonClicked]);
 
+  useEffect(() => {
+    setIsCTAButtonClicked(isFilled);
+  }, [selectedGumjournalsData]);
+
+  const filledDataBox = useMemo(() => {
+    if (!isFilled) return null;
+
+    if (shouldHasMultipleData) {
+      return (
+        <ScrollView>
+          <FlatList
+            data={filledData}
+            keyExtractor={() => faker.string.uuid()}
+            renderItem={({ item: filledDataText }) => {
+              return (
+                <Component.FilledDataBox>
+                  <Component.FilledDataText>
+                    {filledDataText}
+                  </Component.FilledDataText>
+                </Component.FilledDataBox>
+              );
+            }}
+          />
+        </ScrollView>
+      );
+    } else {
+      <Component.FilledDataBox>
+        <Component.FilledDataText>{filledData}</Component.FilledDataText>
+      </Component.FilledDataBox>;
+    }
+  }, [filledData]);
+
   return (
     <>
       <Component.Card position={illustrationPosition}>
         <Component.IllustrationImage
           position={illustrationPosition}
-          {...additionIllustrationStyle}
+          style={{ ...additionIllustrationStyle }}
         >
           <SVGImage />
         </Component.IllustrationImage>
@@ -112,23 +153,7 @@ const InputFormCard: React.FC<IProps> = (props) => {
           </Component.AddButton>
         </Component.SubmitTextInputContainer>
 
-        {Boolean(filledData?.length) && (
-          <ScrollView>
-            <FlatList
-              data={filledData}
-              keyExtractor={() => faker.string.uuid()}
-              renderItem={({ item: filledDataText }) => {
-                return (
-                  <Component.FilledDataBox>
-                    <Component.FilledDataText>
-                      {filledDataText}
-                    </Component.FilledDataText>
-                  </Component.FilledDataBox>
-                );
-              }}
-            />
-          </ScrollView>
-        )}
+        {filledDataBox}
       </Animated.View>
     </>
   );
