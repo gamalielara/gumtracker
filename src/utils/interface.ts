@@ -1,19 +1,26 @@
-import { FITNESS_TO_TRACK, HABITS_GAMIFICATION_TO_TRACK, ScreenNames } from "./const";
+import {
+  FITNESS_TO_TRACK,
+  HABITS_GAMIFICATION_TO_TRACK,
+  ScreenNames,
+} from "./const";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { FormKey } from "./formsConstant";
 
-type HeadRow = string[];
-type HeadSubRow = string[];
-type ValueRow = string[];
-type SheetDimension = "ROWS" | "COLUMNS";
+type TSheetDimension = "ROWS" | "COLUMNS";
+
+export type TRawDataHeaders =
+  | "timestamp"
+  | "date_filled"
+  | "mood"
+  | "gratitude_statements"
+  | "highlight_of_the_day"
+  | "body_weight"
+  | "belly_circumference";
 
 export interface RawSheetData {
   range: string;
-  majorDimension: SheetDimension;
-  values: [HeadRow, HeadSubRow, ...Array<ValueRow>]; // The first index is always the row key header
+  majorDimension: TSheetDimension;
+  values: [TRawDataHeaders[], ...Array<string[]>]; // The first index is always the row key header
 }
-
-export type TransformedSheetData = Record<string, TransformedSheetDataFields>;
 
 export type TransformedSheetDataFields = {
   dateFilled: string;
@@ -24,12 +31,12 @@ export type TransformedSheetDataFields = {
 };
 
 export type Fitness = {
-  [K in typeof FITNESS_TO_TRACK[number]]: string;
-}
+  [K in (typeof FITNESS_TO_TRACK)[number]]: string;
+};
 
 export type HabitsGamification = {
-  [K in typeof HABITS_GAMIFICATION_TO_TRACK[number]]: string;
-}
+  [K in (typeof HABITS_GAMIFICATION_TO_TRACK)[number]]: string;
+};
 
 export interface Wellbeing {
   gratitudeStatements: string[];
@@ -38,7 +45,7 @@ export interface Wellbeing {
 }
 
 export type ComponentBasePropsWithChildren<
-  T extends Record<string, unknown> = Record<never, never>,
+  T extends Record<string, unknown> = Record<never, never>
 > = {
   children: React.ReactNode;
 } & T;
@@ -52,7 +59,7 @@ export type TNavigation = NativeStackNavigationProp<
 >;
 
 export type NavigationScreenProps<
-  T extends Partial<Record<string, unknown>> = Record<never, never>,
+  T extends Partial<Record<string, unknown>> = Record<never, never>
 > = {
   navigation: TNavigation;
   route?: Record<string, unknown>;

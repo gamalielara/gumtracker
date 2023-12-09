@@ -1,21 +1,25 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import {useFonts} from "expo-font";
-import {useCallback} from "react";
+import { useFonts } from "expo-font";
+import { useCallback } from "react";
 import * as SplashScreen from "expo-splash-screen";
 import CommonContext from "./src/module/common";
-import {ColorScheme, ScreenNames} from "./src/utils/const";
-import {SafeAreaProvider} from "react-native-safe-area-context";
-import {NavigationContainer} from "@react-navigation/native";
+import { ColorScheme, ScreenNames } from "./src/utils/const";
+import { SafeAreaProvider } from "react-native-safe-area-context";
+import { NavigationContainer } from "@react-navigation/native";
 import Toast from "./src/components/Toast";
 import useAppPermision from "./src/utils/hook/useAppPermision";
-import {CardStyleInterpolators, createStackNavigator,} from "@react-navigation/stack";
+import {
+  CardStyleInterpolators,
+  createStackNavigator,
+} from "@react-navigation/stack";
 import useSetColorScheme from "./src/utils/hook/useSetColorScheme";
-import {ThemeProvider} from "styled-components";
-import {StatusBar} from "react-native";
+import { ThemeProvider } from "styled-components";
+import { StatusBar } from "react-native";
 import TrackerForms from "./src/screens/TrackerForms";
-import {Provider} from "react-redux";
-import {store} from "./src/module/store";
+import { Provider } from "react-redux";
+import { store } from "./src/module/store";
 import DataPreloader from "./src/components/DataPreloader";
+import useCreateLocalSQLDB from "./src/utils/hook/useCreateLocalSQLDB";
 
 export default function App() {
   useAppPermision();

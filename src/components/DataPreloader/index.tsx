@@ -5,15 +5,18 @@ import { AppDispatch } from "../../module/store";
 import { useEffect } from "react";
 import { parseDate } from "../../utils/date";
 import { setSelectedDate } from "../../module/gumjournals/slice";
+import useCreateLocalSQLDB from "../../utils/hook/useCreateLocalSQLDB";
 
 export default ({ children }: ComponentBasePropsWithChildren) => {
-  const dispatch = useDispatch<AppDispatch>()
+  const dispatch = useDispatch<AppDispatch>();
 
-  useGetGumjournals();
+  // useGetGumjournals();
+
+  useCreateLocalSQLDB();
 
   useEffect(() => {
-    const today = parseDate(Date.now())
-    dispatch(setSelectedDate(today))
+    const today = parseDate(Date.now());
+    dispatch(setSelectedDate(today));
   }, []);
 
   return <>{children}</>;

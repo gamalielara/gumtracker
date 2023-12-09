@@ -59,6 +59,11 @@ export enum AsyncStorageKeys {
   GUMJOURNALS_LOCAL_STORAGE = "gumjournals_local_storage",
 }
 
+export enum DBTableNames {
+  GUMTRACKER = "gumtracker",
+  HABITS_TRACKER = "habits_tracker",
+}
+
 export const ANDROID_KEYBOARD_OFFSET = -200;
 
 export enum DeviceWidthType {
@@ -76,10 +81,7 @@ export const HABITS_GAMIFICATION_TO_TRACK = [
   "reading",
   "watchingMovies",
   "webdev",
-  "writingBlog"
+  "writingBlog",
 ] as const;
 
-export const FITNESS_TO_TRACK = [
-  "bellyCircumferece",
-  "bodyWeight",
-] as const;
+export const FITNESS_TO_TRACK = ["bellyCircumferece", "bodyWeight"] as const;

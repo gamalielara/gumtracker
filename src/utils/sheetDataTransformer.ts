@@ -1,42 +1,20 @@
-import { parseDate } from "./date";
+import { TRawDataHeaders } from "./interface";
 
 export function transformSheetDataToMapObj(
-  rawValues: [string[], string[], ...Array<string[]>]
+  rawValues: [TRawDataHeaders[], ...Array<string[]>]
 ) {
-  const [topHeader, header, ...values] = rawValues;
+  const [header, ...values] = rawValues;
 
-  const result: Record<string, any> = {};
+  const result: Record<TRawDataHeaders, unknown>[] = [];
 
-  const splittedValuesKeys = ["Gratitude Statements", "Highlights of The Day"];
+  values.forEach((value) => {
+    const resultObj = {} as Record<TRawDataHeaders, unknown>;
 
-  for (let i = 0; i < values.length; i++) {
-    const date = parseDate(values[i][0]);
-    result[date] = {};
-
-    let topHeaderKey;
-
-    for (let j = 0; j < values[i].length; j++) {
-      if (topHeader[j]) topHeaderKey = topHeader[j];
-
-      if (!topHeaderKey) {
-        result[date][header[j]] = values[i][j];
-        continue;
-      }
-
-      result[date][topHeaderKey] = { ...(result[date][topHeaderKey] ?? {}) };
-
-      if (header[j]) {
-        let transformedValues: string | string[] = values[i][j];
-
-        if (splittedValuesKeys.includes(header[j]))
-          transformedValues = transformedValues.split("; ");
-
-        result[date][topHeaderKey][header[j]] = transformedValues;
-      } else {
-        result[date][topHeaderKey] = values[i][j];
-      }
-    }
-  }
+    value.forEach((v, i) => {
+      resultObj[header[i]] = v;
+    });
+    result.push(resultObj);
+  });
 
   return result;
 }
