@@ -16,6 +16,7 @@ interface IProps {
 
 const DateCards: React.FC<IProps> = ({ datesInfo }) => {
   const selectedDate = useSelector(getGumjournalsSelectedDate);
+
   const dispatch = useDispatch<AppDispatch>();
 
   const dateCardsFlatListRef = useRef<FlatList>(null);
@@ -23,8 +24,8 @@ const DateCards: React.FC<IProps> = ({ datesInfo }) => {
   useEffect(() => {
     const indexToScroll = datesInfo.indexOf(
       datesInfo.filter(
-        (date) => getDate(date.date) === getDate(new Date(selectedDate)),
-      )[0],
+        (date) => getDate(date.date) === getDate(new Date(selectedDate))
+      )[0]
     );
     dateCardsFlatListRef.current?.scrollToIndex({
       index: indexToScroll,
@@ -33,17 +34,17 @@ const DateCards: React.FC<IProps> = ({ datesInfo }) => {
   }, []);
 
   const decideDateCardVariant = (dateInfo: CalendarDateInfo) => {
-    const dateInfoEpoch = new Date(dateInfo.date).getTime();
-    if (parseDate(dateInfoEpoch) === selectedDate) return DateVariant.SELECTED;
-
     if (dateInfo.hasBeenFilled) return DateVariant.HAS_BEEN_FILLED;
+
+    if (format(dateInfo.date, "MM-dd-yy") === format(selectedDate, "MM-dd-yy"))
+      return DateVariant.SELECTED;
 
     return DateVariant.NONE;
   };
 
   const onDateSelected = (selectedDateInfo: Date) => () => {
     const dateInfoEpoch = new Date(selectedDateInfo).getTime();
-    dispatch(setSelectedDate(parseDate(dateInfoEpoch)))
+    dispatch(setSelectedDate(dateInfoEpoch));
   };
 
   return (

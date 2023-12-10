@@ -24,7 +24,8 @@ export enum FormKey {
   BELLY_CIRCUMFERENCE,
 }
 
-export const FORMS_DETAIL: IFormCard[] = [
+// TODO: DELETE LATER
+const FORMS_DETAIL: IFormCard[] = [
   {
     formKey: FormKey.MOOD,
     title: "Add Mood",
@@ -98,4 +99,23 @@ export const FORMS_DETAIL: IFormCard[] = [
     },
     textInputPlaceHolder: "Enter thing you are grateful for here",
   },
+];
+
+
+export const MOOD_OPTIONS = [
+  {
+    detail: LoudlyCrying,
+    value: "1",
+  },
+  {
+    detail: PerseveringFace,
+    value: "2",
+  },
+  {
+    detail: SlightlyFrowning,
+    value: "2.5",
+  },
+  { detail: SlightlySmile, value: "3.5" },
+  { detail: CalmFace, value: "4" },
+  { detail: PartyFace, value: "5" },
 ];

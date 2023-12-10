@@ -1,44 +1,37 @@
-import { FITNESS_TO_TRACK, HABITS_GAMIFICATION_TO_TRACK, ScreenNames } from "./const";
+import { ScreenNames } from "./const";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { FormKey } from "./formsConstant";
 
-type HeadRow = string[];
-type HeadSubRow = string[];
-type ValueRow = string[];
-type SheetDimension = "ROWS" | "COLUMNS";
+export type Nullable<T> = { [K in keyof T]: T[K] | null };
+
+type TSheetDimension = "ROWS" | "COLUMNS";
+
+export type TRawDataHeaders =
+  | "timestamp"
+  | "date_filled"
+  | "mood"
+  | "gratitude_statements"
+  | "highlight_of_the_day"
+  | "body_weight"
+  | "belly_circumference";
 
 export interface RawSheetData {
   range: string;
-  majorDimension: SheetDimension;
-  values: [HeadRow, HeadSubRow, ...Array<ValueRow>]; // The first index is always the row key header
+  majorDimension: TSheetDimension;
+  values: [TRawDataHeaders[], ...Array<string[]>]; // The first index is always the row key header
 }
 
-export type TransformedSheetData = Record<string, TransformedSheetDataFields>;
-
-export type TransformedSheetDataFields = {
-  dateFilled: string;
-  fitness: Fitness;
-  habits: HabitsGamification;
-  timestamp: string | number;
-  wellbeing: Wellbeing;
-};
-
-export type Fitness =  {
-  [K in typeof FITNESS_TO_TRACK[number]] : string;
-}
-
-export type HabitsGamification = {
-  [K in typeof HABITS_GAMIFICATION_TO_TRACK[number]] : string;
-}
-
-export interface Wellbeing {
-  gratitudeStatements: string[];
-  highlightsOfTheDay: string[];
-  mood: string;
+export interface GumtrackerData extends Record<TRawDataHeaders, unknown> {
+  timestamp: number;
+  date_filled: string;
+  mood: number;
+  gratitude_statements: string;
+  highlight_of_the_day: string;
+  body_weight: number;
+  belly_circumference: number;
 }
 
 export type ComponentBasePropsWithChildren<
-  T extends Record<string, unknown> = Record<never, never>,
+  T extends Record<string, unknown> = Record<never, never>
 > = {
   children: React.ReactNode;
 } & T;
@@ -52,7 +45,7 @@ export type TNavigation = NativeStackNavigationProp<
 >;
 
 export type NavigationScreenProps<
-  T extends Partial<Record<string, unknown>> = Record<never, never>,
+  T extends Partial<Record<string, unknown>> = Record<never, never>
 > = {
   navigation: TNavigation;
   route?: Record<string, unknown>;
@@ -75,12 +68,10 @@ export interface FormOptions {
 }
 
 export interface IFormCard {
-  formKey: FormKey;
   title: string;
   subtitle?: string;
   SVGImage: any;
   illustrationPosition: "left" | "right";
-  type: FormCardType;
   options?: FormOptions[];
   additionIllustrationStyle?: Record<string, unknown>;
   textInputPlaceHolder?: string;

@@ -1,7 +1,8 @@
 import { styled } from "styled-components/native";
 import { BaseText } from "../../global/text";
+import commonStyles from "../commonStyles";
 
-export const Container = styled.View`
+const Container = styled.View`
   flex-direction: row;
   justify-content: space-between;
   padding: 10px;
@@ -10,14 +11,14 @@ export const Container = styled.View`
   margin-top: 10px;
 `;
 
-export const SubmitTextInputContainer = styled.View`
+const SubmitTextInputContainer = styled.View`
   width: 100%;
   flex-direction: row;
   gap: 10px;
   margin: 10px 0;
 `;
 
-export const TextInput = styled.TextInput`
+const TextInput = styled.TextInput`
   flex: 10;
   padding: 10px 15px;
   background-color: ${(props) => props.theme.primary};
@@ -29,7 +30,7 @@ export const TextInput = styled.TextInput`
   height: 50px;
 `;
 
-export const AddButton = styled.TouchableOpacity`
+const AddButton = styled.TouchableOpacity`
   flex: 1;
   padding: 10px 15px;
   background-color: ${(props) => props.theme.primary};
@@ -38,7 +39,7 @@ export const AddButton = styled.TouchableOpacity`
   align-items: center;
 `;
 
-export const FilledDataBox = styled.View`
+const FilledDataBox = styled.View`
   flex: 10;
   padding: 10px 15px;
   background-color: ${(props) => props.theme.primary};
@@ -48,7 +49,17 @@ export const FilledDataBox = styled.View`
   min-height: 50px;
 `;
 
-export const FilledDataText = styled(BaseText)`
+const FilledDataText = styled(BaseText)`
   color: ${(props) => props.theme["text-secondary"]};
   font-size: 14px;
 `;
+
+export default {
+  ...commonStyles,
+  Container,
+  SubmitTextInputContainer,
+  TextInput,
+  AddButton,
+  FilledDataBox,
+  FilledDataText,
+};

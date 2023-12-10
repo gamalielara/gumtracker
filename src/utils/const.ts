@@ -1,3 +1,5 @@
+import { GumtrackerData, Nullable, TRawDataHeaders } from "./interface";
+
 interface IColorScheme {
   primary: string;
   secondary: string;
@@ -56,7 +58,12 @@ export enum ScreenNames {
 export enum AsyncStorageKeys {
   NOTI_STATUS = "noti_permission_status",
   COLOR_SCHEME = "color_scheme",
-  GUMJOURNALS_LOCAL_STORAGE = "gumjournals_local_storage",
+  HAVE_FETCHED_GUMJOURNALS = "have_fetched_gumjournals",
+}
+
+export enum DBTableNames {
+  GUMTRACKER = "gumtracker",
+  HABITS_TRACKER = "habits_tracker",
 }
 
 export enum DeviceWidthType {
@@ -74,10 +81,17 @@ export const HABITS_GAMIFICATION_TO_TRACK = [
   "reading",
   "watchingMovies",
   "webdev",
-  "writingBlog"
+  "writingBlog",
 ] as const;
 
-export const FITNESS_TO_TRACK = [
-  "bellyCircumferece",
-  "bodyWeight",
-] as const;
+export const FITNESS_TO_TRACK = ["bellyCircumferece", "bodyWeight"] as const;
+
+export const RAW_GUMTRACKER_DATA: Nullable<GumtrackerData> = {
+  timestamp: null,
+  date_filled: null,
+  mood: null,
+  gratitude_statements: null,
+  highlight_of_the_day: null,
+  body_weight: null,
+  belly_circumference: null,
+} as const;

@@ -1,5 +1,5 @@
 export interface CalendarDateInfo {
-  date: Date;
+  date: number;
   hasBeenFilled: boolean;
 }
 
