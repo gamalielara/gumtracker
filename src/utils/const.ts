@@ -1,3 +1,5 @@
+import { GumtrackerData, Nullable, TRawDataHeaders } from "./interface";
+
 interface IColorScheme {
   primary: string;
   secondary: string;
@@ -85,3 +87,13 @@ export const HABITS_GAMIFICATION_TO_TRACK = [
 ] as const;
 
 export const FITNESS_TO_TRACK = ["bellyCircumferece", "bodyWeight"] as const;
+
+export const RAW_GUMTRACKER_DATA: Nullable<GumtrackerData> = {
+  timestamp: null,
+  date_filled: null,
+  mood: null,
+  gratitude_statements: null,
+  highlight_of_the_day: null,
+  body_weight: null,
+  belly_circumference: null,
+} as const;

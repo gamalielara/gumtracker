@@ -21,13 +21,13 @@ import { getGumjournalsSelectedDate } from "../../../module/gumjournals/selector
 
 interface IProps extends IFormCard {
   options: FormOptions[];
-  filledData: string;
+  filledData: string | number | null;
 }
 
 const SELECT_BOX_DEFAULT_HEIGHT = 100;
 
 const SelectFormCard: React.FC<IProps> = (props) => {
-  const selectedGumjournalsData = useSelector(getGumjournalsSelectedDate);
+  const selectedDate = useSelector(getGumjournalsSelectedDate);
 
   const [isCTAButtonClicked, setIsCTAButtonClicked] = useState(false);
 
@@ -53,7 +53,7 @@ const SelectFormCard: React.FC<IProps> = (props) => {
 
   useEffect(() => {
     setIsCTAButtonClicked(Boolean(filledData));
-  }, [selectedGumjournalsData]);
+  }, [selectedDate]);
 
   useEffect(() => {
     if (isCTAButtonClicked) {

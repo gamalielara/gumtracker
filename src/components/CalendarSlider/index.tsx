@@ -9,16 +9,13 @@ import CommonContext from "../../module/common";
 import { TouchableOpacity } from "react-native";
 import { addDays, format, lastDayOfMonth } from "date-fns";
 import DateCards from "./DateCards";
-import { useSelector } from "react-redux";
-import { getGumjournalsDateList, getGumjournalsSelectedDate } from "../../module/gumjournals/selectors";
 import { CalendarDateInfo } from "./interface";
+import useGetGumtrackerLocalDatabase from "../../utils/hook/useGetGumtrackerLocalDatabase";
 
 const CalendarSlider = () => {
-  const selectedDate = useSelector(getGumjournalsSelectedDate);
-
-  const filledDateList = useSelector(getGumjournalsDateList);
-
   const [month, setMonth] = useState<string>();
+
+  const filledDateList = useGetGumtrackerLocalDatabase.getAllDates();
 
   const now = useRef<Date>(new Date());
 
@@ -58,7 +55,7 @@ const CalendarSlider = () => {
 
     do {
       const date = {
-        date: new Date(current),
+        date: new Date(current).getTime(),
         hasBeenFilled: false,
       };
       const currentDateFormatted = format(current, "yyyy-MM-dd");

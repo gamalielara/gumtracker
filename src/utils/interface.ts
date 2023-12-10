@@ -1,9 +1,7 @@
-import {
-  FITNESS_TO_TRACK,
-  HABITS_GAMIFICATION_TO_TRACK,
-  ScreenNames,
-} from "./const";
+import { ScreenNames } from "./const";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+
+export type Nullable<T> = { [K in keyof T]: T[K] | null };
 
 type TSheetDimension = "ROWS" | "COLUMNS";
 
@@ -22,26 +20,14 @@ export interface RawSheetData {
   values: [TRawDataHeaders[], ...Array<string[]>]; // The first index is always the row key header
 }
 
-export type TransformedSheetDataFields = {
-  dateFilled: string;
-  fitness: Fitness;
-  habits: HabitsGamification;
-  timestamp: string | number;
-  wellbeing: Wellbeing;
-};
-
-export type Fitness = {
-  [K in (typeof FITNESS_TO_TRACK)[number]]: string;
-};
-
-export type HabitsGamification = {
-  [K in (typeof HABITS_GAMIFICATION_TO_TRACK)[number]]: string;
-};
-
-export interface Wellbeing {
-  gratitudeStatements: string[];
-  highlightsOfTheDay: string[];
-  mood: string;
+export interface GumtrackerData extends Record<TRawDataHeaders, unknown> {
+  timestamp: number;
+  date_filled: string;
+  mood: number;
+  gratitude_statements: string;
+  highlight_of_the_day: string;
+  body_weight: number;
+  belly_circumference: number;
 }
 
 export type ComponentBasePropsWithChildren<

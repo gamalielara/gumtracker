@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import * as SQLite from "expo-sqlite";
 import { DBTableNames } from "../const";
 import ApiService from "../apiService";
@@ -9,20 +9,6 @@ export default () => {
   useEffect(() => {
     (async () => {
       const fetchedData = await ApiService.getGumjournalsData();
-
-      db.transaction((tx) => {
-        tx.executeSql(
-          `DROP TABLE IF EXISTS ${DBTableNames.GUMTRACKER};`,
-          undefined,
-          (_, result) => {
-            console.log("Table dropped successfully");
-          },
-          (_, error) => {
-            console.error("Error dropping table:", error);
-            return false;
-          }
-        );
-      });
 
       db.transaction((tx) => {
         tx.executeSql(

@@ -7,12 +7,9 @@ import {
 } from "./styles";
 import CalendarSlider from "../../components/CalendarSlider";
 import { MOOD_OPTIONS } from "../../utils/formsConstant";
-import { Platform } from "react-native";
+import { Platform, Text } from "react-native";
 import { useSelector } from "react-redux";
-import {
-  getGumjournalsDataByDate,
-  getGumjournalsSelectedDate,
-} from "../../module/gumjournals/selectors";
+import { getGumjournalsSelectedDate } from "../../module/gumjournals/selectors";
 import SelectFormCard from "../../components/FormCards/SelectFormCard";
 
 import MoodCardImage from "../../assets/svg/mood-card-illustration.svg";
@@ -20,14 +17,22 @@ import HighlightOfTheDayImage from "../../assets/svg/highlight-card-illustration
 import GratitudeImage from "../../assets/svg/gratitude-card-illustration.svg";
 import BodyWeightImage from "../../assets/svg/body-weight-illustration.svg";
 import BellyCircumference from "../../assets/svg/belly-illustration.svg";
-import HabitsIllustration from "../../assets/svg/habit-illustration.svg";
 import InputFormCard from "../../components/FormCards/InputFormCard";
+import useGetGumtrackerLocalDatabase from "../../utils/hook/useGetGumtrackerLocalDatabase";
 
 const TrackerForms = () => {
-  const selectedDate = useSelector(getGumjournalsSelectedDate);
-  const selectedGumjournalsData = useSelector(
-    getGumjournalsDataByDate(selectedDate)
-  );
+  const selectedTimeStamp = useSelector(getGumjournalsSelectedDate);
+
+  const [gumjournalsData] =
+    useGetGumtrackerLocalDatabase.getSingleData(selectedTimeStamp);
+
+  const {
+    mood,
+    gratitude_statements,
+    highlight_of_the_day,
+    body_weight,
+    belly_circumference,
+  } = gumjournalsData;
 
   return (
     <Container>
@@ -38,7 +43,7 @@ const TrackerForms = () => {
       >
         <ScrollingFormBody>
           <SelectFormCard
-            filledData={selectedGumjournalsData.wellbeing?.mood ?? ""}
+            filledData={mood}
             title="Mood Tracker"
             subtitle="How are you feeling today?"
             SVGImage={MoodCardImage}
@@ -50,9 +55,7 @@ const TrackerForms = () => {
             title="Highlights of The Day"
             SVGImage={HighlightOfTheDayImage}
             illustrationPosition={"right"}
-            filledData={
-              selectedGumjournalsData.wellbeing?.highlightsOfTheDay ?? []
-            }
+            filledData={highlight_of_the_day?.split(";") ?? []}
             inputType="text"
             textInputPlaceHolder="Enter the most memorable thing here"
             subtitle={
@@ -64,9 +67,7 @@ const TrackerForms = () => {
             title="Gratitude Statements"
             SVGImage={GratitudeImage}
             illustrationPosition={"left"}
-            filledData={
-              selectedGumjournalsData.wellbeing?.gratitudeStatements ?? []
-            }
+            filledData={gratitude_statements?.split(";") ?? []}
             inputType="text"
             textInputPlaceHolder="Enter thing you are grateful for here"
             subtitle="What are things you are grateful for today?"
@@ -78,7 +79,7 @@ const TrackerForms = () => {
           <InputFormCard
             inputType="number"
             textInputPlaceHolder="Insert your body weight here"
-            filledData={selectedGumjournalsData.fitness?.bodyWeight ?? ""}
+            filledData={body_weight ? String(body_weight) : null}
             title={"Body Weight\nMeasurement (in cm)"}
             subtitle="Only fill this on Monday"
             SVGImage={BodyWeightImage}
@@ -92,7 +93,7 @@ const TrackerForms = () => {
             inputType="number"
             textInputPlaceHolder="Insert your belly circumference here"
             filledData={
-              selectedGumjournalsData.fitness?.bellyCircumferece ?? ""
+              belly_circumference ? String(belly_circumference) : null
             }
             title={"Belly Circumference\nMeasurement (in cm)"}
             subtitle="Only fill this on Monday"

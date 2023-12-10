@@ -15,7 +15,7 @@ import Animated, {
   withTiming,
 } from "react-native-reanimated";
 import { ScrollView } from "react-native-gesture-handler";
-import { FlatList, TextInput } from "react-native";
+import { FlatList } from "react-native";
 import { faker } from "@faker-js/faker";
 import { useSelector } from "react-redux";
 import { getGumjournalsSelectedDate } from "../../../module/gumjournals/selectors";
@@ -23,13 +23,13 @@ import { getGumjournalsSelectedDate } from "../../../module/gumjournals/selector
 interface IProps extends IFormCard {
   inputType: "number" | "text";
   textInputPlaceHolder: string;
-  filledData: string[] | string;
+  filledData: string[] | string | null;
 }
 
 const SELECT_BOX_DEFAULT_HEIGHT = 75;
 
 const InputFormCard: React.FC<IProps> = (props) => {
-  const selectedGumjournalsData = useSelector(getGumjournalsSelectedDate);
+  const selectedGumjournalsDate = useSelector(getGumjournalsSelectedDate);
   const [isCTAButtonClicked, setIsCTAButtonClicked] = useState(false);
 
   const textToInput = useRef<string>();
@@ -67,7 +67,14 @@ const InputFormCard: React.FC<IProps> = (props) => {
 
   useEffect(() => {
     if (isCTAButtonClicked) {
-      const num = filledData.length > 0 ? Math.min(filledData.length, 4) : 1;
+      let num: number;
+
+      if (shouldHasMultipleData) {
+        num = filledData.length > 0 ? Math.min(filledData.length, 4) : 1;
+      } else {
+        num = 1;
+      }
+
       boxHeightAnim.value = withSpring(SELECT_BOX_DEFAULT_HEIGHT * num);
     } else {
       boxHeightAnim.value = withTiming(0);
@@ -76,7 +83,7 @@ const InputFormCard: React.FC<IProps> = (props) => {
 
   useEffect(() => {
     setIsCTAButtonClicked(isFilled);
-  }, [selectedGumjournalsData]);
+  }, [selectedGumjournalsDate]);
 
   const filledDataBox = useMemo(() => {
     if (!isFilled) return null;

@@ -1,5 +1,4 @@
 import { ComponentBasePropsWithChildren } from "../../utils/interface";
-import useGetGumjournals from "../../utils/hook/useGetGumjournals";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../module/store";
 import { useEffect } from "react";
@@ -15,8 +14,7 @@ export default ({ children }: ComponentBasePropsWithChildren) => {
   useCreateLocalSQLDB();
 
   useEffect(() => {
-    const today = parseDate(Date.now());
-    dispatch(setSelectedDate(today));
+    dispatch(setSelectedDate(Date.now()));
   }, []);
 
   return <>{children}</>;
