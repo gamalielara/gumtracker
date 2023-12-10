@@ -66,8 +66,6 @@ export enum DBTableNames {
   HABITS_TRACKER = "habits_tracker",
 }
 
-export const ANDROID_KEYBOARD_OFFSET = -200;
-
 export enum DeviceWidthType {
   NARROW,
   PHONE,

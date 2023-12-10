@@ -17,7 +17,7 @@ const Container = styled.View`
 const Option = styled.Pressable<{ isHighlighted: boolean }>`
   height: 100%;
   aspect-ratio: 1;
-  padding: 5px;
+  padding: 3px;
   background-color: ${(props) =>
         props.isHighlighted
             ? props.theme["text-secondary"]

@@ -20,7 +20,6 @@ export enum FormKey {
   MOOD,
   HIGHLIGHTS_OF_THE_DAY,
   GRATITUDE_STATEMENTS,
-  HABITS_MULTI_SELECT,
   BODY_WEIGHT,
   BELLY_CIRCUMFERENCE,
 }
@@ -75,21 +74,9 @@ const FORMS_DETAIL: IFormCard[] = [
     textInputPlaceHolder: "Enter thing you are grateful for here",
   },
   {
-    formKey: FormKey.HABITS_MULTI_SELECT,
-    title: "Habits Tracker",
-    subtitle: "What are things you are grateful for today?",
-    SVGImage: HabitsIllustration,
-    illustrationPosition: "right",
-    type: FormCardType.SELECT,
-    textInputPlaceHolder: "Enter thing you are grateful for here",
-    additionIllustrationStyle: {
-      top: "-60%"
-    }
-  },
-  {
     formKey: FormKey.BODY_WEIGHT,
     title: "Body Weight",
-    subtitle: "Body measurement",
+    subtitle: "Only available on Mondays",
     SVGImage: BodyWeightImage,
     illustrationPosition: "left",
     type: FormCardType.INPUT_NUMBER,
@@ -102,7 +89,7 @@ const FORMS_DETAIL: IFormCard[] = [
   {
     formKey: FormKey.BELLY_CIRCUMFERENCE,
     title: "Belly Circumference",
-    subtitle: "Body measurement",
+    subtitle: "Only available on Mondays",
     SVGImage: BellyCircumference,
     illustrationPosition: "left",
     type: FormCardType.INPUT_NUMBER,
