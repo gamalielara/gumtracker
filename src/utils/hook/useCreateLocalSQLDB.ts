@@ -1,14 +1,20 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import * as SQLite from "expo-sqlite";
-import { DBTableNames } from "../const";
+import { AsyncStorageKeys, DBTableNames } from "../const";
 import ApiService from "../apiService";
+import { TRawDataHeaders } from "../interface";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default () => {
   const db = SQLite.openDatabase("database.db");
 
   useEffect(() => {
     (async () => {
-      const fetchedData = await ApiService.getGumjournalsData();
+      const haveFetchedgumjournals = await AsyncStorage.getItem(
+        AsyncStorageKeys.HAVE_FETCHED_GUMJOURNALS
+      );
+
+      if (haveFetchedgumjournals === "true") return;
 
       db.transaction((tx) => {
         tx.executeSql(
@@ -25,44 +31,45 @@ export default () => {
             );
         `,
           undefined,
-          (tx, result) => {
-            console.log("DB created.");
-            console.log(result);
+          async (tx, result) => {
+            const fetchedData = await ApiService.getGumjournalsData();
+
+            await AsyncStorage.setItem(
+              AsyncStorageKeys.HAVE_FETCHED_GUMJOURNALS,
+              "true"
+            );
+
+            fetchedData?.forEach((data) => {
+              tx.executeSql(
+                `
+                      INSERT INTO ${DBTableNames.GUMTRACKER} (
+                          timestamp, date_filled, mood, highlight_of_the_day, gratitude_statements, body_weight, belly_circumference
+                      ) VALUES (?, ?, ?, ?, ?, ?, ?);
+                  `,
+                [
+                  data.timestamp,
+                  data.date_filled,
+                  data.mood,
+                  data.highlight_of_the_day,
+                  data.gratitude_statements,
+                  data.body_weight,
+                  data.belly_circumference,
+                ] as (string | number)[],
+                (_, result) => {
+                  console.log("Inserted successfully. ", result);
+                },
+                (_, error) => {
+                  console.log("Error found. ", error);
+                  return false;
+                }
+              );
+            });
           },
           (_, err) => {
             console.log(err);
             return false;
           }
         );
-      });
-
-      // Batch insert
-      fetchedData.forEach((data) => {
-        db.transaction((tx) => {
-          tx.executeSql(
-            `
-                INSERT INTO ${DBTableNames.GUMTRACKER} (
-                    timestamp, date_filled, mood, highlight_of_the_day, gratitude_statements, body_weight, belly_circumference
-                ) VALUES (?, ?, ?, ?, ?, ?, ?);
-            `,
-            [
-              data.timestamp,
-              data.date_filled,
-              data.mood,
-              data.highlight_of_the_day,
-              data.gratitude_statements,
-              data.body_weight,
-              data.belly_circumference,
-            ] as (string | number)[],
-            (_, result) => {
-              console.log("Inserted successfully. ", result);
-            },
-            (_, error) => {
-              console.log("Error found. ", error);
-              return false;
-            }
-          );
-        });
       });
     })();
   }, []);

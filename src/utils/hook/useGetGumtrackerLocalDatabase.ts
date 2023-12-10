@@ -57,8 +57,6 @@ const getAllDates = () => {
             ({ date_filled }) => date_filled
           );
 
-          console.log({ dates });
-
           setData(dates);
         },
         (_, err) => {

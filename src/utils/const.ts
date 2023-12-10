@@ -58,7 +58,7 @@ export enum ScreenNames {
 export enum AsyncStorageKeys {
   NOTI_STATUS = "noti_permission_status",
   COLOR_SCHEME = "color_scheme",
-  GUMJOURNALS_LOCAL_STORAGE = "gumjournals_local_storage",
+  HAVE_FETCHED_GUMJOURNALS = "have_fetched_gumjournals",
 }
 
 export enum DBTableNames {

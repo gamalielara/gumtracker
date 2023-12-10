@@ -70,7 +70,7 @@ const InputFormCard: React.FC<IProps> = (props) => {
       let num: number;
 
       if (shouldHasMultipleData) {
-        num = filledData.length > 0 ? Math.min(filledData.length, 4) : 1;
+        num = filledData.length > 0 ? Math.min(filledData.length + 1, 4) : 1;
       } else {
         num = 1;
       }
@@ -79,11 +79,11 @@ const InputFormCard: React.FC<IProps> = (props) => {
     } else {
       boxHeightAnim.value = withTiming(0);
     }
-  }, [isCTAButtonClicked]);
+  }, [isCTAButtonClicked, isFilled]);
 
   useEffect(() => {
     setIsCTAButtonClicked(isFilled);
-  }, [selectedGumjournalsDate]);
+  }, [selectedGumjournalsDate, isFilled]);
 
   const filledDataBox = useMemo(() => {
     if (!isFilled) return null;
