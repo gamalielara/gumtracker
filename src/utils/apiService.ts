@@ -6,6 +6,8 @@ export default class ApiService {
   static async getAuth() {}
 
   static async getGumjournalsData() {
+    console.log({ API_KEY, SPREADSHEET_ID, SPREADSHEET_NAME });
+
     const res = await fetch(
       `https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/${SPREADSHEET_NAME}?valueRenderOption=FORMATTED_VALUE&key=${API_KEY}`
     );
