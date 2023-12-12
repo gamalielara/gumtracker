@@ -6,22 +6,22 @@ import { parseDate } from "../date";
 
 const db = SQLite.openDatabase("database.db");
 
-const getSingleData = (timestamp: number) => {
-  console.log("TIME STAMP OUTSIDE EFFECT ", timestamp, parseDate(timestamp));
-
+const getSingleData = (selectedDate: string) => {
   const [data, setData] = useState<Nullable<GumtrackerData>[]>([
     { ...RAW_GUMTRACKER_DATA },
   ]);
 
   useEffect(() => {
-    console.log("TIME STAMP IN EFFECT ", timestamp, parseDate(timestamp));
-
+    console.log({ selectedDate });
     db.transaction((tx) => {
       tx.executeSql(
-        `SELECT * FROM ${DBTableNames.GUMTRACKER} WHERE strftime('%Y-%m-%d', timestamp / 1000, 'unixepoch') = strftime('%Y-%m-%d', ${timestamp} / 1000, 'unixepoch');`,
+        `SELECT * FROM ${DBTableNames.GUMTRACKER} WHERE date_filled = "${selectedDate}";`,
         undefined,
         (_, result) => {
-          console.log("RESULT FOUND: ", result.rows._array);
+          console.log(
+            `get single data on ${selectedDate}, result found: `,
+            result.rows._array
+          );
 
           setData(() => {
             if (result.rows._array.length > 0) {
@@ -37,7 +37,7 @@ const getSingleData = (timestamp: number) => {
         }
       );
     });
-  }, [timestamp]);
+  }, [selectedDate]);
 
   return data;
 };

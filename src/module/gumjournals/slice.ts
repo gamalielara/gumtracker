@@ -1,10 +1,10 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { TransformedSheetDataFields } from "../../utils/interface";
-import { GumjournalsAddNewText, IGumjournalsState } from "../interface";
-import { generateNewGumjournalsData } from "../../utils/generateNewGumjournalsData";
+import { format } from "date-fns";
+import { APP_DATE_FORMAT } from "../../utils/const";
+import { IGumjournalsState } from "../interface";
 
 const initialState: IGumjournalsState = {
-  selectedDate: 0,
+  selectedDate: format(Date.now(), APP_DATE_FORMAT),
 };
 
 export const gumjournalsSlice = createSlice({
@@ -13,7 +13,7 @@ export const gumjournalsSlice = createSlice({
   reducers: {
     setSelectedDate: (
       state: IGumjournalsState,
-      action: PayloadAction<number>
+      action: PayloadAction<string>
     ) => {
       state.selectedDate = action.payload;
     },

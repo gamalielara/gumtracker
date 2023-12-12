@@ -53,7 +53,7 @@ const SelectFormCard: React.FC<IProps> = (props) => {
 
   useEffect(() => {
     setIsCTAButtonClicked(Boolean(filledData));
-  }, [selectedDate]);
+  }, [selectedDate, filledData]);
 
   useEffect(() => {
     if (isCTAButtonClicked) {

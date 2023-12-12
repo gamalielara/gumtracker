@@ -3,10 +3,5 @@ export interface BaseState {
 }
 
 export interface IGumjournalsState {
-  selectedDate: number;
-}
-
-export interface GumjournalsAddNewText {
-  date: string;
-  text: string;
+  selectedDate: string;
 }

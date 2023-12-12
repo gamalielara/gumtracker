@@ -95,3 +95,5 @@ export const RAW_GUMTRACKER_DATA: Nullable<GumtrackerData> = {
   body_weight: null,
   belly_circumference: null,
 } as const;
+
+export const APP_DATE_FORMAT = "yyyy-MM-dd";

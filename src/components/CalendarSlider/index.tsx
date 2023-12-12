@@ -11,6 +11,7 @@ import { addDays, format, lastDayOfMonth } from "date-fns";
 import DateCards from "./DateCards";
 import { CalendarDateInfo } from "./interface";
 import useGetGumtrackerLocalDatabase from "../../utils/hook/useGetGumtrackerLocalDatabase";
+import { APP_DATE_FORMAT } from "../../utils/const";
 
 const CalendarSlider = () => {
   const [month, setMonth] = useState<string>();
@@ -55,10 +56,10 @@ const CalendarSlider = () => {
 
     do {
       const date = {
-        date: new Date(current).getTime(),
+        date: format(current, APP_DATE_FORMAT),
         hasBeenFilled: false,
       };
-      const currentDateFormatted = format(current, "yyyy-MM-dd");
+      const currentDateFormatted = format(current, APP_DATE_FORMAT);
 
       if (filledDateList.includes(currentDateFormatted))
         date.hasBeenFilled = true;

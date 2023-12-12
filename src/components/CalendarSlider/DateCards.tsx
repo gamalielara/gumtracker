@@ -23,9 +23,7 @@ const DateCards: React.FC<IProps> = ({ datesInfo }) => {
 
   useEffect(() => {
     const indexToScroll = datesInfo.indexOf(
-      datesInfo.filter(
-        (date) => getDate(date.date) === getDate(new Date(selectedDate))
-      )[0]
+      datesInfo.filter((dateInfo) => dateInfo.date === selectedDate)[0]
     );
     dateCardsFlatListRef.current?.scrollToIndex({
       index: indexToScroll,
@@ -36,23 +34,21 @@ const DateCards: React.FC<IProps> = ({ datesInfo }) => {
   const decideDateCardVariant = (dateInfo: CalendarDateInfo) => {
     if (dateInfo.hasBeenFilled) return DateVariant.HAS_BEEN_FILLED;
 
-    if (format(dateInfo.date, "MM-dd-yy") === format(selectedDate, "MM-dd-yy"))
-      return DateVariant.SELECTED;
+    if (dateInfo.date === selectedDate) return DateVariant.SELECTED;
 
     return DateVariant.NONE;
   };
 
-  const onDateSelected = (selectedDateInfo: Date) => () => {
-    const dateInfoEpoch = new Date(selectedDateInfo).getTime();
-    dispatch(setSelectedDate(dateInfoEpoch));
+  const onDateSelected = (selectedDate: string) => () => {
+    dispatch(setSelectedDate(selectedDate));
   };
 
   return (
-    <FlatList
+    <FlatList<CalendarDateInfo>
       ref={dateCardsFlatListRef}
       horizontal={true}
       data={datesInfo}
-      getItemLayout={(data, index) => ({
+      getItemLayout={(_, index) => ({
         length: 30,
         offset: 59 * index,
         index,
@@ -63,8 +59,8 @@ const DateCards: React.FC<IProps> = ({ datesInfo }) => {
           variant={decideDateCardVariant(dateInfo)}
           onPress={onDateSelected(dateInfo.date)}
         >
-          <DateDayText>{format(dateInfo.date, "EEE")}</DateDayText>
-          <DateText>{format(dateInfo.date, "d")}</DateText>
+          <DateDayText>{format(new Date(dateInfo.date), "EEE")}</DateDayText>
+          <DateText>{format(new Date(dateInfo.date), "d")}</DateText>
         </DateCard>
       )}
     />
