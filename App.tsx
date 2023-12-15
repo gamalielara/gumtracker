@@ -19,6 +19,7 @@ import TrackerForms from "./src/screens/TrackerForms";
 import { Provider } from "react-redux";
 import { store } from "./src/module/store";
 import DataPreloader from "./src/components/DataPreloader";
+import useCreateLocalSQLDB from "./src/utils/hook/useCreateLocalSQLDB";
 
 export default function App() {
   useAppPermision();
@@ -31,11 +32,13 @@ export default function App() {
     "Inter-Bold": require("./src/assets/fonts/Inter-Bold.ttf"),
   });
 
+  const hasLoadedDatabase = useCreateLocalSQLDB();
+
   const onLayoutView = useCallback(async () => {
-    if (fontsLoaded) {
+    if (fontsLoaded && hasLoadedDatabase) {
       await SplashScreen.hideAsync();
     }
-  }, [fontsLoaded]);
+  }, [fontsLoaded, hasLoadedDatabase]);
 
   if (!fontsLoaded) return;
 

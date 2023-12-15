@@ -1,15 +1,17 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import * as SQLite from "expo-sqlite";
 import { AsyncStorageKeys, DBTableNames } from "../const";
 import ApiService from "../apiService";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default () => {
+  const [state, setState] = useState(false);
   const db = SQLite.openDatabase("database.db");
 
   useEffect(() => {
     (async () => {
-      await AsyncStorage.clear();
+      // TODO should comment this
+      // await AsyncStorage.clear();
 
       const haveFetchedgumjournals = await AsyncStorage.getItem(
         AsyncStorageKeys.HAVE_FETCHED_GUMJOURNALS
@@ -83,6 +85,9 @@ export default () => {
           );
         });
       });
+      setState(true);
     })();
   }, []);
+
+  return state;
 };

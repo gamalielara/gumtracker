@@ -13,8 +13,6 @@ export default ({ children }: ComponentBasePropsWithChildren) => {
 
   // useGetGumjournals();
 
-  useCreateLocalSQLDB();
-
   useEffect(() => {
     dispatch(setSelectedDate(format(Date.now(), APP_DATE_FORMAT)));
   }, []);
