@@ -19,6 +19,7 @@ import { FlatList } from "react-native";
 import { faker } from "@faker-js/faker";
 import { useSelector } from "react-redux";
 import { getGumjournalsSelectedDate } from "../../../module/gumjournals/selectors";
+import Skeleton from "../../Skeleton";
 
 interface IProps extends IFormCard {
   inputType: "number" | "text";
@@ -112,6 +113,17 @@ const InputFormCard: React.FC<IProps> = (props) => {
       </Component.FilledDataBox>;
     }
   }, [filledData]);
+
+  return (
+    <Skeleton
+      styles={{
+        borderRadius: 10,
+        width: "100%",
+        aspectRatio: "3/1",
+        marginTop: 10,
+      }}
+    />
+  );
 
   return (
     <>
