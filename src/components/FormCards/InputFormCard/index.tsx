@@ -18,7 +18,10 @@ import { ScrollView } from "react-native-gesture-handler";
 import { FlatList } from "react-native";
 import { faker } from "@faker-js/faker";
 import { useSelector } from "react-redux";
-import { getGumjournalsSelectedDate } from "../../../module/gumjournals/selectors";
+import {
+  getGumjournalsSelectedDate,
+  getIsGumjournalsLoading,
+} from "../../../module/gumjournals/selectors";
 import Skeleton from "../../Skeleton";
 
 interface IProps extends IFormCard {
@@ -31,6 +34,8 @@ const SELECT_BOX_DEFAULT_HEIGHT = 75;
 
 const InputFormCard: React.FC<IProps> = (props) => {
   const selectedGumjournalsDate = useSelector(getGumjournalsSelectedDate);
+  const isLoadingGumjournals = useSelector(getIsGumjournalsLoading);
+
   const [isCTAButtonClicked, setIsCTAButtonClicked] = useState(false);
 
   const textToInput = useRef<string>();
@@ -114,16 +119,18 @@ const InputFormCard: React.FC<IProps> = (props) => {
     }
   }, [filledData]);
 
-  return (
-    <Skeleton
-      styles={{
-        borderRadius: 10,
-        width: "100%",
-        aspectRatio: "3/1",
-        marginTop: 10,
-      }}
-    />
-  );
+  if (isLoadingGumjournals) {
+    return (
+      <Skeleton
+        styles={{
+          borderRadius: 10,
+          width: "100%",
+          aspectRatio: "3/1",
+          marginTop: 10,
+        }}
+      />
+    );
+  }
 
   return (
     <>

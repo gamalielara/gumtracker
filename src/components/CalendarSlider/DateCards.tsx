@@ -1,5 +1,5 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { FlatList } from "react-native";
 import { DateCard, DateDayText, DateText } from "./styles";
 import { format, getDate } from "date-fns";
@@ -15,7 +15,13 @@ interface IProps {
 }
 
 const DateCards: React.FC<IProps> = ({ datesInfo }) => {
+  const [selectedDateState, setSelectedDateState] = useState<string | null>(
+    null
+  );
+
   const selectedDate = useSelector(getGumjournalsSelectedDate);
+
+  const selectedDateRef = useRef(selectedDate);
 
   const dispatch = useDispatch<AppDispatch>();
 
@@ -31,16 +37,26 @@ const DateCards: React.FC<IProps> = ({ datesInfo }) => {
     });
   }, []);
 
-  const decideDateCardVariant = (dateInfo: CalendarDateInfo) => {
-    if (dateInfo.hasBeenFilled) return DateVariant.HAS_BEEN_FILLED;
+  useEffect(() => {
+    if (!selectedDateState) return;
 
-    if (dateInfo.date === selectedDate) return DateVariant.SELECTED;
+    dispatch(setSelectedDate(selectedDateState));
+  }, [selectedDateState]);
+
+  const decideDateCardVariant = (
+    dateInfo: CalendarDateInfo,
+    dateCardIndex: number
+  ) => {
+    if (dateInfo.date === selectedDateState || dateInfo.date === selectedDate)
+      return DateVariant.SELECTED;
+
+    if (dateInfo.hasBeenFilled) return DateVariant.HAS_BEEN_FILLED;
 
     return DateVariant.NONE;
   };
 
-  const onDateSelected = (selectedDate: string) => () => {
-    dispatch(setSelectedDate(selectedDate));
+  const onDateSelected = (selectedDate: string, index: number) => () => {
+    setSelectedDateState(selectedDate);
   };
 
   return (
@@ -54,10 +70,10 @@ const DateCards: React.FC<IProps> = ({ datesInfo }) => {
         index,
       })}
       showsHorizontalScrollIndicator={false}
-      renderItem={({ item: dateInfo }) => (
+      renderItem={({ item: dateInfo, index }) => (
         <DateCard
-          variant={decideDateCardVariant(dateInfo)}
-          onPress={onDateSelected(dateInfo.date)}
+          variant={decideDateCardVariant(dateInfo, index)}
+          onPress={onDateSelected(dateInfo.date, index)}
         >
           <DateDayText>{format(new Date(dateInfo.date), "EEE")}</DateDayText>
           <DateText>{format(new Date(dateInfo.date), "d")}</DateText>

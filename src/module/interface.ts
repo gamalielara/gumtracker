@@ -4,4 +4,5 @@ export interface BaseState {
 
 export interface IGumjournalsState {
   selectedDate: string;
+  isLoading: boolean;
 }

@@ -5,6 +5,7 @@ import { IGumjournalsState } from "../interface";
 
 const initialState: IGumjournalsState = {
   selectedDate: format(Date.now(), APP_DATE_FORMAT),
+  isLoading: true,
 };
 
 export const gumjournalsSlice = createSlice({
@@ -17,9 +18,16 @@ export const gumjournalsSlice = createSlice({
     ) => {
       state.selectedDate = action.payload;
     },
+
+    setIsLoading: (
+      state: IGumjournalsState,
+      action: PayloadAction<boolean>
+    ) => {
+      state.isLoading = action.payload;
+    },
   },
 });
 
-export const { setSelectedDate } = gumjournalsSlice.actions;
+export const { setSelectedDate, setIsLoading } = gumjournalsSlice.actions;
 
 export default gumjournalsSlice.reducer;

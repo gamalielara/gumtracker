@@ -17,7 +17,11 @@ import {
   faPlus,
 } from "@fortawesome/free-solid-svg-icons";
 import { useSelector } from "react-redux";
-import { getGumjournalsSelectedDate } from "../../../module/gumjournals/selectors";
+import {
+  getGumjournalsSelectedDate,
+  getIsGumjournalsLoading,
+} from "../../../module/gumjournals/selectors";
+import Skeleton from "../../Skeleton";
 
 interface IProps extends IFormCard {
   options: FormOptions[];
@@ -28,6 +32,8 @@ const SELECT_BOX_DEFAULT_HEIGHT = 100;
 
 const SelectFormCard: React.FC<IProps> = (props) => {
   const selectedDate = useSelector(getGumjournalsSelectedDate);
+
+  const isLoadingGumjournals = useSelector(getIsGumjournalsLoading);
 
   const [isCTAButtonClicked, setIsCTAButtonClicked] = useState(false);
 
@@ -64,6 +70,19 @@ const SelectFormCard: React.FC<IProps> = (props) => {
   }, [isCTAButtonClicked]);
 
   const CTAButtonIcon = Boolean(filledData) ? faChevronDown : faPlus;
+
+  if (isLoadingGumjournals) {
+    return (
+      <Skeleton
+        styles={{
+          borderRadius: 10,
+          width: "100%",
+          aspectRatio: "3/1",
+          marginTop: 10,
+        }}
+      />
+    );
+  }
 
   return (
     <>

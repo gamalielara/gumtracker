@@ -3,6 +3,8 @@ import { DBTableNames, RAW_GUMTRACKER_DATA } from "../const";
 import { useEffect, useState } from "react";
 import { GumtrackerData, Nullable } from "../interface";
 import { parseDate } from "../date";
+import { useDispatch } from "react-redux";
+import { setIsLoading } from "../../module/gumjournals/slice";
 
 const db = SQLite.openDatabase("database.db");
 
@@ -11,8 +13,13 @@ const getSingleData = (selectedDate: string) => {
     { ...RAW_GUMTRACKER_DATA },
   ]);
 
+  const dispatch = useDispatch();
+
   useEffect(() => {
     console.log({ selectedDate });
+
+    dispatch(setIsLoading(true));
+
     db.transaction((tx) => {
       tx.executeSql(
         `SELECT * FROM ${DBTableNames.GUMTRACKER} WHERE date_filled = "${selectedDate}";`,
@@ -22,6 +29,8 @@ const getSingleData = (selectedDate: string) => {
             `get single data on ${selectedDate}, result found: `,
             result.rows._array
           );
+
+          dispatch(setIsLoading(false));
 
           setData(() => {
             if (result.rows._array.length > 0) {
@@ -33,6 +42,7 @@ const getSingleData = (selectedDate: string) => {
         },
         (_, err) => {
           console.log("ERROR ", err);
+          dispatch(setIsLoading(false));
           return false;
         }
       );
@@ -45,7 +55,11 @@ const getSingleData = (selectedDate: string) => {
 const getAllDates = () => {
   const [data, setData] = useState<string[]>([]);
 
+  const dispatch = useDispatch();
+
   useEffect(() => {
+    dispatch(setIsLoading(true));
+
     db.transaction((tx) => {
       tx.executeSql(
         `SELECT date_filled FROM ${DBTableNames.GUMTRACKER}`,
@@ -57,10 +71,15 @@ const getAllDates = () => {
             ({ date_filled }) => date_filled
           );
 
+          dispatch(setIsLoading(false));
+
           setData(dates);
         },
         (_, err) => {
           console.log(err);
+
+          dispatch(setIsLoading(false));
+
           return false;
         }
       );
