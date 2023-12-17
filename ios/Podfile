@@ -58,6 +58,8 @@ target 'gumtracker' do
     :flipper_configuration => flipper_config
   )
 
+  use_flipper!({'Flipper' => '0.212.0'}) # should match the version of your Flipper client app
+
   post_install do |installer|
     react_native_post_install(
       installer,
