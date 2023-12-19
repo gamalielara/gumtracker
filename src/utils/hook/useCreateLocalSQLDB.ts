@@ -1,12 +1,18 @@
-import { useEffect, useState } from "react";
-import * as SQLite from "expo-sqlite";
-import { AsyncStorageKeys, DBTableNames } from "../const";
-import ApiService from "../apiService";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import {useEffect, useState} from 'react';
+import {AsyncStorageKeys, DBTableNames} from '../const';
+import ApiService from '../apiService';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import SQLite from 'react-native-sqlite-storage';
 
 export default () => {
   const [state, setState] = useState(false);
-  const db = SQLite.openDatabase("database.db");
+  const db = SQLite.openDatabase(
+    {
+      name: 'database.db',
+    },
+    () => console.log('SUCCESS'),
+    (err: unknown) => console.log('useCreateDatabase: ERROR OPENING DB! ', err),
+  );
 
   useEffect(() => {
     (async () => {
@@ -14,22 +20,22 @@ export default () => {
       // await AsyncStorage.clear();
 
       const haveFetchedgumjournals = await AsyncStorage.getItem(
-        AsyncStorageKeys.HAVE_FETCHED_GUMJOURNALS
+        AsyncStorageKeys.HAVE_FETCHED_GUMJOURNALS,
       );
 
-      if (haveFetchedgumjournals === "true") return;
+      if (haveFetchedgumjournals === 'true') return;
 
       const fetchedData = await ApiService.getGumjournalsData();
 
-      db.transaction((tx) => {
+      db.transaction(tx => {
         tx.executeSql(
           `DROP TABLE ${DBTableNames.GUMTRACKER}`,
           undefined,
-          () => console.log("table dropped"),
+          () => console.log('table dropped'),
           (_, err) => {
-            console.log("Dropping table error found ", err);
+            console.log('Dropping table error found ', err);
             return false;
-          }
+          },
         );
 
         tx.executeSql(
@@ -47,19 +53,19 @@ export default () => {
         `,
           undefined,
           async (tx, result) => {
-            console.log("TABLE SUCCESSFULLY CREATED. ", result);
+            console.log('TABLE SUCCESSFULLY CREATED. ', result);
             await AsyncStorage.setItem(
               AsyncStorageKeys.HAVE_FETCHED_GUMJOURNALS,
-              "true"
+              'true',
             );
           },
           (_, err) => {
             console.log(err);
             return false;
-          }
+          },
         );
 
-        fetchedData.forEach((data) => {
+        fetchedData.forEach(data => {
           tx.executeSql(
             `
                       INSERT INTO ${DBTableNames.GUMTRACKER} (
@@ -76,12 +82,12 @@ export default () => {
               data.belly_circumference,
             ] as (string | number)[],
             (_, result) => {
-              console.log("Inserted successfully. ", result);
+              console.log('Inserted successfully. ', result);
             },
             (_, error) => {
-              console.log("Error found. ", error);
+              console.log('Error found. ', error);
               return false;
-            }
+            },
           );
         });
       });

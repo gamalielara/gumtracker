@@ -1,38 +1,37 @@
-import { useEffect, useMemo, useRef, useState } from "react";
-import { IFormCard } from "../../../utils/interface";
-import Component from "./styles";
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import {useEffect, useMemo, useRef, useState} from 'react';
+import {IFormCard} from '../../../utils/interface';
+import Component from './styles';
+import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {
   faCheck,
   faChevronDown,
   faPlus,
-} from "@fortawesome/free-solid-svg-icons";
-import { ColorScheme } from "../../../utils/const";
+} from '@fortawesome/free-solid-svg-icons';
+import {ColorScheme} from '../../../utils/const';
 import Animated, {
   useAnimatedStyle,
   useSharedValue,
   withSpring,
   withTiming,
-} from "react-native-reanimated";
-import { ScrollView } from "react-native-gesture-handler";
-import { FlatList } from "react-native";
-import { faker } from "@faker-js/faker";
-import { useSelector } from "react-redux";
+} from 'react-native-reanimated';
+import {FlatList, ScrollView} from 'react-native';
+import {faker} from '@faker-js/faker';
+import {useSelector} from 'react-redux';
 import {
   getGumjournalsSelectedDate,
   getIsGumjournalsLoading,
-} from "../../../module/gumjournals/selectors";
-import Skeleton from "../../Skeleton";
+} from '../../../module/gumjournals/selectors';
+import Skeleton from '../../Skeleton';
 
 interface IProps extends IFormCard {
-  inputType: "number" | "text";
+  inputType: 'number' | 'text';
   textInputPlaceHolder: string;
   filledData: string[] | string | null;
 }
 
 const SELECT_BOX_DEFAULT_HEIGHT = 75;
 
-const InputFormCard: React.FC<IProps> = (props) => {
+const InputFormCard: React.FC<IProps> = props => {
   const selectedGumjournalsDate = useSelector(getGumjournalsSelectedDate);
   const isLoadingGumjournals = useSelector(getIsGumjournalsLoading);
 
@@ -66,7 +65,7 @@ const InputFormCard: React.FC<IProps> = (props) => {
   }));
 
   const onCTAButtonClick = () => {
-    setIsCTAButtonClicked((state) => !state);
+    setIsCTAButtonClicked(state => !state);
   };
 
   const onAddTextHandler = () => {};
@@ -97,10 +96,10 @@ const InputFormCard: React.FC<IProps> = (props) => {
     if (shouldHasMultipleData) {
       return (
         <ScrollView>
-          <FlatList
+          <FlatListComponent
             data={filledData}
             keyExtractor={() => faker.string.uuid()}
-            renderItem={({ item: filledDataText }) => {
+            renderItem={({item: filledDataText}) => {
               return (
                 <Component.FilledDataBox>
                   <Component.FilledDataText>
@@ -124,8 +123,8 @@ const InputFormCard: React.FC<IProps> = (props) => {
       <Skeleton
         styles={{
           borderRadius: 10,
-          width: "100%",
-          aspectRatio: "3/1",
+          width: '100%',
+          aspectRatio: '3/1',
           marginTop: 10,
         }}
       />
@@ -137,8 +136,7 @@ const InputFormCard: React.FC<IProps> = (props) => {
       <Component.Card position={illustrationPosition}>
         <Component.IllustrationImage
           position={illustrationPosition}
-          style={{ ...additionIllustrationStyle }}
-        >
+          style={{...additionIllustrationStyle}}>
           <SVGImage />
         </Component.IllustrationImage>
         <Component.CardSide layoutPosition={illustrationPosition}>
@@ -151,27 +149,26 @@ const InputFormCard: React.FC<IProps> = (props) => {
           <Component.ActionButton onPress={onCTAButtonClick}>
             <FontAwesomeIcon
               icon={isCTAButtonClicked ? faCheck : CTAButtonIcon}
-              color={ColorScheme["text-secondary"]}
+              color={ColorScheme['text-secondary']}
             />
           </Component.ActionButton>
         </Component.CardSide>
       </Component.Card>
 
       <Animated.View
-        style={[{ overflow: "hidden" }, animatedTextInputContainerStyle]}
-      >
+        style={[{overflow: 'hidden'}, animatedTextInputContainerStyle]}>
         <Component.SubmitTextInputContainer>
           <Component.TextInput
             placeholder={textInputPlaceHolder}
-            onChangeText={(text) => {
+            onChangeText={text => {
               textToInput.current = text;
             }}
-            keyboardType={inputType === "number" ? "numeric" : "default"}
+            keyboardType={inputType === 'number' ? 'numeric' : 'default'}
           />
           <Component.AddButton onPress={onAddTextHandler}>
             <FontAwesomeIcon
               icon={faPlus}
-              color={ColorScheme["text-secondary"]}
+              color={ColorScheme['text-secondary']}
             />
           </Component.AddButton>
         </Component.SubmitTextInputContainer>

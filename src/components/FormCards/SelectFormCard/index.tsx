@@ -3,25 +3,24 @@ import Animated, {
   useSharedValue,
   withSpring,
   withTiming,
-} from "react-native-reanimated";
-import Component from "./styles";
-import { FormOptions, IFormCard } from "../../../utils/interface";
-import { FlatList } from "react-native-gesture-handler";
-import { View } from "react-native";
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { useEffect, useState } from "react";
-import { ColorScheme } from "../../../utils/const";
+} from 'react-native-reanimated';
+import Component from './styles';
+import {FormOptions, IFormCard} from '../../../utils/interface';
+import {FlatList, View} from 'react-native';
+import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
+import {useEffect, useState} from 'react';
+import {ColorScheme} from '../../../utils/const';
 import {
   faCheck,
   faChevronDown,
   faPlus,
-} from "@fortawesome/free-solid-svg-icons";
-import { useSelector } from "react-redux";
+} from '@fortawesome/free-solid-svg-icons';
+import {useSelector} from 'react-redux';
 import {
   getGumjournalsSelectedDate,
   getIsGumjournalsLoading,
-} from "../../../module/gumjournals/selectors";
-import Skeleton from "../../Skeleton";
+} from '../../../module/gumjournals/selectors';
+import Skeleton from '../../Skeleton';
 
 interface IProps extends IFormCard {
   options: FormOptions[];
@@ -30,7 +29,7 @@ interface IProps extends IFormCard {
 
 const SELECT_BOX_DEFAULT_HEIGHT = 100;
 
-const SelectFormCard: React.FC<IProps> = (props) => {
+const SelectFormCard: React.FC<IProps> = props => {
   const selectedDate = useSelector(getGumjournalsSelectedDate);
 
   const isLoadingGumjournals = useSelector(getIsGumjournalsLoading);
@@ -54,7 +53,7 @@ const SelectFormCard: React.FC<IProps> = (props) => {
   }));
 
   const onCTAButtonClick = () => {
-    setIsCTAButtonClicked((state) => !state);
+    setIsCTAButtonClicked(state => !state);
   };
 
   useEffect(() => {
@@ -76,21 +75,22 @@ const SelectFormCard: React.FC<IProps> = (props) => {
       <Skeleton
         styles={{
           borderRadius: 10,
-          width: "100%",
-          aspectRatio: "3/1",
+          width: '100%',
+          aspectRatio: '3/1',
           marginTop: 10,
         }}
       />
     );
   }
 
+  console.log('FILLED DATA ', SVGImage);
+
   return (
     <>
       <Component.Card position={illustrationPosition}>
         <Component.IllustrationImage
           position={illustrationPosition}
-          {...additionIllustrationStyle}
-        >
+          {...additionIllustrationStyle}>
           <SVGImage />
         </Component.IllustrationImage>
         <Component.CardSide layoutPosition={illustrationPosition}>
@@ -103,7 +103,7 @@ const SelectFormCard: React.FC<IProps> = (props) => {
           <Component.ActionButton onPress={onCTAButtonClick}>
             <FontAwesomeIcon
               icon={isCTAButtonClicked ? faCheck : CTAButtonIcon}
-              color={ColorScheme["text-secondary"]}
+              color={ColorScheme['text-secondary']}
             />
           </Component.ActionButton>
         </Component.CardSide>
@@ -111,31 +111,29 @@ const SelectFormCard: React.FC<IProps> = (props) => {
       <Animated.View
         style={[
           {
-            overflow: "hidden",
+            overflow: 'hidden',
           },
           animatedTextInputContainerStyle,
-        ]}
-      >
+        ]}>
         <Component.Container>
           <FlatList
             horizontal
             data={options}
             keyExtractor={() => Math.random().toString()}
-            renderItem={({ item: { detail: Option, value } }) => (
+            renderItem={({item: {detail: Option, value}}) => (
               <Component.AnimatedOption
                 style={{
-                  flexBasis: "10%",
+                  flexBasis: '10%',
                 }}
-                isHighlighted={value === filledData}
-              >
-                <View style={{ width: "100%", height: "100%", padding: 5 }}>
+                isHighlighted={value === filledData}>
+                <View style={{width: '100%', height: '100%', padding: 5}}>
                   <Option />
                 </View>
               </Component.AnimatedOption>
             )}
             contentContainerStyle={{
-              justifyContent: "space-between",
-              width: "100%",
+              justifyContent: 'space-between',
+              width: '100%',
             }}
           />
         </Component.Container>
