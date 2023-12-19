@@ -1,4 +1,4 @@
-import {useEffect, useMemo, useRef, useState} from 'react';
+import React, {useEffect, useMemo, useRef, useState} from 'react';
 import {IFormCard} from '../../../utils/interface';
 import Component from './styles';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
@@ -96,7 +96,7 @@ const InputFormCard: React.FC<IProps> = props => {
     if (shouldHasMultipleData) {
       return (
         <ScrollView>
-          <FlatListComponent
+          <FlatList
             data={filledData}
             keyExtractor={() => faker.string.uuid()}
             renderItem={({item: filledDataText}) => {

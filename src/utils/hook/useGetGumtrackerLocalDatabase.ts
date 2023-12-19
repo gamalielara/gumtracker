@@ -33,17 +33,22 @@ const getSingleData = (selectedDate: string) => {
         (_, result) => {
           console.log(
             `get single data on ${selectedDate}, result found: `,
-            result.rows._array,
+            result.rows.item(0),
           );
 
           dispatch(setIsLoading(false));
 
           setData(() => {
-            if (result.rows._array.length > 0) {
-              return result.rows._array as GumtrackerData[];
+            const data = [];
+            if (result.rows?.length > 0) {
+              for (let i = 0; i < result.rows.length; i++) {
+                data.push(result.rows.item(i) as GumtrackerData[]);
+              }
             } else {
-              return [{...RAW_GUMTRACKER_DATA}];
+              data.push({...RAW_GUMTRACKER_DATA});
             }
+
+            return data;
           });
         },
         (_, err) => {

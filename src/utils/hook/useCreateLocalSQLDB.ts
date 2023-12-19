@@ -6,11 +6,12 @@ import SQLite from 'react-native-sqlite-storage';
 
 export default () => {
   const [state, setState] = useState(false);
+
   const db = SQLite.openDatabase(
     {
       name: 'database.db',
     },
-    () => console.log('SUCCESS'),
+    () => console.log('useCreateDatabase: SUCCESS'),
     (err: unknown) => console.log('useCreateDatabase: ERROR OPENING DB! ', err),
   );
 
@@ -23,18 +24,20 @@ export default () => {
         AsyncStorageKeys.HAVE_FETCHED_GUMJOURNALS,
       );
 
-      if (haveFetchedgumjournals === 'true') return;
+      if (haveFetchedgumjournals === 'true') {
+        setState(true);
+        return;
+      }
 
       const fetchedData = await ApiService.getGumjournalsData();
 
       db.transaction(tx => {
         tx.executeSql(
-          `DROP TABLE ${DBTableNames.GUMTRACKER}`,
+          `DROP TABLE IF EXISTS ${DBTableNames.GUMTRACKER}`,
           undefined,
           () => console.log('table dropped'),
-          (_, err) => {
+          err => {
             console.log('Dropping table error found ', err);
-            return false;
           },
         );
 
@@ -60,8 +63,7 @@ export default () => {
             );
           },
           (_, err) => {
-            console.log(err);
-            return false;
+            console.log('Failed to create table ', err);
           },
         );
 
