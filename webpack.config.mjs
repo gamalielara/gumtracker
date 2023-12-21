@@ -292,6 +292,16 @@ export default env => {
             eager: STANDALONE,
             requiredVersion: '^3.6.1',
           },
+          'react-native-gesture-handler': {
+            singleton: true,
+            eager: STANDALONE,
+            requiredVersion: '^2.14.0',
+          },
+          'react-native-sqlite-storage': {
+            singleton: true,
+            eager: STANDALONE,
+            requiredVersion: '^6.0.1',
+          },
         },
       }),
     ],
