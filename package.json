@@ -8,7 +8,8 @@
     "lint": "eslint .",
     "start": "react-native start",
     "test": "jest",
-    "dev": "react-native webpack-start --port 9000"
+    "dev": "react-native webpack-start --port 9000",
+    "dev:standalone": "STANDALONE=1 react-native webpack-start --port 8081"
   },
   "dependencies": {
     "@faker-js/faker": "^8.3.1",

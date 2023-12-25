@@ -48,9 +48,9 @@ export default env => {
    * to check its value to avoid accessing undefined value,
    * otherwise an error might occur.
    */
-  // if (devServer) {
-  //   devServer.hmr = false;
-  // }
+  if (typeof devServer !== 'undefined' && devServer) {
+    devServer.hmr = false;
+  }
 
   /**
    * Depending on your Babel configuration you might want to keep it.
@@ -162,6 +162,7 @@ export default env => {
             /node_modules(.*[/\\])+metro/,
             /node_modules(.*[/\\])+abort-controller/,
             /node_modules(.*[/\\])+@callstack\/repack/,
+            /node_modules(.*[/\\])+react-freeze/,
           ],
           use: 'babel-loader',
         },
@@ -244,7 +245,7 @@ export default env => {
          * This is a list of modules that will be shared between remote containers.
          */
         exposes: {
-          './App': './App.tsx',
+          './GumtrackerApp': './src/screens/TrackerForms/index',
         },
         /**
          * Shared modules are shared in the share scope.
@@ -254,12 +255,12 @@ export default env => {
         shared: {
           react: {
             singleton: true,
-            eager: STANDALONE,
+            eager: true,
             requiredVersion: '^18.2.0',
           },
           'react-native': {
             singleton: true,
-            eager: STANDALONE,
+            eager: true,
             requiredVersion: '^0.73.1',
           },
           '@react-navigation/native': {
@@ -280,17 +281,12 @@ export default env => {
           'react-native-screens': {
             singleton: true,
             eager: STANDALONE,
-            requiredVersion: '3.20.0',
+            requiredVersion: '^3.29.0',
           },
           '@react-native-async-storage/async-storage': {
             singleton: true,
             eager: STANDALONE,
             requiredVersion: '^1.21.0',
-          },
-          'react-native-reanimated': {
-            singleton: true,
-            eager: STANDALONE,
-            requiredVersion: '^3.6.1',
           },
           'react-native-gesture-handler': {
             singleton: true,
