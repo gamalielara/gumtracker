@@ -31,7 +31,7 @@ export default function App() {
 
   return (
     <Provider store={store}>
-      <NavigationContainer>
+      <NavigationContainer independent={true}>
         <CommonContext.Provider value={{colorScheme: ColorScheme[themeColor]}}>
           <ThemeProvider theme={ColorScheme[themeColor]}>
             <DataPreloader>
@@ -67,7 +67,6 @@ export default function App() {
                     component={TrackerForms}
                   />
                 </Stack.Navigator>
-                <Toast />
               </SafeAreaProvider>
             </DataPreloader>
           </ThemeProvider>
