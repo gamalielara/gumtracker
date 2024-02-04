@@ -17,6 +17,7 @@ import {Provider} from 'react-redux';
 import {store} from './src/module/store';
 import DataPreloader from './src/components/DataPreloader';
 import useCreateLocalSQLDB from './src/utils/hook/useCreateLocalSQLDB';
+import HomeScreen from './src/screens/Home';
 
 export default function App() {
   useAppPermision();
@@ -64,7 +65,7 @@ export default function App() {
                   <Stack.Screen
                     name={ScreenNames.TRACKER_FORMS}
                     //@ts-ignore
-                    component={TrackerForms}
+                    component={HomeScreen}
                   />
                 </Stack.Navigator>
               </SafeAreaProvider>
