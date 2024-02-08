@@ -40,7 +40,7 @@ export default function App() {
                   backgroundColor={ColorScheme[themeColor].background}
                 />
                 <Stack.Navigator
-                  initialRouteName={ScreenNames.TRACKER_FORMS}
+                  initialRouteName={ScreenNames.HOME}
                   screenOptions={{
                     gestureEnabled: true,
                     headerShown: false,
@@ -62,7 +62,7 @@ export default function App() {
                     },
                   }}>
                   <Stack.Screen
-                    name={ScreenNames.TRACKER_FORMS}
+                    name={ScreenNames.HOME}
                     component={HomeScreen}
                   />
                 </Stack.Navigator>

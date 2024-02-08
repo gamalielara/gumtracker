@@ -1,66 +1,36 @@
 import React from 'react';
-import {
-  AddButton,
-  Container,
-  HabitsContainer,
-  Header,
-  TitleText,
-} from './styles';
-import HeatMap from '../../components/HeatMap';
-import { MOCK_HABITS } from '../../mock/habits';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { HomeScreenNames } from '../../utils/const';
+import OverallScreen from '../OverallScreen';
+import { faHome, faInbox } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
+
+const Tab = createBottomTabNavigator();
 
 const HomeScreen = () => {
   return (
-    <>
-      <Container>
-        <Header>
-          <TitleText>Overall Habits</TitleText>
-          <AddButton>
-            <FontAwesomeIcon icon={faPlus} color="white" />
-          </AddButton>
-        </Header>
-        <HabitsContainer>
-          <HeatMap
-            height={200}
-            habitName="Habit Name"
-            description="Every Day"
-            data={MOCK_HABITS}
-          />
-          <HeatMap
-            height={200}
-            habitName="Habit Name"
-            description="Every Day"
-            data={MOCK_HABITS}
-          />
-          <HeatMap
-            height={200}
-            habitName="Habit Name"
-            description="Every Day"
-            data={MOCK_HABITS}
-          />
-          <HeatMap
-            height={200}
-            habitName="Habit Name"
-            description="Every Day"
-            data={MOCK_HABITS}
-          />
-          <HeatMap
-            height={200}
-            habitName="Habit Name"
-            description="Every Day"
-            data={MOCK_HABITS}
-          />
-          <HeatMap
-            height={200}
-            habitName="Habit Name"
-            description="Every Day"
-            data={MOCK_HABITS}
-          />
-        </HabitsContainer>
-      </Container>
-    </>
+    <Tab.Navigator
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ focused, color, size }) => {
+          let icon = faInbox;
+
+          switch (route.name) {
+            case HomeScreenNames.OVERALL:
+              icon = faHome;
+              break;
+            default:
+              break;
+          }
+
+          return <FontAwesomeIcon icon={icon} />;
+        },
+      })}>
+      <Tab.Screen
+        name={HomeScreenNames.OVERALL}
+        component={OverallScreen}
+        options={{ headerShown: false }}
+      />
+    </Tab.Navigator>
   );
 };
 

@@ -1,4 +1,4 @@
-import {GumtrackerData, Nullable, TRawDataHeaders} from './interface';
+import { GumtrackerData, Nullable, TRawDataHeaders } from './interface';
 
 interface IColorScheme {
   primary: string;
@@ -50,9 +50,14 @@ export enum ToastType {
 }
 
 export enum ScreenNames {
-  GUMJOURNALS_FORM = 'Gumjournals Form',
-  GUMJOURNALS_OVERVIEW = 'Gumjournals Overview',
-  TRACKER_FORMS = 'Tracker Forms',
+  HOME = 'Home',
+}
+
+export enum HomeScreenNames {
+  OVERALL = 'overall',
+  DAILY = 'daily',
+  WEEKLY = 'weekly',
+  LOGS = 'logs',
 }
 
 export enum AsyncStorageKeys {
