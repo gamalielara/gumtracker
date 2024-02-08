@@ -1,20 +1,18 @@
 import React from 'react';
 import CommonContext from './src/module/common';
-import {ColorScheme, ScreenNames} from './src/utils/const';
-import {SafeAreaProvider} from 'react-native-safe-area-context';
-import {NavigationContainer} from '@react-navigation/native';
-import Toast from './src/components/Toast';
+import { ColorScheme, ScreenNames } from './src/utils/const';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { NavigationContainer } from '@react-navigation/native';
 import useAppPermision from './src/utils/hook/useAppPermision';
 import {
   CardStyleInterpolators,
   createStackNavigator,
 } from '@react-navigation/stack';
 import useSetColorScheme from './src/utils/hook/useSetColorScheme';
-import {ThemeProvider} from 'styled-components';
-import {StatusBar, Text} from 'react-native';
-import TrackerForms from './src/screens/TrackerForms';
-import {Provider} from 'react-redux';
-import {store} from './src/module/store';
+import { ThemeProvider } from 'styled-components';
+import { StatusBar, Text } from 'react-native';
+import { Provider } from 'react-redux';
+import { store } from './src/module/store';
 import DataPreloader from './src/components/DataPreloader';
 import useCreateLocalSQLDB from './src/utils/hook/useCreateLocalSQLDB';
 import HomeScreen from './src/screens/Home';
@@ -22,7 +20,7 @@ import HomeScreen from './src/screens/Home';
 export default function App() {
   useAppPermision();
 
-  const {colorScheme: themeColor} = useSetColorScheme();
+  const { colorScheme: themeColor } = useSetColorScheme();
 
   const hasLoadedDatabase = useCreateLocalSQLDB();
 
@@ -33,7 +31,8 @@ export default function App() {
   return (
     <Provider store={store}>
       <NavigationContainer independent={true}>
-        <CommonContext.Provider value={{colorScheme: ColorScheme[themeColor]}}>
+        <CommonContext.Provider
+          value={{ colorScheme: ColorScheme[themeColor] }}>
           <ThemeProvider theme={ColorScheme[themeColor]}>
             <DataPreloader>
               <SafeAreaProvider>
@@ -64,7 +63,6 @@ export default function App() {
                   }}>
                   <Stack.Screen
                     name={ScreenNames.TRACKER_FORMS}
-                    //@ts-ignore
                     component={HomeScreen}
                   />
                 </Stack.Navigator>
