@@ -1,12 +1,13 @@
 import React from 'react';
-import HeatMap from '../../components/HeatMap';
-import {Text, View} from 'react-native';
+import {Container, TitleText} from './styles';
 
 const HomeScreen = () => {
   return (
-    <View style={{padding: 10}}>
-      <HeatMap height="500" />
-    </View>
+    <>
+      <Container>
+        <TitleText>Overall Habits</TitleText>
+      </Container>
+    </>
   );
 };
 
