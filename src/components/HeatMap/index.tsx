@@ -1,44 +1,64 @@
-import React from 'react';
-import {Text, View} from 'react-native';
-import {HeatMapWrapper} from './styles';
-import {FlatList} from 'react-native-gesture-handler';
-import {Rect} from 'react-native-svg';
+import React, { useCallback, useMemo } from 'react';
+import { View } from 'react-native';
+import { HabitDesc, HabitName, HeatMapWrapper } from './styles';
+import { FlatList } from 'react-native-gesture-handler';
+import { LightModeColorScheme } from '../../utils/const';
+import { getAllDaysInThisYear } from '../../utils/getAllDaysInThisYear';
+import { THabitsData } from '../../type/habits';
 
 interface IProps {
   width?: string;
-  height: string;
+  height: string | number;
+  habitName: string;
+  description: string;
+  data: THabitsData;
 }
 
-const HeatMap: React.FC<IProps> = ({width, height}) => {
-  const data = Array(365).fill(0);
+const HeatMap: React.FC<IProps> = props => {
+  const {
+    width,
+    height,
+    habitName,
+    description,
+    data: habitsScoreData,
+  } = props;
+
+  const renderItem = useCallback(({ item }: { item: string }) => {
+    return (
+      <View
+        style={{
+          width: 20,
+          height: 20,
+          backgroundColor: LightModeColorScheme.card,
+          borderRadius: 5,
+          margin: 1,
+          opacity: (habitsScoreData[item] ?? 0) + 0.2,
+        }}
+      />
+    );
+  }, []);
+
+  const daysInThisYear = useMemo(() => getAllDaysInThisYear(), []);
 
   return (
-    <HeatMapWrapper height="150">
-      <Text>HEI??</Text>
+    <HeatMapWrapper height={height}>
+      <HabitName>{habitName}</HabitName>
+      <HabitDesc>{description}</HabitDesc>
       <FlatList
-        data={data}
-        renderItem={({item}) => {
-          return (
-            <View
-              style={{
-                width: 10,
-                height: 10,
-                backgroundColor: 'gray',
-                borderRadius: 2,
-                margin: 1,
-              }}
-            />
-          );
-        }}
+        data={daysInThisYear}
+        renderItem={renderItem}
         style={{
           marginTop: 10,
         }}
         contentContainerStyle={{
-          maxWidth: '150%',
+          maxHeight: '100%',
+          flexDirection: 'column',
           flexWrap: 'wrap',
         }}
-        initialNumToRender={100}
+        maxToRenderPerBatch={100}
         horizontal
+        keyExtractor={(_, i) => String(i)}
+        showsHorizontalScrollIndicator={false}
       />
     </HeatMapWrapper>
   );
