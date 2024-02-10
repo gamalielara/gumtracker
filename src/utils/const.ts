@@ -54,10 +54,10 @@ export enum ScreenNames {
 }
 
 export enum HomeScreenNames {
-  OVERALL = 'overall',
-  DAILY = 'daily',
-  WEEKLY = 'weekly',
-  LOGS = 'logs',
+  OVERALL = 'Overall',
+  DAILY = 'Daily',
+  WEEKLY = 'Weekly',
+  LOGS = 'Logs',
 }
 
 export enum AsyncStorageKeys {
