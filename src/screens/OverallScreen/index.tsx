@@ -20,44 +20,21 @@ const OverallScreen = () => {
           <FontAwesomeIcon icon={faPlus} color="white" />
         </AddButton>
       </Header>
-      <HabitsContainer>
-        <HeatMap
-          height={200}
-          habitName="Habit Name"
-          description="Every Day"
-          data={MOCK_HABITS}
-        />
-        <HeatMap
-          height={200}
-          habitName="Habit Name"
-          description="Every Day"
-          data={MOCK_HABITS}
-        />
-        <HeatMap
-          height={200}
-          habitName="Habit Name"
-          description="Every Day"
-          data={MOCK_HABITS}
-        />
-        <HeatMap
-          height={200}
-          habitName="Habit Name"
-          description="Every Day"
-          data={MOCK_HABITS}
-        />
-        <HeatMap
-          height={200}
-          habitName="Habit Name"
-          description="Every Day"
-          data={MOCK_HABITS}
-        />
-        <HeatMap
-          height={200}
-          habitName="Habit Name"
-          description="Every Day"
-          data={MOCK_HABITS}
-        />
-      </HabitsContainer>
+      <HabitsContainer
+        data={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
+        renderItem={({ _ }) => (
+          <HeatMap
+            height={200}
+            habitName="Habit Name"
+            description="Every Day"
+            data={MOCK_HABITS}
+          />
+        )}
+        contentContainerStyle={{
+          gap: 25,
+          marginBottom: 50,
+        }}
+      />
     </Container>
   );
 };

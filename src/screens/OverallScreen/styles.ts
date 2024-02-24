@@ -13,8 +13,8 @@ export const TitleText = styled(BoldText)`
   margin-bottom: 10px;
 `;
 
-export const HabitsContainer = styled.View`
-  gap: 10px;
+export const HabitsContainer = styled.FlatList`
+  flex: 1;
 `;
 
 export const Header = styled.View`
