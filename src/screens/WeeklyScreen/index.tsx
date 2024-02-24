@@ -1,11 +1,12 @@
 import React from 'react';
 import { Text, View } from 'react-native';
+import { Container, WeeklyTitleText } from './styles';
 
 const WeeklyScreen = () => {
   return (
-    <View>
-      <Text>HEHEI</Text>
-    </View>
+    <Container>
+      <WeeklyTitleText>Weekly Screen</WeeklyTitleText>
+    </Container>
   );
 };
 
