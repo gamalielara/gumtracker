@@ -1,8 +1,11 @@
 import React, { useCallback, useMemo } from 'react';
-import { View } from 'react-native';
-import { HabitDesc, HabitName, HeatMapWrapper } from './styles';
-import { FlatList } from 'react-native-gesture-handler';
-import { LightModeColorScheme } from '../../utils/const';
+import {
+  HabitDesc,
+  HabitName,
+  HeatMapTiles,
+  HeatMapWrapper,
+  Tile,
+} from './styles';
 import { getAllDaysInThisYear } from '../../utils/getAllDaysInThisYear';
 import { THabitsData } from '../../type/habits';
 
@@ -23,20 +26,10 @@ const HeatMap: React.FC<IProps> = props => {
     data: habitsScoreData,
   } = props;
 
-  const renderItem = useCallback(({ item }: { item: string }) => {
-    return (
-      <View
-        style={{
-          width: 20,
-          height: 20,
-          backgroundColor: LightModeColorScheme.card,
-          borderRadius: 5,
-          margin: 1,
-          opacity: (habitsScoreData[item] ?? 0) + 0.2,
-        }}
-      />
-    );
-  }, []);
+  const renderItem = useCallback(
+    ({ item }: { item: string }) => <Tile score={habitsScoreData[item] ?? 0} />,
+    [],
+  );
 
   const daysInThisYear = useMemo(() => getAllDaysInThisYear(), []);
 
@@ -44,12 +37,9 @@ const HeatMap: React.FC<IProps> = props => {
     <HeatMapWrapper height={height}>
       <HabitName>{habitName}</HabitName>
       <HabitDesc>{description}</HabitDesc>
-      <FlatList
+      <HeatMapTiles
         data={daysInThisYear}
         renderItem={renderItem}
-        style={{
-          marginTop: 10,
-        }}
         contentContainerStyle={{
           maxHeight: '100%',
           flexDirection: 'column',

@@ -1,7 +1,6 @@
-import React from 'react';
+import React, { ElementType } from 'react';
 import { TabBarContainer, TabButton, TabButtonText, Wrapper } from './styles';
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
-import { BlurView } from '@react-native-community/blur';
 
 const TabBar: React.FC<BottomTabBarProps> = props => {
   const { state, descriptors, navigation } = props;
@@ -29,7 +28,7 @@ const TabBar: React.FC<BottomTabBarProps> = props => {
             }
           };
 
-          const Icon = options.tabBarIcon;
+          const Icon = options.tabBarIcon as ElementType;
 
           const onLongPress = () => {
             navigation.emit({
