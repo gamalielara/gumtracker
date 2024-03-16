@@ -5,7 +5,7 @@ import { Container, WeeklyTitleText } from './styles';
 const WeeklyScreen = () => {
   return (
     <Container>
-      <WeeklyTitleText>Weekly Screen</WeeklyTitleText>
+      <WeeklyTitleText>Weekly Habits</WeeklyTitleText>
     </Container>
   );
 };

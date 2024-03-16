@@ -46,6 +46,7 @@ const HomeScreen = () => {
           );
         },
         freezeOnBlur: true,
+        lazy: false,
       })}
       tabBar={props => <TabBar {...props} />}>
       <Tab.Screen

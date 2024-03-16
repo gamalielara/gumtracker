@@ -17,6 +17,8 @@ interface IProps {
   data: THabitsData;
 }
 
+const DAYS_IN_THE_YEAR = 366;
+
 const HeatMap: React.FC<IProps> = props => {
   const {
     width,
@@ -45,10 +47,16 @@ const HeatMap: React.FC<IProps> = props => {
           flexDirection: 'column',
           flexWrap: 'wrap',
         }}
-        maxToRenderPerBatch={100}
+        maxToRenderPerBatch={30}
         horizontal
         keyExtractor={(_, i) => String(i)}
         showsHorizontalScrollIndicator={false}
+        removeClippedSubviews={true}
+        getItemLayout={(_, index) => ({
+          length: DAYS_IN_THE_YEAR,
+          offset: DAYS_IN_THE_YEAR + index,
+          index,
+        })}
       />
     </HeatMapWrapper>
   );
