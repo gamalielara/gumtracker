@@ -35,4 +35,5 @@ export const Wrapper = styled.View`
   bottom: 0;
   left: 0;
   width: 95%;
+  elevation: 3;
 `;

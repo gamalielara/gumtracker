@@ -40,7 +40,7 @@ const OverallScreen = () => {
         renderItem={renderHabitBox}
         contentContainerStyle={{
           gap: 25,
-          marginBottom: 125,
+          paddingBottom: 125,
         }}
         removeClippedSubviews={true}
         maxToRenderPerBatch={3}
