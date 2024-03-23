@@ -12,9 +12,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import WeeklyScreen from '../WeeklyScreen';
 import DailyScreen from '../DailyScreen';
 import TabBar from './TabBar';
-import { BlurView } from '@react-native-community/blur';
-import { StyleSheet, View } from 'react-native';
-
 const Tab = createBottomTabNavigator();
 
 const HomeScreen = () => {
@@ -41,11 +38,13 @@ const HomeScreen = () => {
           return (
             <FontAwesomeIcon
               icon={icon}
-              color={LightModeColorScheme[focused ? 'primary' : 'secondary']}
+              color={LightModeColorScheme[focused ? 'primary' : 'card']}
+              size={20}
             />
           );
         },
         freezeOnBlur: true,
+        lazy: false,
       })}
       tabBar={props => <TabBar {...props} />}>
       <Tab.Screen

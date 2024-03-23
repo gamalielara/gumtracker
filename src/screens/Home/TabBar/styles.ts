@@ -1,6 +1,9 @@
 import styled from 'styled-components/native';
 import { LightModeColorScheme } from '../../../utils/const';
 import { BaseText } from '../../../components/global/text';
+import { Dimensions } from 'react-native';
+
+const TAB_PADDING = 10;
 
 export const TabBarContainer = styled.View`
   flex-direction: row;
@@ -13,7 +16,7 @@ export const TabBarContainer = styled.View`
 export const TabButton = styled.TouchableOpacity`
   flex: 1;
   align-items: center;
-  padding: 5px;
+  padding: 10px;
 `;
 
 export const TabButtonText = styled(BaseText)<{ selected: boolean }>`
@@ -24,8 +27,13 @@ export const TabButtonText = styled(BaseText)<{ selected: boolean }>`
 
 export const Wrapper = styled.View`
   min-height: 50px;
-  width: 100%;
   background-color: #e3e2d8;
-  border-top-left-radius: 20px;
-  border-top-right-radius: 20px;
+  border-radius: 20px;
+  padding: 10px;
+  margin: 10px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 95%;
+  elevation: 3;
 `;

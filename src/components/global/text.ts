@@ -12,3 +12,7 @@ export const BoldText = styled(BaseText)`
 export const BaseTextInput = styled.TextInput`
   font-family: 'Inter-Regular';
 `;
+
+export const SemiboldText = styled(BaseText)`
+  font-family: Inter-SemiBold;
+`;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import {
   AddButton,
   Container,
@@ -12,6 +12,21 @@ import HeatMap from '../../components/HeatMap';
 import { MOCK_HABITS } from '../../mock/habits';
 
 const OverallScreen = () => {
+  //TODO: change data later
+  const habitsToShow = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+  const renderHabitBox = useCallback(
+    () => (
+      <HeatMap
+        height={200}
+        habitName="Habit Name"
+        description="Every Day"
+        data={MOCK_HABITS}
+      />
+    ),
+    [],
+  );
+
   return (
     <Container>
       <Header>
@@ -21,19 +36,14 @@ const OverallScreen = () => {
         </AddButton>
       </Header>
       <HabitsContainer
-        data={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
-        renderItem={({ _ }) => (
-          <HeatMap
-            height={200}
-            habitName="Habit Name"
-            description="Every Day"
-            data={MOCK_HABITS}
-          />
-        )}
+        data={habitsToShow}
+        renderItem={renderHabitBox}
         contentContainerStyle={{
           gap: 25,
-          marginBottom: 50,
+          paddingBottom: 125,
         }}
+        removeClippedSubviews={true}
+        maxToRenderPerBatch={3}
       />
     </Container>
   );

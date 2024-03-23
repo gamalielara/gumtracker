@@ -16,6 +16,8 @@ import { store } from './src/module/store';
 import DataPreloader from './src/components/DataPreloader';
 import useCreateLocalSQLDB from './src/utils/hook/useCreateLocalSQLDB';
 import HomeScreen from './src/screens/Home';
+import Popup from './src/components/Popup';
+import PopupProvider from './src/components/Popup/provider';
 
 export default function App() {
   useAppPermision();
@@ -29,48 +31,50 @@ export default function App() {
   const Stack = createStackNavigator();
 
   return (
-    <Provider store={store}>
-      <NavigationContainer independent={true}>
-        <CommonContext.Provider
-          value={{ colorScheme: ColorScheme[themeColor] }}>
-          <ThemeProvider theme={ColorScheme[themeColor]}>
-            <DataPreloader>
-              <SafeAreaProvider>
-                <StatusBar
-                  backgroundColor={ColorScheme[themeColor].background}
-                />
-                <Stack.Navigator
-                  initialRouteName={ScreenNames.HOME}
-                  screenOptions={{
-                    gestureEnabled: true,
-                    headerShown: false,
-                    cardStyleInterpolator:
-                      CardStyleInterpolators.forHorizontalIOS,
-                    transitionSpec: {
-                      open: {
-                        animation: 'timing',
-                        config: {
-                          duration: 450,
-                        },
-                      },
-                      close: {
-                        animation: 'timing',
-                        config: {
-                          duration: 450,
-                        },
-                      },
-                    },
-                  }}>
-                  <Stack.Screen
-                    name={ScreenNames.HOME}
-                    component={HomeScreen}
+    <PopupProvider>
+      <Provider store={store}>
+        <NavigationContainer independent={true}>
+          <CommonContext.Provider
+            value={{ colorScheme: ColorScheme[themeColor] }}>
+            <ThemeProvider theme={ColorScheme[themeColor]}>
+              <DataPreloader>
+                <SafeAreaProvider>
+                  <StatusBar
+                    backgroundColor={ColorScheme[themeColor].background}
                   />
-                </Stack.Navigator>
-              </SafeAreaProvider>
-            </DataPreloader>
-          </ThemeProvider>
-        </CommonContext.Provider>
-      </NavigationContainer>
-    </Provider>
+                  <Stack.Navigator
+                    initialRouteName={ScreenNames.HOME}
+                    screenOptions={{
+                      gestureEnabled: true,
+                      headerShown: false,
+                      cardStyleInterpolator:
+                        CardStyleInterpolators.forHorizontalIOS,
+                      transitionSpec: {
+                        open: {
+                          animation: 'timing',
+                          config: {
+                            duration: 450,
+                          },
+                        },
+                        close: {
+                          animation: 'timing',
+                          config: {
+                            duration: 450,
+                          },
+                        },
+                      },
+                    }}>
+                    <Stack.Screen
+                      name={ScreenNames.HOME}
+                      component={HomeScreen}
+                    />
+                  </Stack.Navigator>
+                </SafeAreaProvider>
+              </DataPreloader>
+            </ThemeProvider>
+          </CommonContext.Provider>
+        </NavigationContainer>
+      </Provider>
+    </PopupProvider>
   );
 }
