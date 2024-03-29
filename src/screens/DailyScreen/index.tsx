@@ -2,7 +2,6 @@ import React, { useContext, useEffect } from 'react';
 import { Text, View } from 'react-native';
 import * as Comp from './styles';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import { PopupContext } from '../../context/popupContext';
 
 const DailyScreen = () => {
   const habits = [
@@ -11,12 +10,6 @@ const DailyScreen = () => {
     { name: 'Learning French 🇫🇷', color: 'blue' },
     { name: 'Code 💻', color: 'gray' },
   ];
-
-  const popupCtx = useContext(PopupContext);
-
-  useEffect(() => {
-    popupCtx?.show(<Text>HEHHEE</Text>);
-  }, []);
 
   return (
     <Comp.Container>

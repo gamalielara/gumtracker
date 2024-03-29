@@ -8,3 +8,8 @@ declare module '*.svg' {
   const content: React.FunctionComponent<React.SVGAttributes<SVGElement>>;
   export default content;
 }
+
+declare module globalThis {
+  var showPopup: (...args: any[]) => void;
+  var dismissPopup: () => void;
+}
