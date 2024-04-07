@@ -3,8 +3,6 @@ import { LightModeColorScheme } from '../../../utils/const';
 import { BaseText } from '../../../components/global/text';
 import { Dimensions } from 'react-native';
 
-const TAB_PADDING = 10;
-
 export const TabBarContainer = styled.View`
   flex-direction: row;
   justify-content: space-between;

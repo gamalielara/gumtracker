@@ -13,7 +13,7 @@ import { MOCK_HABITS } from '../../mock/habits';
 
 const OverallScreen = () => {
   //TODO: change data later
-  const habitsToShow = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  const habitsToShow = [1, 2, 3, 4, 5];
 
   const renderHabitBox = useCallback(
     () => (
