@@ -47,7 +47,7 @@ const HeatMap: React.FC<IProps> = props => {
           flexDirection: 'column',
           flexWrap: 'wrap',
         }}
-        maxToRenderPerBatch={30}
+        maxToRenderPerBatch={100}
         horizontal
         keyExtractor={(_, i) => String(i)}
         showsHorizontalScrollIndicator={false}

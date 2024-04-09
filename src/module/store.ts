@@ -1,5 +1,4 @@
-import {configureStore, getDefaultMiddleware} from '@reduxjs/toolkit';
-import gumjournalsReducer from './gumjournals/slice';
+import { configureStore } from '@reduxjs/toolkit';
 
 // const middlewares = getDefaultMiddleware({
 //   // https://github.com/reduxjs/redux-toolkit/issues/415
@@ -12,10 +11,7 @@ import gumjournalsReducer from './gumjournals/slice';
 // }
 
 export const store = configureStore({
-  reducer: {
-    gumjournals: gumjournalsReducer,
-  },
-  // middleware: middlewares
+  reducer: {},
 });
 
 export type AppState = ReturnType<typeof store.getState>;

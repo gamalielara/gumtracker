@@ -20,8 +20,8 @@ export const HabitDesc = styled(BaseText)`
 `;
 
 export const Tile = styled.View<{ score: number }>`
-  width: 20px;
-  height: 20px;
+  width: 10px;
+  height: 10px;
   background-color: ${LightModeColorScheme.card};
   border-radius: 5px;
   margin: 1px;
