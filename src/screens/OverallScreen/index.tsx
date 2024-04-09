@@ -9,7 +9,7 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import HeatMap from '../../components/HeatMap';
-import { MOCK_HABITS } from '../../mock/habits';
+import { MOCK_HABITS } from '../../mock/data/habits';
 
 const OverallScreen = () => {
   //TODO: change data later
