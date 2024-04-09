@@ -13,7 +13,6 @@ import { ThemeProvider } from 'styled-components';
 import { StatusBar, Text } from 'react-native';
 import { Provider } from 'react-redux';
 import { store } from './src/module/store';
-import DataPreloader from './src/components/DataPreloader';
 import useCreateLocalSQLDB from './src/utils/hook/useCreateLocalSQLDB';
 import HomeScreen from './src/screens/Home';
 import AppPopup from './src/components/AppPopup';
@@ -37,40 +36,33 @@ export default function App() {
         <CommonContext.Provider
           value={{ colorScheme: ColorScheme[themeColor] }}>
           <ThemeProvider theme={ColorScheme[themeColor]}>
-            <DataPreloader>
-              <SafeAreaProvider>
-                <StatusBar
-                  backgroundColor={ColorScheme[themeColor].background}
-                />
-                <Stack.Navigator
-                  initialRouteName={ScreenNames.HOME}
-                  screenOptions={{
-                    gestureEnabled: true,
-                    headerShown: false,
-                    cardStyleInterpolator:
-                      CardStyleInterpolators.forHorizontalIOS,
-                    transitionSpec: {
-                      open: {
-                        animation: 'timing',
-                        config: {
-                          duration: 450,
-                        },
-                      },
-                      close: {
-                        animation: 'timing',
-                        config: {
-                          duration: 450,
-                        },
+            <SafeAreaProvider>
+              <StatusBar backgroundColor={ColorScheme[themeColor].background} />
+              <Stack.Navigator
+                initialRouteName={ScreenNames.HOME}
+                screenOptions={{
+                  gestureEnabled: true,
+                  headerShown: false,
+                  cardStyleInterpolator:
+                    CardStyleInterpolators.forHorizontalIOS,
+                  transitionSpec: {
+                    open: {
+                      animation: 'timing',
+                      config: {
+                        duration: 450,
                       },
                     },
-                  }}>
-                  <Stack.Screen
-                    name={ScreenNames.HOME}
-                    component={HomeScreen}
-                  />
-                </Stack.Navigator>
-              </SafeAreaProvider>
-            </DataPreloader>
+                    close: {
+                      animation: 'timing',
+                      config: {
+                        duration: 450,
+                      },
+                    },
+                  },
+                }}>
+                <Stack.Screen name={ScreenNames.HOME} component={HomeScreen} />
+              </Stack.Navigator>
+            </SafeAreaProvider>
           </ThemeProvider>
         </CommonContext.Provider>
       </NavigationContainer>
