@@ -1,5 +1,4 @@
 import React from 'react';
-import CommonContext from './src/module/common';
 import { ColorScheme, ScreenNames } from './src/utils/const';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { NavigationContainer } from '@react-navigation/native';
@@ -33,38 +32,34 @@ export default function App() {
       <AppPopup />
 
       <NavigationContainer independent={true}>
-        <CommonContext.Provider
-          value={{ colorScheme: ColorScheme[themeColor] }}>
-          <ThemeProvider theme={ColorScheme[themeColor]}>
-            <SafeAreaProvider>
-              <StatusBar backgroundColor={ColorScheme[themeColor].background} />
-              <Stack.Navigator
-                initialRouteName={ScreenNames.HOME}
-                screenOptions={{
-                  gestureEnabled: true,
-                  headerShown: false,
-                  cardStyleInterpolator:
-                    CardStyleInterpolators.forHorizontalIOS,
-                  transitionSpec: {
-                    open: {
-                      animation: 'timing',
-                      config: {
-                        duration: 450,
-                      },
-                    },
-                    close: {
-                      animation: 'timing',
-                      config: {
-                        duration: 450,
-                      },
+        <ThemeProvider theme={ColorScheme[themeColor]}>
+          <SafeAreaProvider>
+            <StatusBar backgroundColor={ColorScheme[themeColor].background} />
+            <Stack.Navigator
+              initialRouteName={ScreenNames.HOME}
+              screenOptions={{
+                gestureEnabled: true,
+                headerShown: false,
+                cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+                transitionSpec: {
+                  open: {
+                    animation: 'timing',
+                    config: {
+                      duration: 450,
                     },
                   },
-                }}>
-                <Stack.Screen name={ScreenNames.HOME} component={HomeScreen} />
-              </Stack.Navigator>
-            </SafeAreaProvider>
-          </ThemeProvider>
-        </CommonContext.Provider>
+                  close: {
+                    animation: 'timing',
+                    config: {
+                      duration: 450,
+                    },
+                  },
+                },
+              }}>
+              <Stack.Screen name={ScreenNames.HOME} component={HomeScreen} />
+            </Stack.Navigator>
+          </SafeAreaProvider>
+        </ThemeProvider>
       </NavigationContainer>
     </Provider>
   );
