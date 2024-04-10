@@ -1,18 +1,18 @@
-import { ScreenNames } from "./const";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { ScreenNames } from './const';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 export type Nullable<T> = { [K in keyof T]: T[K] | null };
 
-type TSheetDimension = "ROWS" | "COLUMNS";
+type TSheetDimension = 'ROWS' | 'COLUMNS';
 
 export type TRawDataHeaders =
-  | "timestamp"
-  | "date_filled"
-  | "mood"
-  | "gratitude_statements"
-  | "highlight_of_the_day"
-  | "body_weight"
-  | "belly_circumference";
+  | 'timestamp'
+  | 'date_filled'
+  | 'mood'
+  | 'gratitude_statements'
+  | 'highlight_of_the_day'
+  | 'body_weight'
+  | 'belly_circumference';
 
 export interface RawSheetData {
   range: string;
@@ -31,7 +31,7 @@ export interface GumtrackerData extends Record<TRawDataHeaders, unknown> {
 }
 
 export type ComponentBasePropsWithChildren<
-  T extends Record<string, unknown> = Record<never, never>
+  T extends Record<string, unknown> = Record<never, never>,
 > = {
   children: React.ReactNode;
 } & T;
@@ -45,7 +45,7 @@ export type TNavigation = NativeStackNavigationProp<
 >;
 
 export type NavigationScreenProps<
-  T extends Partial<Record<string, unknown>> = Record<never, never>
+  T extends Partial<Record<string, unknown>> = Record<never, never>,
 > = {
   navigation: TNavigation;
   route?: Record<string, unknown>;
@@ -71,8 +71,13 @@ export interface IFormCard {
   title: string;
   subtitle?: string;
   SVGImage: any;
-  illustrationPosition: "left" | "right";
+  illustrationPosition: 'left' | 'right';
   options?: FormOptions[];
   additionIllustrationStyle?: Record<string, unknown>;
   textInputPlaceHolder?: string;
+}
+
+export interface IHabitDetail {
+  name: string;
+  created_at: number;
 }

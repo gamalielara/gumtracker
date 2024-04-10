@@ -1,6 +1,5 @@
 import styled from 'styled-components/native';
 import { BoldText, SemiboldText } from '../../components/global/text';
-import { LightModeColorScheme } from '../../utils/const';
 
 export const Container = styled.View`
   width: 100%;
@@ -10,22 +9,28 @@ export const Container = styled.View`
 
 export const TitleText = styled(BoldText)`
   font-size: 30px;
-  margin-bottom: 10px;
+  margin-top: 10px;
 `;
 
 export const HabitsContainer = styled.FlatList`
-  margin-top: 50px;
+  margin-top: 30px;
   flex: 1;
 `;
 
-export const DailyHabitBox = styled.View`
+export const SubmitButton = styled.TouchableOpacity`
   width: 95%;
-  padding: 30px 20px;
-  margin: 0 auto;
-  background-color: ${LightModeColorScheme.card};
-  border-radius: 25px;
+  margin: 50px auto;
+  padding: 15px;
+  background-color: ${props => props.theme.secondary};
+  border-radius: 10px;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
 `;
 
-export const HabitName = styled(SemiboldText)`
-  color: ${LightModeColorScheme['text-secondary']};
+export const SubmitText = styled(BoldText)`
+  text-align: center;
+  font-size: 20px;
+  color: ${props => props.theme.background};
+  margin-right: 10px;
 `;

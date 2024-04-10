@@ -104,3 +104,5 @@ export const RAW_GUMTRACKER_DATA: Nullable<GumtrackerData> = {
 export const APP_DATE_FORMAT = 'yyyy-MM-dd';
 
 export const HABIT_DATES_COUNT_TO_SHOW = 365;
+
+export const BASE_EMPTY_HTML = `<head></head><body></body>`;

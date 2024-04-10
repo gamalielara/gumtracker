@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker';
-import { THabitsData } from '../type/habits';
+import { THabitsData } from '../../type/habits';
 
 export const MOCK_HABITS: THabitsData = {
   '01-01-2024': 0,

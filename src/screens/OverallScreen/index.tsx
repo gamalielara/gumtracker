@@ -1,19 +1,11 @@
 import React, { useCallback } from 'react';
-import {
-  AddButton,
-  Container,
-  HabitsContainer,
-  Header,
-  TitleText,
-} from './styles';
-import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { Container, HabitsContainer, Header, TitleText } from './styles';
 import HeatMap from '../../components/HeatMap';
-import { MOCK_HABITS } from '../../mock/habits';
+import { MOCK_HABITS } from '../../mock/data/habits';
 
 const OverallScreen = () => {
   //TODO: change data later
-  const habitsToShow = [1, 2, 3, 4, 5];
+  const habitsToShow = [1, 2, 3];
 
   const renderHabitBox = useCallback(
     () => (
@@ -31,9 +23,6 @@ const OverallScreen = () => {
     <Container>
       <Header>
         <TitleText>Overall Habits</TitleText>
-        <AddButton>
-          <FontAwesomeIcon icon={faPlus} color="white" />
-        </AddButton>
       </Header>
       <HabitsContainer
         data={habitsToShow}
