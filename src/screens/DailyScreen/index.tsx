@@ -5,7 +5,6 @@ import { IHabitDetail } from '../../utils/interface';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faPaperPlane, faPlane } from '@fortawesome/free-solid-svg-icons';
 import { LightModeColorScheme } from '../../utils/const';
-import { View } from 'react-native';
 
 const DailyScreen = () => {
   const habits: IHabitDetail[] = [

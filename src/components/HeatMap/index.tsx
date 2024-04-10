@@ -8,6 +8,8 @@ import {
 } from './styles';
 import { getAllDaysInThisYear } from '../../utils/getAllDaysInThisYear';
 import { THabitsData } from '../../type/habits';
+import { WebView } from 'react-native-webview';
+import { drawHeatmapScript } from './drawHeatMap';
 
 interface IProps {
   width?: string;
@@ -36,29 +38,18 @@ const HeatMap: React.FC<IProps> = props => {
   const daysInThisYear = useMemo(() => getAllDaysInThisYear(), []);
 
   return (
-    <HeatMapWrapper height={height}>
-      <HabitName>{habitName}</HabitName>
-      <HabitDesc>{description}</HabitDesc>
-      <HeatMapTiles
-        data={daysInThisYear}
-        renderItem={renderItem}
-        contentContainerStyle={{
-          maxHeight: '100%',
-          flexDirection: 'column',
-          flexWrap: 'wrap',
-        }}
-        maxToRenderPerBatch={100}
-        horizontal
-        keyExtractor={(_, i) => String(i)}
-        showsHorizontalScrollIndicator={false}
-        removeClippedSubviews={true}
-        getItemLayout={(_, index) => ({
-          length: DAYS_IN_THE_YEAR,
-          offset: DAYS_IN_THE_YEAR + index,
-          index,
-        })}
-      />
-    </HeatMapWrapper>
+    <WebView
+      source={{
+        html: '<canvas id="canvas" style="position: fixed; top: 0, left: 0"/>',
+      }}
+      style={{
+        flex: 1,
+        height: 100,
+        width: '100%',
+        backgroundColor: 'transparent',
+      }}
+      injectedJavaScript={drawHeatmapScript(habitsScoreData)}
+    />
   );
 };
 
