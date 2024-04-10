@@ -30,8 +30,8 @@ const HeatMap: React.FC<IProps> = props => {
           backgroundColor: 'transparent',
         }}
         injectedJavaScript={drawWebviewHeatMapTable(habitsScoreData)}
-        // setBuiltInZoomControls={false}
-        // bounce={false}
+        setBuiltInZoomControls={false}
+        bounce={false}
       />
     </HeatMapWrapper>
   );
