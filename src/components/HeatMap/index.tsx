@@ -1,55 +1,39 @@
 import React, { useCallback, useMemo } from 'react';
-import {
-  HabitDesc,
-  HabitName,
-  HeatMapTiles,
-  HeatMapWrapper,
-  Tile,
-} from './styles';
-import { getAllDaysInThisYear } from '../../utils/getAllDaysInThisYear';
+import { HabitDesc, HabitName, HeatMapTiles, HeatMapWrapper } from './styles';
 import { THabitsData } from '../../type/habits';
 import { WebView } from 'react-native-webview';
-import { drawHeatmapScript } from './drawHeatMap';
+import { drawWebviewHeatMapTable } from '../../utils/drawWebviewHeatMapTable';
+import { BASE_EMPTY_HTML } from '../../utils/const';
 
 interface IProps {
-  width?: string;
   height: string | number;
   habitName: string;
   description: string;
   data: THabitsData;
 }
 
-const DAYS_IN_THE_YEAR = 366;
-
 const HeatMap: React.FC<IProps> = props => {
-  const {
-    width,
-    height,
-    habitName,
-    description,
-    data: habitsScoreData,
-  } = props;
-
-  const renderItem = useCallback(
-    ({ item }: { item: string }) => <Tile score={habitsScoreData[item] ?? 0} />,
-    [],
-  );
-
-  const daysInThisYear = useMemo(() => getAllDaysInThisYear(), []);
+  const { height, habitName, description, data: habitsScoreData } = props;
 
   return (
-    <WebView
-      source={{
-        html: '<canvas id="canvas" style="position: fixed; top: 0, left: 0"/>',
-      }}
-      style={{
-        flex: 1,
-        height: 100,
-        width: '100%',
-        backgroundColor: 'transparent',
-      }}
-      injectedJavaScript={drawHeatmapScript(habitsScoreData)}
-    />
+    <HeatMapWrapper height={height}>
+      <HabitName>{habitName}</HabitName>
+      <HabitDesc>{description}</HabitDesc>
+      <WebView
+        source={{
+          html: BASE_EMPTY_HTML,
+        }}
+        style={{
+          flex: 1,
+          height: 200,
+          minWidth: '100%',
+          backgroundColor: 'transparent',
+        }}
+        injectedJavaScript={drawWebviewHeatMapTable(habitsScoreData)}
+        // setBuiltInZoomControls={false}
+        // bounce={false}
+      />
+    </HeatMapWrapper>
   );
 };
 

@@ -9,6 +9,7 @@ export const HeatMapWrapper = styled.View<{ height: string | number }>`
   height: ${props => props.height}px;
   background-color: white;
   border-radius: 10px;
+  justify-content: space-between;
 `;
 
 export const HabitName = styled(BoldText)`
@@ -17,15 +18,6 @@ export const HabitName = styled(BoldText)`
 
 export const HabitDesc = styled(BaseText)`
   font-size: 15px;
-`;
-
-export const Tile = styled.View<{ score: number }>`
-  width: 10px;
-  height: 10px;
-  background-color: ${LightModeColorScheme.card};
-  border-radius: 5px;
-  margin: 1px;
-  opacity: ${props => props.score + 0.2};
 `;
 
 export const HeatMapTiles = styled.FlatList`

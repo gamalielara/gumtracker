@@ -24,12 +24,3 @@ export const Header = styled.View`
   margin-bottom: 50px;
   align-items: center;
 `;
-
-export const AddButton = styled.TouchableOpacity`
-  width: 40px;
-  aspect-ratio: 1;
-  border-radius: 10px;
-  justify-content: center;
-  align-items: center;
-  background-color: ${LightModeColorScheme.secondary};
-`;
