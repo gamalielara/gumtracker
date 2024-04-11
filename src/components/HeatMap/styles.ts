@@ -19,7 +19,3 @@ export const HabitName = styled(BoldText)`
 export const HabitDesc = styled(BaseText)`
   font-size: 15px;
 `;
-
-export const HeatMapTiles = styled.FlatList`
-  margin-top: 10px;
-` as typeof FlatList;

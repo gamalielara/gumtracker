@@ -14,6 +14,8 @@ import { Provider } from 'react-redux';
 import { store } from './src/module/store';
 import HomeScreen from './src/screens/Home';
 import AppPopup from './src/components/AppPopup';
+import RealmPlugin from 'realm-flipper-plugin-device';
+import Realm from 'realm';
 
 export default function App() {
   useAppPermision();
@@ -25,7 +27,7 @@ export default function App() {
   return (
     <Provider store={store}>
       <AppPopup />
-
+      <RealmPlugin realms={[realm]} />
       <NavigationContainer independent={true}>
         <ThemeProvider theme={ColorScheme[themeColor]}>
           <SafeAreaProvider>

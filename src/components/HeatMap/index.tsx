@@ -1,5 +1,4 @@
-import React, { useCallback, useMemo } from 'react';
-import { HabitDesc, HabitName, HeatMapTiles, HeatMapWrapper } from './styles';
+import { HabitDesc, HabitName, HeatMapWrapper } from './styles';
 import { THabitsData } from '../../type/habits';
 import { WebView } from 'react-native-webview';
 import { drawWebviewHeatMapTable } from '../../utils/drawWebviewHeatMapTable';

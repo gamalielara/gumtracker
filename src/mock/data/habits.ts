@@ -369,3 +369,21 @@ export const MOCK_HABITS: THabitsData = {
   '12-30-2024': 4,
   '12-31-2024': 5,
 };
+
+export const MOCK_ALL_HABITS = {
+  code: 200,
+  habits: [
+    {
+      name: 'Reading 📚',
+      description: 'Read 10 pages every day',
+      frequency: 'Every day',
+      log: { ...MOCK_HABITS },
+    },
+    {
+      name: 'Coding 💻',
+      description: 'Code 30 twice a week',
+      frequency: 'Twice a week',
+      log: { ...MOCK_HABITS },
+    },
+  ],
+};
