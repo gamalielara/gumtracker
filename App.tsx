@@ -12,7 +12,6 @@ import { ThemeProvider } from 'styled-components';
 import { StatusBar, Text } from 'react-native';
 import { Provider } from 'react-redux';
 import { store } from './src/module/store';
-import useCreateLocalSQLDB from './src/utils/hook/useCreateLocalSQLDB';
 import HomeScreen from './src/screens/Home';
 import AppPopup from './src/components/AppPopup';
 
@@ -20,10 +19,6 @@ export default function App() {
   useAppPermision();
 
   const { colorScheme: themeColor } = useSetColorScheme();
-
-  const hasLoadedDatabase = useCreateLocalSQLDB();
-
-  if (!hasLoadedDatabase) return <Text>Loading...</Text>;
 
   const Stack = createStackNavigator();
 
