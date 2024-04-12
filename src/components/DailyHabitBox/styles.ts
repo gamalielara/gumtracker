@@ -3,7 +3,7 @@ import { LightModeColorScheme } from '../../utils/const';
 import { SemiboldText } from '../global/text';
 
 export const DailyHabitBox = styled.View`
-  width: 95%;
+  width: 100%;
   padding: 20px;
   margin: 0 auto;
   background-color: ${LightModeColorScheme.card};
