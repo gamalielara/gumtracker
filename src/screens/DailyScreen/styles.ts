@@ -9,17 +9,14 @@ export const Container = styled.View`
 
 export const TitleText = styled(BoldText)`
   font-size: 30px;
-  margin-top: 10px;
+  margin-bottom: 75px;
 `;
 
-export const HabitsContainer = styled.FlatList`
-  margin-top: 30px;
-  flex: 1;
-`;
+export const HabitsContainer = styled.FlatList``;
 
 export const SubmitButton = styled.TouchableOpacity`
   width: 95%;
-  margin: 50px auto;
+  margin: 20px auto;
   padding: 15px;
   background-color: ${props => props.theme.secondary};
   border-radius: 10px;

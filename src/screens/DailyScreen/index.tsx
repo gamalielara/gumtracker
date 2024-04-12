@@ -36,7 +36,7 @@ const DailyScreen = () => {
         )}
         contentContainerStyle={{
           gap: 25,
-          paddingBottom: 125,
+          paddingBottom: 50,
         }}
       />
     </Comp.Container>

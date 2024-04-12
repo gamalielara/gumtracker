@@ -14,8 +14,6 @@ export function parseDate(date: string | number) {
 }
 
 export function formatDateToMMDDYY(date: Date | string | number) {
-  console.log('DATE ', date, date instanceof Date);
-
   const dateToParse = !(date instanceof Date) ? new Date(date) : date;
 
   // Extracting month, day, and year components
@@ -25,8 +23,6 @@ export function formatDateToMMDDYY(date: Date | string | number) {
 
   // Formatting the date as MM-dd-YY
   const formattedDate = `${month}-${day}-${year}`;
-
-  console.log({ formattedDate });
 
   return formattedDate;
 }

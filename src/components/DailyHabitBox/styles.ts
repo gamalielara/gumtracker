@@ -4,7 +4,7 @@ import { SemiboldText } from '../global/text';
 
 export const DailyHabitBox = styled.View`
   width: 95%;
-  padding: 30px 20px;
+  padding: 20px;
   margin: 0 auto;
   background-color: ${LightModeColorScheme.card};
   border-radius: 25px;

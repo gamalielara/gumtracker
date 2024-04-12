@@ -10,7 +10,7 @@ export const Container = styled.ScrollView`
 
 export const TitleText = styled(BoldText)`
   font-size: 30px;
-  margin-bottom: 10px;
+  margin-bottom: 30px;
 `;
 
 export const HabitsContainer = styled.FlatList`

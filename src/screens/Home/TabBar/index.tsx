@@ -1,6 +1,7 @@
 import React, { ElementType } from 'react';
 import { TabBarContainer, TabButton, TabButtonText, Wrapper } from './styles';
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
+import { Text } from 'react-native';
 
 const TabBar: React.FC<BottomTabBarProps> = props => {
   const { state, descriptors, navigation } = props;
@@ -12,7 +13,10 @@ const TabBar: React.FC<BottomTabBarProps> = props => {
           const { options } = descriptors[route.key];
 
           const label =
-            options.tabBarLabel ?? options.title ?? route.name ?? '';
+            options.tabBarLabel?.toString() ??
+            options.title?.toString() ??
+            route.name.toString() ??
+            '';
 
           const isFocused = state.index === index;
 
@@ -28,8 +32,6 @@ const TabBar: React.FC<BottomTabBarProps> = props => {
             }
           };
 
-          const Icon = options.tabBarIcon as ElementType;
-
           const onLongPress = () => {
             navigation.emit({
               type: 'tabLongPress',
@@ -44,8 +46,9 @@ const TabBar: React.FC<BottomTabBarProps> = props => {
               accessibilityLabel={options.tabBarAccessibilityLabel}
               testID={options.tabBarTestID}
               onPress={onPress}
-              onLongPress={onLongPress}>
-              <Icon focused={isFocused} />
+              onLongPress={onLongPress}
+              selected={isFocused}>
+              <TabButtonText selected={isFocused}>{label}</TabButtonText>
             </TabButton>
           );
         })}
