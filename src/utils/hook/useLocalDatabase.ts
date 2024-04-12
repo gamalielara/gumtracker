@@ -1,5 +1,17 @@
-import { connectToDatabase } from '<utils>/db/db';
+import { TableConstants } from '<utils>/const';
+import { createNewHabitOverview } from '<utils>/db/create';
+import { fetchHabitsOverview } from '<utils>/db/fetch';
+import { database } from '<utils>/db/index.native';
+import { useEffect } from 'react';
 
 export default () => {
-  connectToDatabase();
+  const create = async () => {
+    await createNewHabitOverview();
+
+    await fetchHabitsOverview();
+  };
+
+  useEffect(() => {
+    create();
+  }, []);
 };

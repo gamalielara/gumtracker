@@ -108,3 +108,7 @@ export const HABIT_DATES_COUNT_TO_SHOW = 365;
 export const BASE_EMPTY_HTML = `<head></head><body></body>`;
 
 export const API_ENDPOINT = 'https://gumapp-api/';
+
+export enum TableConstants {
+  HABITS_OVERVIEW = 'habits_overview',
+}

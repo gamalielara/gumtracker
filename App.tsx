@@ -13,9 +13,11 @@ import HomeScreen from '<screens>/Home';
 import AppPopup from '<components>/AppPopup';
 import useAppPermision from '<utils>/hook/useAppPermision';
 import useSetColorScheme from '<utils>/hook/useSetColorScheme';
+import useLocalDatabase from '<utils>/hook/useLocalDatabase';
 
 export default function App() {
   useAppPermision();
+  useLocalDatabase();
 
   const { colorScheme: themeColor } = useSetColorScheme();
 

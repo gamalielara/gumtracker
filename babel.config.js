@@ -14,15 +14,16 @@ module.exports = {
       'module-resolver',
       {
         alias: {
-          '<assets>': ['./src/assets'],
-          '<utils>': ['./src/utils'],
-          '<screens>': ['./src/screens'],
-          '<type>': ['./src/type'],
-          '<module>': ['./src/module'],
-          '<components>': ['./src/components'],
-          '<src>': ['./src'],
+          '<assets>': './src/assets',
+          '<utils>': './src/utils',
+          '<screens>': './src/screens',
+          '<type>': './src/type',
+          '<module>': './src/module',
+          '<components>': './src/components',
+          '<src>': './src',
         },
       },
     ],
+    ['@babel/plugin-proposal-decorators', { legacy: true }],
   ],
 };

@@ -10,7 +10,8 @@
       "<module>/*": ["./src/module/*"],
       "<components>/*": ["./src/components/*"],
       "<src>/*": ["./src/*"]
-    }
+    },
+    "experimentalDecorators": true
   },
   "extends": "@react-native/typescript-config/tsconfig.json"
 }
