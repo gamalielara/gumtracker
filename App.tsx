@@ -1,21 +1,18 @@
-import React from 'react';
-import { ColorScheme, ScreenNames } from './src/utils/const';
+import { ColorScheme, ScreenNames } from '<utils>/const';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { NavigationContainer } from '@react-navigation/native';
-import useAppPermision from './src/utils/hook/useAppPermision';
 import {
   CardStyleInterpolators,
   createStackNavigator,
 } from '@react-navigation/stack';
-import useSetColorScheme from './src/utils/hook/useSetColorScheme';
 import { ThemeProvider } from 'styled-components';
-import { StatusBar, Text } from 'react-native';
+import { StatusBar } from 'react-native';
 import { Provider } from 'react-redux';
-import { store } from './src/module/store';
-import HomeScreen from './src/screens/Home';
-import AppPopup from './src/components/AppPopup';
-import RealmPlugin from 'realm-flipper-plugin-device';
-import Realm from 'realm';
+import { store } from '<module>/store';
+import HomeScreen from '<screens>/Home';
+import AppPopup from '<components>/AppPopup';
+import useAppPermision from '<utils>/hook/useAppPermision';
+import useSetColorScheme from '<utils>/hook/useSetColorScheme';
 
 export default function App() {
   useAppPermision();
@@ -27,7 +24,6 @@ export default function App() {
   return (
     <Provider store={store}>
       <AppPopup />
-      <RealmPlugin realms={[realm]} />
       <NavigationContainer independent={true}>
         <ThemeProvider theme={ColorScheme[themeColor]}>
           <SafeAreaProvider>

@@ -1,10 +1,9 @@
-import React, { useContext, useEffect } from 'react';
 import * as Comp from './styles';
-import DailyHabitBox from '../../components/DailyHabitBox';
-import { IHabitDetail } from '../../utils/interface';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faPaperPlane, faPlane } from '@fortawesome/free-solid-svg-icons';
-import { LightModeColorScheme } from '../../utils/const';
+import DailyHabitBox from '<components>/DailyHabitBox';
+import { LightModeColorScheme } from '<utils>/const';
+import { IHabitDetail } from '<type>/interface';
 
 const DailyScreen = () => {
   const habits: IHabitDetail[] = [

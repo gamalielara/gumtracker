@@ -1,7 +1,16 @@
 {
   "compilerOptions": {
-    "jsx": "react",
-    "lib": ["dom"]
+    "jsx": "react-jsx",
+    "lib": ["dom"],
+    "paths": {
+      "<assets>/*": ["./src/assets/*"],
+      "<utils>/*": ["./src/utils/*"],
+      "<screens>/*": ["./src/screens/*"],
+      "<type>/*": ["./src/type/*"],
+      "<module>/*": ["./src/module/*"],
+      "<components>/*": ["./src/components/*"],
+      "<src>/*": ["./src/*"]
+    }
   },
   "extends": "@react-native/typescript-config/tsconfig.json"
 }

@@ -10,5 +10,19 @@ module.exports = {
       },
     ],
     'react-native-reanimated/plugin',
+    [
+      'module-resolver',
+      {
+        alias: {
+          '<assets>': ['./src/assets'],
+          '<utils>': ['./src/utils'],
+          '<screens>': ['./src/screens'],
+          '<type>': ['./src/type'],
+          '<module>': ['./src/module'],
+          '<components>': ['./src/components'],
+          '<src>': ['./src'],
+        },
+      },
+    ],
   ],
 };

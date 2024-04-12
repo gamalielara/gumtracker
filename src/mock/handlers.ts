@@ -1,13 +1,13 @@
 import { http, HttpRequestParsedResult, HttpResponse } from 'msw';
-import { MOCK_HABITS } from './data/habits';
+import { MOCK_ALL_HABITS, MOCK_HABITS } from './data/habits';
+import { API_ENDPOINT } from '../utils/const';
 
 export const handlers = [
-  http.get('/gumapp/habits-overview', () =>
+  http.get(`${API_ENDPOINT}/habits-overview`, () =>
     HttpResponse.json({
-      status: 200,
-      data: MOCK_HABITS,
+      data: MOCK_ALL_HABITS,
     }),
   ),
 
-  http.get('/gumapp/habits-list', () => HttpResponse.json({})),
+  http.get(`${API_ENDPOINT}/habits-list`, () => HttpResponse.json({})),
 ];

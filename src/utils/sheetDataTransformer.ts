@@ -1,13 +1,13 @@
-import { TRawDataHeaders } from "./interface";
+import { TRawDataHeaders } from '../type/interface';
 
 export function transformSheetDataToMapObj(
-  rawValues: [TRawDataHeaders[], ...Array<string[]>]
+  rawValues: [TRawDataHeaders[], ...Array<string[]>],
 ) {
   const [header, ...values] = rawValues;
 
   const result: Record<TRawDataHeaders, unknown>[] = [];
 
-  values.forEach((value) => {
+  values.forEach(value => {
     const resultObj = {} as Record<TRawDataHeaders, unknown>;
 
     value.forEach((v, i) => {
