@@ -39,6 +39,16 @@ target 'gumtracker' do
     :app_path => "#{Pod::Config.instance.installation_root}/.."
   )
 
+  # Uncomment this line if you're not using auto-linking or if auto-linking causes trouble
+  # pod 'WatermelonDB', path: '../node_modules/@nozbe/watermelondb'
+
+  # WatermelonDB dependency, should not be needed on modern React Native
+  # (please file an issue if this causes issues for you)
+  # pod 'React-jsi', path: '../node_modules/react-native/ReactCommon/jsi', modular_headers: true
+
+  # WatermelonDB dependency
+  pod 'simdjson', path: '../node_modules/@nozbe/simdjson', modular_headers: true
+
   target 'gumtrackerTests' do
     inherit! :complete
     # Pods for testing

@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import * as Comp from './styles';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { LightModeColorScheme } from '../../utils/const';
 import { faCheck, faPlus } from '@fortawesome/free-solid-svg-icons';
-import { IHabitDetail } from '../../utils/interface';
+import { IHabitDetail } from '<type>/interface';
+import { LightModeColorScheme } from '<utils>/const';
 
 const DailyHabitBox: React.FC<IHabitDetail> = ({ name }) => {
   const [isChecked, setIsChecked] = useState(false);

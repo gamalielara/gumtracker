@@ -1,4 +1,4 @@
-import { GumtrackerData, Nullable, TRawDataHeaders } from './interface';
+import { GumtrackerData, Nullable, TRawDataHeaders } from '../type/interface';
 
 interface IColorScheme {
   primary: string;
@@ -106,3 +106,9 @@ export const APP_DATE_FORMAT = 'yyyy-MM-dd';
 export const HABIT_DATES_COUNT_TO_SHOW = 365;
 
 export const BASE_EMPTY_HTML = `<head></head><body></body>`;
+
+export const API_ENDPOINT = 'https://gumapp-api/';
+
+export enum TableConstants {
+  HABITS_OVERVIEW = 'habits_overview',
+}

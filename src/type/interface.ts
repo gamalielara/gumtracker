@@ -1,4 +1,4 @@
-import { ScreenNames } from './const';
+import { ScreenNames } from '../utils/const';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 export type Nullable<T> = { [K in keyof T]: T[K] | null };

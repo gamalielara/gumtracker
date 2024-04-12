@@ -1,36 +1,31 @@
-import React from 'react';
-import { ColorScheme, ScreenNames } from './src/utils/const';
+import { ColorScheme, ScreenNames } from '<utils>/const';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { NavigationContainer } from '@react-navigation/native';
-import useAppPermision from './src/utils/hook/useAppPermision';
 import {
   CardStyleInterpolators,
   createStackNavigator,
 } from '@react-navigation/stack';
-import useSetColorScheme from './src/utils/hook/useSetColorScheme';
 import { ThemeProvider } from 'styled-components';
-import { StatusBar, Text } from 'react-native';
+import { StatusBar } from 'react-native';
 import { Provider } from 'react-redux';
-import { store } from './src/module/store';
-import useCreateLocalSQLDB from './src/utils/hook/useCreateLocalSQLDB';
-import HomeScreen from './src/screens/Home';
-import AppPopup from './src/components/AppPopup';
+import { store } from '<module>/store';
+import HomeScreen from '<screens>/Home';
+import AppPopup from '<components>/AppPopup';
+import useAppPermision from '<utils>/hook/useAppPermision';
+import useSetColorScheme from '<utils>/hook/useSetColorScheme';
+import useLocalDatabase from '<utils>/hook/useLocalDatabase';
 
 export default function App() {
   useAppPermision();
+  useLocalDatabase();
 
   const { colorScheme: themeColor } = useSetColorScheme();
-
-  const hasLoadedDatabase = useCreateLocalSQLDB();
-
-  if (!hasLoadedDatabase) return <Text>Loading...</Text>;
 
   const Stack = createStackNavigator();
 
   return (
     <Provider store={store}>
       <AppPopup />
-
       <NavigationContainer independent={true}>
         <ThemeProvider theme={ColorScheme[themeColor]}>
           <SafeAreaProvider>
