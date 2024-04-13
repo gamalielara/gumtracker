@@ -1,3 +1,4 @@
+import { Text } from 'react-native';
 import {
   Container,
   WeeklyBox,
@@ -11,7 +12,14 @@ const WeeklyScreen = () => {
   return (
     <Container>
       <WeeklyTitleText>Weekly Habits</WeeklyTitleText>
-      <WeeklyBoxContainer data={box} renderItem={() => <WeeklyBox />} />
+      <WeeklyBoxContainer
+        data={box}
+        renderItem={() => (
+          <WeeklyBox>
+            <Text>Hehe</Text>
+          </WeeklyBox>
+        )}
+      />
     </Container>
   );
 };
