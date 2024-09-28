@@ -2,7 +2,7 @@ import styled from 'styled-components/native';
 import { BoldText } from '../../components/global/text';
 import { LightModeColorScheme } from '../../utils/const';
 
-export const Container = styled.ScrollView`
+export const Container = styled.View`
   width: 100%;
   height: 100%;
   padding: 20px;
@@ -13,9 +13,7 @@ export const TitleText = styled(BoldText)`
   margin-bottom: 30px;
 `;
 
-export const HabitsContainer = styled.FlatList`
-  flex: 1;
-`;
+export const HabitsContainer = styled.FlatList``;
 
 export const Header = styled.View`
   width: 100%;
