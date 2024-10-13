@@ -1,24 +1,19 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import OverallScreen from '../OverallScreen';
-import {
-  faCalendar,
-  faClock,
-  faInbox,
-  faList,
-} from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import TabBar from './TabBar';
 import WeeklyScreen from '<screens>/WeeklyScreen';
 import DailyScreen from '<screens>/DailyScreen';
 import { HomeScreenNames, LightModeColorScheme } from '<utils>/const';
-const Tab = createBottomTabNavigator();
 
 const HomeScreen = () => {
+  const Tab = createBottomTabNavigator();
+
   return (
     <Tab.Navigator
-      screenOptions={({ route }) => ({
+      screenOptions={() => ({
         lazy: true,
+        unmountOnBlur: true,
       })}
       tabBar={props => <TabBar {...props} />}>
       <Tab.Screen

@@ -1,34 +1,33 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Container, HabitsContainer, Header, TitleText } from './styles';
 // import HeatMap from '../../components/HeatMap';
 import { MOCK_HABITS } from '../../mock/data/habits';
 import { FlatList, requireNativeComponent, Text, View } from 'react-native';
 import { NativeHeatMap } from '<components>/NativeHeatMap';
-// import { NativeHeatMap } from '<components>/NativeHeatMap';
+import { ScrollView } from 'react-native-gesture-handler';
 
 const OverallScreen = () => {
   const [isHeatMapLoaded, setIsHeatMapLoaded] = useState(false);
+  const [visibleHeatMap, setVisibleHeatMap] = useState<number[]>([]);
 
   //TODO: change data later
-  const habitsToShow = [1, 2, 3];
+  const habitsToShow = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
-  const renderHabitBox = () => {
-    return (
-      <View style={{ height: 155, width: '100%' }}>
-        <Text>{`HAI ${isHeatMapLoaded}`}</Text>
-        {isHeatMapLoaded && (
-          <NativeHeatMap style={{ width: '100%', height: '100%' }} />
-        )}
-      </View>
-    );
-  };
+  const renderHabitBox = useCallback(
+    (index: number) => {
+      const isVisible = visibleHeatMap.includes(index);
 
-  useEffect(
-    () => () => {
-      console.log('YESS');
-      // setIsHeatMapLoaded(false);
+      console.log({ index, isVisible, ref: visibleHeatMap });
+
+      return (
+        <View style={{ height: 155, width: '100%' }}>
+          {isHeatMapLoaded && isVisible && (
+            <NativeHeatMap style={{ width: '100%', height: '100%' }} />
+          )}
+        </View>
+      );
     },
-    [],
+    [visibleHeatMap.length],
   );
 
   return (
@@ -36,17 +35,15 @@ const OverallScreen = () => {
       <Header>
         <TitleText>Overall Habits</TitleText>
       </Header>
-      <View>
-        <View style={{ gap: 10 }}>
-          <FlatList
-            data={habitsToShow}
-            onLayout={() => setIsHeatMapLoaded(true)}
-            renderItem={renderHabitBox}
-            keyExtractor={item => item.toString()}
-            contentContainerStyle={{ gap: 10 }}
-          />
-        </View>
-      </View>
+      <ScrollView>
+        {habitsToShow.map((item, index) => (
+          <View
+            key={item.toString()}
+            style={{ height: 155, width: '100%', marginVertical: 10 }}>
+            <NativeHeatMap style={{ width: '100%', height: '100%' }} />
+          </View>
+        ))}
+      </ScrollView>
     </Container>
   );
 };

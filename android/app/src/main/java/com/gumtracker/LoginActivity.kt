@@ -140,10 +140,6 @@ fun MainLoginScreen() {
         ) {
             Text("Login", color = Color.White)
         }
-        Spacer(modifier = Modifier.height(10.dp))
-
-        HeatMap()
-
     }
 }
 
