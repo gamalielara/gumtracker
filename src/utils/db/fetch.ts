@@ -7,9 +7,4 @@ export const fetchHabitsOverview = async () => {
     .get<Habit>(TableConstants.HABITS_OVERVIEW)
     .query()
     .fetch();
-
-  console.log(
-    'HEY DB AFTER CREATE ',
-    res.map(({ habitName, date, score }) => ({ habitName, date, score })),
-  );
 };

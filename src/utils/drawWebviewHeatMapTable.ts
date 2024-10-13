@@ -95,7 +95,7 @@ function formatDateToMMDDYY(date) {
   
     const style = document.createElement('style');
   
-    const globalCSS = \`body{overflow: scroll; margin: 0;} table{border-spacing: 10px} td{min-width: 50px; height: 50px; border-radius: 20px; padding:0;}\`;
+    const globalCSS = \`body{overflow: scroll; margin: 0; pointer-events:none;} table{border-spacing: 10px} td{min-width: 50px; height: 50px; border-radius: 20px; padding:0;}\`;
   
     style.type = 'text/css';
   

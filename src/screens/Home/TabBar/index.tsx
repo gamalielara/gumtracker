@@ -47,7 +47,8 @@ const TabBar: React.FC<BottomTabBarProps> = props => {
               testID={options.tabBarTestID}
               onPress={onPress}
               onLongPress={onLongPress}
-              selected={isFocused}>
+              selected={isFocused}
+              key={route.key}>
               <TabButtonText selected={isFocused}>{label}</TabButtonText>
             </TabButton>
           );
