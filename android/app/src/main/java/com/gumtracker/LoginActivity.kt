@@ -7,6 +7,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -28,6 +29,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.focus.FocusDirection
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
@@ -40,6 +42,7 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.gumtracker.nativeView.HeatMap
 
 class LoginActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -84,7 +87,8 @@ fun MainLoginScreen() {
             fontFamily = fontFamily,
             fontWeight = FontWeight.Bold
         )
-        OutlinedTextField(value = username,
+        OutlinedTextField(
+            value = username,
             onValueChange = { value -> username = value },
             label = null,
             placeholder = {
@@ -103,8 +107,10 @@ fun MainLoginScreen() {
             ),
             keyboardActions = KeyboardActions(onNext = {
                 focusManager.moveFocus(focusDirection = FocusDirection.Next)
-            }))
-        OutlinedTextField(value = password,
+            })
+        )
+        OutlinedTextField(
+            value = password,
             onValueChange = { value -> password = value },
             label = null,
             placeholder = {
@@ -123,7 +129,8 @@ fun MainLoginScreen() {
             ),
             keyboardActions = KeyboardActions(onDone = {
                 goToOverviewActivity(context)
-            }))
+            })
+        )
         Spacer(modifier = Modifier.height(10.dp))
         Button(
             onClick = { goToOverviewActivity(context) },
@@ -133,6 +140,10 @@ fun MainLoginScreen() {
         ) {
             Text("Login", color = Color.White)
         }
+        Spacer(modifier = Modifier.height(10.dp))
+
+        HeatMap()
+
     }
 }
 

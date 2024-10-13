@@ -1,4 +1,5 @@
 <resources>
-    <string name="app_name">gumtracker</string>
+    <string name="title_activity_overview">OverviewActivity</string>
     <string name="title_activity_login">LoginActivity</string>
+    <string name="app_name">gumtracker</string>
 </resources>
