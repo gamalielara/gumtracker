@@ -1,10 +1,11 @@
 package com.gumtracker.nativeView
 
+import android.content.Context
+import android.view.View
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -17,6 +18,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
@@ -34,24 +36,23 @@ fun HeatMap() {
 
     val boxPadding = 10.dp
 
-
     Box(
         modifier = Modifier
-            .padding(horizontal = 10.dp)
             .clip(RoundedCornerShape(10.dp))
     ) {
         Box(
             modifier = Modifier
                 .background(Color(0xFF96B6C5))
                 .horizontalScroll(scrollState)
-                .width((columns * (cellSize + paddingSize)).dp + boxPadding * 2)
-                .height((tileRows * (cellSize + paddingSize)).dp + boxPadding * 2)
+                .width((columns * (cellSize + paddingSize)).dp + (boxPadding * 2))
+                .height((tileRows * (cellSize + paddingSize)).dp + (boxPadding * 2) - (boxPadding / 2))
                 .padding(all = boxPadding)
 
         ) {
             Canvas(
                 modifier = Modifier
                     .fillMaxSize()
+                    .padding(end = boxPadding)
             ) {
                 for (day in 0 until daysInAYear) {
                     val row = day % tileRows
@@ -72,6 +73,14 @@ fun HeatMap() {
                 }
 
             }
+        }
+    }
+}
+
+fun createHeatMapView(context: Context): View {
+    return ComposeView(context).apply {
+        setContent {
+            HeatMap()
         }
     }
 }

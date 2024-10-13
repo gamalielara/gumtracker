@@ -18,33 +18,7 @@ const HomeScreen = () => {
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
-        tabBarIcon: ({ focused, color, size }) => {
-          let icon = faInbox;
-
-          switch (route.name) {
-            case HomeScreenNames.OVERALL:
-              icon = faList;
-              break;
-            case HomeScreenNames.WEEKLY:
-              icon = faCalendar;
-              break;
-            case HomeScreenNames.DAILY:
-              icon = faClock;
-              break;
-            default:
-              break;
-          }
-
-          return (
-            <FontAwesomeIcon
-              icon={icon}
-              color={LightModeColorScheme[focused ? 'primary' : 'card']}
-              size={20}
-            />
-          );
-        },
-        freezeOnBlur: true,
-        lazy: false,
+        lazy: true,
       })}
       tabBar={props => <TabBar {...props} />}>
       <Tab.Screen
