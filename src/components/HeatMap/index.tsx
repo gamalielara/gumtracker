@@ -24,7 +24,7 @@ const HeatMap: React.FC<IProps> = props => {
         }}
         style={{
           flex: 1,
-          height: 200,
+          height: 250,
           minWidth: '100%',
           backgroundColor: 'transparent',
         }}

@@ -1,6 +1,7 @@
 package com.gumtracker.nativeView
 
 import android.content.Context
+import android.util.Log
 import android.view.View
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
@@ -25,7 +26,7 @@ import androidx.compose.ui.unit.dp
 @Composable
 @Preview
 fun HeatMap() {
-    val daysInAYear = 365
+    val daysInAYear = 366
     val tileRows = 7 // Days in a week
     val columns = daysInAYear / tileRows
     val cellSize = 16
@@ -34,7 +35,7 @@ fun HeatMap() {
     val paddingSizeDp = paddingSize.dp
     val scrollState = rememberScrollState()
 
-    val boxPadding = 10.dp
+    val boxPadding = 10
 
     Box(
         modifier = Modifier
@@ -44,15 +45,15 @@ fun HeatMap() {
             modifier = Modifier
                 .background(Color(0xFF96B6C5))
                 .horizontalScroll(scrollState)
-                .width((columns * (cellSize + paddingSize)).dp + (boxPadding * 2))
-                .height((tileRows * (cellSize + paddingSize)).dp + (boxPadding * 2) - (boxPadding / 2))
-                .padding(all = boxPadding)
-
+                .width((columns * (cellSize + paddingSize)).dp + (boxPadding * 4).dp)
+                .height((tileRows * (cellSize + paddingSize)).dp + (boxPadding * 2).dp - (boxPadding / 2).dp)
         ) {
             Canvas(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(end = boxPadding)
+                    .padding(
+                        all = boxPadding.dp,
+                    )
             ) {
                 for (day in 0 until daysInAYear) {
                     val row = day % tileRows
