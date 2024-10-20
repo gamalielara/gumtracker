@@ -1,6 +1,5 @@
 import styled from 'styled-components/native';
 import { BoldText } from '../../components/global/text';
-import { LightModeColorScheme } from '../../utils/const';
 
 export const Container = styled.View`
   width: 100%;
@@ -21,4 +20,11 @@ export const Header = styled.View`
   justify-content: space-between;
   margin-bottom: 50px;
   align-items: center;
+`;
+
+export const NativeHeatMapWrapper = styled.View`
+  height: 175px;
+  width: 100%;
+  margin: 10 0;
+  padding: 10;
 `;
