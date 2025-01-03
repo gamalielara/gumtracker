@@ -1,8 +1,8 @@
 package com.gumtracker.nativeView
 
-import android.content.Context
+import android.os.Build
 import android.util.Log
-import android.view.View
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.horizontalScroll
@@ -19,14 +19,18 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.ComposeView
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import java.time.Year
 
+
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
-@Preview
-fun HeatMap() {
-    val daysInAYear = 366
+fun HeatMap(dates: Map<String, Double>) {
+    Log.d("HEHE", dates.toString())
+
+    val currentYear = Year.now()
+    val daysInAYear = if (currentYear.isLeap) 366 else 365;
+
     val tileRows = 7 // Days in a week
     val columns = daysInAYear / tileRows
     val cellSize = 16
@@ -45,7 +49,7 @@ fun HeatMap() {
             modifier = Modifier
                 .background(Color(0xFF96B6C5))
                 .horizontalScroll(scrollState)
-                .width((columns * (cellSize + paddingSize)).dp + (boxPadding * 4).dp)
+                .width((columns * (cellSize + paddingSize)).dp )
                 .height((tileRows * (cellSize + paddingSize)).dp + (boxPadding * 2).dp - (boxPadding / 2).dp)
         ) {
             Canvas(
@@ -78,10 +82,3 @@ fun HeatMap() {
     }
 }
 
-fun createHeatMapView(context: Context): View {
-    return ComposeView(context).apply {
-        setContent {
-            HeatMap()
-        }
-    }
-}

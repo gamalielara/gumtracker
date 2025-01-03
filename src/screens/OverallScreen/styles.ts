@@ -23,8 +23,8 @@ export const Header = styled.View`
 `;
 
 export const NativeHeatMapWrapper = styled.View`
-  height: 175px;
-  width: 100%;
-  margin: 10 0;
-  padding: 10;
+   height: 175px;
+   width: 100%;
+   padding: 10px 10px;
+   margin: 10px 0;
 `;
